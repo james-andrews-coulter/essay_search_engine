@@ -1,0 +1,572 @@
+# CLAUDE.md - Implementation Documentation
+
+This document explains the implementation decisions, architecture, and context for this project. It's designed to help future Claude sessions (or developers) understand and maintain this codebase.
+
+## Project Context
+
+**Goal**: Build a mobile-accessible semantic search engine for a personal essay collection, deployable to GitHub Pages.
+
+**User's Existing Setup**:
+- Local TUI at `/Users/jamesalexander/book-library-tui`
+- Processes EPUBs → Markdown → Chunks → Embeddings
+- Uses BAAI/bge-large-en-v1.5 for embeddings (768-dim originally, 1024-dim in reality)
+- Search works well, but only accessible on Mac
+
+**Requirements Gathered**:
+1. Same search quality as TUI (explicit user requirement)
+2. Mobile accessible (primary goal)
+3. Static site (GitHub Pages)
+4. Automated sync workflow
+5. Client-side semantic search
+6. User typically searches with 1-2 word queries
+
+## Key Design Decisions
+
+### 1. Model Selection: BGE-large-en-v1.5 (Quality Over Speed)
+
+**Decision**: Use Xenova/bge-large-en-v1.5 (327MB quantized, 1024-dim)
+
+**Why**:
+- User explicitly requested maximum search quality
+- Same model as their TUI for consistency
+- Proven to work well for their use case
+- Tag boosting already implemented in TUI
+
+**Trade-off**:
+- 327MB download on first use (vs 23MB for smaller models)
+- 5-10s first query (vs 2-3s)
+- User accepted: "I don't mind waiting longer for queries"
+
+**Implementation**:
+```javascript
+// src/search.js
+const embedder = await pipeline('feature-extraction', 'Xenova/bge-large-en-v1.5');
+```
+
+### 2. Pre-computed Embeddings (Hybrid Approach)
+
+**Decision**: Generate embeddings offline (Python), only embed queries in browser (JavaScript)
+
+**Why**:
+- Only need to embed 1 query instead of 672 chunks per search
+- Faster search after model loads
+- Smaller data transfer (15MB vs reprocessing all chunks)
+
+**Trade-off**:
+- Requires sync script when content changes
+- Two embedding contexts (Python + JS)
+
+**Implementation**:
+- Python: `sentence-transformers` with BAAI/bge-large-en-v1.5
+- JavaScript: Transformers.js with Xenova/bge-large-en-v1.5 (quantized)
+- Both produce 1024-dim normalized embeddings
+
+### 3. Tag Boosting (Critical for User's Search Style)
+
+**Decision**: Boost scores by 20% for exact tag matches, 10% for partial
+
+**Why**:
+- User typically searches with 1-2 words ("solitude", "jealousy")
+- Tags are AI-generated semantic labels (Ollama qwen2.5:7b)
+- Already proven effective in TUI
+
+**Implementation**:
+```javascript
+// src/search.js
+// Exact tag match: +20% score
+if (tags.some(tag => tag === queryLower)) {
+  result.score += 0.20;
+}
+// Partial tag match: +10% score
+else if (tags.some(tag => tag.includes(queryLower) || queryLower.includes(tag))) {
+  result.score += 0.10;
+}
+```
+
+### 4. Vanilla JavaScript (No Framework)
+
+**Decision**: Use vanilla JS + Vite instead of React/Vue/Svelte
+
+**Why**:
+- Smaller bundle size (~50KB vs ~200KB)
+- Simpler maintenance for static site
+- No framework complexity needed
+- Model download is the bottleneck, not JS bundle
+
+**Trade-off**:
+- More manual DOM manipulation
+- Less component reusability
+
+### 5. Score Threshold: 0.3
+
+**Decision**: Filter out results with similarity score < 0.3
+
+**Why**:
+- 0.3 is a reasonable threshold for semantic similarity
+- Prevents completely irrelevant results
+- Can be adjusted if needed
+
+**Location to adjust**: `src/search.js:142`
+
+## Architecture
+
+### Data Flow
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    Offline (Local)                           │
+├─────────────────────────────────────────────────────────────┤
+│                                                               │
+│  book-library-tui                                            │
+│  ~/Desktop/unified_library/                                  │
+│  ├── books_metadata.json (16 books, chunk ranges)           │
+│  └── books/*/                                                │
+│      ├── chunks.json (metadata)                              │
+│      └── chunk_*.md (content + YAML frontmatter)             │
+│                                                               │
+│                         ↓ sync/sync.py                       │
+│                                                               │
+│  essay_search_engine/                                        │
+│  └── public/data/                                            │
+│      ├── metadata.json (219KB)                               │
+│      └── embeddings.json (15MB, 1024-dim × 672)              │
+│                                                               │
+└─────────────────────────────────────────────────────────────┘
+                                ↓
+┌─────────────────────────────────────────────────────────────┐
+│                    Online (Browser)                          │
+├─────────────────────────────────────────────────────────────┤
+│                                                               │
+│  1. Load metadata.json (219KB)                               │
+│  2. Load embeddings.json (15MB)                              │
+│  3. Load Xenova/bge-large-en-v1.5 (327MB, cached)            │
+│  4. User types query                                         │
+│  5. Embed query (1024-dim)                                   │
+│  6. Compute cosine similarity with all 672 embeddings        │
+│  7. Apply tag boosting                                       │
+│  8. Sort by score, filter < 0.3, return top 20               │
+│  9. Display results                                          │
+│  10. Click → Navigate to chunk_NNN.html                      │
+│                                                               │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### File Structure
+
+```
+essay_search_engine/
+├── sync/                          # Offline data processing
+│   ├── sync.py                    # Main orchestrator
+│   ├── embed_chunks.py            # Generate embeddings
+│   └── requirements.txt           # Python deps
+│
+├── src/                           # Frontend source
+│   ├── search.js                  # SearchEngine class
+│   ├── main.js                    # UI logic
+│   └── styles.css                 # Tailwind base
+│
+├── public/                        # Static assets (served as-is)
+│   ├── data/
+│   │   ├── metadata.json          # Book/chunk metadata
+│   │   └── embeddings.json        # Pre-computed vectors
+│   └── chunks/
+│       └── chunk_*.html           # Individual chapter pages
+│
+├── .github/workflows/
+│   └── deploy.yml                 # GitHub Actions CI/CD
+│
+├── index.html                     # Search page
+├── package.json                   # Node deps
+├── vite.config.js                 # Vite config
+├── tailwind.config.js             # Tailwind config
+├── README.md                      # User documentation
+└── CLAUDE.md                      # This file
+```
+
+## Critical Implementation Details
+
+### 1. Embedding Compatibility
+
+**CRITICAL**: Python and JavaScript embeddings MUST match
+
+**Python** (sync/embed_chunks.py):
+```python
+model = SentenceTransformer('BAAI/bge-large-en-v1.5')
+embeddings = model.encode(
+    texts,
+    batch_size=32,
+    show_progress_bar=True,
+    normalize_embeddings=True  # CRITICAL
+)
+```
+
+**JavaScript** (src/search.js):
+```javascript
+const embedder = await pipeline('feature-extraction', 'Xenova/bge-large-en-v1.5');
+const output = await embedder(query, {
+  pooling: 'mean',
+  normalize: true  // CRITICAL - must match Python
+});
+```
+
+### 2. Cosine Similarity
+
+**Why cosine similarity**:
+- Normalized embeddings (unit vectors)
+- Measures angle between vectors
+- Range: -1 (opposite) to 1 (identical)
+- Common in semantic search
+
+**Implementation**:
+```javascript
+cosineSimilarity(vecA, vecB) {
+  let dotProduct = 0;
+  let normA = 0;
+  let normB = 0;
+
+  for (let i = 0; i < vecA.length; i++) {
+    dotProduct += vecA[i] * vecB[i];
+    normA += vecA[i] * vecA[i];
+    normB += vecB[i] * vecB[i];
+  }
+
+  return dotProduct / (Math.sqrt(normA) * Math.sqrt(normB));
+}
+```
+
+**Performance**: ~20-30ms for 672 comparisons (1024-dim each)
+
+### 3. Chunk HTML Generation
+
+**Why generate static HTML**:
+- Fast page loads
+- No markdown parsing in browser
+- SEO-friendly (if needed later)
+- Deep linking support
+
+**Template** (sync/sync.py:140-220):
+- Inline styles (no external CSS)
+- Mobile-responsive
+- Previous/Next navigation (same book only)
+- Back to search button
+
+### 4. Tag Format
+
+**From TUI**: AI-generated tags via Ollama (qwen2.5:7b)
+- Format: `"jealousy, comparison, inferiority, envy, insecurity, rivalry"`
+- 3-5 single-word semantic tags per chunk
+- Critical for boosting 1-2 word queries
+
+**Processing**:
+```javascript
+const tags = chunk.tags
+  .toLowerCase()
+  .split(',')
+  .map(t => t.trim())
+  .filter(t => t.length > 0);
+```
+
+### 5. Vite Base Path
+
+**CRITICAL**: Must match GitHub repo name
+
+**vite.config.js**:
+```javascript
+export default defineConfig({
+  base: '/essay_search_engine/',  // MUST match repo name
+  // ...
+});
+```
+
+**Used in**:
+- Asset loading: `/essay_search_engine/data/metadata.json`
+- Navigation: `/essay_search_engine/chunks/chunk_000.html`
+- GitHub Pages URL: `https://username.github.io/essay_search_engine/`
+
+**If repo name changes**: Update `vite.config.js` base path
+
+## Common Issues & Solutions
+
+### Issue 1: Search Returns No Results
+
+**Causes**:
+1. Score threshold too high
+2. Model not initialized
+3. Query too specific
+
+**Solutions**:
+1. Lower threshold in `src/search.js:142` (try 0.2 or 0.1)
+2. Check browser console for errors
+3. Try more general keywords
+
+### Issue 2: Model Download Fails
+
+**Causes**:
+1. Network issues
+2. Hugging Face CDN down
+3. Browser cache issues
+
+**Solutions**:
+1. Check internet connection
+2. Clear browser cache
+3. Try different browser
+4. Wait and retry (CDN might be temporarily down)
+
+### Issue 3: Embeddings Don't Match
+
+**Symptoms**: Results very different from TUI
+
+**Causes**:
+1. Different normalization
+2. Different model versions
+3. Text preprocessing differences
+
+**Solution**:
+1. Verify both use `normalize_embeddings=True` / `normalize: true`
+2. Check model versions match (both should be v1.5)
+3. Compare embedding shapes (both should be 1024)
+
+### Issue 4: Sync Script Fails
+
+**Causes**:
+1. book-library-tui not set up
+2. Missing Python dependencies
+3. Ollama not running (not critical)
+
+**Solutions**:
+1. Verify `~/Desktop/unified_library/books_metadata.json` exists
+2. Run `pip install -r sync/requirements.txt`
+3. Ollama not required for sync (only for initial tag generation in TUI)
+
+### Issue 5: GitHub Pages 404
+
+**Causes**:
+1. Wrong base path in vite.config.js
+2. Pages not enabled
+3. Build failed
+
+**Solutions**:
+1. Check base matches repo name
+2. Settings → Pages → Source: GitHub Actions
+3. Check Actions tab for build errors
+
+## Performance Characteristics
+
+### Initial Load (First Visit)
+
+```
+Component                Size        Time (WiFi)
+─────────────────────────────────────────────────
+HTML/CSS/JS             ~10KB       < 1s
+metadata.json           219KB       < 1s
+embeddings.json         15MB        1-2s
+BGE-large model         327MB       8-10s
+─────────────────────────────────────────────────
+TOTAL                   ~342MB      10-15s
+```
+
+### Cached Load (Subsequent Visits)
+
+```
+Component                Size        Time
+─────────────────────────────────────────
+HTML/CSS/JS (cached)    ~10KB       < 1s
+metadata.json (check)   0-219KB     < 1s
+embeddings.json (new)   15MB        1-2s
+Model (cached)          0KB         0s
+─────────────────────────────────────────
+TOTAL                   ~15MB       2-3s
+```
+
+### Search Performance
+
+```
+Operation               Time        Notes
+──────────────────────────────────────────────────
+First query             5-10s       Model init
+Subsequent queries      ~1s         Just inference
+Cosine similarity       20-30ms     672 comparisons
+Tag boosting           < 5ms        String matching
+Sort + filter          < 5ms        Array operations
+──────────────────────────────────────────────────
+TOTAL (after init)     ~1s
+```
+
+### Mobile Performance
+
+```
+Network     Initial Load    Search
+──────────────────────────────────────
+WiFi        10-15s          ~1s
+4G          20-30s          ~1-2s
+3G          60-90s          ~2-3s
+```
+
+## Maintenance Guide
+
+### Adding New Books
+
+1. **Process in TUI**:
+   ```bash
+   cd /Users/jamesalexander/book-library-tui
+   ./lib add path/to/new_book.epub
+   ```
+
+2. **Sync to Web**:
+   ```bash
+   cd /Users/jamesalexander/essay_search_engine
+   source venv/bin/activate
+   python3 sync/sync.py
+   # Wait ~2-3 minutes for embeddings
+   ```
+
+3. **Commit & Push**:
+   ```bash
+   git add public/
+   git commit -m "Add [Book Title]"
+   git push
+   # GitHub Actions auto-deploys in ~2-3 minutes
+   ```
+
+### Updating Existing Books
+
+Same as adding - sync script regenerates everything from source.
+
+### Changing Search Behavior
+
+**Adjust result count** (src/main.js:82):
+```javascript
+const results = await searchEngine.search(query, 20); // Change 20
+```
+
+**Adjust score threshold** (src/search.js:142):
+```javascript
+results = results.filter(r => r.score >= 0.3); // Change 0.3
+```
+
+**Adjust tag boosting** (src/search.js:124-133):
+```javascript
+// Exact match
+result.score += 0.20; // Change 0.20
+
+// Partial match
+result.score += 0.10; // Change 0.10
+```
+
+### Debugging
+
+**Browser Console**:
+```javascript
+// Check if initialized
+console.log(searchEngine.isReady);
+
+// Check metadata loaded
+console.log(searchEngine.metadata);
+
+// Check embeddings loaded
+console.log(searchEngine.embeddings);
+
+// Test search
+searchEngine.search('solitude', 5).then(console.log);
+```
+
+**Python Sync**:
+```bash
+# Test with verbose output
+python3 sync/sync.py 2>&1 | tee sync.log
+
+# Check embeddings shape
+python3 -c "
+import json
+with open('public/data/embeddings.json') as f:
+    data = json.load(f)
+    print(f'Model: {data[\"model\"]}')
+    print(f'Dimensions: {data[\"dimensions\"]}')
+    print(f'Chunks: {len(data[\"embeddings\"])}')
+    print(f'First embedding length: {len(data[\"embeddings\"][0])}')
+"
+```
+
+## Future Enhancements
+
+### Near-term (Easy)
+
+1. **Tag filtering**: Add UI to filter by specific tags
+2. **Book filtering**: Add dropdown to filter by book
+3. **Search history**: Use localStorage to save recent searches
+4. **Dark mode**: Add theme toggle
+
+### Medium-term (Moderate Effort)
+
+1. **Offline support**: Add Service Worker for offline caching
+2. **Hybrid search**: Combine semantic + BM25 keyword search
+3. **Search within results**: Filter results after initial search
+4. **Related chunks**: Show similar chunks based on embeddings
+
+### Long-term (Complex)
+
+1. **Incremental sync**: Only re-embed changed chunks
+2. **Lazy loading**: Load embeddings by book as needed
+3. **Compression**: Use binary format for embeddings (reduce ~50%)
+4. **Backend**: Move to serverless for better performance
+
+## Technical Constraints
+
+### GitHub Pages Limitations
+
+- **Static only**: No server-side code
+- **Size limit**: 1GB per repo (we're ~350MB)
+- **Build time**: 10 minutes max (we use ~2-3 min)
+- **Bandwidth**: Soft limit, but unlikely to hit with personal use
+
+### Browser Limitations
+
+- **Memory**: 327MB model + 15MB data + browser overhead
+- **Storage**: ~342MB in cache (browser-managed)
+- **CORS**: Must serve from same origin (handled by Vite)
+
+### Model Limitations
+
+- **Token limit**: 512 tokens max per chunk (most chunks fit)
+- **Language**: English only (BGE-large-en-v1.5)
+- **Quantization**: 8-bit precision (minimal quality loss)
+
+## Research Sources
+
+This implementation was informed by:
+
+1. **Model Documentation**:
+   - [Xenova/bge-large-en-v1.5](https://huggingface.co/Xenova/bge-large-en-v1.5) - ONNX quantized model
+   - [BAAI/bge-large-en-v1.5](https://huggingface.co/BAAI/bge-large-en-v1.5) - Original model
+
+2. **Libraries**:
+   - [Transformers.js](https://github.com/xenova/transformers.js) - Browser ML
+   - [sentence-transformers](https://www.sbert.net/) - Python embeddings
+
+3. **Reference Implementations**:
+   - User's book-library-tui (tag boosting strategy)
+   - SemanticFinder (client-side search pattern)
+
+## Version History
+
+### v1.0.0 (Current)
+- Initial implementation
+- BGE-large-en-v1.5 with 1024-dim embeddings
+- 672 chunks from 16 books
+- Tag boosting
+- Mobile-responsive UI
+- GitHub Actions deployment
+
+## Contact & Support
+
+For issues or questions:
+1. Check browser console (F12) for errors
+2. Review this file for common issues
+3. Check GitHub Actions for build errors
+4. Verify source data in ~/Desktop/unified_library/
+
+---
+
+*Last updated: 2026-01-08*
+*Built by: Claude (Anthropic)*
+*Model: claude-sonnet-4-5-20250929*
