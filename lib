@@ -20,11 +20,16 @@ if [ $# -eq 0 ]; then
     echo "  ./lib <book.epub>           Process and add a book"
     echo "  ./lib --list                List all books"
     echo "  ./lib --delete <book>       Delete a book"
-    echo "  ./lib --sync                Sync to web (regenerate embeddings)"
+    echo "  ./lib --sync                Sync to web (incremental)"
+    echo "  ./lib --sync --force        Force sync all books"
     echo "  ./lib --help                Show this help"
     exit 0
 elif [ "$1" = "--sync" ]; then
-    "$PYTHON" sync/sync.py
+    if [ "$2" = "--force" ]; then
+        "$PYTHON" sync/sync.py --force
+    else
+        "$PYTHON" sync/sync.py
+    fi
 elif [ "$1" = "--list" ]; then
     "$PYTHON" process_book.py --list
 elif [ "$1" = "--delete" ]; then
@@ -46,8 +51,11 @@ elif [ "$1" = "--help" ]; then
     echo "  ./lib --delete <book>       Delete a book from the library"
     echo "                              <book> can be title or safe_title ID"
     echo ""
-    echo "  ./lib --sync                Generate embeddings and sync to web"
+    echo "  ./lib --sync                Sync to web (incremental - only new books)"
     echo "                              Run this after adding/deleting books"
+    echo ""
+    echo "  ./lib --sync --force        Force sync all books (regenerate everything)"
+    echo "                              Use if embeddings are corrupted or outdated"
     echo ""
     echo "  ./lib --help                Show this help message"
     echo ""
@@ -60,7 +68,30 @@ elif [ "$1" = "--help" ]; then
     echo "  ./lib --list"
     echo "  ./lib --delete \"Book Title\""
     echo "  ./lib --sync"
-elif [ -f "$1" ]; then
+elif [ ! -z "$1" ]; then
+    # File argument provided - check if it exists (file or directory package)
+    if [ ! -e "$1" ]; then
+        echo "❌ Error: File not found: $1"
+        echo ""
+        echo "Tips:"
+        echo "  - Use quotes around paths with spaces:"
+        echo "    ./lib \"/path/with spaces/book.epub\""
+        echo ""
+        echo "  - Use tab completion to avoid typos"
+        echo ""
+        echo "  - Check the file exists:"
+        echo "    ls -l \"$1\""
+        exit 1
+    fi
+
+    # Check if it's an EPUB (file or directory package)
+    if [[ ! "$1" =~ \.epub$ ]]; then
+        echo "❌ Error: File must be an EPUB file"
+        echo ""
+        echo "Provided: $1"
+        exit 1
+    fi
+
     # Check if Ollama is running before processing
     if ! curl -s http://localhost:11434/api/tags >/dev/null 2>&1; then
         echo "❌ Error: Ollama is not running"
@@ -77,7 +108,7 @@ elif [ -f "$1" ]; then
     fi
     "$PYTHON" process_book.py --replace "$1"
 else
-    echo "Error: File not found: $1"
+    echo "❌ Error: No file specified"
     echo ""
     echo "Usage:"
     echo "  ./lib <book.epub>     Process and add a book"

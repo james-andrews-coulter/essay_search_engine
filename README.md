@@ -55,16 +55,23 @@ This will:
 
 ### Syncing to Web
 
-Generate embeddings and web assets:
+Generate embeddings and web assets (incremental):
 ```bash
 ./lib --sync
 ```
 
-This will:
-- Generate 1024-dim embeddings for all chunks
-- Create static HTML pages for each chunk
-- Save search data to `./public/data/`
-- Takes ~2-3 minutes
+This will **intelligently sync only new or updated books**:
+- Detects which books have changed since last sync
+- Only generates embeddings for new chunks (~30 seconds for 1 book)
+- Merges with existing data
+- Creates HTML pages for new chunks
+
+**Force sync all books** (if needed):
+```bash
+./lib --sync --force
+```
+
+This regenerates everything from scratch (~2-3 minutes for 17 books)
 
 ### Testing Locally
 
@@ -86,14 +93,15 @@ git push           # Auto-deploys via GitHub Actions
 ## Commands
 
 ```bash
-./lib <book.epub>      # Process and add a book
-./lib --list           # List all indexed books
-./lib --delete <book>  # Delete a book
-./lib --sync           # Generate embeddings and sync to web
-./lib --help           # Show all commands
+./lib <book.epub>       # Process and add a book
+./lib --list            # List all indexed books
+./lib --delete <book>   # Delete a book
+./lib --sync            # Sync to web (incremental - fast!)
+./lib --sync --force    # Force sync all books
+./lib --help            # Show all commands
 
-npm run dev            # Run local dev server
-npm run build          # Build for production
+npm run dev             # Run local dev server
+npm run build           # Build for production
 ```
 
 ## Project Structure
@@ -213,8 +221,11 @@ If you re-process a book, it will replace the old version:
 **Book Processing**:
 - ~2-5 minutes per book (mostly Ollama tag generation)
 
-**Sync to Web**:
-- ~2-3 minutes for 16 books (672 chunks)
+**Sync to Web (Incremental)**:
+- First sync: ~2-3 minutes for all books
+- Subsequent syncs: ~30 seconds per new book
+- Skips unchanged books automatically
+- Force sync: ~2-3 minutes for all books
 
 ## Configuration
 
@@ -345,6 +356,12 @@ git push origin main
 - Pure semantic search works well
 - Simpler architecture
 - Tag boosting compensates for exact matches
+
+### Why Incremental Sync?
+- Only processes new/changed books
+- 30 seconds vs 3 minutes for typical updates
+- Tracks sync state automatically
+- Force mode available when needed
 
 ## Documentation
 

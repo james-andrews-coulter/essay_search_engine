@@ -29,3 +29,6 @@ yarn-error.log*
 
 # Private data directory (book processing output)
 private/
+
+# Sync state (tracks last sync per book)
+.sync_state.json

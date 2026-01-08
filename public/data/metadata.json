@@ -95,6 +95,12 @@
       "author": "The School Of Life",
       "safe_title": "The_School_of_Life_Dictionary",
       "chunk_count": 181
+    },
+    {
+      "title": "Anxiety",
+      "author": "The School Of Life.",
+      "safe_title": "Anxiety",
+      "chunk_count": 6
     }
   ],
   "chunks": [
@@ -6817,8 +6823,68 @@
       "word_count": 487,
       "char_count": 3232,
       "file": "chunk_180.html"
+    },
+    {
+      "chunk_id": 0,
+      "book_title": "Anxiety",
+      "author": "The School Of Life.",
+      "chapter_title": "4. Diversionary anxiety",
+      "tags": "anxiety, diversion, avoidance, distraction, escapism",
+      "word_count": 72,
+      "char_count": 420,
+      "file": "chunk_000.html"
+    },
+    {
+      "chunk_id": 1,
+      "book_title": "Anxiety",
+      "author": "The School Of Life.",
+      "chapter_title": "INTRODUCTION",
+      "tags": "anxiety, modernity, vulnerability, adaptation, dependence",
+      "word_count": 2253,
+      "char_count": 13035,
+      "file": "chunk_001.html"
+    },
+    {
+      "chunk_id": 2,
+      "book_title": "Anxiety",
+      "author": "The School Of Life.",
+      "chapter_title": "VARIETIES OF ANXIETY",
+      "tags": "anxiety, trauma, fear, coping, resilience",
+      "word_count": 7371,
+      "char_count": 41937,
+      "file": "chunk_002.html"
+    },
+    {
+      "chunk_id": 3,
+      "book_title": "Anxiety",
+      "author": "The School Of Life.",
+      "chapter_title": "1. They have suffered",
+      "tags": "suffering, empathy, friendship, personal experience, agony",
+      "word_count": 174,
+      "char_count": 1016,
+      "file": "chunk_003.html"
+    },
+    {
+      "chunk_id": 4,
+      "book_title": "Anxiety",
+      "author": "The School Of Life.",
+      "chapter_title": "2. It was their fault",
+      "tags": "suffering, guilt, forgiveness, self-reflection, resilience",
+      "word_count": 11988,
+      "char_count": 67095,
+      "file": "chunk_004.html"
+    },
+    {
+      "chunk_id": 5,
+      "book_title": "Anxiety",
+      "author": "The School Of Life.",
+      "chapter_title": "AN IDEAL LIFE FOR THE ANXIOUS",
+      "tags": "anxiety, calm, introspection, psychotherapy, community",
+      "word_count": 1341,
+      "char_count": 7769,
+      "file": "chunk_005.html"
     }
   ],
-  "total_chunks": 672,
-  "last_updated": "2026-01-08T18:55:19.519218Z"
+  "total_chunks": 678,
+  "last_updated": "2026-01-08T19:05:35.549144Z"
 }
