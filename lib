@@ -1,0 +1,86 @@
+#!/bin/bash
+# Unified book management CLI
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+VENV_PATH="$SCRIPT_DIR/venv"
+PYTHON="$VENV_PATH/bin/python3"
+
+# Ensure venv exists
+if [ ! -d "$VENV_PATH" ]; then
+    echo "Error: Virtual environment not found."
+    echo "Please run ./setup.sh first to set up the environment."
+    exit 1
+fi
+
+# Route commands
+if [ $# -eq 0 ]; then
+    echo "Essay Search Engine - Book Management"
+    echo ""
+    echo "Usage:"
+    echo "  ./lib <book.epub>           Process and add a book"
+    echo "  ./lib --list                List all books"
+    echo "  ./lib --delete <book>       Delete a book"
+    echo "  ./lib --sync                Sync to web (regenerate embeddings)"
+    echo "  ./lib --help                Show this help"
+    exit 0
+elif [ "$1" = "--sync" ]; then
+    "$PYTHON" sync/sync.py
+elif [ "$1" = "--list" ]; then
+    "$PYTHON" process_book.py --list
+elif [ "$1" = "--delete" ]; then
+    if [ -z "$2" ]; then
+        echo "Error: Please specify a book to delete"
+        echo "Usage: ./lib --delete <book_title_or_id>"
+        exit 1
+    fi
+    "$PYTHON" process_book.py --delete "$2"
+elif [ "$1" = "--help" ]; then
+    echo "Essay Search Engine - Book Management"
+    echo ""
+    echo "Commands:"
+    echo "  ./lib <book.epub>           Process and add a book to the library"
+    echo "                              Extracts text, generates chapters, creates tags"
+    echo ""
+    echo "  ./lib --list                List all books in the library"
+    echo ""
+    echo "  ./lib --delete <book>       Delete a book from the library"
+    echo "                              <book> can be title or safe_title ID"
+    echo ""
+    echo "  ./lib --sync                Generate embeddings and sync to web"
+    echo "                              Run this after adding/deleting books"
+    echo ""
+    echo "  ./lib --help                Show this help message"
+    echo ""
+    echo "Requirements:"
+    echo "  - Ollama must be running for book processing"
+    echo "  - Model qwen2.5:7b must be available"
+    echo ""
+    echo "Examples:"
+    echo "  ./lib ~/Downloads/my_book.epub"
+    echo "  ./lib --list"
+    echo "  ./lib --delete \"Book Title\""
+    echo "  ./lib --sync"
+elif [ -f "$1" ]; then
+    # Check if Ollama is running before processing
+    if ! curl -s http://localhost:11434/api/tags >/dev/null 2>&1; then
+        echo "❌ Error: Ollama is not running"
+        echo ""
+        echo "Ollama is required for processing books (generates semantic tags)."
+        echo ""
+        echo "Setup instructions:"
+        echo "  1. Install Ollama: https://ollama.ai"
+        echo "  2. Start Ollama: ollama serve"
+        echo "  3. Pull model: ollama pull qwen2.5:7b"
+        echo ""
+        echo "Once Ollama is running, try again."
+        exit 1
+    fi
+    "$PYTHON" process_book.py --replace "$1"
+else
+    echo "Error: File not found: $1"
+    echo ""
+    echo "Usage:"
+    echo "  ./lib <book.epub>     Process and add a book"
+    echo "  ./lib --help          Show full help"
+    exit 1
+fi

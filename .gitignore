@@ -26,3 +26,6 @@ yarn-error.log*
 # Environment
 .env
 .env.local
+
+# Private data directory (book processing output)
+private/

@@ -12,8 +12,8 @@ import yaml
 import markdown
 
 # Configuration
-SOURCE_DIR = Path.home() / "Desktop" / "unified_library"
 TARGET_DIR = Path(__file__).parent.parent  # essay_search_engine/
+SOURCE_DIR = TARGET_DIR / "private"  # ./private/
 BOOKS_DIR = SOURCE_DIR / "books"
 METADATA_FILE = SOURCE_DIR / "books_metadata.json"
 
@@ -21,7 +21,7 @@ def load_source_metadata():
     """Load books_metadata.json from source"""
     if not METADATA_FILE.exists():
         print(f"ERROR: {METADATA_FILE} not found")
-        print("Please ensure book-library-tui has indexed your books first.")
+        print("Please add books first using: ./lib <book.epub>")
         sys.exit(1)
 
     with open(METADATA_FILE) as f:
@@ -223,7 +223,7 @@ def main():
     print("=" * 60)
 
     # Load source data
-    print("\nLoading source data from book-library-tui...")
+    print("\nLoading source data from ./private/...")
     books_metadata = load_source_metadata()
     print(f"Found {len(books_metadata['books'])} books")
 

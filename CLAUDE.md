@@ -2,21 +2,33 @@
 
 This document explains the implementation decisions, architecture, and context for this project. It's designed to help future Claude sessions (or developers) understand and maintain this codebase.
 
+## Repository Consolidation (2026-01-08)
+
+**Important**: This repository consolidates two previously separate projects:
+- `book-library-tui` (book processing) → now `process_book.py` + `./lib` command
+- `essay_search_engine` (web search) → remains as `src/` + web deployment
+
+**Changes Made**:
+- All book data moved from `~/Desktop/unified_library/` to `./private/` (gitignored)
+- Removed FAISS/BM25 hybrid search (web uses pure semantic search)
+- Ollama now required (not optional) for book processing
+- Single unified workflow: `./lib book.epub` → `./lib --sync` → web deployment
+
 ## Project Context
 
-**Goal**: Build a mobile-accessible semantic search engine for a personal essay collection, deployable to GitHub Pages.
+**Goal**: Complete solution for processing personal essay collections and making them searchable via mobile-accessible web interface.
 
-**User's Existing Setup**:
-- Local TUI at `/Users/jamesalexander/book-library-tui`
-- Processes EPUBs → Markdown → Chunks → Embeddings
-- Uses BAAI/bge-large-en-v1.5 for embeddings (768-dim originally, 1024-dim in reality)
-- Search works well, but only accessible on Mac
+**Unified Workflow**:
+1. **Book Processing** (`process_book.py`): EPUB → Markdown → Semantic Chunks → AI Tags
+2. **Web Sync** (`sync/`): Generate embeddings → Create HTML chunks → Build search data
+3. **Web App** (`src/`): Client-side semantic search with tag boosting
+4. **Deployment**: Auto-deploy to GitHub Pages via GitHub Actions
 
-**Requirements Gathered**:
-1. Same search quality as TUI (explicit user requirement)
+**Requirements**:
+1. Same search quality as original TUI (explicit user requirement)
 2. Mobile accessible (primary goal)
 3. Static site (GitHub Pages)
-4. Automated sync workflow
+4. Automated workflow
 5. Client-side semantic search
 6. User typically searches with 1-2 word queries
 
@@ -114,27 +126,51 @@ else if (tags.some(tag => tag.includes(queryLower) || queryLower.includes(tag)))
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                    Offline (Local)                           │
+│                    Step 1: Process Book                      │
+│                    (./lib book.epub)                         │
 ├─────────────────────────────────────────────────────────────┤
 │                                                               │
-│  book-library-tui                                            │
-│  ~/Desktop/unified_library/                                  │
-│  ├── books_metadata.json (16 books, chunk ranges)           │
-│  └── books/*/                                                │
-│      ├── chunks.json (metadata)                              │
-│      └── chunk_*.md (content + YAML frontmatter)             │
+│  Input: book.epub                                            │
 │                                                               │
-│                         ↓ sync/sync.py                       │
+│          ↓ process_book.py                                   │
 │                                                               │
-│  essay_search_engine/                                        │
-│  └── public/data/                                            │
-│      ├── metadata.json (219KB)                               │
-│      └── embeddings.json (15MB, 1024-dim × 672)              │
+│  1. EPUB → Markdown conversion                               │
+│  2. Chapter detection & normalization                        │
+│  3. Semantic chunking (LlamaIndex)                           │
+│  4. Aggressive content filtering                             │
+│  5. AI tag generation (Ollama qwen2.5:7b)                    │
+│  6. Save to ./private/books/<title>/                         │
+│     - chunks.json                                            │
+│     - chunk_NNN.md (with YAML frontmatter)                   │
+│     - <title>.md (full book)                                 │
+│  7. Update ./private/books_metadata.json                     │
 │                                                               │
 └─────────────────────────────────────────────────────────────┘
                                 ↓
 ┌─────────────────────────────────────────────────────────────┐
-│                    Online (Browser)                          │
+│                    Step 2: Sync to Web                       │
+│                    (./lib --sync)                            │
+├─────────────────────────────────────────────────────────────┤
+│                                                               │
+│  Input: ./private/books_metadata.json + chunks               │
+│                                                               │
+│          ↓ sync/sync.py                                      │
+│                                                               │
+│  1. Load all chunks from ./private/books/*/chunks.json       │
+│  2. Generate ./public/data/metadata.json                     │
+│  3. Generate ./public/chunks/chunk_NNN.html (static pages)   │
+│                                                               │
+│          ↓ sync/embed_chunks.py                              │
+│                                                               │
+│  4. Load sentence-transformers (BAAI/bge-large-en-v1.5)      │
+│  5. Generate embeddings (1024-dim, normalized)               │
+│  6. Save ./public/data/embeddings.json (~15MB)               │
+│                                                               │
+└─────────────────────────────────────────────────────────────┘
+                                ↓
+┌─────────────────────────────────────────────────────────────┐
+│                    Step 3: Browser Search                    │
+│                    (Web App)                                 │
 ├─────────────────────────────────────────────────────────────┤
 │                                                               │
 │  1. Load metadata.json (219KB)                               │
@@ -142,8 +178,8 @@ else if (tags.some(tag => tag.includes(queryLower) || queryLower.includes(tag)))
 │  3. Load Xenova/bge-large-en-v1.5 (327MB, cached)            │
 │  4. User types query                                         │
 │  5. Embed query (1024-dim)                                   │
-│  6. Compute cosine similarity with all 672 embeddings        │
-│  7. Apply tag boosting                                       │
+│  6. Compute cosine similarity with all embeddings            │
+│  7. Apply tag boosting (+20% exact, +10% partial)            │
 │  8. Sort by score, filter < 0.3, return top 20               │
 │  9. Display results                                          │
 │  10. Click → Navigate to chunk_NNN.html                      │
@@ -155,22 +191,33 @@ else if (tags.some(tag => tag.includes(queryLower) || queryLower.includes(tag)))
 
 ```
 essay_search_engine/
-├── sync/                          # Offline data processing
-│   ├── sync.py                    # Main orchestrator
-│   ├── embed_chunks.py            # Generate embeddings
-│   └── requirements.txt           # Python deps
+├── lib                            # CLI entry point (shell script)
+├── process_book.py                # Book processing pipeline
+├── setup.sh                       # Installation script
+├── requirements.txt               # Python dependencies
+│
+├── private/                       # Local data (gitignored)
+│   ├── books_metadata.json        # Book catalog
+│   └── books/<safe_title>/
+│       ├── <title>.md             # Full book markdown
+│       ├── chunks.json            # Chunk metadata
+│       └── chunk_NNN.md           # Individual chunks
+│
+├── sync/                          # Web sync scripts
+│   ├── sync.py                    # Generate metadata + HTML
+│   └── embed_chunks.py            # Generate embeddings
 │
 ├── src/                           # Frontend source
 │   ├── search.js                  # SearchEngine class
 │   ├── main.js                    # UI logic
 │   └── styles.css                 # Tailwind base
 │
-├── public/                        # Static assets (served as-is)
+├── public/                        # Web assets (committed)
 │   ├── data/
 │   │   ├── metadata.json          # Book/chunk metadata
-│   │   └── embeddings.json        # Pre-computed vectors
+│   │   └── embeddings.json        # Pre-computed embeddings
 │   └── chunks/
-│       └── chunk_*.html           # Individual chapter pages
+│       └── chunk_NNN.html         # Static HTML pages
 │
 ├── .github/workflows/
 │   └── deploy.yml                 # GitHub Actions CI/CD
@@ -182,6 +229,103 @@ essay_search_engine/
 ├── README.md                      # User documentation
 └── CLAUDE.md                      # This file
 ```
+
+## Book Processing Pipeline
+
+### Overview
+
+The `process_book.py` script handles the complete EPUB → searchable chunks pipeline. It performs intelligent content extraction, semantic chunking, and AI-powered tagging.
+
+### Processing Stages
+
+**Stage 1: EPUB Extraction (lines 258-305)**
+- Uses `ebooklib` to parse EPUB files
+- Extracts HTML from each document section
+- Converts HTML → Markdown with `BeautifulSoup`
+- Preserves structure: headings, paragraphs, lists, blockquotes
+
+**Stage 2: Chapter Detection (lines 112-205)**
+Two-layer normalization to handle inconsistent formatting:
+- **HTML Layer**: Detects plain-text chapter markers in `<p>` tags, converts to proper `<h2>` headers
+- **Markdown Layer**: Post-processes markdown to catch patterns missed in HTML
+- Patterns: Roman numerals (II, III), Arabic (1., 2.), Keywords ("Chapter One")
+
+**Stage 3: Semantic Chunking (lines 477-645)**
+- Uses LlamaIndex's `MarkdownNodeParser` to split by headers/sections
+- **Aggressive Filtering** removes non-content:
+  - Minimum 30 words per chunk
+  - Filters TOC (>40% list items)
+  - Removes bibliography/references (citation patterns)
+  - Removes copyright/ISBN metadata
+  - Removes dedications, acknowledgments
+  - Filters illustration lists, image credits
+  - Removes publisher promotional content
+  - **Result**: Only substantive content chunks
+
+**Stage 4: AI Tag Generation (lines 308-392)**
+- Calls Ollama API (local) with `qwen2.5:7b`
+- For long chunks (>600 words): samples first 200 + middle 200 + last 200 words
+- Generates 3-5 single-word semantic tags (e.g., "jealousy, comparison, envy")
+- Temperature 0.3 for consistent tagging
+- **Required**: Ollama must be running (no graceful degradation)
+
+**Stage 5: Metadata Management (lines 713-767)**
+- Updates `./private/books_metadata.json`
+- Tracks contiguous doc_id ranges for each book
+- Prevents duplicates by `safe_title` matching
+- Supports book replacement
+
+### Output Format
+
+**Chunks JSON** (`./private/books/<title>/chunks.json`):
+```json
+{
+  "chunk_id": 0,
+  "content": "## Chapter Title\n\nMarkdown content...",
+  "chapter_title": "Chapter Title",
+  "tags": "tag1, tag2, tag3",
+  "metadata": {
+    "char_count": 3041,
+    "word_count": 508,
+    "chapter_title": "Chapter Title",
+    "tags": "tag1, tag2, tag3",
+    "title": "Book Title",
+    "header_path": "/Book Title/Section/"
+  }
+}
+```
+
+**Individual Markdown Files** (`chunk_NNN.md`):
+```markdown
+---
+chunk_id: 0
+chapter_title: Chapter Title
+tags: tag1, tag2, tag3
+char_count: 3041
+word_count: 508
+---
+
+## Chapter Title
+Markdown content...
+```
+
+### Key Features
+
+**Ollama Integration**:
+- Check performed at startup (line 1057-1068)
+- Verifies `qwen2.5:7b` model availability
+- Clear error messages with setup instructions
+- Processing fails if Ollama unavailable
+
+**Content Quality**:
+- Average chunk size: ~500 words (sweet spot for semantic search)
+- Aggressive filtering ensures high signal-to-noise ratio
+- Tags boost search relevance for 1-2 word queries
+
+**Metadata Tracking**:
+- `books_metadata.json` maintains doc_id ranges
+- Enables efficient "previous/next chunk" navigation
+- Supports book updates (removes old chunks, assigns new IDs)
 
 ## Critical Implementation Details
 

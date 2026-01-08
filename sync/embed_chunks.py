@@ -13,7 +13,7 @@ import sys
 TARGET_DIR = Path(__file__).parent.parent
 METADATA_FILE = TARGET_DIR / 'public' / 'data' / 'metadata.json'
 EMBEDDINGS_FILE = TARGET_DIR / 'public' / 'data' / 'embeddings.json'
-SOURCE_DIR = Path.home() / "Desktop" / "unified_library" / "books"
+SOURCE_DIR = TARGET_DIR / "private" / "books"
 
 def generate_embeddings():
     """Generate embeddings for all chunks"""

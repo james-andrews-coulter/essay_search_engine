@@ -1,209 +1,355 @@
 # Essay Search Engine
 
-A mobile-accessible semantic search engine for your personal essay collection, powered by AI.
+A complete solution for processing personal essay collections and searching them via a mobile-accessible semantic search engine.
 
 ## Features
 
-- **Semantic Search**: Uses BGE-large-en-v1.5 (same model as the TUI) for intelligent, meaning-based search
-- **Tag Boosting**: Enhanced relevance for keyword searches through AI-generated tags
+- **Complete Pipeline**: EPUB → Chunks → Embeddings → Web Search (all in one repo)
+- **Semantic Search**: Uses BGE-large-en-v1.5 for intelligent, meaning-based search
+- **AI Tag Generation**: Ollama-powered semantic tags for better keyword matching
 - **Mobile-Friendly**: Responsive design accessible from any device
 - **Offline-First**: Model and data cached in browser after initial load
 - **GitHub Pages**: Static deployment, no server required
 
-## Architecture
-
-- **Frontend**: Vanilla JavaScript + Vite + Tailwind CSS
-- **AI Model**: Xenova/bge-large-en-v1.5 (327MB quantized, 1024-dim embeddings)
-- **Search**: Client-side with pre-computed embeddings (~15MB)
-- **Data**: 672 chapters from 16 books
-
-## Project Structure
-
-```
-essay_search_engine/
-├── public/
-│   ├── data/
-│   │   ├── metadata.json          # Book/chunk metadata (219KB)
-│   │   └── embeddings.json        # Pre-computed vectors (15MB)
-│   └── chunks/
-│       └── chunk_*.html           # 672 individual chapter pages
-├── src/
-│   ├── main.js                    # UI logic
-│   ├── search.js                  # Search engine + Transformers.js
-│   └── styles.css                 # Tailwind CSS
-├── sync/
-│   ├── sync.py                    # Main sync script
-│   ├── embed_chunks.py            # Embedding generation
-│   └── requirements.txt           # Python dependencies
-└── index.html                     # Search page
-```
-
-## Setup
+## Quick Start
 
 ### Prerequisites
 
+- Python 3.9+
 - Node.js 20+
-- Python 3.8+
-- book-library-tui installed and configured
+- Ollama installed and running (for book processing)
 
 ### Installation
 
-1. Clone the repository:
+1. Clone and run setup:
 ```bash
 git clone <repo-url>
 cd essay_search_engine
+./setup.sh
 ```
 
-2. Install dependencies:
+2. Install frontend dependencies:
 ```bash
 npm install
 ```
 
-3. Install Python dependencies for sync:
+3. Ensure Ollama is running with required model:
 ```bash
-python3 -m venv venv
-source venv/bin/activate
-pip install -r sync/requirements.txt
+ollama serve
+ollama pull qwen2.5:7b
 ```
 
-## Usage
+### Adding Books
 
-### Syncing Data (After Adding New Books)
-
-When you process new EPUBs with book-library-tui:
-
+Process an EPUB file:
 ```bash
-# Activate Python environment
-source venv/bin/activate
-
-# Run sync script (generates all data files)
-python3 sync/sync.py
-
-# This will:
-# 1. Read from ~/Desktop/unified_library/
-# 2. Generate metadata.json
-# 3. Generate embeddings.json (takes ~2-3 minutes)
-# 4. Generate 672+ chunk HTML pages
+./lib path/to/book.epub
 ```
 
-### Development
+This will:
+- Extract and convert EPUB to markdown
+- Detect chapters intelligently
+- Create semantic chunks (~500 words each)
+- Generate AI tags using Ollama
+- Save to `./private/books/`
+
+### Syncing to Web
+
+Generate embeddings and web assets:
+```bash
+./lib --sync
+```
+
+This will:
+- Generate 1024-dim embeddings for all chunks
+- Create static HTML pages for each chunk
+- Save search data to `./public/data/`
+- Takes ~2-3 minutes
+
+### Testing Locally
 
 ```bash
 npm run dev
 ```
 
-Visit http://localhost:5173 to test locally.
+Visit http://localhost:5173 to test search.
 
-### Building for Production
+### Deploying
 
 ```bash
+npm run build      # Build for production
+git add public/    # Add generated data
+git commit -m "Update books"
+git push           # Auto-deploys via GitHub Actions
+```
+
+## Commands
+
+```bash
+./lib <book.epub>      # Process and add a book
+./lib --list           # List all indexed books
+./lib --delete <book>  # Delete a book
+./lib --sync           # Generate embeddings and sync to web
+./lib --help           # Show all commands
+
+npm run dev            # Run local dev server
+npm run build          # Build for production
+```
+
+## Project Structure
+
+```
+essay_search_engine/
+├── lib                    # CLI entry point
+├── process_book.py        # Book processing pipeline
+├── setup.sh               # Installation script
+├── requirements.txt       # Python dependencies
+│
+├── private/               # Local data (gitignored)
+│   ├── books_metadata.json
+│   └── books/<title>/
+│       ├── chunks.json
+│       └── chunk_NNN.md
+│
+├── sync/                  # Web sync scripts
+│   ├── sync.py
+│   └── embed_chunks.py
+│
+├── src/                   # Frontend source
+│   ├── main.js
+│   ├── search.js
+│   └── styles.css
+│
+├── public/                # Web assets (committed)
+│   ├── data/
+│   │   ├── metadata.json
+│   │   └── embeddings.json
+│   └── chunks/
+│       └── chunk_NNN.html
+│
+└── index.html             # Search page
+```
+
+## Workflow
+
+### Complete Workflow (Adding a New Book)
+
+```bash
+# 1. Process book
+./lib ~/Downloads/my_book.epub
+
+# 2. Sync to web
+./lib --sync
+
+# 3. Test locally
+npm run dev
+
+# 4. Build and deploy
 npm run build
+git add public/
+git commit -m "Add My Book"
+git push
 ```
 
-Output in `dist/` directory.
+### Updating Existing Content
 
-### Deploying to GitHub Pages
-
-1. Commit changes:
+If you re-process a book, it will replace the old version:
 ```bash
-git add .
-git commit -m "Update with new books"
+./lib ~/Downloads/my_book.epub  # Will prompt to replace
+./lib --sync                     # Regenerate embeddings
 ```
-
-2. Push to GitHub:
-```bash
-git push origin main
-```
-
-3. GitHub Actions will automatically build and deploy to Pages (~2-3 minutes)
-
-### Enabling GitHub Pages
-
-1. Go to repository Settings → Pages
-2. Source: "GitHub Actions"
-3. Save
-
-## Performance
-
-**Initial Load:**
-- First visit: ~331MB download (327MB model + 15MB data)
-- Cached visits: ~15MB (only data updates)
-- Time to ready: ~10-15s on WiFi
-
-**Search:**
-- First query: ~5-10s (model initialization)
-- Subsequent queries: ~1s
-- Works offline after initial load
-
-**Mobile:**
-- 4G: ~20-30s initial load
-- 3G: ~60-90s initial load
-- WiFi: ~10-15s initial load
 
 ## How It Works
 
-1. **Preprocessing** (Local, via sync script):
-   - Read chunks from book-library-tui
-   - Generate 1024-dim embeddings using BAAI/bge-large-en-v1.5
-   - Save as JSON files
+### 1. Book Processing (`process_book.py`)
 
-2. **Search** (Browser):
-   - Load BGE-large-en-v1.5 model (Xenova quantized version)
-   - Embed user query (1024-dim)
-   - Compute cosine similarity with all chunk embeddings
-   - Apply tag boosting (+20% for exact match, +10% for partial)
-   - Sort and return top 20 results
+- **Input**: EPUB file
+- **Pipeline**:
+  1. EPUB → Markdown conversion (BeautifulSoup)
+  2. Chapter detection & normalization
+  3. Semantic chunking (LlamaIndex)
+  4. Aggressive content filtering (removes TOC, metadata, etc.)
+  5. AI tag generation (Ollama qwen2.5:7b)
+  6. Save to `./private/books/`
 
-3. **Display**:
-   - Show book title, chapter, score, and tags
-   - Click to view full chunk content
-   - Navigate between chunks
+### 2. Web Sync (`sync/`)
 
-## Customization
+- **Input**: `./private/books_metadata.json` + chunks
+- **Pipeline**:
+  1. Load all chunks
+  2. Generate embeddings (BAAI/bge-large-en-v1.5, 1024-dim)
+  3. Create `metadata.json` and `embeddings.json`
+  4. Generate static HTML for each chunk
+  5. Save to `./public/`
 
-### Changing the Number of Results
+### 3. Browser Search (`src/`)
+
+- **Pipeline**:
+  1. Load metadata (219KB) and embeddings (15MB)
+  2. Load BGE-large-en-v1.5 model (327MB, cached)
+  3. User types query
+  4. Embed query (1024-dim)
+  5. Compute cosine similarity with all chunks
+  6. Apply tag boosting (+20% exact, +10% partial)
+  7. Sort by score, filter < 0.3
+  8. Display top 20 results
+
+## Performance
+
+**Initial Load (First Visit)**:
+- Model: 327MB (cached for ~7 days)
+- Data: 15MB
+- Time: 10-15s on WiFi, 20-30s on 4G
+
+**Subsequent Visits**:
+- Model: 0KB (cached)
+- Data: 15MB (checks for updates)
+- Time: 2-3s
+
+**Search**:
+- First query: 5-10s (model initialization)
+- Subsequent: ~1s
+
+**Book Processing**:
+- ~2-5 minutes per book (mostly Ollama tag generation)
+
+**Sync to Web**:
+- ~2-3 minutes for 16 books (672 chunks)
+
+## Configuration
+
+### Change Result Count
 
 Edit `src/main.js`:
 ```javascript
-const results = await searchEngine.search(query, 20); // Change 20 to desired number
+const results = await searchEngine.search(query, 20); // Change 20
 ```
 
-### Changing the Score Threshold
+### Change Score Threshold
 
 Edit `src/search.js`:
 ```javascript
-results = results.filter(r => r.score >= 0.3); // Change 0.3 to desired threshold
+results = results.filter(r => r.score >= 0.3); // Change 0.3
 ```
 
-### Customizing Tag Boosting
+### Customize Tag Boosting
 
 Edit `src/search.js`:
 ```javascript
-// Exact tag match: +20% score
-if (tags.some(tag => tag === queryLower)) {
-  result.score += 0.20; // Adjust this value
-}
+// Exact tag match
+result.score += 0.20; // Change 0.20
+
+// Partial tag match
+result.score += 0.10; // Change 0.10
 ```
 
 ## Troubleshooting
 
-### Sync Script Fails
+### Ollama Not Running
 
-- Ensure book-library-tui is properly set up
-- Check `~/Desktop/unified_library/books_metadata.json` exists
-- Verify Python dependencies are installed
+```
+❌ Error: Cannot connect to Ollama (is it running?)
+```
 
-### Model Download Fails
+**Solution**: Start Ollama:
+```bash
+ollama serve
+```
 
-- Check internet connection
-- Try manually downloading from: https://huggingface.co/Xenova/bge-large-en-v1.5
-- Clear browser cache and retry
+### Model Not Found
+
+```
+⚠️ qwen2.5:7b model not found
+```
+
+**Solution**: Pull the model:
+```bash
+ollama pull qwen2.5:7b
+```
+
+### Sync Fails
+
+```
+ERROR: ./private/books_metadata.json not found
+```
+
+**Solution**: Add books first:
+```bash
+./lib path/to/book.epub
+```
 
 ### Search Returns No Results
 
-- Lower the score threshold in `src/search.js`
+**Solutions**:
 - Try more general keywords
+- Lower score threshold in `src/search.js`
 - Check browser console for errors
+
+### Model Download Fails (Browser)
+
+**Solutions**:
+- Check internet connection
+- Clear browser cache
+- Try different browser
+- Wait and retry (CDN might be down)
+
+## GitHub Pages Setup
+
+### Initial Setup
+
+1. Go to repository **Settings → Pages**
+2. Source: **"GitHub Actions"**
+3. Save
+
+### Deployment
+
+Every push to `main` triggers auto-deployment:
+```bash
+git push origin main
+# Wait ~2-3 minutes for build
+# Visit: https://your-username.github.io/essay_search_engine/
+```
+
+## Architecture
+
+- **Frontend**: Vanilla JavaScript + Vite + Tailwind CSS
+- **Backend**: Python (local processing only, no server)
+- **AI Models**:
+  - Embedding: BAAI/bge-large-en-v1.5 (Python & Browser)
+  - Tagging: Ollama qwen2.5:7b (local inference)
+- **Deployment**: GitHub Pages (static hosting)
+- **Storage**: ~15MB embeddings + 327MB model (browser cache)
+
+## Key Design Decisions
+
+### Why BGE-large-en-v1.5?
+- Highest quality embeddings (1024-dim)
+- Consistent with original TUI
+- Proven to work well for essay search
+- Worth the 327MB download for quality
+
+### Why Ollama for Tags?
+- Local inference (privacy)
+- High-quality semantic tags
+- Temperature 0.3 for consistency
+- Tags boost 1-2 word queries significantly
+
+### Why Pre-computed Embeddings?
+- Only embed 1 query vs 672 chunks per search
+- Faster search after model loads
+- 15MB transfer is acceptable
+- Enables GitHub Pages deployment
+
+### Why Remove FAISS/BM25?
+- Web doesn't support FAISS
+- Pure semantic search works well
+- Simpler architecture
+- Tag boosting compensates for exact matches
+
+## Documentation
+
+- **CLAUDE.md**: Detailed implementation documentation
+- **Plan**: `/Users/jamesalexander/.claude/plans/crystalline-crafting-stearns.md`
 
 ## License
 
@@ -212,6 +358,8 @@ Private project for personal use.
 ## Credits
 
 - **Embedding Model**: [BAAI/bge-large-en-v1.5](https://huggingface.co/BAAI/bge-large-en-v1.5)
+- **Tagging Model**: [Ollama qwen2.5:7b](https://ollama.ai)
 - **Browser ML**: [Transformers.js](https://github.com/xenova/transformers.js)
+- **Chunking**: [LlamaIndex](https://www.llamaindex.ai/)
 - **UI**: Tailwind CSS
 - **Build**: Vite

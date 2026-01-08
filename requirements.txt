@@ -1,0 +1,22 @@
+# EPUB Processing
+ebooklib>=0.20
+beautifulsoup4>=4.14.0
+lxml>=6.0.0
+
+# Markdown Chunking
+llama-index-core>=0.14.0
+
+# Embedding Generation
+sentence-transformers>=3.0.0
+torch>=2.0.0
+
+# Web Sync
+markdown>=3.5.1
+pyyaml>=6.0.1
+
+# Ollama API Client
+requests>=2.32.0
+
+# Note: Ollama is required for processing books (generates semantic tags)
+# Install: https://ollama.ai
+# Required model: ollama pull qwen2.5:7b
