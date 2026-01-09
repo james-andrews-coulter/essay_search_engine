@@ -2,6 +2,31 @@
 
 This document explains the implementation decisions, architecture, and context for this project. It's designed to help future Claude sessions (or developers) understand and maintain this codebase.
 
+## Recent Updates
+
+### Chunking Fix (2026-01-09)
+
+**Issue**: Books with numbered subsections containing punctuation were creating abnormally large chunks (7K-12K words vs expected ~500 words).
+
+**Root Cause**:
+- Pattern 2 regex failed on titles with `&` symbol: "1. Trauma & anxiety"
+- No pattern existed for ALL-CAPS subsections: "SELF-HATRED & ANXIETY"
+- These subsections weren't converted to headers, causing MarkdownNodeParser to treat multiple sections as one chunk
+
+**Solution Implemented**:
+1. **Updated Pattern 2** (line 165): Allow punctuation (`&`, `-`, `:`, `,`) in numbered titles
+2. **Added Pattern 5** (lines 192-204): Detect ALL-CAPS subsections (8-60 chars, 70%+ letters, with validator)
+3. **Added validator support** (lines 222-223): Check validators before converting patterns to headers
+4. **Updated markdown normalization** (lines 269-271): Mirror HTML patterns for fallback layer
+5. **Fixed sync script** (sync/sync.py line 144): Handle chunks without `safe_title` field
+
+**Results**:
+- **Anxiety**: 6 → 28 chunks (avg 3,866 → 826 words, max 11,988 → 2,812)
+- **A Therapeutic Journey**: 11 → 69 chunks (avg 6,363 → 1,198 words)
+- **Total chunks**: 672 → 758 (+13%)
+
+**Impact**: More granular search results, better subsection detection, improved search relevance for 1-2 word queries.
+
 ## Repository Consolidation (2026-01-08)
 
 **Important**: This repository consolidates two previously separate projects:
@@ -60,7 +85,7 @@ const embedder = await pipeline('feature-extraction', 'Xenova/bge-large-en-v1.5'
 **Decision**: Generate embeddings offline (Python), only embed queries in browser (JavaScript)
 
 **Why**:
-- Only need to embed 1 query instead of 672 chunks per search
+- Only need to embed 1 query instead of 758 chunks per search
 - Faster search after model loads
 - Smaller data transfer (15MB vs reprocessing all chunks)
 
@@ -248,7 +273,12 @@ The `process_book.py` script handles the complete EPUB → searchable chunks pip
 Two-layer normalization to handle inconsistent formatting:
 - **HTML Layer**: Detects plain-text chapter markers in `<p>` tags, converts to proper `<h2>` headers
 - **Markdown Layer**: Post-processes markdown to catch patterns missed in HTML
-- Patterns: Roman numerals (II, III), Arabic (1., 2.), Keywords ("Chapter One")
+- **Patterns Detected**:
+  - Pattern 1: Roman numerals (II, III, "II. Specialisation")
+  - Pattern 2: Arabic numerals with punctuation (1., 2., "1. Trauma & anxiety")
+  - Pattern 3: Chapter keywords ("Chapter One", "CHAPTER 1")
+  - Pattern 4: Part keywords ("Part I", "PART TWO")
+  - Pattern 5: ALL-CAPS subsections ("SELF-HATRED & ANXIETY", 8-60 chars, 70%+ letters)
 
 **Stage 3: Semantic Chunking (lines 477-645)**
 - Uses LlamaIndex's `MarkdownNodeParser` to split by headers/sections
@@ -378,7 +408,7 @@ cosineSimilarity(vecA, vecB) {
 }
 ```
 
-**Performance**: ~20-30ms for 672 comparisons (1024-dim each)
+**Performance**: ~20-30ms for 758 comparisons (1024-dim each)
 
 ### 3. Chunk HTML Generation
 
@@ -529,7 +559,7 @@ Operation               Time        Notes
 ──────────────────────────────────────────────────
 First query             5-10s       Model init
 Subsequent queries      ~1s         Just inference
-Cosine similarity       20-30ms     672 comparisons
+Cosine similarity       20-30ms     758 comparisons
 Tag boosting           < 5ms        String matching
 Sort + filter          < 5ms        Array operations
 ──────────────────────────────────────────────────
@@ -693,11 +723,19 @@ This implementation was informed by:
 
 ## Version History
 
-### v1.0.0 (Current)
-- Initial implementation
+### v1.1.0 (2026-01-09) - Current
+- **Chunking improvements**: Fixed oversized chunk issue
+- Added Pattern 5 (ALL-CAPS subsections detection)
+- Enhanced Pattern 2 (allow punctuation in numbered titles)
+- 758 chunks from 17 books (+13% from v1.0.0)
+- Average chunk size improved: better granularity for subsections
+- Fixed sync script safe_title handling
+
+### v1.0.0 (2026-01-08)
+- Initial implementation after repository consolidation
 - BGE-large-en-v1.5 with 1024-dim embeddings
 - 672 chunks from 16 books
-- Tag boosting
+- Tag boosting (+20% exact, +10% partial)
 - Mobile-responsive UI
 - GitHub Actions deployment
 
@@ -707,10 +745,10 @@ For issues or questions:
 1. Check browser console (F12) for errors
 2. Review this file for common issues
 3. Check GitHub Actions for build errors
-4. Verify source data in ~/Desktop/unified_library/
+4. Verify source data in ./private/
 
 ---
 
-*Last updated: 2026-01-08*
+*Last updated: 2026-01-09*
 *Built by: Claude (Anthropic)*
 *Model: claude-sonnet-4-5-20250929*
