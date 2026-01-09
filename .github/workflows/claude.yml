@@ -49,7 +49,7 @@ jobs:
       - name: Wait for server to be ready
         run: |
           echo "Waiting for dev server to start..."
-          timeout 60 bash -c 'until curl -s http://localhost:5173 > /dev/null; do sleep 2; done'
+          timeout 60 bash -c 'until curl -s http://localhost:5173/essay_search_engine/ > /dev/null; do sleep 2; done'
           echo "Dev server is ready!"
 
       - name: Run Claude Code
@@ -67,12 +67,13 @@ jobs:
             The Essay Search Engine project is already set up and running:
 
             - All Node.js dependencies are installed
-            - Dev server is running at http://localhost:5173
+            - Dev server is running at http://localhost:5173/essay_search_engine/
             - This is a semantic search engine for personal essay collections
             - The app loads AI models and embeddings to perform semantic search
+            - IMPORTANT: The app base path is /essay_search_engine/ (required for GitHub Pages deployment)
 
             You can use the Playwright MCP tools to:
-            - Navigate to the app: mcp__playwright__browser_navigate
+            - Navigate to the app: mcp__playwright__browser_navigate to http://localhost:5173/essay_search_engine/
             - Take snapshots: mcp__playwright__browser_snapshot
             - Click elements: mcp__playwright__browser_click
             - Fill forms: mcp__playwright__browser_fill_form
@@ -82,7 +83,7 @@ jobs:
             It will download a 327MB AI model on first use, which may take time in CI.
 
             When testing, verify:
-            - Page loads correctly
+            - Page loads correctly at http://localhost:5173/essay_search_engine/
             - Initialize button works
             - Search functionality works after initialization
             - Results display properly
@@ -96,7 +97,13 @@ jobs:
                   "args": [
                     "@playwright/mcp@latest",
                     "--allowed-origins",
-                    "localhost:5173;huggingface.co;cdn-lfs.huggingface.co;cdn-lfs-us-1.huggingface.co"
+                    "http://localhost:5173",
+                    "--allowed-origins",
+                    "https://huggingface.co",
+                    "--allowed-origins",
+                    "https://cdn-lfs.huggingface.co",
+                    "--allowed-origins",
+                    "https://cdn-lfs-us-1.huggingface.co"
                   ]
                 }
               }
@@ -134,3 +141,14 @@ jobs:
             mcp__playwright__browser_hover,
             mcp__playwright__browser_select_option,
             mcp__playwright__browser_tabs
+
+      - name: Cleanup dev server
+        if: always()
+        run: |
+          if [ -f server.pid ]; then
+            SERVER_PID=$(cat server.pid)
+            echo "Stopping dev server (PID: $SERVER_PID)..."
+            kill $SERVER_PID 2>/dev/null || true
+            rm server.pid
+          fi
+          echo "Cleanup complete"
