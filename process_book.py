@@ -160,9 +160,9 @@ def normalize_chapter_markers(soup):
         },
 
         # Pattern 2: Arabic numeral with period + title
-        # Matches: "1. Hyperactivity", "10. Creative Play"
+        # Matches: "1. Hyperactivity", "10. Creative Play", "1. Trauma & anxiety"
         {
-            'regex': re.compile(r'^(\d{1,3})\.\s+([A-Z][A-Za-z\s]{3,})$'),
+            'regex': re.compile(r'^(\d{1,3})\.\s+([A-Z][A-Za-z\s&\-:,]{3,})$'),
             'level': 2,
             'name': 'arabic_numeral'
         },
@@ -187,6 +187,20 @@ def normalize_chapter_markers(soup):
             ),
             'level': 2,
             'name': 'part_keyword'
+        },
+
+        # Pattern 5: ALL-CAPS subsections
+        # Matches: "SELF-HATRED & ANXIETY", "TRAUMA EXERCISE"
+        {
+            'regex': re.compile(r'^([A-Z][A-Z\s&\-]{8,60})$'),
+            'level': 2,
+            'name': 'all_caps_subsection',
+            'validator': lambda text: (
+                # Must be 8-60 chars (not too short like "OK", not full sentences)
+                8 <= len(text) <= 60 and
+                # Must be mostly letters (at least 70%)
+                sum(c.isalpha() for c in text) / len(text) >= 0.7
+            )
         }
     ]
 
@@ -204,6 +218,10 @@ def normalize_chapter_markers(soup):
         for pattern_def in patterns:
             match = pattern_def['regex'].match(text)
             if match:
+                # Check validator if present
+                if 'validator' in pattern_def and not pattern_def['validator'](text):
+                    continue  # Skip this match
+
                 # Handle edge case: "IISpecialisation" → inject space
                 if pattern_def['name'] == 'roman_numeral':
                     text = re.sub(r'^([IVX]+)([A-Z][a-z])', r'\1. \2', text)
@@ -247,8 +265,10 @@ def normalize_markdown_headers(markdown_content):
     chapter_patterns = [
         # Roman numeral patterns
         re.compile(r'^([IVX]{1,10})\.?\s+([A-Z][a-zA-Z].*)$'),
-        # Arabic numeral patterns
-        re.compile(r'^(\d{1,3})\.\s+([A-Z][A-Za-z\s]{3,})$'),
+        # Arabic numeral patterns (WITH PUNCTUATION)
+        re.compile(r'^(\d{1,3})\.\s+([A-Z][A-Za-z\s&\-:,]{3,})$'),
+        # ALL-CAPS subsections (NEW)
+        re.compile(r'^([A-Z][A-Z\s&\-]{8,60})$'),
         # Chapter/Part keywords (case-insensitive for word numbers)
         re.compile(r'^(Chapter|CHAPTER|Part|PART)\s+([IVX\d]+|One|Two|Three|Four|Five|Six|Seven|Eight|Nine|Ten|ONE|TWO|THREE|FOUR|FIVE|SIX|SEVEN|EIGHT|NINE|TEN).*$')
     ]

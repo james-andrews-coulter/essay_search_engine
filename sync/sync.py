@@ -141,7 +141,7 @@ def merge_metadata(existing_metadata, books_metadata, new_chunks):
     # Remove old chunks from books being updated
     existing_chunks = [
         c for c in existing_metadata.get('chunks', [])
-        if c['safe_title'] not in new_book_titles
+        if c.get('safe_title') not in new_book_titles
     ]
 
     # Add new chunks
