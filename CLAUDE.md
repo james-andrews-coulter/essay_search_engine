@@ -4,6 +4,30 @@ This document explains the implementation decisions, architecture, and context f
 
 ## Recent Updates
 
+### Search Quality Fix (2026-01-09)
+
+**Issue**: Search returning irrelevant results with high scores (e.g., query "adventure" returning Chunk ID: 97 about commercialization with 65% score).
+
+**Root Cause**:
+- BGE-large-en-v1.5 produces moderately high baseline similarities (0.4-0.6) even for semantically unrelated content
+- Tag boosting (+20% exact, +10% partial) wasn't strong enough to differentiate relevant results
+- 0.3 similarity threshold was too permissive, allowing false positives
+- No penalty for missing tag matches - only boosts for matches
+
+**Solution Implemented** (src/search.js):
+1. **Increased tag boost strength**: +30% for exact match (was +20%), +15% for partial (was +10%)
+2. **Added hybrid filtering logic**:
+   - Chunks WITH tag matches: min 0.25 base similarity (lenient)
+   - Chunks WITHOUT tag matches: min 0.65 base similarity (strict)
+3. **Tracked base similarity separately**: Prevents tag boosts from masking low semantic relevance
+
+**Results**:
+- Irrelevant chunks (like Chunk 97 for "adventure") now filtered out
+- Tag-matched chunks with moderate similarity still appear (preserves 1-2 word query effectiveness)
+- High-similarity chunks without tag matches still appear (handles synonyms/related concepts)
+
+**Impact**: Dramatically improved search precision while maintaining recall for user's typical 1-2 word queries.
+
 ### Chunking Fix (2026-01-09)
 
 **Issue**: Books with numbered subsections containing punctuation were creating abnormally large chunks (7K-12K words vs expected ~500 words).
@@ -100,24 +124,31 @@ const embedder = await pipeline('feature-extraction', 'Xenova/bge-large-en-v1.5'
 
 ### 3. Tag Boosting (Critical for User's Search Style)
 
-**Decision**: Boost scores by 20% for exact tag matches, 10% for partial
+**Decision**: Boost scores by 30% for exact tag matches, 15% for partial (updated 2026-01-09)
 
 **Why**:
 - User typically searches with 1-2 words ("solitude", "jealousy")
 - Tags are AI-generated semantic labels (Ollama qwen2.5:7b)
 - Already proven effective in TUI
+- Enhanced boost strength improves precision (see Search Quality Fix above)
 
 **Implementation**:
 ```javascript
 // src/search.js
-// Exact tag match: +20% score
+// Exact tag match: +30% score
 if (tags.some(tag => tag === queryLower)) {
-  result.score += 0.20;
+  result.score += 0.30;
+  result.hasExactMatch = true;
 }
-// Partial tag match: +10% score
+// Partial tag match: +15% score
 else if (tags.some(tag => tag.includes(queryLower) || queryLower.includes(tag))) {
-  result.score += 0.10;
+  result.score += 0.15;
+  result.hasPartialMatch = true;
 }
+
+// Hybrid filtering (prevents false positives)
+// WITH tag match: min 0.25 base similarity
+// WITHOUT tag match: min 0.65 base similarity
 ```
 
 ### 4. Vanilla JavaScript (No Framework)
@@ -613,18 +644,22 @@ Same as adding - sync script regenerates everything from source.
 const results = await searchEngine.search(query, 20); // Change 20
 ```
 
-**Adjust score threshold** (src/search.js:142):
+**Adjust similarity thresholds** (src/search.js:136-143):
 ```javascript
-results = results.filter(r => r.score >= 0.3); // Change 0.3
+// Chunks WITH tag matches
+return r.baseSimilarity >= 0.25; // Lower threshold OK with tag match
+
+// Chunks WITHOUT tag matches
+return r.baseSimilarity >= 0.65; // High threshold required without tag match
 ```
 
-**Adjust tag boosting** (src/search.js:124-133):
+**Adjust tag boosting** (src/search.js:117-126):
 ```javascript
 // Exact match
-result.score += 0.20; // Change 0.20
+result.score += 0.30; // Change 0.30 (was 0.20 pre-2026-01-09)
 
 // Partial match
-result.score += 0.10; // Change 0.10
+result.score += 0.15; // Change 0.15 (was 0.10 pre-2026-01-09)
 ```
 
 ### Debugging
