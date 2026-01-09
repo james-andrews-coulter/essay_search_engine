@@ -30,6 +30,28 @@ jobs:
         with:
           fetch-depth: 1
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Start dev server
+        run: |
+          npm run dev &
+          echo $! > server.pid
+        env:
+          CI: true
+
+      - name: Wait for server to be ready
+        run: |
+          echo "Waiting for dev server to start..."
+          timeout 60 bash -c 'until curl -s http://localhost:5173 > /dev/null; do sleep 2; done'
+          echo "Dev server is ready!"
+
       - name: Run Claude Code
         id: claude
         uses: anthropics/claude-code-action@v1
@@ -40,11 +62,75 @@ jobs:
           additional_permissions: |
             actions: read
 
-          # Optional: Give a custom prompt to Claude. If this is not specified, Claude will perform the instructions specified in the comment that tagged it.
-          # prompt: 'Update the pull request description to include a summary of changes.'
+          # Custom instructions about the project setup
+          custom_instructions: |
+            The Essay Search Engine project is already set up and running:
 
-          # Optional: Add claude_args to customize behavior and configuration
-          # See https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
-          # or https://code.claude.com/docs/en/cli-reference for available options
-          # claude_args: '--allowed-tools Bash(gh pr:*)'
+            - All Node.js dependencies are installed
+            - Dev server is running at http://localhost:5173
+            - This is a semantic search engine for personal essay collections
+            - The app loads AI models and embeddings to perform semantic search
 
+            You can use the Playwright MCP tools to:
+            - Navigate to the app: mcp__playwright__browser_navigate
+            - Take snapshots: mcp__playwright__browser_snapshot
+            - Click elements: mcp__playwright__browser_click
+            - Fill forms: mcp__playwright__browser_fill_form
+            - Take screenshots: mcp__playwright__browser_take_screenshot
+
+            The app requires initialization (click "Initialize Search Engine" button) before searching.
+            It will download a 327MB AI model on first use, which may take time in CI.
+
+            When testing, verify:
+            - Page loads correctly
+            - Initialize button works
+            - Search functionality works after initialization
+            - Results display properly
+
+          # Configure MCP servers for browser testing
+          mcp_config: |
+            {
+              "mcpServers": {
+                "playwright": {
+                  "command": "npx",
+                  "args": [
+                    "@playwright/mcp@latest",
+                    "--allowed-origins",
+                    "localhost:5173;huggingface.co;cdn-lfs.huggingface.co;cdn-lfs-us-1.huggingface.co"
+                  ]
+                }
+              }
+            }
+
+          # Allowed tools for testing
+          allowed_tools: >-
+            Bash(npm:*),
+            Bash(curl:*),
+            Bash(echo:*),
+            Bash(cat:*),
+            Bash(ls:*),
+            Bash(grep:*),
+            Bash(head:*),
+            Bash(tail:*),
+            mcp__playwright__browser_navigate,
+            mcp__playwright__browser_snapshot,
+            mcp__playwright__browser_click,
+            mcp__playwright__browser_type,
+            mcp__playwright__browser_fill_form,
+            mcp__playwright__browser_take_screenshot,
+            mcp__playwright__browser_evaluate,
+            mcp__playwright__browser_wait_for,
+            mcp__playwright__browser_console_messages,
+            mcp__playwright__browser_network_requests,
+            mcp__playwright__browser_close,
+            mcp__playwright__browser_resize,
+            mcp__playwright__browser_handle_dialog,
+            mcp__playwright__browser_file_upload,
+            mcp__playwright__browser_install,
+            mcp__playwright__browser_press_key,
+            mcp__playwright__browser_navigate_back,
+            mcp__playwright__browser_run_code,
+            mcp__playwright__browser_drag,
+            mcp__playwright__browser_hover,
+            mcp__playwright__browser_select_option,
+            mcp__playwright__browser_tabs
