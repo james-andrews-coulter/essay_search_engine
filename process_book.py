@@ -685,8 +685,8 @@ def chunk_markdown_hierarchically(markdown_content, book_title):
     return chunks
 
 
-def save_chunks(chunks, output_dir, book_title):
-    """Save chunks to both JSON and individual markdown files."""
+def save_chunks(chunks, output_dir, book_title, start_doc_id=0):
+    """Save chunks to both JSON and individual markdown files with global doc_ids."""
     output_path = Path(output_dir)
     output_path.mkdir(parents=True, exist_ok=True)
 
@@ -695,6 +695,10 @@ def save_chunks(chunks, output_dir, book_title):
 
     chunks_dir = output_path / safe_title
     chunks_dir.mkdir(exist_ok=True)
+
+    # Add global doc_id to each chunk
+    for i, chunk in enumerate(chunks):
+        chunk['doc_id'] = start_doc_id + i
 
     json_path = chunks_dir / "chunks.json"
     with open(json_path, 'w', encoding='utf-8') as f:
@@ -708,6 +712,7 @@ def save_chunks(chunks, output_dir, book_title):
 
         chunk_content = f"""---
 chunk_id: {chunk['chunk_id']}
+doc_id: {chunk['doc_id']}
 chapter_title: {chunk['chapter_title']}
 tags: {chunk['tags']}
 char_count: {chunk['metadata']['char_count']}
@@ -1021,7 +1026,24 @@ def main():
 
     print(f"\n✓ Markdown saved to: {output_md}")
 
-    save_chunks(chunks, index_dir / "books", book_title)
+    # Get starting doc_id from metadata
+    metadata_path = index_dir / "books_metadata.json"
+    if metadata_path.exists():
+        with open(metadata_path, 'r') as f:
+            books_metadata = json.load(f)
+        # Check if book already exists (for replacement)
+        existing_book = next((b for b in books_metadata["books"] if b["safe_title"] == safe_title), None)
+        if existing_book:
+            # Book is being replaced, reuse its ID range
+            start_doc_id = existing_book["id_range"][0]
+        else:
+            # New book, use next_id
+            start_doc_id = books_metadata.get("next_id", 0)
+    else:
+        # No metadata yet, start from 0
+        start_doc_id = 0
+
+    save_chunks(chunks, index_dir / "books", book_title, start_doc_id)
 
     # Update metadata
     update_books_metadata(chunks, book_title, author, index_dir, chunk_dir, args.replace)

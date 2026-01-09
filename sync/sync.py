@@ -99,9 +99,12 @@ def collect_chunks(books, all_books=False):
             chunks = json.load(f)
 
         for chunk in chunks:
+            # Use global doc_id (fall back to chunk_id for backwards compatibility)
+            doc_id = chunk.get('doc_id', chunk['chunk_id'])
+
             # Add book context
             chunk_data = {
-                'chunk_id': chunk['chunk_id'],
+                'chunk_id': doc_id,  # Use global doc_id as chunk_id
                 'book_title': book['title'],
                 'author': book['author'],
                 'safe_title': book['safe_title'],
@@ -110,11 +113,39 @@ def collect_chunks(books, all_books=False):
                 'content': chunk['content'],
                 'word_count': chunk['metadata']['word_count'],
                 'char_count': chunk['metadata']['char_count'],
-                'file': f"chunk_{chunk['chunk_id']:03d}.html"
+                'file': f"chunk_{doc_id:03d}.html"  # Use global doc_id for filename
             }
             all_chunks.append(chunk_data)
 
     return all_chunks
+
+def validate_chunks(chunks):
+    """Validate that all chunk IDs are unique"""
+    chunk_ids = [chunk['chunk_id'] for chunk in chunks]
+    unique_ids = set(chunk_ids)
+
+    if len(chunk_ids) != len(unique_ids):
+        # Find duplicates
+        from collections import Counter
+        id_counts = Counter(chunk_ids)
+        duplicates = {id: count for id, count in id_counts.items() if count > 1}
+
+        print(f"\n⚠️  ERROR: Found {len(chunk_ids) - len(unique_ids)} duplicate chunk IDs!")
+        print(f"  Total chunks: {len(chunk_ids)}")
+        print(f"  Unique IDs: {len(unique_ids)}")
+        print(f"\n  Duplicate IDs (showing first 10):")
+        for chunk_id, count in sorted(duplicates.items())[:10]:
+            print(f"    - chunk_id {chunk_id}: appears {count} times")
+
+        # Show which books have these duplicates
+        print(f"\n  Books with duplicate chunk_id {list(duplicates.keys())[0]}:")
+        for chunk in chunks:
+            if chunk['chunk_id'] == list(duplicates.keys())[0]:
+                print(f"    - {chunk['book_title']} (chunk {chunk.get('book_local_chunk_id', '?')})")
+
+        raise ValueError("Duplicate chunk IDs detected. Please run './lib --sync --force' to regenerate all chunks.")
+
+    print(f"✓ Validation passed: All {len(chunks)} chunk IDs are unique")
 
 def merge_metadata(existing_metadata, books_metadata, new_chunks):
     """Merge new chunks with existing metadata"""
@@ -165,8 +196,12 @@ def merge_metadata(existing_metadata, books_metadata, new_chunks):
         'last_updated': datetime.utcnow().isoformat() + 'Z'
     }
 
-def generate_metadata_json(books_metadata, chunks, existing_metadata=None):
+def generate_metadata_json(books_metadata, chunks, existing_metadata=None, force=False):
     """Generate or update public/data/metadata.json"""
+    # On force sync, ignore existing metadata and start fresh
+    if force:
+        existing_metadata = None
+
     metadata = merge_metadata(existing_metadata, books_metadata, chunks)
 
     output_file = OUTPUT_METADATA_FILE
@@ -316,8 +351,12 @@ def main():
         print("\n⚠️  No chunks found. Please check your source data.")
         sys.exit(1)
 
+    # Validate chunk IDs are unique
+    print(f"\n🔍 Validating chunk IDs...")
+    validate_chunks(new_chunks)
+
     # Generate outputs
-    generate_metadata_json(books_metadata, new_chunks, existing_metadata)
+    generate_metadata_json(books_metadata, new_chunks, existing_metadata, force=args.force)
     generate_chunk_pages(new_chunks)
 
     # Generate embeddings (separate script)
