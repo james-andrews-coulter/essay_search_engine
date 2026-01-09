@@ -99,10 +99,12 @@ export class SearchEngine {
     // Compute cosine similarity with all chunks
     let results = this.embeddings.embeddings.map((embedding, idx) => ({
       chunk: this.metadata.chunks[idx],
-      score: this.cosineSimilarity(queryEmbedding, embedding)
+      score: this.cosineSimilarity(queryEmbedding, embedding),
+      baseSimilarity: this.cosineSimilarity(queryEmbedding, embedding)
     }));
 
-    // Tag boosting (same as TUI - critical for 1-2 word queries)
+    // Tag boosting (enhanced for better precision)
+    const queryLower = query.toLowerCase().trim();
     results = results.map(result => {
       if (!result.chunk.tags) return result;
 
@@ -112,25 +114,33 @@ export class SearchEngine {
         .map(t => t.trim())
         .filter(t => t.length > 0);
 
-      const queryLower = query.toLowerCase().trim();
-
-      // Exact tag match: +20% score
+      // Exact tag match: +30% score (increased from +20%)
       if (tags.some(tag => tag === queryLower)) {
-        result.score += 0.20;
+        result.score += 0.30;
+        result.hasExactMatch = true;
       }
-      // Partial tag match: +10% score
+      // Partial tag match: +15% score (increased from +10%)
       else if (tags.some(tag => tag.includes(queryLower) || queryLower.includes(tag))) {
-        result.score += 0.10;
+        result.score += 0.15;
+        result.hasPartialMatch = true;
       }
 
       return result;
     });
 
-    // Sort by score (descending) and return top N
+    // Sort by score (descending)
     results.sort((a, b) => b.score - a.score);
 
-    // Filter out very low scores (< 0.3)
-    results = results.filter(r => r.score >= 0.3);
+    // Enhanced filtering: Require either tag match OR very high semantic similarity
+    // This prevents irrelevant results from appearing just because they have moderate similarity
+    results = results.filter(r => {
+      // Keep if has any tag match and reasonable similarity
+      if (r.hasExactMatch || r.hasPartialMatch) {
+        return r.baseSimilarity >= 0.25; // Lower threshold OK with tag match
+      }
+      // Otherwise require very high semantic similarity
+      return r.baseSimilarity >= 0.65; // High threshold required without tag match
+    });
 
     return results.slice(0, limit);
   }
