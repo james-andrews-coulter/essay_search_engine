@@ -4,6 +4,40 @@ This document explains the implementation decisions, architecture, and context f
 
 ## Recent Updates
 
+### Multi-Attribute Search Matching (2026-01-09)
+
+**Issue**: Search for "travel" not returning chapters from book titled "How to Travel". Book and chapter titles weren't being considered in search matching.
+
+**Root Cause**:
+- Embeddings only generated from chunk content (body text)
+- Book title and chapter title not included in semantic embeddings
+- Only tag boosting was implemented - no title boosting
+
+**Solution Implemented**:
+
+1. **Updated embedding generation** (sync/embed_chunks.py:111-114):
+   - Prepend book title and chapter title to content before embedding
+   - Format: `"{book_title}\n{chapter_title}\n\n{content}"`
+   - Gives titles natural semantic weight in embedding space
+
+2. **Added hierarchical attribute boosting** (src/search.js:106-146):
+   - Book Title match: +50% score (highest priority)
+   - Chapter Title match: +40% score (high priority)
+   - Exact Tag match: +30% score (medium priority)
+   - Partial Tag match: +15% score (medium priority)
+
+3. **Updated filtering thresholds** (src/search.js:151-164):
+   - Book/Chapter title match: min 0.15 base similarity (very lenient)
+   - Tag match: min 0.25 base similarity (lenient)
+   - No match: min 0.65 base similarity (strict)
+
+**Impact**:
+- Searching "travel" now returns ALL chapters from "How to Travel"
+- Clear hierarchy: Book Title > Chapter Title > Tags > Body Text
+- Maintains high precision while improving recall for title-based queries
+
+**Note**: Requires regenerating embeddings with `./lib --sync` to take effect.
+
 ### Search Quality Fix (2026-01-09)
 
 **Issue**: Search returning irrelevant results with high scores (e.g., query "adventure" returning Chunk ID: 97 about commercialization with 65% score).

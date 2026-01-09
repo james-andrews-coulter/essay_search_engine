@@ -103,26 +103,43 @@ export class SearchEngine {
       baseSimilarity: this.cosineSimilarity(queryEmbedding, embedding)
     }));
 
-    // Tag boosting (enhanced for better precision)
+    // Multi-attribute boosting with hierarchy: Book Title > Chapter Title > Tags
     const queryLower = query.toLowerCase().trim();
     results = results.map(result => {
-      if (!result.chunk.tags) return result;
+      const chunk = result.chunk;
 
-      const tags = result.chunk.tags
-        .toLowerCase()
-        .split(',')
-        .map(t => t.trim())
-        .filter(t => t.length > 0);
-
-      // Exact tag match: +30% score (increased from +20%)
-      if (tags.some(tag => tag === queryLower)) {
-        result.score += 0.30;
-        result.hasExactMatch = true;
+      // Book Title boosting (highest priority)
+      const bookTitle = chunk.book_title?.toLowerCase() || '';
+      if (bookTitle.includes(queryLower) || queryLower.includes(bookTitle)) {
+        result.score += 0.50; // +50% for book title match
+        result.hasBookTitleMatch = true;
       }
-      // Partial tag match: +15% score (increased from +10%)
-      else if (tags.some(tag => tag.includes(queryLower) || queryLower.includes(tag))) {
-        result.score += 0.15;
-        result.hasPartialMatch = true;
+
+      // Chapter Title boosting (high priority)
+      const chapterTitle = chunk.chapter_title?.toLowerCase() || '';
+      if (chapterTitle.includes(queryLower) || queryLower.includes(chapterTitle)) {
+        result.score += 0.40; // +40% for chapter title match
+        result.hasChapterTitleMatch = true;
+      }
+
+      // Tag boosting (medium priority)
+      if (chunk.tags) {
+        const tags = chunk.tags
+          .toLowerCase()
+          .split(',')
+          .map(t => t.trim())
+          .filter(t => t.length > 0);
+
+        // Exact tag match: +30% score
+        if (tags.some(tag => tag === queryLower)) {
+          result.score += 0.30;
+          result.hasExactTagMatch = true;
+        }
+        // Partial tag match: +15% score
+        else if (tags.some(tag => tag.includes(queryLower) || queryLower.includes(tag))) {
+          result.score += 0.15;
+          result.hasPartialTagMatch = true;
+        }
       }
 
       return result;
@@ -131,15 +148,19 @@ export class SearchEngine {
     // Sort by score (descending)
     results.sort((a, b) => b.score - a.score);
 
-    // Enhanced filtering: Require either tag match OR very high semantic similarity
+    // Enhanced filtering: Require either attribute match OR very high semantic similarity
     // This prevents irrelevant results from appearing just because they have moderate similarity
     results = results.filter(r => {
+      // Keep if has book/chapter title match (even with low similarity)
+      if (r.hasBookTitleMatch || r.hasChapterTitleMatch) {
+        return r.baseSimilarity >= 0.15; // Very low threshold OK with title match
+      }
       // Keep if has any tag match and reasonable similarity
-      if (r.hasExactMatch || r.hasPartialMatch) {
+      if (r.hasExactTagMatch || r.hasPartialTagMatch) {
         return r.baseSimilarity >= 0.25; // Lower threshold OK with tag match
       }
       // Otherwise require very high semantic similarity
-      return r.baseSimilarity >= 0.65; // High threshold required without tag match
+      return r.baseSimilarity >= 0.65; // High threshold required without any match
     });
 
     return results.slice(0, limit);

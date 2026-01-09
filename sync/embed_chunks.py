@@ -108,8 +108,10 @@ def generate_embeddings(incremental=True):
             texts.append("")
             continue
 
-        # Use full content (model handles up to 512 tokens)
-        texts.append(chunk['content'])
+        # Construct searchable text with hierarchy: Book Title > Chapter Title > Content
+        # This ensures book/chapter titles have semantic weight in embeddings
+        searchable_text = f"{book_title}\n{chunk_meta['chapter_title']}\n\n{chunk['content']}"
+        texts.append(searchable_text)
 
     print(f"\n🧠 Generating embeddings for {len(texts)} chunk(s)...")
     print("   (This will take 1-2 minutes)")
