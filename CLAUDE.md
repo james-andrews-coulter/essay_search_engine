@@ -4,6 +4,46 @@ This document explains the implementation decisions, architecture, and context f
 
 ## Recent Updates
 
+### Multi-Attribute Search & Pagination (2026-01-09)
+
+**Issue**: Query "travel" only returned 8 of 29 chapters from "How to Travel" book. Search was limited to 20 results and didn't consider book/chapter titles.
+
+**Root Cause**:
+- Search only matched against tags and body text (semantic similarity)
+- Book titles and chapter titles were ignored in relevance scoring
+- 20-result artificial limit prevented seeing all matches
+- User searching for "travel" expected ALL chapters from book titled "How to Travel"
+
+**Solution Implemented** (src/search.js, src/main.js):
+1. **Ranked relevance boosting** with tiered priorities:
+   - Book Title: +50% exact, +40% partial (highest priority)
+   - Chapter Title: +40% exact, +30% partial (second priority)
+   - Tags: +30% exact, +15% partial (third priority)
+   - Body Text: Semantic similarity only (fourth priority)
+
+2. **Tiered filtering thresholds** based on match type:
+   - Book title matches: min 0.15 base similarity (very lenient)
+   - Chapter title matches: min 0.20 base similarity (lenient)
+   - Tag matches: min 0.25 base similarity (moderate)
+   - No matches: min 0.65 base similarity (strict)
+
+3. **Removed result limit**: Returns all matching results (was capped at 20)
+
+4. **Pagination system**:
+   - 25 results per page (configurable)
+   - Previous/Next navigation buttons
+   - Page number buttons with smart ellipsis (e.g., "1 ... 5 6 7 ... 12")
+   - Auto-scroll to top on page change
+   - Status shows "Found X results (showing Y-Z)"
+
+**Results**:
+- Query "travel" now returns all 32 relevant results (29 from "How to Travel" + 3 related)
+- Book title queries work correctly (e.g., "how to survive" finds "How to Survive the Modern World")
+- Chapter title queries get appropriate boost
+- Pagination provides clean navigation for large result sets
+
+**Impact**: Resolves GitHub issue #7. Search now considers all relevant attributes in ranked order, and users can browse all results via pagination.
+
 ### Search Quality Fix (2026-01-09)
 
 **Issue**: Search returning irrelevant results with high scores (e.g., query "adventure" returning Chunk ID: 97 about commercialization with 65% score).
@@ -122,33 +162,46 @@ const embedder = await pipeline('feature-extraction', 'Xenova/bge-large-en-v1.5'
 - JavaScript: Transformers.js with Xenova/bge-large-en-v1.5 (quantized)
 - Both produce 1024-dim normalized embeddings
 
-### 3. Tag Boosting (Critical for User's Search Style)
+### 3. Multi-Attribute Relevance Boosting (Critical for User's Search Style)
 
-**Decision**: Boost scores by 30% for exact tag matches, 15% for partial (updated 2026-01-09)
+**Decision**: Ranked boosting system considering Book Title → Chapter Title → Tags → Body Text (implemented 2026-01-09)
 
 **Why**:
-- User typically searches with 1-2 words ("solitude", "jealousy")
+- User typically searches with 1-2 words ("solitude", "jealousy", "travel")
+- Query "travel" should return ALL chapters from "How to Travel" book
+- Book and chapter titles are highly relevant metadata
 - Tags are AI-generated semantic labels (Ollama qwen2.5:7b)
-- Already proven effective in TUI
-- Enhanced boost strength improves precision (see Search Quality Fix above)
+- Body text semantic search handles synonyms and related concepts
 
 **Implementation**:
 ```javascript
 // src/search.js
-// Exact tag match: +30% score
-if (tags.some(tag => tag === queryLower)) {
-  result.score += 0.30;
-  result.hasExactMatch = true;
-}
-// Partial tag match: +15% score
-else if (tags.some(tag => tag.includes(queryLower) || queryLower.includes(tag))) {
-  result.score += 0.15;
-  result.hasPartialMatch = true;
+// Book Title (highest priority)
+if (bookTitle === queryLower) {
+  result.score += 0.50;  // +50% exact match
+} else if (bookTitle.includes(queryLower) || queryLower.split(' ').some(...)) {
+  result.score += 0.40;  // +40% partial match
 }
 
-// Hybrid filtering (prevents false positives)
-// WITH tag match: min 0.25 base similarity
-// WITHOUT tag match: min 0.65 base similarity
+// Chapter Title (second priority)
+if (chapterTitle === queryLower) {
+  result.score += 0.40;  // +40% exact match
+} else if (chapterTitle.includes(queryLower) || queryLower.split(' ').some(...)) {
+  result.score += 0.30;  // +30% partial match
+}
+
+// Tags (third priority)
+if (tags.some(tag => tag === queryLower)) {
+  result.score += 0.30;  // +30% exact match
+} else if (tags.some(tag => tag.includes(queryLower) || queryLower.includes(tag))) {
+  result.score += 0.15;  // +15% partial match
+}
+
+// Tiered filtering thresholds (prevents false positives)
+// Book title match: min 0.15 base similarity
+// Chapter title match: min 0.20 base similarity
+// Tag match: min 0.25 base similarity
+// No match: min 0.65 base similarity
 ```
 
 ### 4. Vanilla JavaScript (No Framework)
@@ -235,10 +288,12 @@ else if (tags.some(tag => tag.includes(queryLower) || queryLower.includes(tag)))
 │  4. User types query                                         │
 │  5. Embed query (1024-dim)                                   │
 │  6. Compute cosine similarity with all embeddings            │
-│  7. Apply tag boosting (+20% exact, +10% partial)            │
-│  8. Sort by score, filter < 0.3, return top 20               │
-│  9. Display results                                          │
-│  10. Click → Navigate to chunk_NNN.html                      │
+│  7. Apply ranked boosting (book/chapter titles, tags)        │
+│  8. Sort by score, apply tiered filtering (0.15-0.65)        │
+│  9. Return all results (no limit)                            │
+│  10. Paginate results (25 per page)                          │
+│  11. Display current page                                    │
+│  12. Click → Navigate to chunk_NNN.html                      │
 │                                                               │
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -639,27 +694,44 @@ Same as adding - sync script regenerates everything from source.
 
 ### Changing Search Behavior
 
-**Adjust result count** (src/main.js:82):
+**Adjust results per page** (src/main.js:19):
 ```javascript
-const results = await searchEngine.search(query, 20); // Change 20
+const resultsPerPage = 25; // Change to desired page size
 ```
 
-**Adjust similarity thresholds** (src/search.js:136-143):
-```javascript
-// Chunks WITH tag matches
-return r.baseSimilarity >= 0.25; // Lower threshold OK with tag match
+**Note**: Search now returns ALL matching results (no limit), paginated for display.
 
-// Chunks WITHOUT tag matches
-return r.baseSimilarity >= 0.65; // High threshold required without tag match
+**Adjust tiered similarity thresholds** (src/search.js:158-173):
+```javascript
+// Book title matches
+if (r.hasBookTitleExact || r.hasBookTitlePartial) {
+  return r.baseSimilarity >= 0.15; // Very lenient
+}
+// Chapter title matches
+if (r.hasChapterTitleExact || r.hasChapterTitlePartial) {
+  return r.baseSimilarity >= 0.20; // Lenient
+}
+// Tag matches
+if (r.hasExactMatch || r.hasPartialMatch) {
+  return r.baseSimilarity >= 0.25; // Moderate
+}
+// No matches
+return r.baseSimilarity >= 0.65; // Strict
 ```
 
-**Adjust tag boosting** (src/search.js:117-126):
+**Adjust ranked boosting** (src/search.js:111-149):
 ```javascript
-// Exact match
-result.score += 0.30; // Change 0.30 (was 0.20 pre-2026-01-09)
+// Book Title (highest priority)
+result.score += 0.50; // Exact match
+result.score += 0.40; // Partial match
 
-// Partial match
-result.score += 0.15; // Change 0.15 (was 0.10 pre-2026-01-09)
+// Chapter Title (second priority)
+result.score += 0.40; // Exact match
+result.score += 0.30; // Partial match
+
+// Tags (third priority)
+result.score += 0.30; // Exact match
+result.score += 0.15; // Partial match
 ```
 
 ### Debugging
@@ -758,13 +830,24 @@ This implementation was informed by:
 
 ## Version History
 
-### v1.1.0 (2026-01-09) - Current
+### v1.2.0 (2026-01-09) - Current
+- **Multi-attribute search**: Book Title → Chapter Title → Tags → Body Text ranked boosting
+- **Tiered filtering**: Different similarity thresholds by match type (0.15-0.65)
+- **Removed result limit**: Returns all matching results (was capped at 20)
+- **Pagination system**: 25 results per page with navigation UI
+- **Issue #7 fixed**: Query "travel" now returns all 29 "How to Travel" chapters (was 8/29)
+- Book title exact/partial: +50%/+40% boost
+- Chapter title exact/partial: +40%/+30% boost
+- Tag exact/partial: +30%/+15% boost (maintained from v1.1.0)
+
+### v1.1.0 (2026-01-09)
 - **Chunking improvements**: Fixed oversized chunk issue
 - Added Pattern 5 (ALL-CAPS subsections detection)
 - Enhanced Pattern 2 (allow punctuation in numbered titles)
 - 758 chunks from 17 books (+13% from v1.0.0)
 - Average chunk size improved: better granularity for subsections
 - Fixed sync script safe_title handling
+- Enhanced tag boosting: +30%/+15% (was +20%/+10%)
 
 ### v1.0.0 (2026-01-08)
 - Initial implementation after repository consolidation
