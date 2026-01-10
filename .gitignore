@@ -32,3 +32,6 @@ private/
 
 # Sync state (tracks last sync per book)
 .sync_state.json
+
+# Git worktrees
+.worktrees/
