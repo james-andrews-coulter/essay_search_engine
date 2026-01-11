@@ -263,5 +263,16 @@ searchForm.addEventListener('submit', (e) => {
   performSearch();
 });
 
-// Auto-initialize on page load
-window.addEventListener('DOMContentLoaded', initialize);
+// Auto-initialize on page load and handle tag parameters
+window.addEventListener('DOMContentLoaded', async () => {
+  await initialize();
+
+  // Check for tag parameter in URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const tag = urlParams.get('tag');
+
+  if (tag && isInitialized) {
+    searchInput.value = tag;
+    performSearch();
+  }
+});
