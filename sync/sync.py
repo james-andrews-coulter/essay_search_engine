@@ -248,7 +248,7 @@ def generate_chunk_pages(chunks):
     <title>{chunk['chapter_title']} - {chunk['book_title']}</title>
 </head>
 <body>
-    <a href="../../index.html">← Back</a>
+    <button onclick="if (document.referrer.includes('/essay_search_engine/') || document.referrer.includes('localhost')) {{ history.back(); }} else {{ window.location.href = '../../index.html'; }}">← Back</button>
 
     <h1>{chunk['book_title']}</h1>
     <p>by {chunk['author']}</p>
