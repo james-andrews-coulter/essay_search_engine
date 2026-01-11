@@ -138,9 +138,9 @@ function renderResults() {
         ${tags.length > 0 ? `
           <div class="result-tags">
             ${tags.map(tag => `
-              <span class="tag">
+              <a href="?tag=${encodeURIComponent(tag)}" class="tag">
                 ${escapeHtml(tag)}
-              </span>
+              </a>
             `).join('')}
           </div>
         ` : ''}
