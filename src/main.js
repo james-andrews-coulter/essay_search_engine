@@ -119,22 +119,24 @@ function renderResults() {
       : [];
 
     return `
-      <a href="/essay_search_engine/chunks/${result.chunk.file}" class="result-card">
-        <div class="result-header">
-          <h3 class="result-title">
-            ${escapeHtml(result.chunk.book_title)}
-          </h3>
-          <span class="result-score">
-            ${score}%
-          </span>
-        </div>
-        <p class="result-chapter">
-          ${escapeHtml(result.chunk.chapter_title)}
-        </p>
-        <p class="result-meta">
-          by ${escapeHtml(result.chunk.author)} •
-          ${result.chunk.word_count.toLocaleString()} words
-        </p>
+      <div class="result-card">
+        <a href="/essay_search_engine/chunks/${result.chunk.file}" class="result-link">
+          <div class="result-header">
+            <h3 class="result-title">
+              ${escapeHtml(result.chunk.book_title)}
+            </h3>
+            <span class="result-score">
+              ${score}%
+            </span>
+          </div>
+          <p class="result-chapter">
+            ${escapeHtml(result.chunk.chapter_title)}
+          </p>
+          <p class="result-meta">
+            by ${escapeHtml(result.chunk.author)} •
+            ${result.chunk.word_count.toLocaleString()} words
+          </p>
+        </a>
         ${tags.length > 0 ? `
           <div class="result-tags">
             ${tags.map(tag => `
@@ -144,7 +146,7 @@ function renderResults() {
             `).join('')}
           </div>
         ` : ''}
-      </a>
+      </div>
     `;
   }).join('');
 
