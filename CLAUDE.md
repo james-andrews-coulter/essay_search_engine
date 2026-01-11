@@ -4,6 +4,31 @@ This document explains the implementation decisions, architecture, and context f
 
 ## Recent Updates
 
+### Tag Navigation (2026-01-12)
+
+**Goal**: Enable browsing and navigating content by AI-generated tags.
+
+**Changes**:
+- **Tag Index Page**: Alphabetical listing at `/tags.html` showing all unique tags with counts
+- **Clickable Tags**: Tags in search results are now clickable links to `?tag=<tagname>` URLs
+- **URL Parameters**: Main page detects `?tag=` parameter and auto-executes search
+- **Navigation**: Added "Browse Tags" link to main page header
+- **Data Generation**: Sync script now extracts tags and generates `tags.json` + `tags.html`
+
+**Implementation**:
+- Pure semantic HTML, zero new CSS files
+- Static tag index generated during sync
+- Shareable tag search URLs
+- Foundation for future hierarchical tag clustering
+
+**Usage**:
+- Browse tags: Click "Browse Tags" on main page
+- Search by tag: Click any tag in search results or on tag index
+- Share tag searches: Copy URL (e.g., `/?tag=anxiety`)
+
+**Design**: See `docs/plans/2026-01-12-tag-navigation-design.md`
+**Implementation**: See `docs/plans/2026-01-12-tag-navigation.md`
+
 ### Minimal Semantic HTML Redesign (2026-01-10)
 
 **Goal**: Dramatically simplify codebase by removing all bloated styling and dependencies.
