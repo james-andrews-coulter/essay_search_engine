@@ -38,7 +38,7 @@ button:disabled {
 }
 
 /* Touch-friendly links in results */
-a {
+.result-link {
   display: block;
   min-height: 44px; /* iOS minimum touch target */
   padding: 0.5rem 0;
@@ -94,6 +94,14 @@ a {
   padding: 0.25rem 0.5rem;
   font-size: 0.75rem;
   border-radius: 0.25rem;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.tag:hover {
+  background: #e0e0e0;
+  text-decoration: underline;
 }
 
 /* Pagination */

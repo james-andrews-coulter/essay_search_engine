@@ -270,6 +270,80 @@ def generate_chunk_pages(chunks):
 
     print(f"   ✓ Generated {len(chunks)} HTML page(s)")
 
+def extract_tags(chunks):
+    """Extract all unique tags with counts from chunks"""
+    tag_counts = {}
+
+    for chunk in chunks:
+        if not chunk.get('tags'):
+            continue
+
+        # Parse comma-separated tags
+        tags = [tag.strip().lower() for tag in chunk['tags'].split(',') if tag.strip()]
+
+        for tag in tags:
+            tag_counts[tag] = tag_counts.get(tag, 0) + 1
+
+    return tag_counts
+
+def generate_tags_json(tag_counts):
+    """Generate public/data/tags.json"""
+    output_file = TARGET_DIR / 'public' / 'data' / 'tags.json'
+    output_file.parent.mkdir(parents=True, exist_ok=True)
+
+    with open(output_file, 'w') as f:
+        json.dump(tag_counts, f, indent=2, sort_keys=True)
+
+    file_size_kb = output_file.stat().st_size / 1024
+    print(f"\n✓ Generated tags.json ({len(tag_counts)} unique tags, {file_size_kb:.1f} KB)")
+
+def generate_tags_html(tag_counts):
+    """Generate public/tags.html with alphabetical index"""
+    output_file = TARGET_DIR / 'public' / 'tags.html'
+    output_file.parent.mkdir(parents=True, exist_ok=True)
+
+    # Group tags by first letter
+    tags_by_letter = {}
+    for tag in sorted(tag_counts.keys()):
+        first_letter = tag[0].upper()
+        if first_letter not in tags_by_letter:
+            tags_by_letter[first_letter] = []
+        tags_by_letter[first_letter].append((tag, tag_counts[tag]))
+
+    # Generate HTML
+    html = """<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Browse Tags - Essay Search Engine</title>
+</head>
+<body>
+  <h1>Browse by Tag</h1>
+  <a href="/essay_search_engine/">← Back to Search</a>
+
+"""
+
+    # Add letter sections
+    for letter in sorted(tags_by_letter.keys()):
+        html += f"  <h2>{letter}</h2>\n  <ul>\n"
+        for tag, count in tags_by_letter[letter]:
+            # URL encode the tag for the link
+            from urllib.parse import quote
+            encoded_tag = quote(tag)
+            html += f'    <li><a href="/essay_search_engine/?tag={encoded_tag}">{tag} ({count})</a></li>\n'
+        html += "  </ul>\n\n"
+
+    html += """</body>
+</html>
+"""
+
+    with open(output_file, 'w', encoding='utf-8') as f:
+        f.write(html)
+
+    file_size_kb = output_file.stat().st_size / 1024
+    print(f"✓ Generated tags.html ({len(tag_counts)} tags, {file_size_kb:.1f} KB)")
+
 def main():
     import argparse
     parser = argparse.ArgumentParser(description='Sync books to web format')
@@ -316,6 +390,17 @@ def main():
     # Generate outputs
     generate_metadata_json(books_metadata, new_chunks, existing_metadata, force=args.force)
     generate_chunk_pages(new_chunks)
+
+    # Generate tag index (after generate_chunk_pages)
+    print("\n🏷️  Generating tag index...")
+
+    # Need to load ALL chunks for complete tag index
+    all_chunks = collect_chunks(books_metadata['books'], all_books=True)
+    tag_counts = extract_tags(all_chunks)
+    print(f"   Found {len(tag_counts)} unique tags")
+
+    generate_tags_json(tag_counts)
+    generate_tags_html(tag_counts)
 
     # Generate embeddings (separate script)
     print("\n" + "=" * 60)
