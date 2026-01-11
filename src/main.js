@@ -256,13 +256,11 @@ function escapeHtml(text) {
   return div.innerHTML;
 }
 
-// Event listeners - search on button click or Enter only
-searchButton.addEventListener('click', performSearch);
-searchInput.addEventListener('keypress', (e) => {
-  if (e.key === 'Enter') {
-    e.preventDefault();
-    performSearch();
-  }
+// Event listeners - prevent form submission and handle search
+const searchForm = document.getElementById('search-form');
+searchForm.addEventListener('submit', (e) => {
+  e.preventDefault(); // Prevent page reload
+  performSearch();
 });
 
 // Auto-initialize on page load
