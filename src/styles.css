@@ -1,8 +1,130 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-/* Custom styles */
+/* Mobile-friendly base */
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-family: system-ui, -apple-system, sans-serif;
+  line-height: 1.5;
+  max-width: 50rem;
+  margin: 0 auto;
+  padding: 1rem;
+  font-size: 16px; /* Prevents mobile zoom on input focus */
+}
+
+/* Touch-friendly form elements */
+input[type="search"] {
+  display: block;
+  width: 100%;
+  padding: 0.5rem;
+  margin: 1rem 0;
+  font-size: 16px; /* Prevents mobile zoom */
+  border: 1px solid #ccc;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  font-size: 16px;
+  min-height: 44px; /* iOS minimum touch target */
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Touch-friendly links in results */
+a {
+  display: block;
+  min-height: 44px; /* iOS minimum touch target */
+  padding: 0.5rem 0;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Result cards */
+.result-card {
+  display: block;
+  border: 1px solid #ddd;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.result-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.result-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.result-score {
+  color: #0066cc;
+  font-weight: 500;
+}
+
+.result-chapter {
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.result-meta {
+  font-size: 0.875rem;
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+
+.result-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag {
+  display: inline-block;
+  background: #f0f0f0;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  border-radius: 0.25rem;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 2rem 0;
+}
+
+.page-numbers {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.page-number {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  background: white;
+}
+
+.page-number.active {
+  background: #0066cc;
+  color: white;
+  border-color: #0066cc;
+}
+
+.ellipsis {
+  padding: 0.5rem;
+  color: #666;
 }

@@ -4,6 +4,27 @@ This document explains the implementation decisions, architecture, and context f
 
 ## Recent Updates
 
+### Minimal Semantic HTML Redesign (2026-01-10)
+
+**Goal**: Dramatically simplify codebase by removing all bloated styling and dependencies.
+
+**Changes**:
+- **Removed Tailwind CSS**: Eliminated 76 npm packages, config files
+- **Minimal CSS**: 130 lines covering mobile usability, result cards, pagination (was 30 lines planned, expanded during implementation)
+- **Browser defaults**: Everything else uses native browser styling
+- **Chunk pages**: Zero CSS for Safari Reader mode
+- **Auto-initialization**: Removed init button, search engine starts on page load
+- **Button-only search**: Removed auto-search while typing, search triggers on button click or Enter only
+
+**Results**:
+- Package count: 168 → 81 packages (-52%, better than planned 45%)
+- CSS bundle: ~10 KB → 1.3 KB (-87%, better than planned 70%)
+- postcss.config.js: Emptied instead of deleted due to worktree constraints (functionally equivalent)
+- Simpler codebase, faster builds, browser-native experience
+
+**Design**: See `docs/plans/2026-01-10-minimal-semantic-html-design.md`
+**Implementation**: See `docs/plans/2026-01-10-minimal-semantic-html.md`
+
 ### Multi-Attribute Search & Pagination (2026-01-09)
 
 **Issue**: Query "travel" only returned 8 of 29 chapters from "How to Travel" book. Search was limited to 20 results and didn't consider book/chapter titles.
@@ -204,19 +225,28 @@ if (tags.some(tag => tag === queryLower)) {
 // No match: min 0.65 base similarity
 ```
 
-### 4. Vanilla JavaScript (No Framework)
+### 4. Raw Semantic HTML with Minimal CSS
 
-**Decision**: Use vanilla JS + Vite instead of React/Vue/Svelte
+**Decision**: Use browser defaults with ~130 lines of CSS for mobile usability only
 
 **Why**:
-- Smaller bundle size (~50KB vs ~200KB)
-- Simpler maintenance for static site
-- No framework complexity needed
-- Model download is the bottleneck, not JS bundle
+- Private project - only essentials needed
+- Smaller bundle, faster loads
+- Easier to maintain (no framework complexity)
+- Browser-native experience
 
-**Trade-off**:
-- More manual DOM manipulation
-- Less component reusability
+**CSS covers**:
+- 16px minimum font size (prevents mobile zoom)
+- 44px minimum touch targets (iOS standard)
+- Max-width container (50rem)
+- System font stack
+- Result cards and pagination styling
+
+**What's removed**:
+- All CSS frameworks (Tailwind removed)
+- Custom colors, shadows, rounded corners (beyond basics)
+- Loading spinners (browser defaults)
+- Chunk page styling (Safari Reader mode)
 
 ### 5. Score Threshold: 0.3
 

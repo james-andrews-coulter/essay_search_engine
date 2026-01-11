@@ -8,10 +8,8 @@ let isInitialized = false;
 // DOM elements
 const searchInput = document.getElementById('search-input');
 const searchButton = document.getElementById('search-button');
-const initButton = document.getElementById('init-button');
 const statusDiv = document.getElementById('status');
 const resultsDiv = document.getElementById('results');
-const loadingDiv = document.getElementById('loading');
 
 // Pagination state
 let allResults = [];
@@ -19,48 +17,30 @@ let currentPage = 1;
 const resultsPerPage = 25;
 let currentQuery = '';
 
-// Debounce timer
-let debounceTimer = null;
-
-/**
- * Update status message
- */
-function updateStatus(message, type = 'info') {
-  statusDiv.textContent = message;
-  statusDiv.className = `text-sm ${type === 'error' ? 'text-red-600' : 'text-gray-600'}`;
-}
-
 /**
  * Initialize the search engine
  */
 async function initialize() {
   if (isInitialized) return;
 
-  initButton.disabled = true;
-  initButton.textContent = 'Initializing...';
-  loadingDiv.classList.remove('hidden');
+  statusDiv.textContent = 'Loading search engine...';
 
   try {
     await searchEngine.initialize((progress) => {
-      updateStatus(progress);
+      statusDiv.textContent = progress;
     });
 
     isInitialized = true;
-    initButton.classList.add('hidden');
     searchInput.disabled = false;
     searchButton.disabled = false;
     searchInput.focus();
 
     const totalChunks = searchEngine.getTotalChunks();
     const books = searchEngine.getBooks();
-    updateStatus(`Ready! Search across ${books.length} books (${totalChunks} chapters)`);
-    loadingDiv.classList.add('hidden');
+    statusDiv.textContent = `Ready! Search across ${books.length} books (${totalChunks} chapters)`;
   } catch (error) {
     console.error('Initialization error:', error);
-    updateStatus(`Error: ${error.message}`, 'error');
-    initButton.disabled = false;
-    initButton.textContent = 'Retry Initialization';
-    loadingDiv.classList.add('hidden');
+    statusDiv.textContent = `Error: ${error.message}`;
   }
 }
 
@@ -78,26 +58,24 @@ async function performSearch() {
   }
 
   if (!isInitialized) {
-    updateStatus('Please initialize the search engine first', 'error');
+    statusDiv.textContent = 'Please initialize the search engine first';
     return;
   }
 
   // Show loading state
-  loadingDiv.classList.remove('hidden');
   searchButton.disabled = true;
-  updateStatus('Searching...');
+  statusDiv.textContent = 'Searching...';
 
   try {
     // Get all results (no limit)
     const results = await searchEngine.search(query);
 
     // Hide loading state
-    loadingDiv.classList.add('hidden');
     searchButton.disabled = false;
 
     if (results.length === 0) {
-      updateStatus(`No results found for "${query}"`);
-      resultsDiv.innerHTML = '<p class="text-gray-500 text-center py-8">No results found. Try different keywords.</p>';
+      statusDiv.textContent = `No results found for "${query}"`;
+      resultsDiv.innerHTML = '<p>No results found. Try different keywords.</p>';
       allResults = [];
       currentQuery = '';
       return;
@@ -112,8 +90,7 @@ async function performSearch() {
     renderResults();
   } catch (error) {
     console.error('Search error:', error);
-    updateStatus(`Search error: ${error.message}`, 'error');
-    loadingDiv.classList.add('hidden');
+    statusDiv.textContent = `Search error: ${error.message}`;
     searchButton.disabled = false;
   }
 }
@@ -132,7 +109,7 @@ function renderResults() {
   const endIdx = Math.min(startIdx + resultsPerPage, allResults.length);
   const pageResults = allResults.slice(startIdx, endIdx);
 
-  updateStatus(`Found ${allResults.length} results for "${currentQuery}" (showing ${startIdx + 1}-${endIdx})`);
+  statusDiv.textContent = `Found ${allResults.length} results for "${currentQuery}" (showing ${startIdx + 1}-${endIdx})`;
 
   // Render results
   const resultsHtml = pageResults.map((result, idx) => {
@@ -142,27 +119,26 @@ function renderResults() {
       : [];
 
     return `
-      <a href="/essay_search_engine/chunks/${result.chunk.file}"
-         class="block bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-6 mb-4">
-        <div class="flex justify-between items-start mb-2">
-          <h3 class="text-xl font-semibold text-gray-900 flex-1">
+      <a href="/essay_search_engine/chunks/${result.chunk.file}" class="result-card">
+        <div class="result-header">
+          <h3 class="result-title">
             ${escapeHtml(result.chunk.book_title)}
           </h3>
-          <span class="text-sm font-medium text-blue-600 ml-4">
+          <span class="result-score">
             ${score}%
           </span>
         </div>
-        <p class="text-gray-700 font-medium mb-2">
+        <p class="result-chapter">
           ${escapeHtml(result.chunk.chapter_title)}
         </p>
-        <p class="text-sm text-gray-500 mb-3">
+        <p class="result-meta">
           by ${escapeHtml(result.chunk.author)} •
           ${result.chunk.word_count.toLocaleString()} words
         </p>
         ${tags.length > 0 ? `
-          <div class="flex flex-wrap gap-2">
+          <div class="result-tags">
             ${tags.map(tag => `
-              <span class="text-xs bg-blue-50 text-blue-700 px-3 py-1 rounded-full">
+              <span class="tag">
                 ${escapeHtml(tag)}
               </span>
             `).join('')}
@@ -174,23 +150,19 @@ function renderResults() {
 
   // Render pagination controls
   const paginationHtml = totalPages > 1 ? `
-    <div class="flex justify-center items-center gap-2 mt-8 mb-4">
-      <button id="prev-page"
-              class="px-4 py-2 rounded-lg border ${currentPage === 1 ? 'border-gray-200 text-gray-400 cursor-not-allowed' : 'border-blue-500 text-blue-600 hover:bg-blue-50'}"
-              ${currentPage === 1 ? 'disabled' : ''}>
+    <nav class="pagination">
+      <button id="prev-page" ${currentPage === 1 ? 'disabled' : ''}>
         Previous
       </button>
 
-      <div class="flex items-center gap-1">
+      <div class="page-numbers">
         ${generatePageNumbers(currentPage, totalPages)}
       </div>
 
-      <button id="next-page"
-              class="px-4 py-2 rounded-lg border ${currentPage === totalPages ? 'border-gray-200 text-gray-400 cursor-not-allowed' : 'border-blue-500 text-blue-600 hover:bg-blue-50'}"
-              ${currentPage === totalPages ? 'disabled' : ''}>
+      <button id="next-page" ${currentPage === totalPages ? 'disabled' : ''}>
         Next
       </button>
-    </div>
+    </nav>
   ` : '';
 
   resultsDiv.innerHTML = resultsHtml + paginationHtml;
@@ -261,12 +233,12 @@ function generatePageNumbers(current, total) {
 
   return pages.map(page => {
     if (page === '...') {
-      return '<span class="px-2 text-gray-400">...</span>';
+      return '<span class="ellipsis">...</span>';
     }
 
     const isActive = page === current;
     return `
-      <button class="page-number px-3 py-1 rounded ${isActive ? 'bg-blue-600 text-white' : 'hover:bg-gray-100 text-gray-700'}"
+      <button class="page-number ${isActive ? 'active' : ''}"
               data-page="${page}"
               ${isActive ? 'disabled' : ''}>
         ${page}
@@ -284,24 +256,14 @@ function escapeHtml(text) {
   return div.innerHTML;
 }
 
-/**
- * Handle search with debouncing
- */
-function handleSearchInput() {
-  clearTimeout(debounceTimer);
-  debounceTimer = setTimeout(performSearch, 300);
-}
-
-// Event listeners
-initButton.addEventListener('click', initialize);
+// Event listeners - search on button click or Enter only
 searchButton.addEventListener('click', performSearch);
-searchInput.addEventListener('input', handleSearchInput);
 searchInput.addEventListener('keypress', (e) => {
   if (e.key === 'Enter') {
-    clearTimeout(debounceTimer);
+    e.preventDefault();
     performSearch();
   }
 });
 
-// Auto-initialize on load (optional - you can remove this if you want manual init)
-// window.addEventListener('load', initialize);
+// Auto-initialize on page load
+window.addEventListener('DOMContentLoaded', initialize);
