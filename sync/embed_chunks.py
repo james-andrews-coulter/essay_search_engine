@@ -101,8 +101,8 @@ def generate_embeddings(incremental=True):
         with open(chunks_file) as f:
             all_chunks = json.load(f)
 
-        # Find matching chunk
-        chunk = next((c for c in all_chunks if c['chunk_id'] == chunk_id), None)
+        # Find matching chunk (use doc_id which is the global ID, fallback to chunk_id for old data)
+        chunk = next((c for c in all_chunks if c.get('doc_id', c['chunk_id']) == chunk_id), None)
         if not chunk:
             print(f"⚠️  WARNING: Chunk {chunk_id} not found in {chunks_file}")
             texts.append("")
