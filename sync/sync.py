@@ -233,11 +233,13 @@ def generate_chunk_pages(chunks):
         # Note: We don't have prev/next context for incremental sync
         # These would need to be computed from full metadata
 
-        # Generate tags HTML (plain text, no styling)
+        # Generate tags HTML with links back to search
         tags_text = ''
         if chunk['tags']:
+            from urllib.parse import quote
             tags = [tag.strip() for tag in chunk['tags'].split(',') if tag.strip()]
-            tags_text = f"<p>Tags: {', '.join(tags)}</p>"
+            tag_links = [f'<a href="/essay_search_engine/?tag={quote(tag)}">{tag}</a>' for tag in tags]
+            tags_text = f"<p>Tags: {', '.join(tag_links)}</p>"
 
         # Generate HTML (zero styling for Safari Reader)
         html = f"""<!DOCTYPE html>
