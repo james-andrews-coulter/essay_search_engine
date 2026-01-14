@@ -1,4 +1,4 @@
-import { pipeline } from '@xenova/transformers';
+import { pipeline } from "@xenova/transformers";
 
 /**
  * Search Engine Class
@@ -20,26 +20,34 @@ export class SearchEngine {
   async initialize(onProgress = null) {
     if (this.isReady) return;
     if (this.isLoading) {
-      throw new Error('Already initializing');
+      throw new Error("Already initializing");
     }
 
     this.isLoading = true;
 
     try {
       // Load metadata and embeddings
-      if (onProgress) onProgress('Loading metadata...');
-      const metadataResponse = await fetch('/essay_search_engine/data/metadata.json');
+      if (onProgress) onProgress("Loading metadata...");
+      const metadataResponse = await fetch(
+        "/essay_search_engine/data/metadata.json",
+      );
       this.metadata = await metadataResponse.json();
 
-      if (onProgress) onProgress('Loading embeddings...');
-      const embeddingsResponse = await fetch('/essay_search_engine/data/embeddings.json');
+      if (onProgress) onProgress("Loading embeddings...");
+      const embeddingsResponse = await fetch(
+        "/essay_search_engine/data/embeddings.json",
+      );
       this.embeddings = await embeddingsResponse.json();
 
       // Load embedding model (BGE-large-en-v1.5 - same as TUI)
-      if (onProgress) onProgress('Loading AI model (327MB, may take a minute)...');
-      this.embedder = await pipeline('feature-extraction', 'Xenova/bge-large-en-v1.5');
+      if (onProgress)
+        onProgress("Loading AI model (327MB, may take a minute)...");
+      this.embedder = await pipeline(
+        "feature-extraction",
+        "Xenova/bge-large-en-v1.5",
+      );
 
-      if (onProgress) onProgress('Ready!');
+      if (onProgress) onProgress("Ready!");
       this.isReady = true;
     } catch (error) {
       this.isLoading = false;
@@ -54,7 +62,7 @@ export class SearchEngine {
    */
   cosineSimilarity(vecA, vecB) {
     if (vecA.length !== vecB.length) {
-      throw new Error('Vectors must have the same length');
+      throw new Error("Vectors must have the same length");
     }
 
     let dotProduct = 0;
@@ -82,7 +90,9 @@ export class SearchEngine {
    */
   async search(query, limit = null) {
     if (!this.isReady) {
-      throw new Error('Search engine not initialized. Call initialize() first.');
+      throw new Error(
+        "Search engine not initialized. Call initialize() first.",
+      );
     }
 
     if (!query || query.trim().length === 0) {
@@ -91,40 +101,54 @@ export class SearchEngine {
 
     // Embed the query (1024-dim)
     const output = await this.embedder(query.trim(), {
-      pooling: 'mean',
-      normalize: true
+      pooling: "mean",
+      normalize: true,
     });
     const queryEmbedding = Array.from(output.data);
 
     // Compute cosine similarity with all chunks
-    let results = this.embeddings.embeddings.map((embedding, idx) => ({
-      chunk: this.metadata.chunks[idx],
-      score: this.cosineSimilarity(queryEmbedding, embedding),
-      baseSimilarity: this.cosineSimilarity(queryEmbedding, embedding)
-    }));
+    let results = this.embeddings.embeddings
+      .map((embedding, idx) => ({
+        chunk: this.metadata.chunks[idx],
+        score: this.cosineSimilarity(queryEmbedding, embedding),
+        baseSimilarity: this.cosineSimilarity(queryEmbedding, embedding),
+      }))
+      .filter((result) => result.chunk !== undefined);
 
     // Relevance boosting (ranked by importance)
     const queryLower = query.toLowerCase().trim();
-    results = results.map(result => {
+    results = results.map((result) => {
       const chunk = result.chunk;
 
       // Book Title matching (highest priority: +50% for exact, +40% for partial)
-      const bookTitle = chunk.book_title ? chunk.book_title.toLowerCase() : '';
+      const bookTitle = chunk.book_title ? chunk.book_title.toLowerCase() : "";
       if (bookTitle === queryLower) {
-        result.score += 0.50;
+        result.score += 0.5;
         result.hasBookTitleExact = true;
-      } else if (bookTitle.includes(queryLower) || queryLower.split(' ').some(word => word.length > 2 && bookTitle.includes(word))) {
-        result.score += 0.40;
+      } else if (
+        bookTitle.includes(queryLower) ||
+        queryLower
+          .split(" ")
+          .some((word) => word.length > 2 && bookTitle.includes(word))
+      ) {
+        result.score += 0.4;
         result.hasBookTitlePartial = true;
       }
 
       // Chapter Title matching (second priority: +40% for exact, +30% for partial)
-      const chapterTitle = chunk.chapter_title ? chunk.chapter_title.toLowerCase() : '';
+      const chapterTitle = chunk.chapter_title
+        ? chunk.chapter_title.toLowerCase()
+        : "";
       if (chapterTitle === queryLower) {
-        result.score += 0.40;
+        result.score += 0.4;
         result.hasChapterTitleExact = true;
-      } else if (chapterTitle.includes(queryLower) || queryLower.split(' ').some(word => word.length > 2 && chapterTitle.includes(word))) {
-        result.score += 0.30;
+      } else if (
+        chapterTitle.includes(queryLower) ||
+        queryLower
+          .split(" ")
+          .some((word) => word.length > 2 && chapterTitle.includes(word))
+      ) {
+        result.score += 0.3;
         result.hasChapterTitlePartial = true;
       }
 
@@ -132,17 +156,21 @@ export class SearchEngine {
       if (chunk.tags) {
         const tags = chunk.tags
           .toLowerCase()
-          .split(',')
-          .map(t => t.trim())
-          .filter(t => t.length > 0);
+          .split(",")
+          .map((t) => t.trim())
+          .filter((t) => t.length > 0);
 
         // Exact tag match: +30% score
-        if (tags.some(tag => tag === queryLower)) {
-          result.score += 0.30;
+        if (tags.some((tag) => tag === queryLower)) {
+          result.score += 0.3;
           result.hasExactMatch = true;
         }
         // Partial tag match: +15% score
-        else if (tags.some(tag => tag.includes(queryLower) || queryLower.includes(tag))) {
+        else if (
+          tags.some(
+            (tag) => tag.includes(queryLower) || queryLower.includes(tag),
+          )
+        ) {
           result.score += 0.15;
           result.hasPartialMatch = true;
         }
@@ -155,14 +183,14 @@ export class SearchEngine {
     results.sort((a, b) => b.score - a.score);
 
     // Enhanced filtering: Prioritize title matches, then tag matches, then semantic similarity
-    results = results.filter(r => {
+    results = results.filter((r) => {
       // Keep if has book title match (even with very low semantic similarity)
       if (r.hasBookTitleExact || r.hasBookTitlePartial) {
         return r.baseSimilarity >= 0.15; // Very low threshold for book title matches
       }
       // Keep if has chapter title match
       if (r.hasChapterTitleExact || r.hasChapterTitlePartial) {
-        return r.baseSimilarity >= 0.20; // Low threshold for chapter title matches
+        return r.baseSimilarity >= 0.2; // Low threshold for chapter title matches
       }
       // Keep if has tag match and reasonable similarity
       if (r.hasExactMatch || r.hasPartialMatch) {
