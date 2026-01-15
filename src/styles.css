@@ -136,3 +136,30 @@ button:disabled {
   padding: 0.5rem;
   color: #666;
 }
+
+/* Offline support indicators */
+#online-status {
+  font-size: 0.875rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+#refresh-btn {
+  padding: 0.5rem 1rem;
+  background: #f0f0f0;
+  border: 1px solid #ddd;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+#refresh-btn:hover {
+  background: #e0e0e0;
+}
+
+/* Download progress indicator (if added later) */
+#download-progress {
+  font-size: 0.75rem;
+  color: #666;
+  margin-top: 0.5rem;
+}
