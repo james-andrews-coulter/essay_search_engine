@@ -1,6 +1,6 @@
 /**
  * Service Worker for offline search capability
- * Caches model, embeddings, and metadata on first visit
+ * Caches model, embeddings, metadata, and all chunk HTML pages on first visit
  * Detects and downloads updates when new embeddings are published
  */
 
