@@ -17,7 +17,7 @@ async function registerServiceWorker() {
 
   try {
     const registration = await navigator.serviceWorker.register(
-      '/essay_search_engine/src/service-worker.js',
+      '/essay_search_engine/service-worker.js',
       { scope: '/essay_search_engine/' }
     );
     console.log('[App] Service Worker registered successfully');
