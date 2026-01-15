@@ -11,6 +11,8 @@ from pathlib import Path
 from datetime import datetime
 import yaml
 import markdown
+import hashlib
+import time
 
 # Configuration
 TARGET_DIR = Path(__file__).parent.parent  # essay_search_engine/
@@ -344,6 +346,36 @@ def generate_tags_html(tag_counts):
     file_size_kb = output_file.stat().st_size / 1024
     print(f"✓ Generated tags.html ({len(tag_counts)} tags, {file_size_kb:.1f} KB)")
 
+def generate_version_file():
+    """Generate version.json for update detection in Service Worker"""
+    embeddings_path = TARGET_DIR / 'public' / 'data' / 'embeddings.json'
+    version_path = TARGET_DIR / 'public' / 'data' / 'version.json'
+
+    if not embeddings_path.exists():
+        print("ERROR: embeddings.json not found, skipping version.json generation")
+        return
+
+    try:
+        # Calculate checksum of embeddings.json
+        with open(embeddings_path, 'rb') as f:
+            file_content = f.read()
+            checksum = hashlib.md5(file_content).hexdigest()
+
+        # Create version data
+        version_data = {
+            'timestamp': int(time.time()),
+            'checksum': checksum,
+            'embeddings_size': len(file_content)
+        }
+
+        # Write version.json
+        with open(version_path, 'w') as f:
+            json.dump(version_data, f, indent=2)
+
+        print(f"✓ Generated version.json (checksum: {checksum}, size: {len(file_content) / 1024 / 1024:.1f}MB)")
+    except Exception as e:
+        print(f"ERROR generating version.json: {e}")
+
 def main():
     import argparse
     parser = argparse.ArgumentParser(description='Sync books to web format')
@@ -416,6 +448,10 @@ def main():
     except subprocess.CalledProcessError as e:
         print(f"\n❌ ERROR: Embedding generation failed: {e}")
         sys.exit(1)
+
+    # Generate version.json for offline updates
+    print("\nGenerating version.json for Service Worker updates...")
+    generate_version_file()
 
     # Update sync state
     now = datetime.utcnow().isoformat() + 'Z'
