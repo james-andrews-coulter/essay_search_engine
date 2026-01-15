@@ -8,8 +8,27 @@ let updateAvailable = false;
 
 /**
  * Register Service Worker for offline support
+ * Only registers in production (not during Vite dev server)
  */
 async function registerServiceWorker() {
+  // Skip SW in development - it interferes with Vite's dev server
+  const isDev = window.location.hostname === 'localhost' ||
+                window.location.hostname === '127.0.0.1' ||
+                window.location.port === '5173';
+
+  if (isDev) {
+    console.log('[App] Skipping Service Worker in development mode');
+    // Unregister any existing SW from previous sessions
+    if ('serviceWorker' in navigator) {
+      const registrations = await navigator.serviceWorker.getRegistrations();
+      for (const registration of registrations) {
+        await registration.unregister();
+        console.log('[App] Unregistered stale Service Worker');
+      }
+    }
+    return;
+  }
+
   if (!('serviceWorker' in navigator)) {
     console.log('Service Workers not supported');
     return;
