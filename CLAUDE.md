@@ -10,30 +10,40 @@ This document explains the implementation decisions, architecture, and context f
 
 **Issue**: Search worked online but failed offline after page navigation, particularly in Safari. Systematic debugging revealed model files loaded from HuggingFace CDN weren't being cached.
 
-**Root Cause**:
-- Transformers.js attempted to load model files from `/models/` (404), fell back to HuggingFace CDN (cross-origin)
-- Service Worker skipped caching cross-origin requests
-- Chrome's internal cache persisted across navigations, Safari's didn't
-- tags.html wasn't pre-cached, causing offline navigation errors
+**Root Causes Identified**:
+1. Transformers.js attempted to load model files from `/models/` (404), fell back to HuggingFace CDN (cross-origin)
+2. Service Worker skipped caching cross-origin requests
+3. Chrome's internal cache persisted across navigations, Safari's didn't
+4. tags.html wasn't pre-cached, causing offline navigation errors
+5. Service Worker error handler returned undefined instead of proper 404 Response
+6. Query parameters (e.g., `/?tag=anxiety`) didn't match cached index.html
 
 **Solution Implemented**:
 1. **Self-hosted model files**: Downloaded BGE-large-en-v1.5 model files (~322MB) to `public/models/Xenova/bge-large-en-v1.5/`
-   - config.json, tokenizer.json, tokenizer_config.json
-   - onnx/model_quantized.onnx (321MB)
-2. **Updated Service Worker**:
+   - config.json, tokenizer.json, tokenizer_config.json (695KB total)
+   - onnx/model_quantized.onnx (321MB, via Git LFS)
+2. **Updated Service Worker v5**:
    - Added model files and tags.html to pre-cache list
-   - Fixed error handling bug (line 213) that returned undefined instead of proper 404 Response
-   - Bumped cache version to v4
-3. **Verified in both browsers**: Tested complete offline workflow (load → search → navigate → back)
+   - Fixed error handling to return proper 404 Response instead of undefined
+   - Added fallback to serve index.html for root paths with query params
+   - Removed verbose diagnostic logging
+3. **Git LFS**: Configured for *.onnx files (GitHub's limit is 100MB per file)
 
-**Results**:
-- ✅ Complete offline support in both Chrome and Safari
+**Results (Verified in Both Browsers)**:
+- ✅ Complete offline support in Chrome and Safari
 - ✅ All 1141 chunks cached and accessible offline
-- ✅ tags.html accessible offline
 - ✅ Model loads from local cache (no network requests after first load)
-- ✅ Page navigation works offline without errors
+- ✅ Page navigation works offline (load → search → result → back)
+- ✅ Tag navigation works offline (Browse Tags → click tag → search)
+- ✅ Query parameters handled correctly (/?tag=anxiety loads offline)
 
-**Debugging Approach**: Used systematic debugging with comprehensive diagnostic logging at each component boundary (SW registration, install, fetch, pipeline load) to identify exact failure points in both browsers before implementing fix.
+**Debugging Approach**: Used systematic debugging methodology with comprehensive diagnostic logging at each component boundary (SW registration, install, fetch, pipeline load) to identify exact failure points in both browsers before implementing fixes. Verified assumptions by testing both browsers with identical workflows.
+
+**Files Modified**:
+- `public/models/Xenova/bge-large-en-v1.5/` - Self-hosted model files
+- `public/service-worker.js` - Cache v5 with query param handling
+- `src/search.js` - WASM path configuration
+- `.gitattributes` - Git LFS tracking for *.onnx
 
 ### Tag Navigation (2026-01-12)
 

@@ -1,14 +1,7 @@
 import { pipeline, env } from "@xenova/transformers";
 
-console.log('[Search] === WASM CONFIGURATION DIAGNOSTIC ===');
-console.log('[Search] Setting WASM paths to:', "/essay_search_engine/wasm/");
-
 // Configure WASM files to load from our server instead of CDN (for offline support)
 env.backends.onnx.wasm.wasmPaths = "/essay_search_engine/wasm/";
-
-console.log('[Search] WASM paths configured:', env.backends.onnx.wasm.wasmPaths);
-console.log('[Search] Available backends:', Object.keys(env.backends));
-console.log('[Search] ===================================');
 
 /**
  * Search Engine Class
@@ -28,12 +21,7 @@ export class SearchEngine {
    * @param {Function} onProgress - Callback for progress updates
    */
   async initialize(onProgress = null) {
-    console.log('[Search] === INITIALIZATION DIAGNOSTIC START ===');
-
-    if (this.isReady) {
-      console.log('[Search] Already initialized, skipping');
-      return;
-    }
+    if (this.isReady) return;
     if (this.isLoading) {
       throw new Error("Already initializing");
     }
@@ -43,53 +31,28 @@ export class SearchEngine {
     try {
       // Load metadata and embeddings
       if (onProgress) onProgress("Loading metadata...");
-      console.log('[Search] Fetching metadata.json...');
       const metadataResponse = await fetch(
         "/essay_search_engine/data/metadata.json",
       );
-      console.log('[Search] Metadata response status:', metadataResponse.status);
       this.metadata = await metadataResponse.json();
-      console.log('[Search] ✓ Metadata loaded:', this.metadata.total_chunks, 'chunks');
 
       if (onProgress) onProgress("Loading embeddings...");
-      console.log('[Search] Fetching embeddings.json...');
       const embeddingsResponse = await fetch(
         "/essay_search_engine/data/embeddings.json",
       );
-      console.log('[Search] Embeddings response status:', embeddingsResponse.status);
       this.embeddings = await embeddingsResponse.json();
-      console.log('[Search] ✓ Embeddings loaded:', this.embeddings.embeddings.length, 'vectors');
 
       // Load embedding model (BGE-large-en-v1.5 - same as TUI)
       if (onProgress)
         onProgress("Loading AI model (327MB, may take a minute)...");
-      console.log('[Search] Loading pipeline (Xenova/bge-large-en-v1.5)...');
-      console.log('[Search] Current WASM paths:', env.backends.onnx.wasm.wasmPaths);
-
-      try {
-        this.embedder = await pipeline(
-          "feature-extraction",
-          "Xenova/bge-large-en-v1.5",
-        );
-        console.log('[Search] ✓ Pipeline loaded successfully');
-      } catch (pipelineError) {
-        console.error('[Search] ❌ Pipeline load failed:', pipelineError);
-        console.error('[Search] Error name:', pipelineError.name);
-        console.error('[Search] Error message:', pipelineError.message);
-        console.error('[Search] Error stack:', pipelineError.stack);
-        throw pipelineError;
-      }
+      this.embedder = await pipeline(
+        "feature-extraction",
+        "Xenova/bge-large-en-v1.5",
+      );
 
       if (onProgress) onProgress("Ready!");
       this.isReady = true;
-      console.log('[Search] ✓ Initialization complete');
-      console.log('[Search] === INITIALIZATION DIAGNOSTIC END ===');
     } catch (error) {
-      console.error('[Search] ❌ Initialization failed:', error);
-      console.error('[Search] Error name:', error.name);
-      console.error('[Search] Error message:', error.message);
-      console.error('[Search] Error stack:', error.stack);
-      console.log('[Search] === INITIALIZATION DIAGNOSTIC END ===');
       this.isLoading = false;
       throw new Error(`Failed to initialize search engine: ${error.message}`);
     } finally {

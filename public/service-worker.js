@@ -37,41 +37,22 @@ const MODEL_DOMAINS = [
  * Install event: Pre-cache critical assets + all chunk HTML pages
  */
 self.addEventListener('install', (event) => {
-  console.log('[SW] === INSTALL DIAGNOSTIC START ===');
-  console.log('[SW] Cache name:', CACHE_NAME);
-  console.log('[SW] Assets to cache:', ASSETS_TO_CACHE.length);
-
+  console.log('[SW] Installing...');
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      console.log('[SW] ✓ Cache opened successfully:', CACHE_NAME);
-      console.log('[SW] Caching critical assets...');
-
+      console.log('[SW] Caching critical assets');
       // Try to cache critical assets, but don't fail if some don't exist yet
       return Promise.allSettled(
-        ASSETS_TO_CACHE.map(url => {
-          console.log('[SW] Caching:', url);
-          return cache.add(url).then(() => {
-            console.log('[SW] ✓ Cached:', url);
-          }).catch((err) => {
-            console.warn(`[SW] ❌ Could not cache ${url}:`, err.message);
-          });
-        })
+        ASSETS_TO_CACHE.map(url => cache.add(url).catch(() => {
+          console.log(`[SW] Could not cache ${url} (may not exist yet)`);
+        }))
       );
-    }).then((results) => {
-      const successful = results.filter(r => r.status === 'fulfilled').length;
-      const failed = results.filter(r => r.status === 'rejected').length;
-      console.log(`[SW] Critical assets cached: ${successful} succeeded, ${failed} failed`);
-
+    }).then(() => {
       // After critical assets, fetch metadata and pre-cache all chunks
-      console.log('[SW] Fetching metadata.json...');
       return fetch('/essay_search_engine/data/metadata.json')
-        .then(response => {
-          console.log('[SW] Metadata fetch status:', response.status);
-          return response.json();
-        })
+        .then(response => response.json())
         .then(metadata => {
           const chunks = metadata.chunks || [];
-          console.log(`[SW] ✓ Metadata loaded: ${chunks.length} chunks`);
           console.log(`[SW] Pre-caching ${chunks.length} chunk pages...`);
 
           // Extract all unique chunk files from metadata
@@ -81,8 +62,6 @@ self.addEventListener('install', (event) => {
               chunkFiles.add(`/essay_search_engine/chunks/${chunk.file}`);
             }
           });
-
-          console.log(`[SW] Unique chunk files: ${chunkFiles.size}`);
 
           // Pre-cache all chunks
           return caches.open(CACHE_NAME).then(cache => {
@@ -96,21 +75,12 @@ self.addEventListener('install', (event) => {
           });
         })
         .catch(err => {
-          console.error('[SW] ❌ Could not pre-cache chunks:', err.message);
-          console.error('[SW] Error stack:', err.stack);
+          console.warn('[SW] Could not pre-cache chunks:', err.message);
           // Don't fail install if chunk caching fails
         });
     }).then(() => {
-      console.log('[SW] ✓ Install complete, calling skipWaiting()');
-      console.log('[SW] === INSTALL DIAGNOSTIC END ===');
+      console.log('[SW] Install complete');
       self.skipWaiting();
-    })
-    .catch(err => {
-      console.error('[SW] ❌ Install failed:', err);
-      console.error('[SW] Error name:', err.name);
-      console.error('[SW] Error message:', err.message);
-      console.error('[SW] Error stack:', err.stack);
-      console.log('[SW] === INSTALL DIAGNOSTIC END ===');
     })
   );
 });
