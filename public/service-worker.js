@@ -4,7 +4,7 @@
  * Detects and downloads updates when new embeddings are published
  */
 
-const CACHE_NAME = 'essay-search-v4';  // Bumped for self-hosted model files
+const CACHE_NAME = 'essay-search-v5';  // Bumped for query param handling fix
 const MODEL_CACHE_NAME = 'transformers-model-v1';  // Separate cache for large model files
 
 const ASSETS_TO_CACHE = [
@@ -216,6 +216,15 @@ self.addEventListener('fetch', (event) => {
           if (cachedResponse) {
             return cachedResponse;
           }
+
+          // Special case: root path with query params (e.g., /?tag=anxiety)
+          // should serve index.html
+          if (url.pathname === '/essay_search_engine/' ||
+              url.pathname === '/essay_search_engine') {
+            return cache.match('/essay_search_engine/index.html')
+              .then(indexResponse => indexResponse || cache.match('/essay_search_engine/'));
+          }
+
           // Return proper 404 response if not cached
           return new Response('Not found', {
             status: 404,
