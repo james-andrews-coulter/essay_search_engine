@@ -41,11 +41,12 @@ self.addEventListener('install', (event) => {
       return fetch('/essay_search_engine/data/metadata.json')
         .then(response => response.json())
         .then(metadata => {
-          console.log(`[SW] Pre-caching ${metadata.length} chunk pages...`);
+          const chunks = metadata.chunks || [];
+          console.log(`[SW] Pre-caching ${chunks.length} chunk pages...`);
 
           // Extract all unique chunk files from metadata
           const chunkFiles = new Set();
-          metadata.forEach(chunk => {
+          chunks.forEach(chunk => {
             if (chunk.file) {
               chunkFiles.add(`/essay_search_engine/chunks/${chunk.file}`);
             }
