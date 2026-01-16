@@ -20,16 +20,11 @@ if [ $# -eq 0 ]; then
     echo "  ./lib <book.epub>           Process and add a book"
     echo "  ./lib --list                List all books"
     echo "  ./lib --delete <book>       Delete a book"
-    echo "  ./lib --sync                Sync to web (incremental)"
-    echo "  ./lib --sync --force        Force sync all books"
+    echo "  ./lib --sync                Sync to web"
     echo "  ./lib --help                Show this help"
     exit 0
 elif [ "$1" = "--sync" ]; then
-    if [ "$2" = "--force" ]; then
-        "$PYTHON" sync/sync.py --force
-    else
-        "$PYTHON" sync/sync.py
-    fi
+    "$PYTHON" sync/build.py
 elif [ "$1" = "--list" ]; then
     "$PYTHON" process_book.py --list
 elif [ "$1" = "--delete" ]; then
@@ -51,11 +46,9 @@ elif [ "$1" = "--help" ]; then
     echo "  ./lib --delete <book>       Delete a book from the library"
     echo "                              <book> can be title or safe_title ID"
     echo ""
-    echo "  ./lib --sync                Sync to web (incremental - only new books)"
+    echo "  ./lib --sync                Sync to web"
+    echo "                              Generates metadata, tags, and embeddings"
     echo "                              Run this after adding/deleting books"
-    echo ""
-    echo "  ./lib --sync --force        Force sync all books (regenerate everything)"
-    echo "                              Use if embeddings are corrupted or outdated"
     echo ""
     echo "  ./lib --help                Show this help message"
     echo ""
