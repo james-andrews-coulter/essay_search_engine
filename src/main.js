@@ -11,10 +11,18 @@ let updateAvailable = false;
  * Only registers in production (not during Vite dev server)
  */
 async function registerServiceWorker() {
+  console.log('[App] === SW REGISTRATION DIAGNOSTIC START ===');
+  console.log('[App] Browser:', navigator.userAgent);
+  console.log('[App] Location:', window.location.href);
+  console.log('[App] Hostname:', window.location.hostname);
+  console.log('[App] Port:', window.location.port);
+
   // Skip SW in development - it interferes with Vite's dev server
   const isDev = window.location.hostname === 'localhost' ||
                 window.location.hostname === '127.0.0.1' ||
                 window.location.port === '5173';
+
+  console.log('[App] isDev:', isDev);
 
   if (isDev) {
     console.log('[App] Skipping Service Worker in development mode');
@@ -30,17 +38,33 @@ async function registerServiceWorker() {
   }
 
   if (!('serviceWorker' in navigator)) {
-    console.log('Service Workers not supported');
+    console.log('[App] ❌ Service Workers not supported in this browser');
     return;
   }
 
+  console.log('[App] ✓ Service Worker API available');
+
   try {
+    console.log('[App] Attempting to register SW at: /essay_search_engine/service-worker.js');
     const registration = await navigator.serviceWorker.register(
       '/essay_search_engine/service-worker.js',
       { scope: '/essay_search_engine/' }
     );
-    console.log('[App] Service Worker registered successfully');
+    console.log('[App] ✓ Service Worker registered successfully');
+    console.log('[App] SW state:', registration.installing ? 'installing' :
+                                   registration.waiting ? 'waiting' :
+                                   registration.active ? 'active' : 'unknown');
+    console.log('[App] SW scope:', registration.scope);
+
     serviceWorkerReady = true;
+
+    // Wait for SW to become active
+    if (registration.installing) {
+      console.log('[App] Waiting for SW to install...');
+      registration.installing.addEventListener('statechange', function() {
+        console.log('[App] SW state changed to:', this.state);
+      });
+    }
 
     // Check for updates periodically (every 5 minutes)
     checkForUpdatesIfOnline();
@@ -49,8 +73,13 @@ async function registerServiceWorker() {
     }, 5 * 60 * 1000);
 
   } catch (error) {
-    console.error('[App] Service Worker registration failed:', error);
+    console.error('[App] ❌ Service Worker registration failed:', error);
+    console.error('[App] Error name:', error.name);
+    console.error('[App] Error message:', error.message);
+    console.error('[App] Error stack:', error.stack);
   }
+
+  console.log('[App] === SW REGISTRATION DIAGNOSTIC END ===');
 }
 
 /**
