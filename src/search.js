@@ -1,4 +1,7 @@
-import { pipeline } from "@xenova/transformers";
+import { pipeline, env } from "@xenova/transformers";
+
+// Configure WASM files to load from our server instead of CDN (for offline support)
+env.backends.onnx.wasm.wasmPaths = "/essay_search_engine/wasm/";
 
 /**
  * Search Engine Class

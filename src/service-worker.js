@@ -4,7 +4,7 @@
  * Detects and downloads updates when new embeddings are published
  */
 
-const CACHE_NAME = 'essay-search-v2';  // Bumped version for model caching
+const CACHE_NAME = 'essay-search-v3';  // Bumped for WASM self-hosting
 const MODEL_CACHE_NAME = 'transformers-model-v1';  // Separate cache for large model files
 
 const ASSETS_TO_CACHE = [
@@ -12,7 +12,12 @@ const ASSETS_TO_CACHE = [
   '/essay_search_engine/index.html',
   '/essay_search_engine/data/metadata.json',
   '/essay_search_engine/data/version.json',
-  '/essay_search_engine/data/embeddings.json'
+  '/essay_search_engine/data/embeddings.json',
+  // WASM files for ONNX runtime (required for offline AI)
+  '/essay_search_engine/wasm/ort-wasm-simd-threaded.wasm',
+  '/essay_search_engine/wasm/ort-wasm-simd.wasm',
+  '/essay_search_engine/wasm/ort-wasm-threaded.wasm',
+  '/essay_search_engine/wasm/ort-wasm.wasm'
 ];
 
 // HuggingFace domains that serve model files
@@ -151,12 +156,14 @@ self.addEventListener('fetch', (event) => {
           // Clone the response before caching
           const responseToCache = response.clone();
 
-          // Cache large files (embeddings.json, models, chunks) for offline use
+          // Cache large files (embeddings.json, models, chunks, wasm) for offline use
           const shouldCache =
             url.pathname.includes('embeddings.json') ||
             url.pathname.includes('metadata.json') ||
             url.pathname.includes('version.json') ||
             url.pathname.includes('/chunks/') ||
+            url.pathname.includes('/wasm/') ||
+            url.pathname.endsWith('.wasm') ||
             url.pathname.endsWith('.js') ||
             url.pathname.endsWith('.css') ||
             url.pathname.endsWith('.html');
