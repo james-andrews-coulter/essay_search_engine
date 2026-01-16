@@ -4,6 +4,37 @@ This document explains the implementation decisions, architecture, and context f
 
 ## Recent Updates
 
+### Complete Offline Functionality (2026-01-16)
+
+**Goal**: Fix offline search functionality to work consistently across all browsers (Chrome, Safari).
+
+**Issue**: Search worked online but failed offline after page navigation, particularly in Safari. Systematic debugging revealed model files loaded from HuggingFace CDN weren't being cached.
+
+**Root Cause**:
+- Transformers.js attempted to load model files from `/models/` (404), fell back to HuggingFace CDN (cross-origin)
+- Service Worker skipped caching cross-origin requests
+- Chrome's internal cache persisted across navigations, Safari's didn't
+- tags.html wasn't pre-cached, causing offline navigation errors
+
+**Solution Implemented**:
+1. **Self-hosted model files**: Downloaded BGE-large-en-v1.5 model files (~322MB) to `public/models/Xenova/bge-large-en-v1.5/`
+   - config.json, tokenizer.json, tokenizer_config.json
+   - onnx/model_quantized.onnx (321MB)
+2. **Updated Service Worker**:
+   - Added model files and tags.html to pre-cache list
+   - Fixed error handling bug (line 213) that returned undefined instead of proper 404 Response
+   - Bumped cache version to v4
+3. **Verified in both browsers**: Tested complete offline workflow (load → search → navigate → back)
+
+**Results**:
+- ✅ Complete offline support in both Chrome and Safari
+- ✅ All 1141 chunks cached and accessible offline
+- ✅ tags.html accessible offline
+- ✅ Model loads from local cache (no network requests after first load)
+- ✅ Page navigation works offline without errors
+
+**Debugging Approach**: Used systematic debugging with comprehensive diagnostic logging at each component boundary (SW registration, install, fetch, pipeline load) to identify exact failure points in both browsers before implementing fix.
+
 ### Tag Navigation (2026-01-12)
 
 **Goal**: Enable browsing and navigating content by AI-generated tags.

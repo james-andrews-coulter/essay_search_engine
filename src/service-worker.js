@@ -4,12 +4,13 @@
  * Detects and downloads updates when new embeddings are published
  */
 
-const CACHE_NAME = 'essay-search-v3';  // Bumped for WASM self-hosting
+const CACHE_NAME = 'essay-search-v4';  // Bumped for self-hosted model files
 const MODEL_CACHE_NAME = 'transformers-model-v1';  // Separate cache for large model files
 
 const ASSETS_TO_CACHE = [
   '/essay_search_engine/',
   '/essay_search_engine/index.html',
+  '/essay_search_engine/tags.html',
   '/essay_search_engine/data/metadata.json',
   '/essay_search_engine/data/version.json',
   '/essay_search_engine/data/embeddings.json',
@@ -17,7 +18,12 @@ const ASSETS_TO_CACHE = [
   '/essay_search_engine/wasm/ort-wasm-simd-threaded.wasm',
   '/essay_search_engine/wasm/ort-wasm-simd.wasm',
   '/essay_search_engine/wasm/ort-wasm-threaded.wasm',
-  '/essay_search_engine/wasm/ort-wasm.wasm'
+  '/essay_search_engine/wasm/ort-wasm.wasm',
+  // Model files for BGE-large-en-v1.5 (self-hosted for offline support)
+  '/essay_search_engine/models/Xenova/bge-large-en-v1.5/config.json',
+  '/essay_search_engine/models/Xenova/bge-large-en-v1.5/tokenizer.json',
+  '/essay_search_engine/models/Xenova/bge-large-en-v1.5/tokenizer_config.json',
+  '/essay_search_engine/models/Xenova/bge-large-en-v1.5/onnx/model_quantized.onnx'
 ];
 
 // HuggingFace domains that serve model files
@@ -205,8 +211,17 @@ self.addEventListener('fetch', (event) => {
           return response;
         });
       }).catch(() => {
-        // Offline fallback: return cached response or offline page
-        return cache.match(event.request);
+        // Offline fallback: return cached response or 404
+        return cache.match(event.request).then(cachedResponse => {
+          if (cachedResponse) {
+            return cachedResponse;
+          }
+          // Return proper 404 response if not cached
+          return new Response('Not found', {
+            status: 404,
+            statusText: 'Not Found'
+          });
+        });
       });
     })
   );
