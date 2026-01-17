@@ -254,7 +254,7 @@ function renderResults() {
 
     return `
       <div class="result-card">
-        <a href="/essay_search_engine/chunks/${result.chunk.file}" class="result-link">
+        <a href="/essay_search_engine/chunk.html?id=${result.chunk.chunk_id}" class="result-link">
           <div class="result-header">
             <h3 class="result-title">
               ${escapeHtml(result.chunk.book_title)}
