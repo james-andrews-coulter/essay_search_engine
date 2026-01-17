@@ -1,10 +1,9 @@
 import { pipeline, env } from "@xenova/transformers";
 
-// Configure for offline support with local models
+// Configure for offline support with self-hosted models
 env.backends.onnx.wasm.wasmPaths = "/essay_search_engine/wasm/";
-env.localModelPath = "/essay_search_engine/models/";
-env.allowRemoteModels = false;
-env.allowLocalModels = true;
+env.remoteHost = "/essay_search_engine/models/";
+env.remotePathTemplate = "{model}/"; // Flat structure without /resolve/main/
 
 /**
  * Search Engine Class
