@@ -1,24 +1,14 @@
 import './styles.css';
 import { SearchEngine } from './search.js';
 
-// Service Worker registration and offline support
-let serviceWorkerReady = false;
-let isOnline = navigator.onLine;
-let updateAvailable = false;
-
-/**
- * Register Service Worker for offline support
- * Only registers in production (not during Vite dev server)
- */
+// Service Worker registration
 async function registerServiceWorker() {
-  // Skip SW in development - it interferes with Vite's dev server
   const isDev = window.location.hostname === 'localhost' ||
                 window.location.hostname === '127.0.0.1' ||
                 window.location.port === '5173';
 
   if (isDev) {
     console.log('[App] Skipping Service Worker in development mode');
-    // Unregister any existing SW from previous sessions
     if ('serviceWorker' in navigator) {
       const registrations = await navigator.serviceWorker.getRegistrations();
       for (const registration of registrations) {
@@ -34,99 +24,13 @@ async function registerServiceWorker() {
   }
 
   try {
-    const registration = await navigator.serviceWorker.register(
+    await navigator.serviceWorker.register(
       '/essay_search_engine/service-worker.js',
       { scope: '/essay_search_engine/' }
     );
     console.log('[App] Service Worker registered successfully');
-    serviceWorkerReady = true;
-
-    // Check for updates periodically (every 5 minutes)
-    checkForUpdatesIfOnline();
-    setInterval(() => {
-      if (isOnline) checkForUpdatesIfOnline();
-    }, 5 * 60 * 1000);
-
   } catch (error) {
     console.error('[App] Service Worker registration failed:', error);
-  }
-}
-
-/**
- * Check if new version of embeddings is available
- */
-function checkForUpdatesIfOnline() {
-  if (!isOnline || !serviceWorkerReady) return;
-
-  navigator.serviceWorker.controller?.postMessage({
-    type: 'CHECK_FOR_UPDATES'
-  });
-}
-
-/**
- * Handle messages from Service Worker
- */
-navigator.serviceWorker?.addEventListener('message', (event) => {
-  const message = event.data;
-
-  if (message.type === 'UPDATE_AVAILABLE') {
-    console.log('[App] New embeddings available');
-    updateAvailable = true;
-    showUpdateNotification();
-  } else if (message.type === 'UP_TO_DATE') {
-    console.log('[App] Using cached version, up to date');
-  } else if (message.type === 'UPDATE_FAILED') {
-    console.warn('[App] Failed to download update:', message.error);
-  }
-});
-
-/**
- * Show notification that updates are available
- */
-function showUpdateNotification() {
-  const statusDiv = document.getElementById('status');
-  if (statusDiv && !statusDiv.textContent.includes('New books')) {
-    const original = statusDiv.textContent;
-    statusDiv.innerHTML = `
-      ${original}
-      <button id="refresh-btn" style="margin-left: 1rem; padding: 0.5rem 1rem;">
-        📚 New books available. Refresh
-      </button>
-    `;
-
-    document.getElementById('refresh-btn')?.addEventListener('click', () => {
-      window.location.reload();
-    });
-  }
-}
-
-/**
- * Track online/offline status
- */
-window.addEventListener('online', () => {
-  isOnline = true;
-  updateOnlineStatus();
-  checkForUpdatesIfOnline();
-});
-
-window.addEventListener('offline', () => {
-  isOnline = false;
-  updateOnlineStatus();
-});
-
-/**
- * Update UI to show online/offline status
- */
-function updateOnlineStatus() {
-  const statusIndicator = document.getElementById('online-status');
-  if (statusIndicator) {
-    if (isOnline) {
-      statusIndicator.textContent = '🟢 Online';
-      statusIndicator.style.color = '#22863a';
-    } else {
-      statusIndicator.textContent = '🔴 Offline';
-      statusIndicator.style.color = '#cb2431';
-    }
   }
 }
 
@@ -153,9 +57,7 @@ async function initialize() {
   if (isInitialized) return;
 
   // Register Service Worker for offline support
-  if (!serviceWorkerReady) {
-    await registerServiceWorker();
-  }
+  await registerServiceWorker();
 
   statusDiv.textContent = 'Loading...';
 
