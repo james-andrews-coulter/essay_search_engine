@@ -1,7 +1,10 @@
 import { pipeline, env } from "@xenova/transformers";
 
-// Configure WASM files to load from our server instead of CDN (for offline support)
+// Configure for offline support with local models
 env.backends.onnx.wasm.wasmPaths = "/essay_search_engine/wasm/";
+env.localModelPath = "/essay_search_engine/models/";
+env.allowRemoteModels = false;
+env.allowLocalModels = true;
 
 /**
  * Search Engine Class
