@@ -1,24 +1,14 @@
 import './styles.css';
 import { SearchEngine } from './search.js';
 
-// Service Worker registration and offline support
-let serviceWorkerReady = false;
-let isOnline = navigator.onLine;
-let updateAvailable = false;
-
-/**
- * Register Service Worker for offline support
- * Only registers in production (not during Vite dev server)
- */
+// Service Worker registration
 async function registerServiceWorker() {
-  // Skip SW in development - it interferes with Vite's dev server
   const isDev = window.location.hostname === 'localhost' ||
                 window.location.hostname === '127.0.0.1' ||
                 window.location.port === '5173';
 
   if (isDev) {
     console.log('[App] Skipping Service Worker in development mode');
-    // Unregister any existing SW from previous sessions
     if ('serviceWorker' in navigator) {
       const registrations = await navigator.serviceWorker.getRegistrations();
       for (const registration of registrations) {
@@ -34,99 +24,13 @@ async function registerServiceWorker() {
   }
 
   try {
-    const registration = await navigator.serviceWorker.register(
+    await navigator.serviceWorker.register(
       '/essay_search_engine/service-worker.js',
       { scope: '/essay_search_engine/' }
     );
     console.log('[App] Service Worker registered successfully');
-    serviceWorkerReady = true;
-
-    // Check for updates periodically (every 5 minutes)
-    checkForUpdatesIfOnline();
-    setInterval(() => {
-      if (isOnline) checkForUpdatesIfOnline();
-    }, 5 * 60 * 1000);
-
   } catch (error) {
     console.error('[App] Service Worker registration failed:', error);
-  }
-}
-
-/**
- * Check if new version of embeddings is available
- */
-function checkForUpdatesIfOnline() {
-  if (!isOnline || !serviceWorkerReady) return;
-
-  navigator.serviceWorker.controller?.postMessage({
-    type: 'CHECK_FOR_UPDATES'
-  });
-}
-
-/**
- * Handle messages from Service Worker
- */
-navigator.serviceWorker?.addEventListener('message', (event) => {
-  const message = event.data;
-
-  if (message.type === 'UPDATE_AVAILABLE') {
-    console.log('[App] New embeddings available');
-    updateAvailable = true;
-    showUpdateNotification();
-  } else if (message.type === 'UP_TO_DATE') {
-    console.log('[App] Using cached version, up to date');
-  } else if (message.type === 'UPDATE_FAILED') {
-    console.warn('[App] Failed to download update:', message.error);
-  }
-});
-
-/**
- * Show notification that updates are available
- */
-function showUpdateNotification() {
-  const statusDiv = document.getElementById('status');
-  if (statusDiv && !statusDiv.textContent.includes('New books')) {
-    const original = statusDiv.textContent;
-    statusDiv.innerHTML = `
-      ${original}
-      <button id="refresh-btn" style="margin-left: 1rem; padding: 0.5rem 1rem;">
-        📚 New books available. Refresh
-      </button>
-    `;
-
-    document.getElementById('refresh-btn')?.addEventListener('click', () => {
-      window.location.reload();
-    });
-  }
-}
-
-/**
- * Track online/offline status
- */
-window.addEventListener('online', () => {
-  isOnline = true;
-  updateOnlineStatus();
-  checkForUpdatesIfOnline();
-});
-
-window.addEventListener('offline', () => {
-  isOnline = false;
-  updateOnlineStatus();
-});
-
-/**
- * Update UI to show online/offline status
- */
-function updateOnlineStatus() {
-  const statusIndicator = document.getElementById('online-status');
-  if (statusIndicator) {
-    if (isOnline) {
-      statusIndicator.textContent = '🟢 Online';
-      statusIndicator.style.color = '#22863a';
-    } else {
-      statusIndicator.textContent = '🔴 Offline';
-      statusIndicator.style.color = '#cb2431';
-    }
   }
 }
 
@@ -135,8 +39,8 @@ const searchEngine = new SearchEngine();
 let isInitialized = false;
 
 // DOM elements
-const searchInput = document.getElementById('search-input');
-const searchButton = document.getElementById('search-button');
+const searchInput = document.getElementById('searchInput');
+const searchButton = document.getElementById('searchButton');
 const statusDiv = document.getElementById('status');
 const resultsDiv = document.getElementById('results');
 
@@ -153,15 +57,13 @@ async function initialize() {
   if (isInitialized) return;
 
   // Register Service Worker for offline support
-  if (!serviceWorkerReady) {
-    await registerServiceWorker();
-  }
+  await registerServiceWorker();
 
-  statusDiv.textContent = 'Loading search engine...';
+  statusDiv.textContent = 'Loading...';
 
   try {
     await searchEngine.initialize((progress) => {
-      statusDiv.textContent = progress;
+      statusDiv.textContent = 'Loading...';
     });
 
     isInitialized = true;
@@ -169,9 +71,7 @@ async function initialize() {
     searchButton.disabled = false;
     searchInput.focus();
 
-    const totalChunks = searchEngine.getTotalChunks();
-    const books = searchEngine.getBooks();
-    statusDiv.textContent = `Ready! Search across ${books.length} books (${totalChunks} chapters)`;
+    statusDiv.textContent = '';
   } catch (error) {
     console.error('Initialization error:', error);
     statusDiv.textContent = `Error: ${error.message}`;
@@ -243,8 +143,6 @@ function renderResults() {
   const endIdx = Math.min(startIdx + resultsPerPage, allResults.length);
   const pageResults = allResults.slice(startIdx, endIdx);
 
-  statusDiv.textContent = `Found ${allResults.length} results for "${currentQuery}" (showing ${startIdx + 1}-${endIdx})`;
-
   // Render results
   const resultsHtml = pageResults.map((result, idx) => {
     const score = (result.score * 100).toFixed(1);
@@ -253,34 +151,13 @@ function renderResults() {
       : [];
 
     return `
-      <div class="result-card">
-        <a href="/essay_search_engine/chunks/${result.chunk.file}" class="result-link">
-          <div class="result-header">
-            <h3 class="result-title">
-              ${escapeHtml(result.chunk.book_title)}
-            </h3>
-            <span class="result-score">
-              ${score}%
-            </span>
-          </div>
-          <p class="result-chapter">
-            ${escapeHtml(result.chunk.chapter_title)}
-          </p>
-          <p class="result-meta">
-            by ${escapeHtml(result.chunk.author)} •
-            ${result.chunk.word_count.toLocaleString()} words
-          </p>
-        </a>
-        ${tags.length > 0 ? `
-          <div class="result-tags">
-            ${tags.map(tag => `
-              <a href="?tag=${encodeURIComponent(tag)}" class="tag">
-                ${escapeHtml(tag)}
-              </a>
-            `).join('')}
-          </div>
-        ` : ''}
-      </div>
+      <a href="/essay_search_engine/chunk.html?id=${result.chunk.chunk_id}" class="result">
+        <h2>${escapeHtml(result.chunk.book_title)}</h2>
+        <div class="meta">
+          ${escapeHtml(result.chunk.chapter_title)}
+          ${tags.length > 0 ? `<br><span class="tags">${tags.join(', ')}</span>` : ''}
+        </div>
+      </a>
     `;
   }).join('');
 
@@ -392,11 +269,15 @@ function escapeHtml(text) {
   return div.innerHTML;
 }
 
-// Event listeners - prevent form submission and handle search
-const searchForm = document.getElementById('search-form');
-searchForm.addEventListener('submit', (e) => {
-  e.preventDefault(); // Prevent page reload
+// Event listeners - handle search button click and Enter key
+searchButton.addEventListener('click', () => {
   performSearch();
+});
+
+searchInput.addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') {
+    performSearch();
+  }
 });
 
 // Auto-initialize on page load and handle tag parameters

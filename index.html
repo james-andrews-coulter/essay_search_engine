@@ -7,24 +7,28 @@
   <link rel="stylesheet" href="/src/styles.css">
 </head>
 <body>
-  <h1>Essay Search Engine</h1>
+  <div class="container">
+    <header>
+      <h1>Search</h1>
+      <div style="margin-bottom: 0.5rem;">
+        <a href="/essay_search_engine/tags.html">Browse Tags</a>
+      </div>
+    </header>
 
-  <div id="online-status" style="position: absolute; top: 1rem; right: 1rem; font-size: 0.875rem;">
-    🟢 Online
+    <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Search..."
+        style="flex: 1; font-size: 16px; padding: 8px;"
+      >
+      <button id="searchButton" style="padding: 8px 16px; font-size: 16px;">Go</button>
+    </div>
+
+    <div id="status" style="font-size: 14px; color: #666; margin-bottom: 1rem;"></div>
+    <div id="results"></div>
+    <div id="pagination"></div>
   </div>
-
-  <nav>
-    <a href="/essay_search_engine/tags.html">Browse Tags</a>
-  </nav>
-
-  <form id="search-form">
-    <input type="search" id="search-input" placeholder="Search..." disabled>
-    <button type="submit" id="search-button" disabled>Search</button>
-  </form>
-
-  <p id="status">Loading search engine...</p>
-
-  <div id="results"></div>
 
   <script type="module" src="/src/main.js"></script>
 </body>
