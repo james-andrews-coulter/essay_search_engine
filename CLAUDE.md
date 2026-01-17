@@ -4,6 +4,35 @@ This document explains the implementation decisions, architecture, and context f
 
 ## Recent Updates
 
+### Minimal Refactoring (2026-01-17)
+
+**Goal**: Refactor codebase to minimal/lean state while preserving full offline functionality.
+
+**Changes**:
+- **Removed 1,245 files (-1.3GB)**: Old worktrees, test screenshots, docs, migration scripts, 1,241 chunk HTML files
+- **Dynamic chunk rendering**: Single `chunk.html` replaces 1,241 static files, renders markdown from metadata.json using marked.js
+- **Merged sync scripts**: `sync/build.py` replaces sync.py + embed_chunks.py
+- **Simplified service worker**: Removed update notifications, periodic checks, online/offline tracking (~79 lines, was 338)
+- **Compact mobile UI**: 4-5 results per screen (was 1-2), minimal spacing, no score display
+- **Removed dependencies**: markdown, pyyaml packages no longer needed
+- **Cleaned metadata**: Removed word_count, char_count, doc_id, author fields (not used in new UI)
+
+**Results**:
+- Repository: -1,245 files, -1.3GB disk space
+- Codebase: -470 lines (-15%)
+- Mobile UX: 4-5 results per screen (400% improvement)
+- Dependencies: 10 → 8 Python packages
+- Build: Single script (build.py), faster execution
+- CSS: 165 → 113 lines (-31%)
+- Service Worker: 338 → 79 lines (-76%)
+- Maintenance: Simpler, fewer files to manage
+
+**Architecture Changes**:
+- Chunks: Static HTML → Dynamic markdown rendering via marked.js
+- Sync: Two scripts → One unified build.py
+- Service Worker: Full update management → Simple cache-first
+- UI: Verbose/spacious → Minimal/compact
+
 ### Complete Offline Functionality (2026-01-16)
 
 **Goal**: Fix offline search functionality to work consistently across all browsers (Chrome, Safari).
@@ -67,9 +96,6 @@ This document explains the implementation decisions, architecture, and context f
 - Search by tag: Click any tag in search results or on tag index
 - Share tag searches: Copy URL (e.g., `/?tag=anxiety`)
 
-**Design**: See `docs/plans/2026-01-12-tag-navigation-design.md`
-**Implementation**: See `docs/plans/2026-01-12-tag-navigation.md`
-
 ### Minimal Semantic HTML Redesign (2026-01-10)
 
 **Goal**: Dramatically simplify codebase by removing all bloated styling and dependencies.
@@ -87,9 +113,6 @@ This document explains the implementation decisions, architecture, and context f
 - CSS bundle: ~10 KB → 1.3 KB (-87%, better than planned 70%)
 - postcss.config.js: Emptied instead of deleted due to worktree constraints (functionally equivalent)
 - Simpler codebase, faster builds, browser-native experience
-
-**Design**: See `docs/plans/2026-01-10-minimal-semantic-html-design.md`
-**Implementation**: See `docs/plans/2026-01-10-minimal-semantic-html.md`
 
 ### Multi-Attribute Search & Pagination (2026-01-09)
 
@@ -398,10 +421,10 @@ if (tags.some(tag => tag === queryLower)) {
 
 ```
 essay_search_engine/
-├── lib                            # CLI entry point (shell script)
+├── lib                            # CLI entry point
 ├── process_book.py                # Book processing pipeline
 ├── setup.sh                       # Installation script
-├── requirements.txt               # Python dependencies
+├── requirements.txt               # Python dependencies (8 packages)
 │
 ├── private/                       # Local data (gitignored)
 │   ├── books_metadata.json        # Book catalog
@@ -411,30 +434,30 @@ essay_search_engine/
 │       └── chunk_NNN.md           # Individual chunks
 │
 ├── sync/                          # Web sync scripts
-│   ├── sync.py                    # Generate metadata + HTML
-│   └── embed_chunks.py            # Generate embeddings
+│   └── build.py                   # Unified build script
 │
 ├── src/                           # Frontend source
 │   ├── search.js                  # SearchEngine class
 │   ├── main.js                    # UI logic
-│   └── styles.css                 # Tailwind base
+│   ├── service-worker.js          # Offline caching
+│   └── styles.css                 # Minimal CSS (113 lines)
 │
 ├── public/                        # Web assets (committed)
 │   ├── data/
-│   │   ├── metadata.json          # Book/chunk metadata
-│   │   └── embeddings.json        # Pre-computed embeddings
-│   └── chunks/
-│       └── chunk_NNN.html         # Static HTML pages
+│   │   ├── metadata.json          # Book/chunk metadata with full content
+│   │   ├── embeddings.json        # Pre-computed embeddings
+│   │   └── tags.json              # Tag index
+│   ├── models/                    # Self-hosted BGE model
+│   └── wasm/                      # ONNX runtime files
 │
 ├── .github/workflows/
 │   └── deploy.yml                 # GitHub Actions CI/CD
 │
 ├── index.html                     # Search page
-├── package.json                   # Node deps
+├── chunk.html                     # Dynamic chunk viewer
+├── package.json                   # Node deps (2 packages)
 ├── vite.config.js                 # Vite config
-├── tailwind.config.js             # Tailwind config
-├── README.md                      # User documentation
-└── CLAUDE.md                      # This file
+└── CLAUDE.md                      # This file (single source of truth)
 ```
 
 ## Book Processing Pipeline
@@ -771,8 +794,7 @@ WiFi        10-15s          ~1s
 2. **Sync to Web**:
    ```bash
    cd /Users/jamesalexander/essay_search_engine
-   source venv/bin/activate
-   python3 sync/sync.py
+   ./lib --sync
    # Wait ~2-3 minutes for embeddings
    ```
 
