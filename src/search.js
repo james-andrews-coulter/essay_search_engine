@@ -1,9 +1,14 @@
 import { pipeline, env } from "@xenova/transformers";
 
 // Configure for offline support with self-hosted models
-env.backends.onnx.wasm.wasmPaths = `${import.meta.env.BASE_URL}wasm/`;
-env.remoteHost = `${window.location.origin}${import.meta.env.BASE_URL}models/`;
+// Use URL constructor for robust path resolution
+const baseUrl = new URL(import.meta.env.BASE_URL, window.location.origin).href;
+env.backends.onnx.wasm.wasmPaths = `${baseUrl}wasm/`;
+env.remoteHost = `${baseUrl}models/`;
 env.remotePathTemplate = "{model}/"; // Flat structure without /resolve/main/
+
+// Debug: log configured URL (remove after fixing)
+console.log("[SearchEngine] remoteHost:", env.remoteHost);
 
 /**
  * Search Engine Class
