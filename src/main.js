@@ -253,34 +253,13 @@ function renderResults() {
       : [];
 
     return `
-      <div class="result-card">
-        <a href="/essay_search_engine/chunk.html?id=${result.chunk.chunk_id}" class="result-link">
-          <div class="result-header">
-            <h3 class="result-title">
-              ${escapeHtml(result.chunk.book_title)}
-            </h3>
-            <span class="result-score">
-              ${score}%
-            </span>
-          </div>
-          <p class="result-chapter">
-            ${escapeHtml(result.chunk.chapter_title)}
-          </p>
-          <p class="result-meta">
-            by ${escapeHtml(result.chunk.author)} •
-            ${result.chunk.word_count.toLocaleString()} words
-          </p>
-        </a>
-        ${tags.length > 0 ? `
-          <div class="result-tags">
-            ${tags.map(tag => `
-              <a href="?tag=${encodeURIComponent(tag)}" class="tag">
-                ${escapeHtml(tag)}
-              </a>
-            `).join('')}
-          </div>
-        ` : ''}
-      </div>
+      <a href="/essay_search_engine/chunk.html?id=${result.chunk.chunk_id}" class="result">
+        <h2>${escapeHtml(result.chunk.book_title)}</h2>
+        <div class="meta">
+          ${escapeHtml(result.chunk.chapter_title)}
+          ${tags.length > 0 ? `<br><span class="tags">${tags.join(', ')}</span>` : ''}
+        </div>
+      </a>
     `;
   }).join('');
 
