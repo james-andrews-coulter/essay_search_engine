@@ -1,11 +1,6 @@
 // Simplified Service Worker - Cache only, no update notifications
-const CACHE_VERSION = 'v8';
+const CACHE_VERSION = 'v7';
 const CACHE_NAME = `essay-search-${CACHE_VERSION}`;
-
-// Model path mapping: HuggingFace URL pattern -> local path
-const MODEL_ID = 'Xenova/bge-large-en-v1.5';
-const HF_MODEL_PREFIX = `https://huggingface.co/${MODEL_ID}/resolve/main/`;
-const LOCAL_MODEL_PREFIX = `/essay_search_engine/models/${MODEL_ID}/`;
 
 // Assets to pre-cache
 const PRECACHE_ASSETS = [
@@ -48,30 +43,9 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-// Fetch: Cache-first strategy with HuggingFace URL interception
+// Fetch: Cache-first strategy
 self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
-  const requestUrl = event.request.url;
-
-  // Intercept HuggingFace model requests and serve local files instead
-  // This enables offline support without changing Transformers.js configuration
-  if (requestUrl.startsWith(HF_MODEL_PREFIX)) {
-    const filePath = requestUrl.slice(HF_MODEL_PREFIX.length);
-    const localPath = LOCAL_MODEL_PREFIX + filePath;
-
-    event.respondWith(
-      caches.match(localPath).then((cached) => {
-        if (cached) {
-          console.log('[SW] Serving local model file:', localPath);
-          return cached;
-        }
-        // Fallback to network (HuggingFace) if not cached
-        console.log('[SW] Model file not cached, fetching from HuggingFace:', filePath);
-        return fetch(event.request);
-      })
-    );
-    return;
-  }
 
   // Handle root with query params (e.g., /?tag=anxiety)
   if (url.pathname === '/essay_search_engine/' && url.search) {
