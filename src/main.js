@@ -157,11 +157,11 @@ async function initialize() {
     await registerServiceWorker();
   }
 
-  statusDiv.textContent = 'Loading search engine...';
+  statusDiv.textContent = 'Loading...';
 
   try {
     await searchEngine.initialize((progress) => {
-      statusDiv.textContent = progress;
+      statusDiv.textContent = 'Loading...';
     });
 
     isInitialized = true;
@@ -169,9 +169,7 @@ async function initialize() {
     searchButton.disabled = false;
     searchInput.focus();
 
-    const totalChunks = searchEngine.getTotalChunks();
-    const books = searchEngine.getBooks();
-    statusDiv.textContent = `Ready! Search across ${books.length} books (${totalChunks} chapters)`;
+    statusDiv.textContent = '';
   } catch (error) {
     console.error('Initialization error:', error);
     statusDiv.textContent = `Error: ${error.message}`;
@@ -242,8 +240,6 @@ function renderResults() {
   const startIdx = (currentPage - 1) * resultsPerPage;
   const endIdx = Math.min(startIdx + resultsPerPage, allResults.length);
   const pageResults = allResults.slice(startIdx, endIdx);
-
-  statusDiv.textContent = `Found ${allResults.length} results for "${currentQuery}" (showing ${startIdx + 1}-${endIdx})`;
 
   // Render results
   const resultsHtml = pageResults.map((result, idx) => {
