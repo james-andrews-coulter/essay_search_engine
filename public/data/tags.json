@@ -1,1645 +1,8825 @@
 {
-  "80/20 rule": 1,
-  "abandonment": 2,
-  "absence": 1,
-  "absorption": 1,
-  "abuse": 2,
-  "acceptance": 38,
-  "accessibility": 1,
-  "accident": 1,
-  "accomplishment": 1,
-  "accountability": 3,
-  "accusation": 1,
-  "achievement": 3,
-  "acknowledgment": 5,
-  "adaptation": 7,
-  "addiction": 3,
-  "adequacy": 1,
-  "administration": 1,
-  "admiration": 5,
-  "adolescence": 1,
-  "adult child parent": 1,
-  "adulthood": 7,
-  "adulting": 1,
-  "advancement": 1,
-  "adventure": 3,
-  "adversity": 6,
-  "advertising": 5,
-  "advice": 1,
-  "aesthetics": 4,
-  "affair": 2,
-  "affection": 8,
-  "affordability": 1,
-  "ageing": 3,
-  "ageism": 3,
-  "agency": 2,
-  "agendas": 1,
-  "aggression": 2,
-  "aging": 5,
-  "agony": 1,
-  "agriculture": 2,
-  "air travel": 1,
-  "airline_seat": 1,
-  "airport": 1,
-  "airports": 1,
-  "akrasia": 2,
-  "alienation": 4,
-  "allies": 1,
-  "alone": 2,
-  "aloneliness": 1,
-  "alternatives": 5,
-  "altitude": 1,
-  "ambiguity": 1,
-  "ambition": 13,
-  "ambivalence": 4,
-  "amnesia": 2,
-  "amorality": 1,
-  "analysis": 1,
-  "anchors": 1,
-  "ancient knowledge": 1,
-  "anger": 8,
-  "angst": 1,
-  "animals": 1,
-  "anonymity": 3,
-  "anticipation": 5,
-  "anxiety": 58,
-  "anxiousness": 1,
-  "apathy": 1,
-  "apologies": 1,
-  "apology": 7,
-  "appreciation": 17,
-  "approval": 1,
-  "architecture": 12,
-  "arduousness": 1,
-  "argument": 4,
-  "arguments": 16,
-  "arrangement": 1,
-  "arrival": 1,
-  "arrogance": 1,
-  "art": 17,
-  "articulation": 1,
-  "artificial": 1,
-  "asceticism": 1,
-  "aspiration": 1,
-  "assertiveness": 2,
-  "assessment": 1,
-  "assumptions": 1,
-  "asteroids": 1,
-  "astronomy": 1,
-  "asylum": 1,
-  "ataraxia": 1,
-  "atmosphere": 1,
-  "atonement": 3,
-  "attachment": 10,
-  "attention": 7,
-  "attention-seeking": 1,
-  "attentiveness": 1,
-  "attitudes": 2,
-  "attraction": 10,
-  "attunement": 1,
-  "audience": 1,
-  "authenticity": 50,
-  "authority": 1,
-  "autonomy": 4,
-  "availability": 1,
-  "avoidance": 9,
-  "awareness": 13,
-  "awe": 5,
-  "awkwardness": 2,
-  "bad dates": 1,
-  "bad taste": 1,
-  "balance": 5,
-  "beauty": 20,
-  "bed": 1,
-  "being loved": 2,
-  "being zones": 1,
-  "belief": 2,
-  "beliefs": 2,
-  "belonging": 5,
-  "betrayal": 3,
-  "bikini": 1,
-  "biodiversity": 1,
-  "biology": 1,
-  "bitterness": 1,
-  "blame": 5,
-  "blindness": 1,
-  "body temperature": 1,
-  "bohemian": 1,
-  "bombardment": 1,
-  "bond": 1,
-  "bonding": 1,
-  "books": 1,
-  "boredom": 7,
-  "boundaries": 3,
-  "bounded work": 1,
-  "bourgeoisie": 1,
-  "brain": 2,
-  "brain health": 1,
-  "brainstem": 1,
-  "brands": 1,
-  "break-up": 3,
-  "breakdown": 2,
-  "breakup": 7,
-  "breakups": 2,
-  "breath": 1,
-  "breathing": 2,
-  "brevity": 1,
-  "bridge": 1,
-  "broadcasting": 1,
-  "brokenheart": 1,
-  "busy": 1,
-  "busy-ness": 1,
-  "calm": 5,
-  "calmness": 3,
-  "camaraderie": 1,
-  "camping": 1,
-  "capitalism": 7,
-  "captivity": 1,
-  "care": 2,
-  "career": 2,
-  "caregiver": 1,
-  "caregivers": 1,
-  "cars": 1,
-  "catastrophe": 2,
-  "categorization": 1,
-  "catharsis": 2,
-  "caution": 2,
-  "cautionary": 1,
-  "celibacy": 2,
-  "cemetery": 1,
-  "censorship": 1,
-  "ceremony": 4,
-  "challenges": 5,
-  "change": 14,
-  "chaos": 3,
-  "character": 4,
-  "character formation": 1,
-  "charity": 2,
-  "charm": 2,
-  "cheerful despair": 1,
-  "cheerfulness": 1,
-  "childhood": 26,
-  "childhood influences": 1,
-  "childhood trauma": 1,
-  "childhood-trauma": 1,
-  "childhood_influences": 1,
-  "children": 6,
-  "choice": 10,
-  "choices": 2,
-  "chores": 3,
-  "circadian rhythms": 1,
-  "cities": 2,
-  "city": 1,
-  "civil relations": 1,
-  "civilization": 1,
-  "clarity": 1,
-  "classical": 6,
-  "classicism": 3,
-  "classification": 1,
-  "claustrophobia": 1,
-  "cleaning": 1,
-  "clinic": 1,
-  "closeness": 4,
-  "closure": 1,
-  "clothing": 1,
-  "cloud": 1,
-  "clumsiness": 1,
-  "cognition": 1,
-  "cognitive reserve": 1,
-  "cognitive_flaws": 1,
-  "collaboration": 4,
-  "collapse": 1,
-  "colleagues": 1,
-  "collecting": 1,
-  "collection": 2,
-  "comedy": 1,
-  "comfort": 7,
-  "comfort zone": 1,
-  "commemoration": 1,
-  "commerce": 1,
-  "commercialization": 2,
-  "commitment": 13,
-  "commonality": 1,
-  "communication": 42,
-  "communism": 1,
-  "community": 6,
-  "companionship": 8,
-  "company": 1,
-  "comparison": 19,
-  "compassion": 30,
-  "compatibility": 11,
-  "compensation": 3,
-  "competition": 45,
-  "complaint": 2,
-  "complaints": 2,
-  "complementarity": 3,
-  "completeness": 1,
-  "completion": 4,
-  "complexity": 16,
-  "compliance": 3,
-  "complications": 1,
-  "comprehension": 1,
-  "compression": 1,
-  "compromise": 17,
-  "concealment": 1,
-  "confession": 6,
-  "confessions": 1,
-  "confidence": 7,
-  "conflict": 17,
-  "conflicts": 2,
-  "conformity": 3,
-  "confrontation": 2,
-  "confrontations": 1,
-  "confusion": 4,
-  "connection": 26,
-  "connections": 1,
-  "connectivity": 1,
-  "conscience": 1,
-  "consciousness": 3,
-  "consent": 1,
-  "consequences": 1,
-  "conservation": 1,
-  "conservatism": 1,
-  "consideration": 2,
-  "consolation": 9,
-  "constraints": 3,
-  "consumerism": 4,
-  "contemplation": 2,
-  "contempt": 1,
-  "contentment": 10,
-  "context": 1,
-  "contingency": 1,
-  "continuity": 1,
-  "contradictions": 1,
-  "contrast": 2,
-  "contribution": 3,
-  "control": 4,
-  "convalescence": 1,
-  "conversation": 3,
-  "cooperation": 1,
-  "coping": 5,
-  "correction": 1,
-  "corruption": 2,
-  "cosmic": 1,
-  "cosmology": 1,
-  "cosmos": 1,
-  "counseling": 1,
-  "couples therapy": 1,
-  "courage": 4,
-  "cow": 1,
-  "craftsmanship": 1,
-  "creativity": 13,
-  "credibility": 1,
-  "credit": 1,
-  "crisis": 2,
-  "criteria": 3,
-  "critical friend": 1,
-  "criticism": 11,
-  "critique": 3,
-  "crowded place exercise": 1,
-  "crowds": 1,
-  "cruelty": 3,
-  "crush": 2,
-  "crushes": 5,
-  "crying": 1,
-  "cultivation": 2,
-  "cultural mining": 1,
-  "culture": 16,
-  "curiosity": 5,
-  "customer demand": 1,
-  "cyclical": 1,
-  "cynicism": 1,
-  "daily": 1,
-  "dance": 1,
-  "dating": 4,
-  "dating apps": 1,
-  "daydreaming": 3,
-  "deadlines": 1,
-  "death": 6,
-  "decay": 6,
-  "deceitfulness": 1,
-  "deception": 4,
-  "decision-making": 3,
-  "decision_making": 1,
-  "decline": 1,
-  "decorating": 1,
-  "decoration": 1,
-  "defeat": 4,
-  "defense": 4,
-  "defense mechanism": 1,
-  "defense mechanisms": 2,
-  "defenselessness": 1,
-  "defensiveness": 3,
-  "deficiencies": 1,
-  "deficiency": 1,
-  "dehabituation": 1,
-  "delay": 2,
-  "delicacy": 1,
-  "delight": 1,
-  "demand": 1,
-  "demands": 1,
-  "dementia": 1,
-  "democracy": 2,
-  "denial": 5,
-  "density": 1,
-  "departure": 3,
-  "dependence": 4,
-  "dependency": 4,
-  "depression": 5,
-  "depth": 3,
-  "design": 2,
-  "desire": 9,
-  "desires": 3,
-  "despair": 15,
-  "destination": 3,
-  "destiny": 3,
-  "destruction": 1,
-  "detachment": 1,
-  "detail": 1,
-  "details": 2,
-  "devaluation": 1,
-  "development": 4,
-  "devotion": 3,
-  "dialogue": 3,
-  "diary": 2,
-  "diet": 1,
-  "difference": 3,
-  "differences": 3,
-  "difficulties": 2,
-  "difficulty": 3,
-  "diffusion": 1,
-  "digital": 1,
-  "digital addiction": 1,
-  "digital technology": 1,
-  "dignity": 7,
-  "diligence": 1,
-  "dinosaurs": 1,
-  "diplomacy": 3,
-  "directness": 1,
-  "disagreement": 1,
-  "disagreements": 3,
-  "disappointment": 25,
-  "disaster": 1,
-  "disasters": 1,
-  "disclosure": 6,
-  "discomfort": 1,
-  "disconnection": 1,
-  "disillusionment": 4,
-  "dislocation": 1,
-  "dismissal": 1,
-  "disorder": 2,
-  "dispiriting": 1,
-  "displacement": 1,
-  "disputes": 2,
-  "dissatisfaction": 4,
-  "dissemination": 1,
-  "dissent": 1,
-  "dissolution": 1,
-  "distance": 6,
-  "distorted thinking": 1,
-  "distraction": 9,
-  "distress": 2,
-  "distribution": 1,
-  "diversity": 3,
-  "division": 1,
-  "domestic": 2,
-  "domesticity": 8,
-  "doubt": 4,
-  "downfall": 1,
-  "drafts": 1,
-  "drawing": 1,
-  "dread": 1,
-  "dreams": 1,
-  "duality": 1,
-  "dusk": 1,
-  "duty": 5,
-  "dynamics": 1,
-  "dysfunction": 1,
-  "early-life-trauma": 1,
-  "earnestness": 1,
-  "eccentricity": 1,
-  "economics": 2,
-  "economy": 2,
-  "ecosystems": 1,
-  "editing": 1,
-  "education": 30,
-  "effectiveness": 1,
-  "efficiency": 2,
-  "effort": 2,
-  "ego": 2,
-  "egoism": 1,
-  "elderly": 1,
-  "elegance": 1,
-  "embarrassment": 3,
-  "embodiment": 1,
-  "emotion": 4,
-  "emotional": 7,
-  "emotional history": 1,
-  "emotional intelligence": 3,
-  "emotional maturity": 2,
-  "emotional procrastination": 1,
-  "emotional support": 1,
-  "emotional well-being": 1,
-  "emotional-intelligence": 1,
-  "emotional-maturity": 1,
-  "emotional-response": 1,
-  "emotional_education": 1,
-  "emotional_history": 2,
-  "emotional_impact": 1,
-  "emotional_intelligence": 1,
-  "emotional_scepticism": 1,
-  "emotional_translation": 2,
-  "emotionaleducation": 1,
-  "emotionalintelligence": 3,
-  "emotions": 16,
-  "empathy": 59,
-  "empire": 2,
-  "emptiness": 3,
-  "enchantment": 1,
-  "encouragement": 3,
-  "endings": 3,
-  "endorsement": 3,
-  "endurance": 4,
-  "enemies": 1,
-  "engagement": 5,
-  "engineering": 1,
-  "enhancement": 1,
-  "enjoyment": 5,
-  "enlightenment": 4,
-  "enthusiasm": 1,
-  "entropy": 2,
-  "environment": 5,
-  "environmental_crisis": 1,
-  "envy": 42,
-  "equality": 6,
-  "equilibrium": 1,
-  "eroticism": 2,
-  "error": 1,
-  "errors": 1,
-  "escalation": 1,
-  "escape": 2,
-  "essay": 1,
-  "eternity": 1,
-  "ethical complexity": 1,
-  "ethics": 1,
-  "eudaimonia": 4,
-  "evasion": 1,
-  "evasiveness": 1,
-  "everyday": 2,
-  "evil": 1,
-  "evolution": 5,
-  "exaggeration": 1,
-  "exams": 1,
-  "exceptionalism": 1,
-  "exceptions": 1,
-  "excessive logic": 1,
-  "excitement": 2,
-  "exercise": 2,
-  "exercises": 1,
-  "exes": 1,
-  "exhaustion": 2,
-  "exile": 5,
-  "existence": 2,
-  "existential angst": 1,
-  "existential terror": 1,
-  "existentialism": 2,
-  "exit": 1,
-  "exotic": 1,
-  "exoticism": 1,
-  "expansion": 2,
-  "expectation": 5,
-  "expectations": 22,
-  "experience": 10,
-  "experimentation": 1,
-  "explanation": 1,
-  "explanations": 2,
-  "exploitation": 1,
-  "exploration": 8,
-  "exposure": 3,
-  "exposure-risk": 1,
-  "expression": 2,
-  "extinction": 5,
-  "extinction_event": 1,
-  "extrapolation": 1,
-  "extroversion": 2,
-  "failure": 55,
-  "faith": 4,
-  "fall": 2,
-  "fallibility": 1,
-  "false promises": 1,
-  "false self": 1,
-  "fame": 3,
-  "familiarity": 10,
-  "family": 5,
-  "family bonds": 1,
-  "family dynamics": 1,
-  "fantasies": 3,
-  "fantasy": 2,
-  "fate": 2,
-  "fatigue": 1,
-  "fault": 1,
-  "faultiness": 1,
-  "fear": 39,
-  "fears": 3,
-  "feedback": 1,
-  "feeling": 1,
-  "feelings": 1,
-  "feminism": 1,
-  "fetish": 1,
-  "fiction": 2,
-  "fidelity": 4,
-  "filial": 1,
-  "firing": 1,
-  "first day": 1,
-  "fishing": 1,
-  "fixation": 1,
-  "flaneur": 1,
-  "flaws": 9,
-  "fleeting": 1,
-  "flexibility": 1,
-  "flight": 1,
-  "floodplain": 1,
-  "flourishing": 3,
-  "flow": 2,
-  "flowers": 1,
-  "focus": 5,
-  "folly": 2,
-  "foolishness": 2,
-  "foraging": 1,
-  "foreboding": 1,
-  "foresight": 1,
-  "foresight-lack": 1,
-  "forgetting": 1,
-  "forgiveness": 41,
-  "formation": 1,
-  "fragility": 4,
-  "frailty": 1,
-  "freedom": 17,
-  "friction": 1,
-  "friendliness": 1,
-  "friends": 2,
-  "friendship": 42,
-  "frustration": 10,
-  "fulfillment": 7,
-  "fun": 1,
-  "function": 1,
-  "fundamental": 1,
-  "furnish": 1,
-  "furniture": 2,
-  "future": 8,
-  "future direction": 1,
-  "futurism": 1,
-  "gallows humour": 1,
-  "garden": 1,
-  "gardening": 4,
-  "gender": 1,
-  "general thoughts": 1,
-  "generalization": 1,
-  "generosity": 4,
-  "genius": 4,
-  "genogram": 1,
-  "gerontology": 1,
-  "gerontophobia": 1,
-  "glamour": 1,
-  "god": 1,
-  "godlessness": 1,
-  "gods": 1,
-  "good business": 1,
-  "good enough": 1,
-  "goodness": 3,
-  "gratification": 1,
-  "gratitude": 22,
-  "gravity": 1,
-  "grief": 2,
-  "group": 1,
-  "growth": 10,
-  "guidance": 3,
-  "guilt": 10,
-  "gut\u53cd\u5e94": 1,
-  "habit formation": 1,
-  "habitat": 1,
-  "habitation": 1,
-  "habitats": 2,
-  "habits": 3,
-  "hamartia": 3,
-  "happiness": 17,
-  "hard work": 1,
-  "hardship": 1,
-  "harm": 3,
-  "harmony": 3,
-  "hate": 1,
-  "hated": 1,
-  "healing": 7,
-  "health": 2,
-  "heartbreak": 10,
-  "hedonism": 1,
-  "helping": 1,
-  "hermits": 1,
-  "heroism": 2,
-  "hesitation": 1,
-  "hidden": 1,
-  "hierarchy": 3,
-  "higher": 1,
-  "higher needs": 3,
-  "hinting": 1,
-  "historical-shift": 1,
-  "history": 11,
-  "home": 10,
-  "homecoming": 2,
-  "homekeeping": 2,
-  "homelessness": 1,
-  "homework": 2,
-  "honesty": 27,
-  "hope": 14,
-  "hopelessness": 1,
-  "housework": 1,
-  "human": 1,
-  "human capacity": 1,
-  "human condition": 1,
-  "human-flaw": 1,
-  "human_nature": 1,
-  "human_tragedy": 1,
-  "humanistic": 1,
-  "humanity": 2,
-  "humiliation": 1,
-  "humility": 14,
-  "humor": 5,
-  "hunger": 1,
-  "hunting": 1,
-  "hurt": 1,
-  "hurts": 1,
-  "hyperactivity": 1,
-  "hypocrisy": 1,
-  "idealism": 1,
-  "idealization": 2,
-  "ideas": 1,
-  "identity": 19,
-  "idleness": 3,
-  "ignorance": 4,
-  "illness": 1,
-  "illusion": 2,
-  "illustration": 1,
-  "images": 1,
-  "imagination": 17,
-  "imbalance": 2,
-  "immersion": 2,
-  "immortality": 1,
-  "impact": 1,
-  "impatience": 1,
-  "imperfection": 26,
-  "imperfections": 3,
-  "impermanence": 6,
-  "implementation": 1,
-  "importance": 2,
-  "impostor syndrome": 5,
-  "impressionability": 1,
-  "improvement": 6,
-  "impulsivity": 2,
-  "inaction": 1,
-  "inadequacy": 4,
-  "incompatibility": 2,
-  "incompleteness": 1,
-  "incompletion": 1,
-  "incomprehension": 2,
-  "incumbent": 1,
-  "indecision": 1,
-  "independence": 9,
-  "indicators": 1,
-  "indifference": 7,
-  "indirectness": 1,
-  "individualism": 8,
-  "individuality": 3,
-  "individualization": 1,
-  "indolence": 1,
-  "indulgence": 1,
-  "industrial": 1,
-  "inequality": 8,
-  "inevitability": 3,
-  "infamy": 1,
-  "infancy": 1,
-  "inference": 1,
-  "infidelity": 6,
-  "influence": 4,
-  "information": 4,
-  "infrastructure": 2,
-  "inharmony": 1,
-  "inheritance": 1,
-  "inherited\u6a21\u677f": 1,
-  "inhibition": 2,
-  "initiation": 1,
-  "injustice": 3,
-  "inner calling": 1,
-  "inner child": 1,
-  "inner critic": 3,
-  "inner growth": 1,
-  "inner idiot": 2,
-  "inner journey": 1,
-  "inner peace": 2,
-  "inner voice": 1,
-  "inner-child": 1,
-  "inner-criticism": 1,
-  "inner_voices": 1,
-  "innocence": 3,
-  "innovation": 3,
-  "insecure_attachment": 1,
-  "insecurities": 4,
-  "insecurity": 52,
-  "insight": 5,
-  "insignificance": 17,
-  "inspiration": 4,
-  "instinct": 9,
-  "instincts": 1,
-  "institutions": 1,
-  "instruction": 1,
-  "integration": 4,
-  "integrity": 2,
-  "intelligence": 2,
-  "interaction": 1,
-  "interconnectedness": 1,
-  "interdependence": 1,
-  "interest": 2,
-  "interior": 2,
-  "interior design": 1,
-  "internal dialogue": 1,
-  "internalized beliefs": 1,
-  "internet": 1,
-  "interpretation": 7,
-  "intimacy": 58,
-  "intriguing": 1,
-  "intrinsic satisfaction": 1,
-  "introduction": 1,
-  "introspection": 16,
-  "introversion": 3,
-  "intuition": 5,
-  "inventory": 1,
-  "irony": 1,
-  "irritants": 1,
-  "irritation": 1,
-  "isolation": 21,
-  "jealousy": 30,
-  "job fixation": 1,
-  "job influence": 1,
-  "journey": 2,
-  "joy": 1,
-  "judgement": 1,
-  "judgment": 5,
-  "jurisdiction": 1,
-  "justice": 1,
-  "justification": 3,
-  "kindness": 17,
-  "kink": 1,
-  "knowing": 1,
-  "knowledge": 4,
-  "labor": 1,
-  "landscape": 1,
-  "late bloomer": 1,
-  "laughter": 2,
-  "layoffs": 1,
-  "layout": 1,
-  "laziness": 4,
-  "learning": 12,
-  "left_brain": 1,
-  "legacy": 1,
-  "leisure": 4,
-  "lemon": 1,
-  "lessons": 1,
-  "liberation": 10,
-  "lies": 1,
-  "life": 1,
-  "life cycle": 1,
-  "limitations": 2,
-  "lingering": 1,
-  "listening": 6,
-  "literature": 3,
-  "local": 1,
-  "locals": 1,
-  "logic": 2,
-  "loneliness": 36,
-  "long-term": 1,
-  "long-term challenges": 2,
-  "long-termlove": 1,
-  "long_term": 1,
-  "long_term_relationships": 1,
-  "longevity": 1,
-  "longing": 8,
-  "loss": 6,
-  "loss of rationality": 1,
-  "lottery": 1,
-  "lovability": 1,
-  "love": 93,
-  "love stories": 1,
-  "love_loss": 1,
-  "loving": 2,
-  "low self-esteem": 1,
-  "loyalty": 8,
-  "luck": 3,
-  "lust": 1,
-  "luxury": 3,
-  "lying": 1,
-  "madness": 6,
-  "maintenance": 2,
-  "mallard": 1,
-  "malleability": 1,
-  "malnutrition": 1,
-  "management": 3,
-  "manipulation": 3,
-  "mantra": 1,
-  "marketing": 2,
-  "marriage": 30,
-  "marvel": 1,
-  "maslow": 1,
-  "masochism": 1,
-  "mass_extinction": 1,
-  "mastery": 1,
-  "materialism": 5,
-  "materials": 1,
-  "mating habits": 1,
-  "maturation": 1,
-  "maturity": 14,
-  "meaning": 8,
-  "meaningfulness": 3,
-  "meanness": 1,
-  "media": 4,
-  "mediocrity": 3,
-  "meditation": 4,
-  "meekness": 2,
-  "melancholy": 44,
-  "memento mori": 1,
-  "memories": 2,
-  "memorization": 2,
-  "memory": 13,
-  "mental healing": 1,
-  "mental health": 5,
-  "mental illness": 5,
-  "mental_functioning": 1,
-  "mental_health": 3,
-  "mental_images": 1,
-  "mentality": 1,
-  "mentalization": 1,
-  "mentorship": 1,
-  "mercy": 1,
-  "meritocracy": 9,
-  "microfriendships": 1,
-  "milestones": 1,
-  "mind-reading": 2,
-  "mindfulness": 14,
-  "minibreak": 1,
-  "minor injuries": 1,
-  "minor issues": 1,
-  "misadaptation": 1,
-  "misanthropy": 2,
-  "misconception": 1,
-  "misemployment": 1,
-  "misery": 1,
-  "misinterpretation": 1,
-  "mismatch": 1,
-  "mistakes": 2,
-  "misunderstanding": 5,
-  "modernism": 1,
-  "modernity": 13,
-  "modesty": 8,
-  "moment": 1,
-  "momentary": 1,
-  "monasteries": 1,
-  "monastery": 1,
-  "monasticism": 3,
-  "money": 2,
-  "monogamy": 4,
-  "monsters": 2,
-  "moral growth": 1,
-  "moral_crucible": 1,
-  "morality": 7,
-  "morality-change": 1,
-  "mortality": 7,
-  "motivation": 3,
-  "mountains": 1,
-  "mourning": 5,
-  "multiplicity": 1,
-  "multipotentialite": 1,
-  "mundane": 1,
-  "museum": 2,
-  "museums": 1,
-  "music": 1,
-  "mutual": 1,
-  "mutual education": 1,
-  "mutualimpact": 1,
-  "mystery": 1,
-  "mysticism": 1,
-  "mythology": 1,
-  "nagging": 1,
-  "name": 1,
-  "naps": 1,
-  "narcissism": 1,
-  "narrative": 2,
-  "narratives": 2,
-  "nastiness": 1,
-  "nation": 1,
-  "national character": 1,
-  "national destiny": 1,
-  "nationalism": 1,
-  "nature": 34,
-  "nature awareness": 1,
-  "nature connection": 2,
-  "nature loss": 1,
-  "nature observation": 1,
-  "navigation": 2,
-  "neediness": 2,
-  "needs": 4,
-  "negativity": 1,
-  "neglect": 3,
-  "neglected tasks": 1,
-  "negligence": 1,
-  "negotiation": 3,
-  "nesting": 1,
-  "neurasthenia": 1,
-  "neuroplasticity": 2,
-  "neuroscience": 1,
-  "neuroses": 1,
-  "neutrality": 1,
-  "news": 4,
-  "news overload": 1,
-  "newspaper": 1,
-  "niceness": 1,
-  "nightmares": 2,
-  "nobility": 4,
-  "normalcy": 6,
-  "normality": 6,
-  "norms": 1,
-  "nosex": 1,
-  "nostalgia": 16,
-  "noticing": 1,
-  "novelty": 5,
-  "nuance": 2,
-  "nurturing": 2,
-  "nutrients": 1,
-  "object choice": 1,
-  "objects": 3,
-  "obligation": 1,
-  "oblivion": 1,
-  "observation": 12,
-  "obsolescence": 1,
-  "obstacles": 2,
-  "occasional": 1,
-  "occupation": 1,
-  "office": 2,
-  "openness": 1,
-  "opposition": 1,
-  "optimism": 9,
-  "order": 2,
-  "orderliness": 1,
-  "ordinary": 4,
-  "organization": 1,
-  "organizational purpose": 1,
-  "origin": 1,
-  "original_sin": 2,
-  "originality": 1,
-  "origins": 1,
-  "ostracism": 1,
-  "otherknowledge": 1,
-  "otherness": 2,
-  "outdoor experience": 1,
-  "outlook": 1,
-  "overachievement": 1,
-  "overeating": 1,
-  "overload": 1,
-  "overlooked": 1,
-  "oversensitivity": 1,
-  "overwhelm": 1,
-  "pain": 5,
-  "paleontology": 1,
-  "panic": 4,
-  "paradigm": 1,
-  "paradise": 3,
-  "paranoia": 2,
-  "pardon": 1,
-  "parental failure": 1,
-  "parental imprinting": 1,
-  "parental love": 1,
-  "parental regret": 1,
-  "parental role": 1,
-  "parental-resemblance": 1,
-  "parenting": 2,
-  "parents": 2,
-  "parks": 1,
-  "participation": 1,
-  "parties": 2,
-  "partner choice": 1,
-  "partnership": 7,
-  "passion": 3,
-  "passivity": 1,
-  "past": 7,
-  "past-experiences": 1,
-  "past-trauma": 1,
-  "pathologising": 1,
-  "patience": 7,
-  "patriotism": 1,
-  "pattern": 1,
-  "patterns": 5,
-  "peace": 3,
-  "pedagogy": 2,
-  "perception": 21,
-  "perfection": 3,
-  "perfectionism": 7,
-  "permanence": 2,
-  "permission": 2,
-  "permissions": 1,
-  "perseverance": 1,
-  "persona": 1,
-  "personal failings": 1,
-  "personal freedom": 1,
-  "personal growth": 1,
-  "personality-alteration": 1,
-  "personality_development": 1,
-  "personalization": 1,
-  "perspective": 19,
-  "persuasion": 4,
-  "pessimism": 9,
-  "petition": 1,
-  "philanthropy": 1,
-  "philosophical meditation": 1,
-  "philosophy": 17,
-  "photographs": 1,
-  "photography": 3,
-  "physiology": 1,
-  "pilgrimage": 4,
-  "pills": 2,
-  "pitfalls": 1,
-  "pity": 2,
-  "place": 1,
-  "placelessness": 1,
-  "plan_b": 1,
-  "planning": 2,
-  "play": 2,
-  "playfulness": 2,
-  "pleasure": 10,
-  "plot": 1,
-  "politeness": 7,
-  "political": 1,
-  "politics": 1,
-  "polyamory": 1,
-  "pop_music": 1,
-  "popularisation": 1,
-  "popularity": 1,
-  "popularization": 1,
-  "populism": 1,
-  "pornography": 2,
-  "possessions": 1,
-  "possibilities": 1,
-  "post-coital": 1,
-  "potential": 3,
-  "poverty": 2,
-  "power": 1,
-  "practical": 1,
-  "practicality": 5,
-  "practice": 2,
-  "pragmatism": 1,
-  "prayer": 1,
-  "precision": 1,
-  "predictability": 2,
-  "prediction": 2,
-  "prejudice": 3,
-  "premeditation": 1,
-  "prenuptial": 1,
-  "preparation": 2,
-  "preparedness": 1,
-  "present": 7,
-  "present-moment": 1,
-  "preservation": 1,
-  "pressure": 4,
-  "prestige": 2,
-  "prevention": 1,
-  "pride": 2,
-  "primate": 1,
-  "principles": 1,
-  "priorities": 4,
-  "prioritization": 3,
-  "privacy": 2,
-  "problematic": 1,
-  "problems": 6,
-  "procedure": 1,
-  "procedures": 1,
-  "processing": 3,
-  "procrastination": 18,
-  "productivity": 7,
-  "professionalism": 2,
-  "profit": 1,
-  "programming": 1,
-  "progress": 2,
-  "projection": 5,
-  "projects": 1,
-  "prosperity": 2,
-  "protection": 1,
-  "provincialism": 1,
-  "psyche": 1,
-  "psychoanalysis": 3,
-  "psychological": 3,
-  "psychological asymmetry": 1,
-  "psychological_traits": 1,
-  "psychology": 32,
-  "psychotherapy": 4,
-  "public expression": 1,
-  "publicity": 1,
-  "purchasing": 1,
-  "purity": 2,
-  "purpose": 14,
-  "purposes": 1,
-  "puzzlement": 1,
-  "qualities": 1,
-  "quantum mechanics": 1,
-  "questioning": 3,
-  "questionnaire": 1,
-  "questions": 1,
-  "quiet life": 2,
-  "quiet mind": 1,
-  "quietness": 1,
-  "quotidian": 2,
-  "randomness": 1,
-  "rationalism": 1,
-  "rationality": 6,
-  "rationalization": 1,
-  "reaction": 1,
-  "readiness": 4,
-  "reading": 1,
-  "realism": 7,
-  "reality": 26,
-  "realization": 1,
-  "reason": 3,
-  "reasons": 2,
-  "reasons to live": 1,
-  "reassurance": 13,
-  "rebalancing": 1,
-  "rebellion": 5,
-  "recalibration": 1,
-  "reciprocation": 2,
-  "reciprocity": 5,
-  "recitation": 1,
-  "reclusion": 2,
-  "recognition": 2,
-  "recoil": 2,
-  "recollection": 1,
-  "reconciliation": 7,
-  "reconnection": 1,
-  "recovery": 10,
-  "recurrence": 1,
-  "redemption": 18,
-  "redirection": 1,
-  "rediscovery": 2,
-  "reduction": 1,
-  "redundancy": 1,
-  "reenchantment": 1,
-  "reevaluation": 1,
-  "refinement": 1,
-  "reflection": 26,
-  "reflective-listening": 2,
-  "reform": 1,
-  "refuge": 2,
-  "regression": 1,
-  "regret": 10,
-  "regulation": 1,
-  "regulations": 1,
-  "rehabilitation": 2,
-  "reinforcement": 1,
-  "reinvention": 1,
-  "rejection": 7,
-  "relapse": 1,
-  "relationship": 16,
-  "relationship dynamics": 1,
-  "relationships": 75,
-  "relativization": 1,
-  "relaxation": 2,
-  "reliance": 1,
-  "relief": 2,
-  "religion": 10,
-  "reminder": 1,
-  "reminders": 1,
-  "reminiscence": 1,
-  "remorse": 1,
-  "renaming": 1,
-  "renewal": 2,
-  "reorientation": 1,
-  "repair": 3,
-  "reparation": 1,
-  "reparenting": 1,
-  "repetition": 6,
-  "replacement": 1,
-  "replication": 2,
-  "reputation": 2,
-  "requirements": 1,
-  "resentment": 10,
-  "resignation": 3,
-  "resilience": 30,
-  "resistance": 2,
-  "resolution": 1,
-  "respect": 5,
-  "respectability": 2,
-  "responsibility": 7,
-  "restaurant": 1,
-  "restlessness": 1,
-  "restoration": 1,
-  "restraint": 1,
-  "restrictions": 1,
-  "retention": 1,
-  "retirement": 1,
-  "retreat": 3,
-  "revelation": 1,
-  "reverie": 2,
-  "rice cultivation": 1,
-  "ridiculousness": 1,
-  "right_brain": 1,
-  "righteousness": 1,
-  "rightness": 1,
-  "rigidity": 1,
-  "rings": 1,
-  "ritual": 4,
-  "rituals": 2,
-  "rivalry": 3,
-  "river": 1,
-  "role_models": 1,
-  "roles": 1,
-  "romance": 13,
-  "romantic": 4,
-  "romanticism": 16,
-  "room": 1,
-  "room_service": 1,
-  "roots": 1,
-  "routine": 3,
-  "ruins": 1,
-  "rules": 1,
-  "rural": 1,
-  "sabotage": 2,
-  "sacrifice": 10,
-  "sadness": 10,
-  "safety": 1,
-  "saints": 1,
-  "sanctuary": 1,
-  "sane_insanity": 1,
-  "sanity": 5,
-  "satisfaction": 9,
-  "scale": 3,
-  "scarcity": 1,
-  "schooling": 2,
-  "science": 4,
-  "scripting": 1,
-  "scrutiny": 1,
-  "seasonal awareness": 1,
-  "seasonal behavior": 1,
-  "seasonality": 1,
-  "secrets": 6,
-  "secularism": 1,
-  "secularization": 4,
-  "secure_attachment": 1,
-  "security": 3,
-  "seduction": 2,
-  "seeing": 1,
-  "self": 5,
-  "self-acceptance": 2,
-  "self-accompanying": 1,
-  "self-analysis": 2,
-  "self-assertion": 1,
-  "self-awareness": 26,
-  "self-blame": 1,
-  "self-care": 2,
-  "self-compassion": 3,
-  "self-conception": 1,
-  "self-confidence": 2,
-  "self-consciousness": 2,
-  "self-control": 1,
-  "self-criticism": 4,
-  "self-deception": 1,
-  "self-definition": 2,
-  "self-deprecating": 1,
-  "self-development": 2,
-  "self-directed": 1,
-  "self-disclosure": 2,
-  "self-discovery": 9,
-  "self-disgust": 2,
-  "self-doubt": 13,
-  "self-esteem": 1,
-  "self-examination": 4,
-  "self-explanation": 1,
-  "self-exploration": 3,
-  "self-expression": 2,
-  "self-forgiveness": 1,
-  "self-governance": 1,
-  "self-growth": 1,
-  "self-hatred": 11,
-  "self-help": 1,
-  "self-importance": 1,
-  "self-improvement": 6,
-  "self-interest": 2,
-  "self-judgment": 1,
-  "self-knowledge": 7,
-  "self-limiting beliefs": 1,
-  "self-loathing": 1,
-  "self-love": 6,
-  "self-motivation": 1,
-  "self-observation": 6,
-  "self-perception": 1,
-  "self-presentation": 1,
-  "self-rationale": 1,
-  "self-realization": 1,
-  "self-reflection": 9,
-  "self-reliance": 1,
-  "self-revelation": 1,
-  "self-righteousness": 2,
-  "self-sabotage": 4,
-  "self-soothing": 1,
-  "self-worth": 8,
-  "self_awareness": 1,
-  "self_doubt": 1,
-  "self_help": 1,
-  "self_nurture": 1,
-  "self_skepticism": 1,
-  "self_understanding": 1,
-  "selfishness": 2,
-  "selfknowledge": 1,
-  "selflessness": 5,
-  "selfrighteousness": 1,
-  "senecide": 1,
-  "senior": 1,
-  "sensemaking": 1,
-  "senses": 4,
-  "sensitivity": 4,
-  "sentimentality": 2,
-  "separation": 3,
-  "serendipity": 1,
-  "serenity": 3,
-  "seriousness": 1,
-  "service": 3,
-  "setting": 1,
-  "sewage": 1,
-  "sex": 11,
-  "sex life": 1,
-  "sexual fantasy": 1,
-  "sexual liberation": 1,
-  "sexual repression": 1,
-  "sexual_fulfillment": 1,
-  "sexuality": 12,
-  "shadow": 1,
-  "shame": 12,
-  "shared experience": 1,
-  "sheep": 1,
-  "shopping": 1,
-  "shortsightedness": 1,
-  "shrine": 1,
-  "shyness": 5,
-  "sicily": 1,
-  "significance": 3,
-  "silence": 3,
-  "silliness": 1,
-  "simplicity": 9,
-  "simulation": 1,
-  "sin": 3,
-  "sincerity": 4,
-  "sinfulness": 1,
-  "singledom": 1,
-  "singlehood": 3,
-  "singles": 1,
-  "sins": 1,
-  "skepticism": 5,
-  "skills": 3,
-  "slavery": 1,
-  "sleep": 2,
-  "small": 2,
-  "small pleasures": 1,
-  "small talk": 1,
-  "small things": 1,
-  "smalltalk": 1,
-  "smallthings": 1,
-  "smiling": 1,
-  "snobbery": 1,
-  "sociability": 1,
-  "social": 6,
-  "social anxiety": 1,
-  "social dilemmas": 1,
-  "social inhibition": 1,
-  "social media": 1,
-  "social pressure": 1,
-  "social_editing": 1,
-  "socialization": 4,
-  "society": 2,
-  "softening": 2,
-  "solar calendar": 1,
-  "solemnity": 1,
-  "solitude": 38,
-  "solo": 1,
-  "solution": 1,
-  "solutions": 3,
-  "soothing": 1,
-  "sorrow": 5,
-  "sorrows": 1,
-  "soul": 3,
-  "soulmate": 1,
-  "source": 1,
-  "space": 3,
-  "specialization": 4,
-  "specificity": 1,
-  "speculation": 1,
-  "speed": 1,
-  "spirituality": 3,
-  "splitting": 3,
-  "spontaneity": 7,
-  "sprawl": 1,
-  "stability": 3,
-  "standard model": 1,
-  "standardization": 2,
-  "standards": 1,
-  "stars": 1,
-  "station": 1,
-  "statistics": 1,
-  "status": 1,
-  "stereotypes": 1,
-  "stewardship": 1,
-  "stigma": 1,
-  "stillness": 1,
-  "stimulation": 1,
-  "stoicism": 5,
-  "stories": 2,
-  "storms": 1,
-  "storytelling": 2,
-  "strain": 2,
-  "strangeness": 1,
-  "stranger": 1,
-  "strangers": 1,
-  "strategies": 1,
-  "street photography": 1,
-  "strength": 6,
-  "stress": 6,
-  "striving": 1,
-  "structure": 3,
-  "structured": 1,
-  "struggle": 4,
-  "stuckness": 1,
-  "style": 1,
-  "subjectivity": 1,
-  "sublime": 1,
-  "sublimity": 1,
-  "substitutes": 1,
-  "suburbanism": 1,
-  "success": 14,
-  "suddenness": 1,
-  "suffering": 15,
-  "sufficiency": 1,
-  "suicide": 5,
-  "suitability": 1,
-  "sulk": 1,
-  "sulking": 4,
-  "sunday evenings": 1,
-  "sunlight": 1,
-  "sunshine": 1,
-  "superiority": 1,
-  "supervision": 1,
-  "support": 16,
-  "surrender": 2,
-  "survival": 12,
-  "suspicion": 1,
-  "symbolism": 2,
-  "sympathy": 8,
-  "taboo": 2,
-  "talent": 2,
-  "task avoidance": 1,
-  "taste": 2,
-  "teaching": 6,
-  "teamwork": 1,
-  "tears": 1,
-  "teasing": 2,
-  "technology": 5,
-  "temporality": 2,
-  "temptation": 1,
-  "tenderness": 3,
-  "tensions": 1,
-  "termination": 1,
-  "terror": 1,
-  "thankfulness": 1,
-  "theater": 2,
-  "therapy": 19,
-  "thinking": 3,
-  "thinking feeling acting": 1,
-  "thoughtfulness": 1,
-  "thoughts": 3,
-  "threshold": 1,
-  "time": 5,
-  "time management": 2,
-  "time perception": 1,
-  "timekeeping": 1,
-  "timelessness": 1,
-  "timing": 1,
-  "tiredness": 1,
-  "tolerance": 13,
-  "torture": 1,
-  "toughness": 1,
-  "tourism": 3,
-  "tracking": 1,
-  "trade-offs": 1,
-  "tradition": 2,
-  "traditional societies": 1,
-  "tragedy": 10,
-  "training": 1,
-  "tranquility": 2,
-  "tranquillisation": 1,
-  "transactional analysis": 1,
-  "transcendence": 5,
-  "transference": 3,
-  "transformation": 12,
-  "transience": 2,
-  "transient": 1,
-  "transitional": 1,
-  "transitional_objects": 1,
-  "translation": 1,
-  "transubstantiation": 1,
-  "trauma": 11,
-  "travel": 17,
-  "trees": 1,
-  "triggering": 1,
-  "triumph": 1,
-  "trivialities": 1,
-  "triviality": 3,
-  "trivialization": 1,
-  "true connection": 1,
-  "true self": 2,
-  "trust": 13,
-  "truth": 14,
-  "try": 1,
-  "types": 1,
-  "ugliness": 6,
-  "ultimatum": 1,
-  "uncertainty": 12,
-  "unconditionality": 1,
-  "unconscious": 4,
-  "underestimation": 1,
-  "underlying_meaning": 1,
-  "understanding": 46,
-  "unfaithfulness": 1,
-  "unfinished_business": 1,
-  "unhappiness": 1,
-  "uniqueness": 1,
-  "unity": 1,
-  "universality": 1,
-  "universe": 5,
-  "unpaid": 1,
-  "unpredictability": 1,
-  "unprocessed emotion": 2,
-  "unrequited": 1,
-  "unrequited love": 1,
-  "unresolved": 1,
-  "unworthiness": 3,
-  "urban exploration": 1,
-  "urbanism": 1,
-  "urbanization": 4,
-  "urgency": 2,
-  "urgent-action": 1,
-  "usefulness": 2,
-  "utility": 1,
-  "utopia": 5,
-  "vacuuming": 1,
-  "validation": 10,
-  "value": 1,
-  "values": 2,
-  "vanity": 3,
-  "veneration": 1,
-  "victory": 1,
-  "vigilance": 1,
-  "virtue": 2,
-  "virtues": 4,
-  "vitality": 1,
-  "vocation": 5,
-  "voting": 1,
-  "vows": 2,
-  "vulnerability": 64,
-  "wardrobe": 1,
-  "warmth": 1,
-  "weakness": 7,
-  "wealth": 2,
-  "wedding": 1,
-  "well-being": 3,
-  "wellbeing": 1,
-  "wheat": 1,
-  "wilderness": 2,
-  "willpower": 1,
-  "window": 1,
-  "window staring": 1,
-  "wisdom": 22,
-  "wishfulthinking": 1,
-  "womb": 1,
-  "wonder": 3,
-  "woolf": 1,
-  "work": 9,
-  "worry": 2,
-  "worth": 1,
-  "worthlessness": 1,
-  "worthwhile": 1,
-  "wounds": 1,
-  "writing": 2,
-  "wrongpartner": 1,
-  "yoga": 1,
-  "youth": 1,
-  "youth obsession": 1,
-  "zoos": 1,
-  "\u5fe0\u8bda": 1,
-  "\u60c5\u611f": 1,
-  "\u6d88\u901d": 1,
-  "\u7231\u60c5": 1,
-  "\u771f\u5b9e\u6027": 2,
-  "\u9009\u62e9": 1,
-  "\u9057\u5fd8": 1
+  "total_tags": 2205,
+  "tags": [
+    {
+      "tag": "80/20 rule",
+      "count": 1
+    },
+    {
+      "tag": "Christianity",
+      "count": 1
+    },
+    {
+      "tag": "Sicily",
+      "count": 1
+    },
+    {
+      "tag": "abandonment",
+      "count": 4
+    },
+    {
+      "tag": "absence",
+      "count": 1
+    },
+    {
+      "tag": "absorption",
+      "count": 1
+    },
+    {
+      "tag": "abundance",
+      "count": 1
+    },
+    {
+      "tag": "abuse",
+      "count": 5
+    },
+    {
+      "tag": "acceptance",
+      "count": 66
+    },
+    {
+      "tag": "accessibility",
+      "count": 1
+    },
+    {
+      "tag": "accident",
+      "count": 1
+    },
+    {
+      "tag": "accomplishment",
+      "count": 4
+    },
+    {
+      "tag": "accountability",
+      "count": 5
+    },
+    {
+      "tag": "accuracy",
+      "count": 1
+    },
+    {
+      "tag": "accusation",
+      "count": 1
+    },
+    {
+      "tag": "achievement",
+      "count": 6
+    },
+    {
+      "tag": "achievements",
+      "count": 1
+    },
+    {
+      "tag": "acknowledgment",
+      "count": 6
+    },
+    {
+      "tag": "action",
+      "count": 1
+    },
+    {
+      "tag": "activities",
+      "count": 1
+    },
+    {
+      "tag": "adaptation",
+      "count": 11
+    },
+    {
+      "tag": "addiction",
+      "count": 3
+    },
+    {
+      "tag": "adequacy",
+      "count": 1
+    },
+    {
+      "tag": "administration",
+      "count": 1
+    },
+    {
+      "tag": "admiration",
+      "count": 7
+    },
+    {
+      "tag": "adolescence",
+      "count": 3
+    },
+    {
+      "tag": "adult child parent",
+      "count": 1
+    },
+    {
+      "tag": "adult ego",
+      "count": 1
+    },
+    {
+      "tag": "adultery",
+      "count": 1
+    },
+    {
+      "tag": "adulthood",
+      "count": 14
+    },
+    {
+      "tag": "adulting",
+      "count": 1
+    },
+    {
+      "tag": "advancement",
+      "count": 1
+    },
+    {
+      "tag": "adventure",
+      "count": 3
+    },
+    {
+      "tag": "adversity",
+      "count": 6
+    },
+    {
+      "tag": "advertising",
+      "count": 6
+    },
+    {
+      "tag": "advice",
+      "count": 2
+    },
+    {
+      "tag": "aesthetics",
+      "count": 12
+    },
+    {
+      "tag": "affair",
+      "count": 6
+    },
+    {
+      "tag": "affairs",
+      "count": 7
+    },
+    {
+      "tag": "affection",
+      "count": 13
+    },
+    {
+      "tag": "affordability",
+      "count": 1
+    },
+    {
+      "tag": "ageing",
+      "count": 4
+    },
+    {
+      "tag": "ageism",
+      "count": 4
+    },
+    {
+      "tag": "agency",
+      "count": 4
+    },
+    {
+      "tag": "agendas",
+      "count": 1
+    },
+    {
+      "tag": "aggression",
+      "count": 3
+    },
+    {
+      "tag": "aging",
+      "count": 7
+    },
+    {
+      "tag": "agitation",
+      "count": 1
+    },
+    {
+      "tag": "agony",
+      "count": 3
+    },
+    {
+      "tag": "agriculture",
+      "count": 2
+    },
+    {
+      "tag": "air travel",
+      "count": 1
+    },
+    {
+      "tag": "airline_seat",
+      "count": 1
+    },
+    {
+      "tag": "airport",
+      "count": 1
+    },
+    {
+      "tag": "airports",
+      "count": 1
+    },
+    {
+      "tag": "akrasia",
+      "count": 3
+    },
+    {
+      "tag": "alarm",
+      "count": 1
+    },
+    {
+      "tag": "alienation",
+      "count": 4
+    },
+    {
+      "tag": "alignment",
+      "count": 1
+    },
+    {
+      "tag": "alliance",
+      "count": 1
+    },
+    {
+      "tag": "allies",
+      "count": 1
+    },
+    {
+      "tag": "alone",
+      "count": 4
+    },
+    {
+      "tag": "aloneliness",
+      "count": 1
+    },
+    {
+      "tag": "alternatives",
+      "count": 6
+    },
+    {
+      "tag": "altitude",
+      "count": 1
+    },
+    {
+      "tag": "ambiguity",
+      "count": 1
+    },
+    {
+      "tag": "ambition",
+      "count": 28
+    },
+    {
+      "tag": "ambivalence",
+      "count": 7
+    },
+    {
+      "tag": "amnesia",
+      "count": 4
+    },
+    {
+      "tag": "amor fati",
+      "count": 2
+    },
+    {
+      "tag": "amorality",
+      "count": 1
+    },
+    {
+      "tag": "analogies",
+      "count": 1
+    },
+    {
+      "tag": "analogy",
+      "count": 1
+    },
+    {
+      "tag": "analysis",
+      "count": 2
+    },
+    {
+      "tag": "ancestry",
+      "count": 1
+    },
+    {
+      "tag": "anchors",
+      "count": 1
+    },
+    {
+      "tag": "ancient knowledge",
+      "count": 1
+    },
+    {
+      "tag": "anger",
+      "count": 17
+    },
+    {
+      "tag": "angst",
+      "count": 1
+    },
+    {
+      "tag": "animals",
+      "count": 1
+    },
+    {
+      "tag": "anonymity",
+      "count": 3
+    },
+    {
+      "tag": "anthropocentrism",
+      "count": 1
+    },
+    {
+      "tag": "anticipation",
+      "count": 7
+    },
+    {
+      "tag": "antipathy",
+      "count": 1
+    },
+    {
+      "tag": "anxiety",
+      "count": 80
+    },
+    {
+      "tag": "anxiousness",
+      "count": 1
+    },
+    {
+      "tag": "apathy",
+      "count": 1
+    },
+    {
+      "tag": "apocalypse",
+      "count": 1
+    },
+    {
+      "tag": "apologies",
+      "count": 1
+    },
+    {
+      "tag": "apology",
+      "count": 10
+    },
+    {
+      "tag": "appearance",
+      "count": 3
+    },
+    {
+      "tag": "appreciation",
+      "count": 30
+    },
+    {
+      "tag": "approval",
+      "count": 2
+    },
+    {
+      "tag": "aptitude_tests",
+      "count": 1
+    },
+    {
+      "tag": "architecture",
+      "count": 16
+    },
+    {
+      "tag": "arduousness",
+      "count": 1
+    },
+    {
+      "tag": "argument",
+      "count": 4
+    },
+    {
+      "tag": "arguments",
+      "count": 18
+    },
+    {
+      "tag": "aristocracy",
+      "count": 1
+    },
+    {
+      "tag": "arousal",
+      "count": 1
+    },
+    {
+      "tag": "arrangement",
+      "count": 1
+    },
+    {
+      "tag": "arrival",
+      "count": 1
+    },
+    {
+      "tag": "arrogance",
+      "count": 1
+    },
+    {
+      "tag": "art",
+      "count": 29
+    },
+    {
+      "tag": "articulation",
+      "count": 2
+    },
+    {
+      "tag": "artificial",
+      "count": 1
+    },
+    {
+      "tag": "asceticism",
+      "count": 1
+    },
+    {
+      "tag": "aspiration",
+      "count": 3
+    },
+    {
+      "tag": "aspirations",
+      "count": 1
+    },
+    {
+      "tag": "assertiveness",
+      "count": 3
+    },
+    {
+      "tag": "assessment",
+      "count": 1
+    },
+    {
+      "tag": "assumption",
+      "count": 1
+    },
+    {
+      "tag": "assumptions",
+      "count": 2
+    },
+    {
+      "tag": "asteroids",
+      "count": 1
+    },
+    {
+      "tag": "astronomy",
+      "count": 2
+    },
+    {
+      "tag": "asylum",
+      "count": 1
+    },
+    {
+      "tag": "ataraxia",
+      "count": 1
+    },
+    {
+      "tag": "atheism",
+      "count": 1
+    },
+    {
+      "tag": "athleticism",
+      "count": 1
+    },
+    {
+      "tag": "atmosphere",
+      "count": 1
+    },
+    {
+      "tag": "atonement",
+      "count": 3
+    },
+    {
+      "tag": "attachment",
+      "count": 15
+    },
+    {
+      "tag": "attainability",
+      "count": 1
+    },
+    {
+      "tag": "attention",
+      "count": 14
+    },
+    {
+      "tag": "attention-seeking",
+      "count": 1
+    },
+    {
+      "tag": "attention_to_detail",
+      "count": 1
+    },
+    {
+      "tag": "attentiveness",
+      "count": 1
+    },
+    {
+      "tag": "attitudes",
+      "count": 3
+    },
+    {
+      "tag": "attraction",
+      "count": 13
+    },
+    {
+      "tag": "attractiveness",
+      "count": 2
+    },
+    {
+      "tag": "attunement",
+      "count": 1
+    },
+    {
+      "tag": "audience",
+      "count": 1
+    },
+    {
+      "tag": "authenticity",
+      "count": 74
+    },
+    {
+      "tag": "authority",
+      "count": 2
+    },
+    {
+      "tag": "authority_submission",
+      "count": 1
+    },
+    {
+      "tag": "autobiography",
+      "count": 1
+    },
+    {
+      "tag": "autonomy",
+      "count": 7
+    },
+    {
+      "tag": "availability",
+      "count": 1
+    },
+    {
+      "tag": "average",
+      "count": 1
+    },
+    {
+      "tag": "avoidance",
+      "count": 14
+    },
+    {
+      "tag": "awareness",
+      "count": 17
+    },
+    {
+      "tag": "awe",
+      "count": 6
+    },
+    {
+      "tag": "awkwardness",
+      "count": 2
+    },
+    {
+      "tag": "bad dates",
+      "count": 1
+    },
+    {
+      "tag": "bad parenting",
+      "count": 1
+    },
+    {
+      "tag": "bad taste",
+      "count": 1
+    },
+    {
+      "tag": "baggage",
+      "count": 1
+    },
+    {
+      "tag": "balance",
+      "count": 8
+    },
+    {
+      "tag": "bankruptcy",
+      "count": 1
+    },
+    {
+      "tag": "bathing",
+      "count": 1
+    },
+    {
+      "tag": "beauty",
+      "count": 29
+    },
+    {
+      "tag": "bed",
+      "count": 1
+    },
+    {
+      "tag": "behavior",
+      "count": 1
+    },
+    {
+      "tag": "being loved",
+      "count": 2
+    },
+    {
+      "tag": "being zones",
+      "count": 1
+    },
+    {
+      "tag": "belief",
+      "count": 4
+    },
+    {
+      "tag": "beliefs",
+      "count": 4
+    },
+    {
+      "tag": "belonging",
+      "count": 6
+    },
+    {
+      "tag": "benefits",
+      "count": 1
+    },
+    {
+      "tag": "betrayal",
+      "count": 7
+    },
+    {
+      "tag": "bias",
+      "count": 1
+    },
+    {
+      "tag": "bikini",
+      "count": 1
+    },
+    {
+      "tag": "biodiversity",
+      "count": 1
+    },
+    {
+      "tag": "biology",
+      "count": 1
+    },
+    {
+      "tag": "bitterness",
+      "count": 2
+    },
+    {
+      "tag": "black-and-white thinking",
+      "count": 1
+    },
+    {
+      "tag": "blame",
+      "count": 5
+    },
+    {
+      "tag": "blindness",
+      "count": 1
+    },
+    {
+      "tag": "bodily-awareness",
+      "count": 1
+    },
+    {
+      "tag": "bodily_factors",
+      "count": 1
+    },
+    {
+      "tag": "body",
+      "count": 1
+    },
+    {
+      "tag": "body temperature",
+      "count": 1
+    },
+    {
+      "tag": "bodybuilding",
+      "count": 1
+    },
+    {
+      "tag": "bohemian",
+      "count": 1
+    },
+    {
+      "tag": "bombardment",
+      "count": 1
+    },
+    {
+      "tag": "bond",
+      "count": 2
+    },
+    {
+      "tag": "bonding",
+      "count": 1
+    },
+    {
+      "tag": "bone",
+      "count": 1
+    },
+    {
+      "tag": "books",
+      "count": 3
+    },
+    {
+      "tag": "boredom",
+      "count": 10
+    },
+    {
+      "tag": "boundaries",
+      "count": 7
+    },
+    {
+      "tag": "bounded work",
+      "count": 1
+    },
+    {
+      "tag": "bourgeoisie",
+      "count": 1
+    },
+    {
+      "tag": "brain",
+      "count": 4
+    },
+    {
+      "tag": "brain health",
+      "count": 1
+    },
+    {
+      "tag": "brainstem",
+      "count": 1
+    },
+    {
+      "tag": "brands",
+      "count": 1
+    },
+    {
+      "tag": "bravery",
+      "count": 1
+    },
+    {
+      "tag": "break-up",
+      "count": 3
+    },
+    {
+      "tag": "breakdown",
+      "count": 3
+    },
+    {
+      "tag": "breakup",
+      "count": 7
+    },
+    {
+      "tag": "breakups",
+      "count": 2
+    },
+    {
+      "tag": "breath",
+      "count": 1
+    },
+    {
+      "tag": "breathing",
+      "count": 2
+    },
+    {
+      "tag": "brevity",
+      "count": 1
+    },
+    {
+      "tag": "bridge",
+      "count": 1
+    },
+    {
+      "tag": "broadcasting",
+      "count": 1
+    },
+    {
+      "tag": "brokenheart",
+      "count": 1
+    },
+    {
+      "tag": "brokenness",
+      "count": 4
+    },
+    {
+      "tag": "bullying",
+      "count": 2
+    },
+    {
+      "tag": "bureaucracy",
+      "count": 1
+    },
+    {
+      "tag": "busy",
+      "count": 1
+    },
+    {
+      "tag": "busy-ness",
+      "count": 1
+    },
+    {
+      "tag": "busyness",
+      "count": 1
+    },
+    {
+      "tag": "butterfly",
+      "count": 1
+    },
+    {
+      "tag": "calm",
+      "count": 8
+    },
+    {
+      "tag": "calmness",
+      "count": 5
+    },
+    {
+      "tag": "camaraderie",
+      "count": 1
+    },
+    {
+      "tag": "camping",
+      "count": 2
+    },
+    {
+      "tag": "candour",
+      "count": 1
+    },
+    {
+      "tag": "capitalism",
+      "count": 13
+    },
+    {
+      "tag": "captivity",
+      "count": 1
+    },
+    {
+      "tag": "care",
+      "count": 2
+    },
+    {
+      "tag": "career",
+      "count": 10
+    },
+    {
+      "tag": "career Planning",
+      "count": 1
+    },
+    {
+      "tag": "career expectations",
+      "count": 1
+    },
+    {
+      "tag": "career exploration",
+      "count": 1
+    },
+    {
+      "tag": "career-purpose",
+      "count": 1
+    },
+    {
+      "tag": "career_advice",
+      "count": 1
+    },
+    {
+      "tag": "caregiver",
+      "count": 1
+    },
+    {
+      "tag": "caregivers",
+      "count": 1
+    },
+    {
+      "tag": "cars",
+      "count": 1
+    },
+    {
+      "tag": "catastrophe",
+      "count": 3
+    },
+    {
+      "tag": "catastrophic thinking",
+      "count": 1
+    },
+    {
+      "tag": "catastrophizing",
+      "count": 1
+    },
+    {
+      "tag": "categorization",
+      "count": 1
+    },
+    {
+      "tag": "catharsis",
+      "count": 2
+    },
+    {
+      "tag": "caution",
+      "count": 2
+    },
+    {
+      "tag": "cautionary",
+      "count": 1
+    },
+    {
+      "tag": "celibacy",
+      "count": 2
+    },
+    {
+      "tag": "cemetery",
+      "count": 1
+    },
+    {
+      "tag": "censorship",
+      "count": 4
+    },
+    {
+      "tag": "centrism",
+      "count": 1
+    },
+    {
+      "tag": "ceremony",
+      "count": 4
+    },
+    {
+      "tag": "certainty",
+      "count": 1
+    },
+    {
+      "tag": "challenges",
+      "count": 6
+    },
+    {
+      "tag": "change",
+      "count": 18
+    },
+    {
+      "tag": "chaos",
+      "count": 3
+    },
+    {
+      "tag": "character",
+      "count": 5
+    },
+    {
+      "tag": "character formation",
+      "count": 1
+    },
+    {
+      "tag": "characters",
+      "count": 1
+    },
+    {
+      "tag": "charity",
+      "count": 7
+    },
+    {
+      "tag": "charm",
+      "count": 2
+    },
+    {
+      "tag": "cheerful despair",
+      "count": 1
+    },
+    {
+      "tag": "cheerfulness",
+      "count": 1
+    },
+    {
+      "tag": "cheese",
+      "count": 1
+    },
+    {
+      "tag": "childhood",
+      "count": 66
+    },
+    {
+      "tag": "childhood influences",
+      "count": 1
+    },
+    {
+      "tag": "childhood trauma",
+      "count": 2
+    },
+    {
+      "tag": "childhood-influence",
+      "count": 1
+    },
+    {
+      "tag": "childhood-trauma",
+      "count": 2
+    },
+    {
+      "tag": "childhood_influence",
+      "count": 1
+    },
+    {
+      "tag": "childhood_influences",
+      "count": 1
+    },
+    {
+      "tag": "childlike",
+      "count": 1
+    },
+    {
+      "tag": "children",
+      "count": 7
+    },
+    {
+      "tag": "childrens art",
+      "count": 1
+    },
+    {
+      "tag": "choice",
+      "count": 11
+    },
+    {
+      "tag": "choices",
+      "count": 3
+    },
+    {
+      "tag": "chores",
+      "count": 3
+    },
+    {
+      "tag": "cinema",
+      "count": 1
+    },
+    {
+      "tag": "circadian rhythms",
+      "count": 1
+    },
+    {
+      "tag": "cities",
+      "count": 2
+    },
+    {
+      "tag": "city",
+      "count": 1
+    },
+    {
+      "tag": "civil relations",
+      "count": 1
+    },
+    {
+      "tag": "civilization",
+      "count": 3
+    },
+    {
+      "tag": "clarification",
+      "count": 1
+    },
+    {
+      "tag": "clarifying",
+      "count": 1
+    },
+    {
+      "tag": "clarity",
+      "count": 6
+    },
+    {
+      "tag": "classical",
+      "count": 6
+    },
+    {
+      "tag": "classicism",
+      "count": 3
+    },
+    {
+      "tag": "classification",
+      "count": 1
+    },
+    {
+      "tag": "claustrophobia",
+      "count": 1
+    },
+    {
+      "tag": "cleaning",
+      "count": 1
+    },
+    {
+      "tag": "clinic",
+      "count": 1
+    },
+    {
+      "tag": "closeness",
+      "count": 5
+    },
+    {
+      "tag": "closure",
+      "count": 1
+    },
+    {
+      "tag": "clothing",
+      "count": 1
+    },
+    {
+      "tag": "cloud",
+      "count": 1
+    },
+    {
+      "tag": "clowning",
+      "count": 1
+    },
+    {
+      "tag": "clumsiness",
+      "count": 1
+    },
+    {
+      "tag": "cognition",
+      "count": 1
+    },
+    {
+      "tag": "cognitive biases",
+      "count": 1
+    },
+    {
+      "tag": "cognitive reserve",
+      "count": 1
+    },
+    {
+      "tag": "cognitive_flaws",
+      "count": 1
+    },
+    {
+      "tag": "coherence",
+      "count": 1
+    },
+    {
+      "tag": "collaboration",
+      "count": 7
+    },
+    {
+      "tag": "collapse",
+      "count": 1
+    },
+    {
+      "tag": "colleagues",
+      "count": 1
+    },
+    {
+      "tag": "collecting",
+      "count": 1
+    },
+    {
+      "tag": "collection",
+      "count": 2
+    },
+    {
+      "tag": "collective",
+      "count": 1
+    },
+    {
+      "tag": "comedy",
+      "count": 2
+    },
+    {
+      "tag": "comfort",
+      "count": 12
+    },
+    {
+      "tag": "comfort zone",
+      "count": 1
+    },
+    {
+      "tag": "commemoration",
+      "count": 1
+    },
+    {
+      "tag": "commerce",
+      "count": 1
+    },
+    {
+      "tag": "commercialization",
+      "count": 2
+    },
+    {
+      "tag": "commitment",
+      "count": 15
+    },
+    {
+      "tag": "commodification",
+      "count": 1
+    },
+    {
+      "tag": "commonality",
+      "count": 2
+    },
+    {
+      "tag": "communal",
+      "count": 1
+    },
+    {
+      "tag": "communication",
+      "count": 57
+    },
+    {
+      "tag": "communism",
+      "count": 1
+    },
+    {
+      "tag": "community",
+      "count": 11
+    },
+    {
+      "tag": "companionship",
+      "count": 11
+    },
+    {
+      "tag": "company",
+      "count": 1
+    },
+    {
+      "tag": "comparison",
+      "count": 37
+    },
+    {
+      "tag": "compassion",
+      "count": 62
+    },
+    {
+      "tag": "compatibility",
+      "count": 14
+    },
+    {
+      "tag": "compensation",
+      "count": 7
+    },
+    {
+      "tag": "competence",
+      "count": 3
+    },
+    {
+      "tag": "competition",
+      "count": 83
+    },
+    {
+      "tag": "complaint",
+      "count": 2
+    },
+    {
+      "tag": "complaints",
+      "count": 2
+    },
+    {
+      "tag": "complementarity",
+      "count": 3
+    },
+    {
+      "tag": "completeness",
+      "count": 2
+    },
+    {
+      "tag": "completion",
+      "count": 4
+    },
+    {
+      "tag": "complexity",
+      "count": 25
+    },
+    {
+      "tag": "compliance",
+      "count": 6
+    },
+    {
+      "tag": "complications",
+      "count": 1
+    },
+    {
+      "tag": "compliment",
+      "count": 1
+    },
+    {
+      "tag": "composition",
+      "count": 1
+    },
+    {
+      "tag": "comprehension",
+      "count": 1
+    },
+    {
+      "tag": "compression",
+      "count": 1
+    },
+    {
+      "tag": "compromise",
+      "count": 22
+    },
+    {
+      "tag": "compulsions",
+      "count": 1
+    },
+    {
+      "tag": "concealment",
+      "count": 1
+    },
+    {
+      "tag": "confession",
+      "count": 11
+    },
+    {
+      "tag": "confessions",
+      "count": 1
+    },
+    {
+      "tag": "confidence",
+      "count": 22
+    },
+    {
+      "tag": "conflict",
+      "count": 24
+    },
+    {
+      "tag": "conflicts",
+      "count": 2
+    },
+    {
+      "tag": "conformity",
+      "count": 8
+    },
+    {
+      "tag": "confrontation",
+      "count": 2
+    },
+    {
+      "tag": "confrontations",
+      "count": 1
+    },
+    {
+      "tag": "confusion",
+      "count": 6
+    },
+    {
+      "tag": "congruence",
+      "count": 1
+    },
+    {
+      "tag": "connection",
+      "count": 31
+    },
+    {
+      "tag": "connections",
+      "count": 1
+    },
+    {
+      "tag": "connectivity",
+      "count": 1
+    },
+    {
+      "tag": "conscience",
+      "count": 1
+    },
+    {
+      "tag": "consciousness",
+      "count": 6
+    },
+    {
+      "tag": "consensus",
+      "count": 1
+    },
+    {
+      "tag": "consent",
+      "count": 1
+    },
+    {
+      "tag": "consequences",
+      "count": 2
+    },
+    {
+      "tag": "conservation",
+      "count": 1
+    },
+    {
+      "tag": "conservatism",
+      "count": 1
+    },
+    {
+      "tag": "consideration",
+      "count": 4
+    },
+    {
+      "tag": "consistency",
+      "count": 1
+    },
+    {
+      "tag": "consolation",
+      "count": 14
+    },
+    {
+      "tag": "constraints",
+      "count": 3
+    },
+    {
+      "tag": "consumerism",
+      "count": 4
+    },
+    {
+      "tag": "contemplation",
+      "count": 8
+    },
+    {
+      "tag": "contempt",
+      "count": 3
+    },
+    {
+      "tag": "contentment",
+      "count": 20
+    },
+    {
+      "tag": "context",
+      "count": 3
+    },
+    {
+      "tag": "contingency",
+      "count": 1
+    },
+    {
+      "tag": "continuity",
+      "count": 1
+    },
+    {
+      "tag": "contradictions",
+      "count": 1
+    },
+    {
+      "tag": "contrast",
+      "count": 2
+    },
+    {
+      "tag": "contribution",
+      "count": 4
+    },
+    {
+      "tag": "control",
+      "count": 7
+    },
+    {
+      "tag": "convalescence",
+      "count": 1
+    },
+    {
+      "tag": "conventionality",
+      "count": 1
+    },
+    {
+      "tag": "conversation",
+      "count": 5
+    },
+    {
+      "tag": "conviction",
+      "count": 1
+    },
+    {
+      "tag": "cooking",
+      "count": 1
+    },
+    {
+      "tag": "cooperation",
+      "count": 1
+    },
+    {
+      "tag": "coping",
+      "count": 8
+    },
+    {
+      "tag": "correction",
+      "count": 2
+    },
+    {
+      "tag": "corruption",
+      "count": 3
+    },
+    {
+      "tag": "cosmic",
+      "count": 2
+    },
+    {
+      "tag": "cosmic_creation",
+      "count": 1
+    },
+    {
+      "tag": "cosmology",
+      "count": 1
+    },
+    {
+      "tag": "cosmopolitanism",
+      "count": 1
+    },
+    {
+      "tag": "cosmos",
+      "count": 1
+    },
+    {
+      "tag": "counseling",
+      "count": 2
+    },
+    {
+      "tag": "couples therapy",
+      "count": 1
+    },
+    {
+      "tag": "courage",
+      "count": 7
+    },
+    {
+      "tag": "cow",
+      "count": 1
+    },
+    {
+      "tag": "craftsmanship",
+      "count": 1
+    },
+    {
+      "tag": "craving",
+      "count": 1
+    },
+    {
+      "tag": "craziness",
+      "count": 2
+    },
+    {
+      "tag": "creativity",
+      "count": 21
+    },
+    {
+      "tag": "credibility",
+      "count": 1
+    },
+    {
+      "tag": "credit",
+      "count": 2
+    },
+    {
+      "tag": "credits",
+      "count": 1
+    },
+    {
+      "tag": "crimes",
+      "count": 1
+    },
+    {
+      "tag": "crises",
+      "count": 1
+    },
+    {
+      "tag": "crisis",
+      "count": 2
+    },
+    {
+      "tag": "criteria",
+      "count": 3
+    },
+    {
+      "tag": "critical friend",
+      "count": 1
+    },
+    {
+      "tag": "criticism",
+      "count": 17
+    },
+    {
+      "tag": "critique",
+      "count": 3
+    },
+    {
+      "tag": "crowd mentality",
+      "count": 1
+    },
+    {
+      "tag": "crowded place exercise",
+      "count": 1
+    },
+    {
+      "tag": "crowds",
+      "count": 1
+    },
+    {
+      "tag": "crucifixion",
+      "count": 1
+    },
+    {
+      "tag": "cruelty",
+      "count": 3
+    },
+    {
+      "tag": "crush",
+      "count": 4
+    },
+    {
+      "tag": "crushes",
+      "count": 6
+    },
+    {
+      "tag": "crying",
+      "count": 2
+    },
+    {
+      "tag": "cuckoldry",
+      "count": 1
+    },
+    {
+      "tag": "cultivation",
+      "count": 3
+    },
+    {
+      "tag": "cultural mining",
+      "count": 1
+    },
+    {
+      "tag": "culture",
+      "count": 20
+    },
+    {
+      "tag": "cumulative",
+      "count": 1
+    },
+    {
+      "tag": "cumulative thinking",
+      "count": 1
+    },
+    {
+      "tag": "curiosity",
+      "count": 8
+    },
+    {
+      "tag": "customer demand",
+      "count": 1
+    },
+    {
+      "tag": "customers",
+      "count": 1
+    },
+    {
+      "tag": "cycles",
+      "count": 1
+    },
+    {
+      "tag": "cyclical",
+      "count": 1
+    },
+    {
+      "tag": "cynicism",
+      "count": 3
+    },
+    {
+      "tag": "daddy issues",
+      "count": 1
+    },
+    {
+      "tag": "daily",
+      "count": 1
+    },
+    {
+      "tag": "daily life",
+      "count": 1
+    },
+    {
+      "tag": "damage",
+      "count": 1
+    },
+    {
+      "tag": "dance",
+      "count": 1
+    },
+    {
+      "tag": "dark humor",
+      "count": 1
+    },
+    {
+      "tag": "dating",
+      "count": 6
+    },
+    {
+      "tag": "dating apps",
+      "count": 1
+    },
+    {
+      "tag": "dawn",
+      "count": 2
+    },
+    {
+      "tag": "daydreaming",
+      "count": 4
+    },
+    {
+      "tag": "daydreams",
+      "count": 2
+    },
+    {
+      "tag": "daylight",
+      "count": 1
+    },
+    {
+      "tag": "deadlines",
+      "count": 1
+    },
+    {
+      "tag": "death",
+      "count": 12
+    },
+    {
+      "tag": "decay",
+      "count": 6
+    },
+    {
+      "tag": "deceitfulness",
+      "count": 1
+    },
+    {
+      "tag": "deception",
+      "count": 4
+    },
+    {
+      "tag": "decision-making",
+      "count": 4
+    },
+    {
+      "tag": "decision_making",
+      "count": 1
+    },
+    {
+      "tag": "decline",
+      "count": 2
+    },
+    {
+      "tag": "decorating",
+      "count": 1
+    },
+    {
+      "tag": "decoration",
+      "count": 1
+    },
+    {
+      "tag": "decorum",
+      "count": 1
+    },
+    {
+      "tag": "defeat",
+      "count": 4
+    },
+    {
+      "tag": "defense",
+      "count": 11
+    },
+    {
+      "tag": "defense mechanism",
+      "count": 1
+    },
+    {
+      "tag": "defense mechanisms",
+      "count": 2
+    },
+    {
+      "tag": "defense-mechanism",
+      "count": 1
+    },
+    {
+      "tag": "defense-mechanisms",
+      "count": 1
+    },
+    {
+      "tag": "defenselessness",
+      "count": 1
+    },
+    {
+      "tag": "defensive",
+      "count": 1
+    },
+    {
+      "tag": "defensiveness",
+      "count": 4
+    },
+    {
+      "tag": "deference",
+      "count": 2
+    },
+    {
+      "tag": "defiance",
+      "count": 3
+    },
+    {
+      "tag": "deficiencies",
+      "count": 1
+    },
+    {
+      "tag": "deficiency",
+      "count": 2
+    },
+    {
+      "tag": "definition",
+      "count": 1
+    },
+    {
+      "tag": "dehabituation",
+      "count": 1
+    },
+    {
+      "tag": "deity",
+      "count": 2
+    },
+    {
+      "tag": "delay",
+      "count": 2
+    },
+    {
+      "tag": "delicacy",
+      "count": 1
+    },
+    {
+      "tag": "delight",
+      "count": 1
+    },
+    {
+      "tag": "delusion",
+      "count": 1
+    },
+    {
+      "tag": "demand",
+      "count": 1
+    },
+    {
+      "tag": "demands",
+      "count": 1
+    },
+    {
+      "tag": "dementia",
+      "count": 1
+    },
+    {
+      "tag": "democracy",
+      "count": 2
+    },
+    {
+      "tag": "denial",
+      "count": 8
+    },
+    {
+      "tag": "densify",
+      "count": 1
+    },
+    {
+      "tag": "density",
+      "count": 1
+    },
+    {
+      "tag": "departure",
+      "count": 3
+    },
+    {
+      "tag": "dependence",
+      "count": 7
+    },
+    {
+      "tag": "dependency",
+      "count": 7
+    },
+    {
+      "tag": "depression",
+      "count": 8
+    },
+    {
+      "tag": "deprivation",
+      "count": 3
+    },
+    {
+      "tag": "depth",
+      "count": 4
+    },
+    {
+      "tag": "design",
+      "count": 3
+    },
+    {
+      "tag": "desire",
+      "count": 16
+    },
+    {
+      "tag": "desires",
+      "count": 5
+    },
+    {
+      "tag": "despair",
+      "count": 22
+    },
+    {
+      "tag": "destination",
+      "count": 4
+    },
+    {
+      "tag": "destiny",
+      "count": 6
+    },
+    {
+      "tag": "destruction",
+      "count": 1
+    },
+    {
+      "tag": "detachment",
+      "count": 3
+    },
+    {
+      "tag": "detail",
+      "count": 3
+    },
+    {
+      "tag": "details",
+      "count": 2
+    },
+    {
+      "tag": "devaluation",
+      "count": 2
+    },
+    {
+      "tag": "development",
+      "count": 4
+    },
+    {
+      "tag": "deviance",
+      "count": 1
+    },
+    {
+      "tag": "devotion",
+      "count": 4
+    },
+    {
+      "tag": "diagnosis",
+      "count": 1
+    },
+    {
+      "tag": "dialogue",
+      "count": 5
+    },
+    {
+      "tag": "diary",
+      "count": 3
+    },
+    {
+      "tag": "diet",
+      "count": 1
+    },
+    {
+      "tag": "difference",
+      "count": 4
+    },
+    {
+      "tag": "differences",
+      "count": 3
+    },
+    {
+      "tag": "difficulties",
+      "count": 2
+    },
+    {
+      "tag": "difficulty",
+      "count": 4
+    },
+    {
+      "tag": "diffusion",
+      "count": 1
+    },
+    {
+      "tag": "digital",
+      "count": 1
+    },
+    {
+      "tag": "digital addiction",
+      "count": 1
+    },
+    {
+      "tag": "digital technology",
+      "count": 1
+    },
+    {
+      "tag": "dignity",
+      "count": 14
+    },
+    {
+      "tag": "dilemmas",
+      "count": 1
+    },
+    {
+      "tag": "diligence",
+      "count": 1
+    },
+    {
+      "tag": "diminishment",
+      "count": 1
+    },
+    {
+      "tag": "dinosaurs",
+      "count": 1
+    },
+    {
+      "tag": "diplomacy",
+      "count": 3
+    },
+    {
+      "tag": "direction",
+      "count": 1
+    },
+    {
+      "tag": "directness",
+      "count": 2
+    },
+    {
+      "tag": "disagreement",
+      "count": 3
+    },
+    {
+      "tag": "disagreements",
+      "count": 3
+    },
+    {
+      "tag": "disappointment",
+      "count": 36
+    },
+    {
+      "tag": "disaster",
+      "count": 2
+    },
+    {
+      "tag": "disasters",
+      "count": 1
+    },
+    {
+      "tag": "disbelief",
+      "count": 1
+    },
+    {
+      "tag": "discipline",
+      "count": 1
+    },
+    {
+      "tag": "disclosure",
+      "count": 6
+    },
+    {
+      "tag": "discomfort",
+      "count": 2
+    },
+    {
+      "tag": "disconnection",
+      "count": 3
+    },
+    {
+      "tag": "discovery",
+      "count": 2
+    },
+    {
+      "tag": "disenchantment",
+      "count": 1
+    },
+    {
+      "tag": "disillusionment",
+      "count": 4
+    },
+    {
+      "tag": "dislike",
+      "count": 1
+    },
+    {
+      "tag": "dislocation",
+      "count": 1
+    },
+    {
+      "tag": "dismissal",
+      "count": 1
+    },
+    {
+      "tag": "disorder",
+      "count": 2
+    },
+    {
+      "tag": "dispiriting",
+      "count": 1
+    },
+    {
+      "tag": "displacement",
+      "count": 1
+    },
+    {
+      "tag": "disputes",
+      "count": 2
+    },
+    {
+      "tag": "dissatisfaction",
+      "count": 7
+    },
+    {
+      "tag": "dissemination",
+      "count": 1
+    },
+    {
+      "tag": "dissent",
+      "count": 1
+    },
+    {
+      "tag": "dissolution",
+      "count": 1
+    },
+    {
+      "tag": "distance",
+      "count": 10
+    },
+    {
+      "tag": "distorted thinking",
+      "count": 1
+    },
+    {
+      "tag": "distraction",
+      "count": 15
+    },
+    {
+      "tag": "distress",
+      "count": 3
+    },
+    {
+      "tag": "distribution",
+      "count": 1
+    },
+    {
+      "tag": "disturbance",
+      "count": 1
+    },
+    {
+      "tag": "diversity",
+      "count": 4
+    },
+    {
+      "tag": "division",
+      "count": 1
+    },
+    {
+      "tag": "divorce",
+      "count": 1
+    },
+    {
+      "tag": "dog",
+      "count": 1
+    },
+    {
+      "tag": "domains",
+      "count": 1
+    },
+    {
+      "tag": "domestic",
+      "count": 2
+    },
+    {
+      "tag": "domesticity",
+      "count": 10
+    },
+    {
+      "tag": "domination",
+      "count": 1
+    },
+    {
+      "tag": "doubt",
+      "count": 7
+    },
+    {
+      "tag": "downfall",
+      "count": 1
+    },
+    {
+      "tag": "drafts",
+      "count": 1
+    },
+    {
+      "tag": "drawing",
+      "count": 1
+    },
+    {
+      "tag": "dread",
+      "count": 2
+    },
+    {
+      "tag": "dream analysis",
+      "count": 1
+    },
+    {
+      "tag": "dreaming",
+      "count": 1
+    },
+    {
+      "tag": "dreams",
+      "count": 2
+    },
+    {
+      "tag": "driving",
+      "count": 1
+    },
+    {
+      "tag": "dualism",
+      "count": 1
+    },
+    {
+      "tag": "duality",
+      "count": 1
+    },
+    {
+      "tag": "dusk",
+      "count": 1
+    },
+    {
+      "tag": "duty",
+      "count": 6
+    },
+    {
+      "tag": "dynamics",
+      "count": 1
+    },
+    {
+      "tag": "dysfunction",
+      "count": 2
+    },
+    {
+      "tag": "early bedtime",
+      "count": 2
+    },
+    {
+      "tag": "early retirement",
+      "count": 1
+    },
+    {
+      "tag": "early-life-trauma",
+      "count": 1
+    },
+    {
+      "tag": "earnestness",
+      "count": 1
+    },
+    {
+      "tag": "eccentricity",
+      "count": 2
+    },
+    {
+      "tag": "economics",
+      "count": 2
+    },
+    {
+      "tag": "economy",
+      "count": 3
+    },
+    {
+      "tag": "ecosystems",
+      "count": 1
+    },
+    {
+      "tag": "editing",
+      "count": 2
+    },
+    {
+      "tag": "education",
+      "count": 41
+    },
+    {
+      "tag": "effectiveness",
+      "count": 2
+    },
+    {
+      "tag": "efficiency",
+      "count": 3
+    },
+    {
+      "tag": "effort",
+      "count": 3
+    },
+    {
+      "tag": "ego",
+      "count": 5
+    },
+    {
+      "tag": "egoism",
+      "count": 2
+    },
+    {
+      "tag": "elderly",
+      "count": 1
+    },
+    {
+      "tag": "elegance",
+      "count": 2
+    },
+    {
+      "tag": "elsewhere",
+      "count": 1
+    },
+    {
+      "tag": "embarrassment",
+      "count": 3
+    },
+    {
+      "tag": "embodiment",
+      "count": 2
+    },
+    {
+      "tag": "emotion",
+      "count": 7
+    },
+    {
+      "tag": "emotional",
+      "count": 12
+    },
+    {
+      "tag": "emotional connection",
+      "count": 1
+    },
+    {
+      "tag": "emotional deprivation",
+      "count": 1
+    },
+    {
+      "tag": "emotional health",
+      "count": 4
+    },
+    {
+      "tag": "emotional history",
+      "count": 1
+    },
+    {
+      "tag": "emotional imbalance",
+      "count": 1
+    },
+    {
+      "tag": "emotional intelligence",
+      "count": 3
+    },
+    {
+      "tag": "emotional literacy",
+      "count": 1
+    },
+    {
+      "tag": "emotional maturity",
+      "count": 3
+    },
+    {
+      "tag": "emotional neglect",
+      "count": 3
+    },
+    {
+      "tag": "emotional perspective",
+      "count": 1
+    },
+    {
+      "tag": "emotional procrastination",
+      "count": 1
+    },
+    {
+      "tag": "emotional support",
+      "count": 1
+    },
+    {
+      "tag": "emotional well-being",
+      "count": 1
+    },
+    {
+      "tag": "emotional-closeness",
+      "count": 1
+    },
+    {
+      "tag": "emotional-disconnection",
+      "count": 1
+    },
+    {
+      "tag": "emotional-health",
+      "count": 1
+    },
+    {
+      "tag": "emotional-intelligence",
+      "count": 1
+    },
+    {
+      "tag": "emotional-maturity",
+      "count": 1
+    },
+    {
+      "tag": "emotional-response",
+      "count": 1
+    },
+    {
+      "tag": "emotional-vulnerability",
+      "count": 1
+    },
+    {
+      "tag": "emotional-well-being",
+      "count": 1
+    },
+    {
+      "tag": "emotional_damage",
+      "count": 2
+    },
+    {
+      "tag": "emotional_education",
+      "count": 1
+    },
+    {
+      "tag": "emotional_health",
+      "count": 4
+    },
+    {
+      "tag": "emotional_history",
+      "count": 2
+    },
+    {
+      "tag": "emotional_impact",
+      "count": 1
+    },
+    {
+      "tag": "emotional_intelligence",
+      "count": 1
+    },
+    {
+      "tag": "emotional_scepticism",
+      "count": 1
+    },
+    {
+      "tag": "emotional_translation",
+      "count": 2
+    },
+    {
+      "tag": "emotionaleducation",
+      "count": 1
+    },
+    {
+      "tag": "emotionalintelligence",
+      "count": 4
+    },
+    {
+      "tag": "emotions",
+      "count": 23
+    },
+    {
+      "tag": "empathy",
+      "count": 101
+    },
+    {
+      "tag": "empathylessness",
+      "count": 1
+    },
+    {
+      "tag": "empire",
+      "count": 2
+    },
+    {
+      "tag": "employment",
+      "count": 1
+    },
+    {
+      "tag": "emptiness",
+      "count": 3
+    },
+    {
+      "tag": "enabler",
+      "count": 1
+    },
+    {
+      "tag": "enchantment",
+      "count": 2
+    },
+    {
+      "tag": "encouragement",
+      "count": 6
+    },
+    {
+      "tag": "endings",
+      "count": 3
+    },
+    {
+      "tag": "endorsement",
+      "count": 4
+    },
+    {
+      "tag": "endurance",
+      "count": 6
+    },
+    {
+      "tag": "enemies",
+      "count": 2
+    },
+    {
+      "tag": "engagement",
+      "count": 10
+    },
+    {
+      "tag": "engineering",
+      "count": 3
+    },
+    {
+      "tag": "engraving",
+      "count": 1
+    },
+    {
+      "tag": "enhancement",
+      "count": 1
+    },
+    {
+      "tag": "enjoyment",
+      "count": 7
+    },
+    {
+      "tag": "enlightenment",
+      "count": 6
+    },
+    {
+      "tag": "enthusiasm",
+      "count": 3
+    },
+    {
+      "tag": "entitlement",
+      "count": 1
+    },
+    {
+      "tag": "entrepreneurship",
+      "count": 1
+    },
+    {
+      "tag": "entropy",
+      "count": 3
+    },
+    {
+      "tag": "environment",
+      "count": 5
+    },
+    {
+      "tag": "environmental_crisis",
+      "count": 1
+    },
+    {
+      "tag": "envy",
+      "count": 76
+    },
+    {
+      "tag": "epiphany",
+      "count": 1
+    },
+    {
+      "tag": "equality",
+      "count": 9
+    },
+    {
+      "tag": "equilibrium",
+      "count": 2
+    },
+    {
+      "tag": "eroticism",
+      "count": 2
+    },
+    {
+      "tag": "error",
+      "count": 1
+    },
+    {
+      "tag": "errors",
+      "count": 1
+    },
+    {
+      "tag": "escalation",
+      "count": 1
+    },
+    {
+      "tag": "escape",
+      "count": 2
+    },
+    {
+      "tag": "escapism",
+      "count": 1
+    },
+    {
+      "tag": "essay",
+      "count": 1
+    },
+    {
+      "tag": "essays",
+      "count": 1
+    },
+    {
+      "tag": "eternity",
+      "count": 2
+    },
+    {
+      "tag": "ethical complexity",
+      "count": 1
+    },
+    {
+      "tag": "ethics",
+      "count": 3
+    },
+    {
+      "tag": "etiquette",
+      "count": 2
+    },
+    {
+      "tag": "eudaimonia",
+      "count": 4
+    },
+    {
+      "tag": "evasion",
+      "count": 1
+    },
+    {
+      "tag": "evasiveness",
+      "count": 1
+    },
+    {
+      "tag": "everyday",
+      "count": 3
+    },
+    {
+      "tag": "evil",
+      "count": 1
+    },
+    {
+      "tag": "evolution",
+      "count": 10
+    },
+    {
+      "tag": "exaggeration",
+      "count": 1
+    },
+    {
+      "tag": "examination",
+      "count": 1
+    },
+    {
+      "tag": "exams",
+      "count": 1
+    },
+    {
+      "tag": "exceptionalism",
+      "count": 2
+    },
+    {
+      "tag": "exceptions",
+      "count": 1
+    },
+    {
+      "tag": "excessive logic",
+      "count": 1
+    },
+    {
+      "tag": "exchange",
+      "count": 1
+    },
+    {
+      "tag": "excitement",
+      "count": 5
+    },
+    {
+      "tag": "exclusion",
+      "count": 2
+    },
+    {
+      "tag": "execution",
+      "count": 2
+    },
+    {
+      "tag": "exercise",
+      "count": 8
+    },
+    {
+      "tag": "exercises",
+      "count": 1
+    },
+    {
+      "tag": "exes",
+      "count": 1
+    },
+    {
+      "tag": "exhaustion",
+      "count": 3
+    },
+    {
+      "tag": "exile",
+      "count": 7
+    },
+    {
+      "tag": "existence",
+      "count": 6
+    },
+    {
+      "tag": "existential angst",
+      "count": 1
+    },
+    {
+      "tag": "existential concerns",
+      "count": 1
+    },
+    {
+      "tag": "existential terror",
+      "count": 1
+    },
+    {
+      "tag": "existentialism",
+      "count": 3
+    },
+    {
+      "tag": "exit",
+      "count": 1
+    },
+    {
+      "tag": "exorcism",
+      "count": 1
+    },
+    {
+      "tag": "exotic",
+      "count": 1
+    },
+    {
+      "tag": "exoticism",
+      "count": 1
+    },
+    {
+      "tag": "expansion",
+      "count": 2
+    },
+    {
+      "tag": "expectation",
+      "count": 10
+    },
+    {
+      "tag": "expectations",
+      "count": 39
+    },
+    {
+      "tag": "experience",
+      "count": 11
+    },
+    {
+      "tag": "experiences",
+      "count": 1
+    },
+    {
+      "tag": "experimentation",
+      "count": 1
+    },
+    {
+      "tag": "expertise",
+      "count": 1
+    },
+    {
+      "tag": "explanation",
+      "count": 4
+    },
+    {
+      "tag": "explanations",
+      "count": 2
+    },
+    {
+      "tag": "exploitation",
+      "count": 1
+    },
+    {
+      "tag": "exploration",
+      "count": 11
+    },
+    {
+      "tag": "exposure",
+      "count": 3
+    },
+    {
+      "tag": "exposure-risk",
+      "count": 1
+    },
+    {
+      "tag": "expression",
+      "count": 4
+    },
+    {
+      "tag": "externals",
+      "count": 1
+    },
+    {
+      "tag": "extinction",
+      "count": 7
+    },
+    {
+      "tag": "extinction_event",
+      "count": 1
+    },
+    {
+      "tag": "extrapolation",
+      "count": 1
+    },
+    {
+      "tag": "extroversion",
+      "count": 2
+    },
+    {
+      "tag": "failure",
+      "count": 64
+    },
+    {
+      "tag": "fairness",
+      "count": 1
+    },
+    {
+      "tag": "faith",
+      "count": 5
+    },
+    {
+      "tag": "fall",
+      "count": 2
+    },
+    {
+      "tag": "fallibility",
+      "count": 1
+    },
+    {
+      "tag": "false promises",
+      "count": 1
+    },
+    {
+      "tag": "false self",
+      "count": 1
+    },
+    {
+      "tag": "falsehood",
+      "count": 1
+    },
+    {
+      "tag": "fame",
+      "count": 3
+    },
+    {
+      "tag": "familiarity",
+      "count": 15
+    },
+    {
+      "tag": "family",
+      "count": 6
+    },
+    {
+      "tag": "family bonds",
+      "count": 1
+    },
+    {
+      "tag": "family dynamics",
+      "count": 1
+    },
+    {
+      "tag": "family influence",
+      "count": 1
+    },
+    {
+      "tag": "fantasies",
+      "count": 4
+    },
+    {
+      "tag": "fantasy",
+      "count": 9
+    },
+    {
+      "tag": "fatalism",
+      "count": 1
+    },
+    {
+      "tag": "fate",
+      "count": 4
+    },
+    {
+      "tag": "fatigue",
+      "count": 2
+    },
+    {
+      "tag": "fault",
+      "count": 1
+    },
+    {
+      "tag": "faultiness",
+      "count": 2
+    },
+    {
+      "tag": "fear",
+      "count": 64
+    },
+    {
+      "tag": "fears",
+      "count": 4
+    },
+    {
+      "tag": "feedback",
+      "count": 2
+    },
+    {
+      "tag": "feeling",
+      "count": 1
+    },
+    {
+      "tag": "feelings",
+      "count": 1
+    },
+    {
+      "tag": "fellowship",
+      "count": 1
+    },
+    {
+      "tag": "feminism",
+      "count": 1
+    },
+    {
+      "tag": "fetish",
+      "count": 1
+    },
+    {
+      "tag": "fiction",
+      "count": 2
+    },
+    {
+      "tag": "fidelity",
+      "count": 5
+    },
+    {
+      "tag": "figs",
+      "count": 1
+    },
+    {
+      "tag": "filial",
+      "count": 2
+    },
+    {
+      "tag": "finance",
+      "count": 1
+    },
+    {
+      "tag": "financial",
+      "count": 1
+    },
+    {
+      "tag": "financial friendships",
+      "count": 1
+    },
+    {
+      "tag": "financial insecurities",
+      "count": 1
+    },
+    {
+      "tag": "financial misinterpretation",
+      "count": 1
+    },
+    {
+      "tag": "financial mistakes",
+      "count": 1
+    },
+    {
+      "tag": "finitude",
+      "count": 1
+    },
+    {
+      "tag": "firefly",
+      "count": 1
+    },
+    {
+      "tag": "firing",
+      "count": 1
+    },
+    {
+      "tag": "first day",
+      "count": 1
+    },
+    {
+      "tag": "fishing",
+      "count": 1
+    },
+    {
+      "tag": "fitness",
+      "count": 1
+    },
+    {
+      "tag": "fixation",
+      "count": 2
+    },
+    {
+      "tag": "flaneur",
+      "count": 1
+    },
+    {
+      "tag": "flaw",
+      "count": 1
+    },
+    {
+      "tag": "flaws",
+      "count": 12
+    },
+    {
+      "tag": "flexibility",
+      "count": 2
+    },
+    {
+      "tag": "flight",
+      "count": 1
+    },
+    {
+      "tag": "flirting",
+      "count": 2
+    },
+    {
+      "tag": "floodplain",
+      "count": 1
+    },
+    {
+      "tag": "flourishing",
+      "count": 9
+    },
+    {
+      "tag": "flow",
+      "count": 3
+    },
+    {
+      "tag": "flowers",
+      "count": 1
+    },
+    {
+      "tag": "fluctuation",
+      "count": 1
+    },
+    {
+      "tag": "fluidity",
+      "count": 1
+    },
+    {
+      "tag": "focus",
+      "count": 7
+    },
+    {
+      "tag": "focused",
+      "count": 1
+    },
+    {
+      "tag": "folly",
+      "count": 2
+    },
+    {
+      "tag": "foolishness",
+      "count": 4
+    },
+    {
+      "tag": "foraging",
+      "count": 1
+    },
+    {
+      "tag": "forbearance",
+      "count": 1
+    },
+    {
+      "tag": "foreboding",
+      "count": 1
+    },
+    {
+      "tag": "foreignness",
+      "count": 1
+    },
+    {
+      "tag": "foresight",
+      "count": 2
+    },
+    {
+      "tag": "foresight-lack",
+      "count": 1
+    },
+    {
+      "tag": "forgetfulness",
+      "count": 3
+    },
+    {
+      "tag": "forgetting",
+      "count": 2
+    },
+    {
+      "tag": "forgiveness",
+      "count": 71
+    },
+    {
+      "tag": "formality",
+      "count": 1
+    },
+    {
+      "tag": "formation",
+      "count": 1
+    },
+    {
+      "tag": "fracture",
+      "count": 1
+    },
+    {
+      "tag": "fragility",
+      "count": 8
+    },
+    {
+      "tag": "frailty",
+      "count": 1
+    },
+    {
+      "tag": "frankness",
+      "count": 1
+    },
+    {
+      "tag": "freedom",
+      "count": 27
+    },
+    {
+      "tag": "friction",
+      "count": 1
+    },
+    {
+      "tag": "friendliness",
+      "count": 1
+    },
+    {
+      "tag": "friends",
+      "count": 2
+    },
+    {
+      "tag": "friendship",
+      "count": 59
+    },
+    {
+      "tag": "frustration",
+      "count": 16
+    },
+    {
+      "tag": "fulfillment",
+      "count": 25
+    },
+    {
+      "tag": "fun",
+      "count": 2
+    },
+    {
+      "tag": "function",
+      "count": 1
+    },
+    {
+      "tag": "functionality",
+      "count": 1
+    },
+    {
+      "tag": "fundamental",
+      "count": 1
+    },
+    {
+      "tag": "furnish",
+      "count": 1
+    },
+    {
+      "tag": "furniture",
+      "count": 2
+    },
+    {
+      "tag": "fury",
+      "count": 1
+    },
+    {
+      "tag": "future",
+      "count": 12
+    },
+    {
+      "tag": "future direction",
+      "count": 1
+    },
+    {
+      "tag": "future planning",
+      "count": 1
+    },
+    {
+      "tag": "futurism",
+      "count": 1
+    },
+    {
+      "tag": "gallows humour",
+      "count": 1
+    },
+    {
+      "tag": "games",
+      "count": 1
+    },
+    {
+      "tag": "gaps",
+      "count": 1
+    },
+    {
+      "tag": "garden",
+      "count": 1
+    },
+    {
+      "tag": "gardening",
+      "count": 4
+    },
+    {
+      "tag": "gender",
+      "count": 2
+    },
+    {
+      "tag": "general thoughts",
+      "count": 1
+    },
+    {
+      "tag": "generalization",
+      "count": 2
+    },
+    {
+      "tag": "generational",
+      "count": 1
+    },
+    {
+      "tag": "generosity",
+      "count": 5
+    },
+    {
+      "tag": "genius",
+      "count": 5
+    },
+    {
+      "tag": "genogram",
+      "count": 1
+    },
+    {
+      "tag": "genuine connection",
+      "count": 1
+    },
+    {
+      "tag": "gerontology",
+      "count": 1
+    },
+    {
+      "tag": "gerontophobia",
+      "count": 1
+    },
+    {
+      "tag": "gesture",
+      "count": 1
+    },
+    {
+      "tag": "glamour",
+      "count": 4
+    },
+    {
+      "tag": "goals",
+      "count": 1
+    },
+    {
+      "tag": "god",
+      "count": 1
+    },
+    {
+      "tag": "godlessness",
+      "count": 1
+    },
+    {
+      "tag": "gods",
+      "count": 2
+    },
+    {
+      "tag": "golden child",
+      "count": 1
+    },
+    {
+      "tag": "good business",
+      "count": 1
+    },
+    {
+      "tag": "good enough",
+      "count": 3
+    },
+    {
+      "tag": "goodness",
+      "count": 7
+    },
+    {
+      "tag": "goodwill",
+      "count": 1
+    },
+    {
+      "tag": "gradualism",
+      "count": 1
+    },
+    {
+      "tag": "grandeur",
+      "count": 1
+    },
+    {
+      "tag": "grandiosity",
+      "count": 2
+    },
+    {
+      "tag": "grandmother",
+      "count": 1
+    },
+    {
+      "tag": "grandness",
+      "count": 1
+    },
+    {
+      "tag": "gratification",
+      "count": 2
+    },
+    {
+      "tag": "gratitude",
+      "count": 30
+    },
+    {
+      "tag": "gravity",
+      "count": 1
+    },
+    {
+      "tag": "greed",
+      "count": 1
+    },
+    {
+      "tag": "grief",
+      "count": 4
+    },
+    {
+      "tag": "grievance",
+      "count": 2
+    },
+    {
+      "tag": "group",
+      "count": 1
+    },
+    {
+      "tag": "growth",
+      "count": 15
+    },
+    {
+      "tag": "guidance",
+      "count": 6
+    },
+    {
+      "tag": "guillotine",
+      "count": 1
+    },
+    {
+      "tag": "guilt",
+      "count": 19
+    },
+    {
+      "tag": "gut\u53cd\u5e94",
+      "count": 1
+    },
+    {
+      "tag": "habit",
+      "count": 1
+    },
+    {
+      "tag": "habit Formation",
+      "count": 1
+    },
+    {
+      "tag": "habitat",
+      "count": 1
+    },
+    {
+      "tag": "habitation",
+      "count": 1
+    },
+    {
+      "tag": "habitats",
+      "count": 2
+    },
+    {
+      "tag": "habits",
+      "count": 3
+    },
+    {
+      "tag": "hamartia",
+      "count": 3
+    },
+    {
+      "tag": "happiness",
+      "count": 24
+    },
+    {
+      "tag": "hard work",
+      "count": 1
+    },
+    {
+      "tag": "hardship",
+      "count": 1
+    },
+    {
+      "tag": "harm",
+      "count": 3
+    },
+    {
+      "tag": "harmony",
+      "count": 3
+    },
+    {
+      "tag": "hate",
+      "count": 1
+    },
+    {
+      "tag": "hated",
+      "count": 1
+    },
+    {
+      "tag": "hatred",
+      "count": 1
+    },
+    {
+      "tag": "healing",
+      "count": 12
+    },
+    {
+      "tag": "health",
+      "count": 2
+    },
+    {
+      "tag": "heartache",
+      "count": 1
+    },
+    {
+      "tag": "heartbreak",
+      "count": 11
+    },
+    {
+      "tag": "hedonism",
+      "count": 1
+    },
+    {
+      "tag": "helping",
+      "count": 2
+    },
+    {
+      "tag": "hermits",
+      "count": 1
+    },
+    {
+      "tag": "heroism",
+      "count": 4
+    },
+    {
+      "tag": "hesitation",
+      "count": 2
+    },
+    {
+      "tag": "hidden",
+      "count": 1
+    },
+    {
+      "tag": "hidden feelings",
+      "count": 1
+    },
+    {
+      "tag": "hierarchy",
+      "count": 4
+    },
+    {
+      "tag": "higher",
+      "count": 1
+    },
+    {
+      "tag": "higher needs",
+      "count": 3
+    },
+    {
+      "tag": "hinting",
+      "count": 1
+    },
+    {
+      "tag": "historical-shift",
+      "count": 1
+    },
+    {
+      "tag": "history",
+      "count": 18
+    },
+    {
+      "tag": "home",
+      "count": 11
+    },
+    {
+      "tag": "homecoming",
+      "count": 2
+    },
+    {
+      "tag": "homekeeping",
+      "count": 2
+    },
+    {
+      "tag": "homelessness",
+      "count": 1
+    },
+    {
+      "tag": "homework",
+      "count": 3
+    },
+    {
+      "tag": "honesty",
+      "count": 33
+    },
+    {
+      "tag": "hope",
+      "count": 25
+    },
+    {
+      "tag": "hopelessness",
+      "count": 7
+    },
+    {
+      "tag": "hostility",
+      "count": 1
+    },
+    {
+      "tag": "housework",
+      "count": 1
+    },
+    {
+      "tag": "human",
+      "count": 1
+    },
+    {
+      "tag": "human capacity",
+      "count": 1
+    },
+    {
+      "tag": "human condition",
+      "count": 2
+    },
+    {
+      "tag": "human limitations",
+      "count": 1
+    },
+    {
+      "tag": "human-flaw",
+      "count": 1
+    },
+    {
+      "tag": "human-nature",
+      "count": 1
+    },
+    {
+      "tag": "human_nature",
+      "count": 2
+    },
+    {
+      "tag": "human_tragedy",
+      "count": 1
+    },
+    {
+      "tag": "humanistic",
+      "count": 1
+    },
+    {
+      "tag": "humanity",
+      "count": 3
+    },
+    {
+      "tag": "humbleness",
+      "count": 1
+    },
+    {
+      "tag": "humiliation",
+      "count": 1
+    },
+    {
+      "tag": "humility",
+      "count": 27
+    },
+    {
+      "tag": "humor",
+      "count": 7
+    },
+    {
+      "tag": "hunger",
+      "count": 1
+    },
+    {
+      "tag": "hunting",
+      "count": 1
+    },
+    {
+      "tag": "hurt",
+      "count": 4
+    },
+    {
+      "tag": "hurts",
+      "count": 1
+    },
+    {
+      "tag": "hut",
+      "count": 1
+    },
+    {
+      "tag": "hyperactivity",
+      "count": 1
+    },
+    {
+      "tag": "hypervigilance",
+      "count": 1
+    },
+    {
+      "tag": "hypocrisy",
+      "count": 1
+    },
+    {
+      "tag": "icebreaker",
+      "count": 1
+    },
+    {
+      "tag": "ideal state",
+      "count": 1
+    },
+    {
+      "tag": "idealism",
+      "count": 2
+    },
+    {
+      "tag": "idealization",
+      "count": 4
+    },
+    {
+      "tag": "ideas",
+      "count": 3
+    },
+    {
+      "tag": "identity",
+      "count": 34
+    },
+    {
+      "tag": "identity-separation",
+      "count": 1
+    },
+    {
+      "tag": "idleness",
+      "count": 3
+    },
+    {
+      "tag": "ignorance",
+      "count": 7
+    },
+    {
+      "tag": "illness",
+      "count": 4
+    },
+    {
+      "tag": "ills",
+      "count": 1
+    },
+    {
+      "tag": "illth",
+      "count": 1
+    },
+    {
+      "tag": "illusion",
+      "count": 3
+    },
+    {
+      "tag": "illustration",
+      "count": 2
+    },
+    {
+      "tag": "imagery",
+      "count": 1
+    },
+    {
+      "tag": "images",
+      "count": 1
+    },
+    {
+      "tag": "imaginary speeches",
+      "count": 1
+    },
+    {
+      "tag": "imagination",
+      "count": 31
+    },
+    {
+      "tag": "imbalance",
+      "count": 3
+    },
+    {
+      "tag": "immaturity",
+      "count": 2
+    },
+    {
+      "tag": "immediacy",
+      "count": 1
+    },
+    {
+      "tag": "immersion",
+      "count": 3
+    },
+    {
+      "tag": "immortality",
+      "count": 1
+    },
+    {
+      "tag": "impact",
+      "count": 2
+    },
+    {
+      "tag": "impatience",
+      "count": 1
+    },
+    {
+      "tag": "imperfection",
+      "count": 40
+    },
+    {
+      "tag": "imperfections",
+      "count": 3
+    },
+    {
+      "tag": "impermanence",
+      "count": 10
+    },
+    {
+      "tag": "implementation",
+      "count": 1
+    },
+    {
+      "tag": "importance",
+      "count": 2
+    },
+    {
+      "tag": "impossibility",
+      "count": 1
+    },
+    {
+      "tag": "impostor syndrome",
+      "count": 8
+    },
+    {
+      "tag": "impotence",
+      "count": 2
+    },
+    {
+      "tag": "impressionability",
+      "count": 1
+    },
+    {
+      "tag": "imprinting",
+      "count": 1
+    },
+    {
+      "tag": "improvement",
+      "count": 13
+    },
+    {
+      "tag": "impulsivity",
+      "count": 2
+    },
+    {
+      "tag": "inaction",
+      "count": 2
+    },
+    {
+      "tag": "inadequacy",
+      "count": 10
+    },
+    {
+      "tag": "inclusion",
+      "count": 1
+    },
+    {
+      "tag": "incompatibility",
+      "count": 2
+    },
+    {
+      "tag": "incompleteness",
+      "count": 2
+    },
+    {
+      "tag": "incompletion",
+      "count": 1
+    },
+    {
+      "tag": "incomprehension",
+      "count": 2
+    },
+    {
+      "tag": "inconvenience",
+      "count": 1
+    },
+    {
+      "tag": "incumbent",
+      "count": 1
+    },
+    {
+      "tag": "indecision",
+      "count": 1
+    },
+    {
+      "tag": "independence",
+      "count": 20
+    },
+    {
+      "tag": "independent",
+      "count": 1
+    },
+    {
+      "tag": "independent_thinking",
+      "count": 1
+    },
+    {
+      "tag": "indicators",
+      "count": 1
+    },
+    {
+      "tag": "indifference",
+      "count": 11
+    },
+    {
+      "tag": "indirectness",
+      "count": 1
+    },
+    {
+      "tag": "individualism",
+      "count": 14
+    },
+    {
+      "tag": "individuality",
+      "count": 3
+    },
+    {
+      "tag": "individualization",
+      "count": 1
+    },
+    {
+      "tag": "indolence",
+      "count": 1
+    },
+    {
+      "tag": "indulgence",
+      "count": 1
+    },
+    {
+      "tag": "industrial",
+      "count": 1
+    },
+    {
+      "tag": "industry",
+      "count": 1
+    },
+    {
+      "tag": "inequality",
+      "count": 11
+    },
+    {
+      "tag": "inertia",
+      "count": 1
+    },
+    {
+      "tag": "inevitability",
+      "count": 5
+    },
+    {
+      "tag": "infamy",
+      "count": 1
+    },
+    {
+      "tag": "infancy",
+      "count": 1
+    },
+    {
+      "tag": "infatuation",
+      "count": 1
+    },
+    {
+      "tag": "inference",
+      "count": 1
+    },
+    {
+      "tag": "inferiority",
+      "count": 5
+    },
+    {
+      "tag": "infidelity",
+      "count": 12
+    },
+    {
+      "tag": "influence",
+      "count": 9
+    },
+    {
+      "tag": "information",
+      "count": 5
+    },
+    {
+      "tag": "infrastructure",
+      "count": 2
+    },
+    {
+      "tag": "inharmony",
+      "count": 1
+    },
+    {
+      "tag": "inheritance",
+      "count": 2
+    },
+    {
+      "tag": "inherited\u6a21\u677f",
+      "count": 1
+    },
+    {
+      "tag": "inhibition",
+      "count": 5
+    },
+    {
+      "tag": "initiation",
+      "count": 1
+    },
+    {
+      "tag": "initiative",
+      "count": 1
+    },
+    {
+      "tag": "injury",
+      "count": 1
+    },
+    {
+      "tag": "injustice",
+      "count": 6
+    },
+    {
+      "tag": "inner calling",
+      "count": 2
+    },
+    {
+      "tag": "inner child",
+      "count": 1
+    },
+    {
+      "tag": "inner critic",
+      "count": 4
+    },
+    {
+      "tag": "inner growth",
+      "count": 1
+    },
+    {
+      "tag": "inner idiot",
+      "count": 2
+    },
+    {
+      "tag": "inner journey",
+      "count": 1
+    },
+    {
+      "tag": "inner monologue",
+      "count": 1
+    },
+    {
+      "tag": "inner peace",
+      "count": 2
+    },
+    {
+      "tag": "inner traits",
+      "count": 1
+    },
+    {
+      "tag": "inner voice",
+      "count": 3
+    },
+    {
+      "tag": "inner voices",
+      "count": 1
+    },
+    {
+      "tag": "inner-child",
+      "count": 2
+    },
+    {
+      "tag": "inner-critic",
+      "count": 1
+    },
+    {
+      "tag": "inner-criticism",
+      "count": 1
+    },
+    {
+      "tag": "inner-parent",
+      "count": 1
+    },
+    {
+      "tag": "inner_voices",
+      "count": 1
+    },
+    {
+      "tag": "innocence",
+      "count": 8
+    },
+    {
+      "tag": "innovation",
+      "count": 7
+    },
+    {
+      "tag": "inputs",
+      "count": 1
+    },
+    {
+      "tag": "insecure_attachment",
+      "count": 1
+    },
+    {
+      "tag": "insecurities",
+      "count": 5
+    },
+    {
+      "tag": "insecurity",
+      "count": 94
+    },
+    {
+      "tag": "insight",
+      "count": 13
+    },
+    {
+      "tag": "insightfulness",
+      "count": 2
+    },
+    {
+      "tag": "insignificance",
+      "count": 27
+    },
+    {
+      "tag": "insomnia",
+      "count": 4
+    },
+    {
+      "tag": "inspiration",
+      "count": 11
+    },
+    {
+      "tag": "instinct",
+      "count": 9
+    },
+    {
+      "tag": "instincts",
+      "count": 1
+    },
+    {
+      "tag": "institutions",
+      "count": 1
+    },
+    {
+      "tag": "instruction",
+      "count": 1
+    },
+    {
+      "tag": "integration",
+      "count": 4
+    },
+    {
+      "tag": "integrity",
+      "count": 6
+    },
+    {
+      "tag": "intelligence",
+      "count": 4
+    },
+    {
+      "tag": "intensity",
+      "count": 1
+    },
+    {
+      "tag": "intention",
+      "count": 1
+    },
+    {
+      "tag": "intentionality",
+      "count": 1
+    },
+    {
+      "tag": "intentions",
+      "count": 2
+    },
+    {
+      "tag": "interaction",
+      "count": 2
+    },
+    {
+      "tag": "interconnectedness",
+      "count": 1
+    },
+    {
+      "tag": "interdependence",
+      "count": 1
+    },
+    {
+      "tag": "interest",
+      "count": 3
+    },
+    {
+      "tag": "interestingness",
+      "count": 1
+    },
+    {
+      "tag": "interests",
+      "count": 2
+    },
+    {
+      "tag": "intergenerational",
+      "count": 1
+    },
+    {
+      "tag": "interior",
+      "count": 2
+    },
+    {
+      "tag": "interior design",
+      "count": 1
+    },
+    {
+      "tag": "interior_design",
+      "count": 1
+    },
+    {
+      "tag": "intermittent",
+      "count": 1
+    },
+    {
+      "tag": "internal dialogue",
+      "count": 1
+    },
+    {
+      "tag": "internal-dialogue",
+      "count": 1
+    },
+    {
+      "tag": "internalization",
+      "count": 3
+    },
+    {
+      "tag": "internalized beliefs",
+      "count": 1
+    },
+    {
+      "tag": "internalized criticism",
+      "count": 1
+    },
+    {
+      "tag": "internet",
+      "count": 1
+    },
+    {
+      "tag": "interpretation",
+      "count": 8
+    },
+    {
+      "tag": "intimacy",
+      "count": 81
+    },
+    {
+      "tag": "intolerance",
+      "count": 1
+    },
+    {
+      "tag": "intriguing",
+      "count": 1
+    },
+    {
+      "tag": "intrinsic satisfaction",
+      "count": 1
+    },
+    {
+      "tag": "intrinsic_motivation",
+      "count": 1
+    },
+    {
+      "tag": "introduction",
+      "count": 1
+    },
+    {
+      "tag": "introjection",
+      "count": 1
+    },
+    {
+      "tag": "introspection",
+      "count": 30
+    },
+    {
+      "tag": "introversion",
+      "count": 3
+    },
+    {
+      "tag": "intuition",
+      "count": 5
+    },
+    {
+      "tag": "invention",
+      "count": 1
+    },
+    {
+      "tag": "inventory",
+      "count": 1
+    },
+    {
+      "tag": "investigation",
+      "count": 1
+    },
+    {
+      "tag": "invisibility",
+      "count": 1
+    },
+    {
+      "tag": "irony",
+      "count": 1
+    },
+    {
+      "tag": "irritability",
+      "count": 1
+    },
+    {
+      "tag": "irritants",
+      "count": 1
+    },
+    {
+      "tag": "irritation",
+      "count": 2
+    },
+    {
+      "tag": "isolation",
+      "count": 24
+    },
+    {
+      "tag": "jealousy",
+      "count": 59
+    },
+    {
+      "tag": "job",
+      "count": 1
+    },
+    {
+      "tag": "job fixation",
+      "count": 1
+    },
+    {
+      "tag": "job influence",
+      "count": 1
+    },
+    {
+      "tag": "job investment trap",
+      "count": 1
+    },
+    {
+      "tag": "job opportunities",
+      "count": 1
+    },
+    {
+      "tag": "job satisfaction",
+      "count": 3
+    },
+    {
+      "tag": "job_suitability",
+      "count": 1
+    },
+    {
+      "tag": "journey",
+      "count": 2
+    },
+    {
+      "tag": "joy",
+      "count": 4
+    },
+    {
+      "tag": "judgement",
+      "count": 3
+    },
+    {
+      "tag": "judgment",
+      "count": 9
+    },
+    {
+      "tag": "jurisdiction",
+      "count": 1
+    },
+    {
+      "tag": "justice",
+      "count": 5
+    },
+    {
+      "tag": "justification",
+      "count": 4
+    },
+    {
+      "tag": "kindness",
+      "count": 30
+    },
+    {
+      "tag": "kink",
+      "count": 1
+    },
+    {
+      "tag": "kissing",
+      "count": 1
+    },
+    {
+      "tag": "kith",
+      "count": 1
+    },
+    {
+      "tag": "knitters",
+      "count": 1
+    },
+    {
+      "tag": "knowing",
+      "count": 1
+    },
+    {
+      "tag": "knowledge",
+      "count": 9
+    },
+    {
+      "tag": "labor",
+      "count": 1
+    },
+    {
+      "tag": "labor demand",
+      "count": 1
+    },
+    {
+      "tag": "lacking",
+      "count": 1
+    },
+    {
+      "tag": "landscape",
+      "count": 1
+    },
+    {
+      "tag": "language",
+      "count": 1
+    },
+    {
+      "tag": "late bloomer",
+      "count": 1
+    },
+    {
+      "tag": "laughter",
+      "count": 2
+    },
+    {
+      "tag": "layoffs",
+      "count": 1
+    },
+    {
+      "tag": "layout",
+      "count": 1
+    },
+    {
+      "tag": "laziness",
+      "count": 5
+    },
+    {
+      "tag": "leadership",
+      "count": 2
+    },
+    {
+      "tag": "learning",
+      "count": 14
+    },
+    {
+      "tag": "left_brain",
+      "count": 1
+    },
+    {
+      "tag": "legacy",
+      "count": 3
+    },
+    {
+      "tag": "leisure",
+      "count": 4
+    },
+    {
+      "tag": "lemon",
+      "count": 1
+    },
+    {
+      "tag": "lesser_options",
+      "count": 1
+    },
+    {
+      "tag": "lessons",
+      "count": 2
+    },
+    {
+      "tag": "letdown",
+      "count": 1
+    },
+    {
+      "tag": "liberation",
+      "count": 14
+    },
+    {
+      "tag": "lies",
+      "count": 1
+    },
+    {
+      "tag": "life",
+      "count": 4
+    },
+    {
+      "tag": "life cycle",
+      "count": 1
+    },
+    {
+      "tag": "life-clues",
+      "count": 1
+    },
+    {
+      "tag": "lifecycle",
+      "count": 1
+    },
+    {
+      "tag": "lifestyle",
+      "count": 1
+    },
+    {
+      "tag": "light-heartedness",
+      "count": 1
+    },
+    {
+      "tag": "limitations",
+      "count": 3
+    },
+    {
+      "tag": "limits",
+      "count": 1
+    },
+    {
+      "tag": "lingering",
+      "count": 1
+    },
+    {
+      "tag": "listening",
+      "count": 10
+    },
+    {
+      "tag": "lists",
+      "count": 1
+    },
+    {
+      "tag": "literature",
+      "count": 4
+    },
+    {
+      "tag": "local",
+      "count": 1
+    },
+    {
+      "tag": "locals",
+      "count": 1
+    },
+    {
+      "tag": "location",
+      "count": 1
+    },
+    {
+      "tag": "logic",
+      "count": 3
+    },
+    {
+      "tag": "loneliness",
+      "count": 46
+    },
+    {
+      "tag": "long-term",
+      "count": 1
+    },
+    {
+      "tag": "long-term challenges",
+      "count": 2
+    },
+    {
+      "tag": "long-termlove",
+      "count": 1
+    },
+    {
+      "tag": "long_term",
+      "count": 1
+    },
+    {
+      "tag": "long_term_relationships",
+      "count": 1
+    },
+    {
+      "tag": "longevity",
+      "count": 2
+    },
+    {
+      "tag": "longing",
+      "count": 9
+    },
+    {
+      "tag": "longterm",
+      "count": 1
+    },
+    {
+      "tag": "loss",
+      "count": 6
+    },
+    {
+      "tag": "loss of rationality",
+      "count": 1
+    },
+    {
+      "tag": "lottery",
+      "count": 1
+    },
+    {
+      "tag": "lovability",
+      "count": 2
+    },
+    {
+      "tag": "love",
+      "count": 128
+    },
+    {
+      "tag": "love stories",
+      "count": 1
+    },
+    {
+      "tag": "love_loss",
+      "count": 1
+    },
+    {
+      "tag": "lovelessness",
+      "count": 1
+    },
+    {
+      "tag": "loving",
+      "count": 2
+    },
+    {
+      "tag": "low self-esteem",
+      "count": 1
+    },
+    {
+      "tag": "loyalty",
+      "count": 12
+    },
+    {
+      "tag": "luck",
+      "count": 4
+    },
+    {
+      "tag": "lust",
+      "count": 1
+    },
+    {
+      "tag": "luxury",
+      "count": 4
+    },
+    {
+      "tag": "lying",
+      "count": 2
+    },
+    {
+      "tag": "madness",
+      "count": 8
+    },
+    {
+      "tag": "maintenance",
+      "count": 2
+    },
+    {
+      "tag": "mallard",
+      "count": 1
+    },
+    {
+      "tag": "malleability",
+      "count": 2
+    },
+    {
+      "tag": "malnutrition",
+      "count": 1
+    },
+    {
+      "tag": "maltreatment",
+      "count": 1
+    },
+    {
+      "tag": "management",
+      "count": 5
+    },
+    {
+      "tag": "manipulation",
+      "count": 10
+    },
+    {
+      "tag": "mantra",
+      "count": 1
+    },
+    {
+      "tag": "manuscripts",
+      "count": 1
+    },
+    {
+      "tag": "marginalization",
+      "count": 1
+    },
+    {
+      "tag": "markers",
+      "count": 1
+    },
+    {
+      "tag": "marketing",
+      "count": 2
+    },
+    {
+      "tag": "marriage",
+      "count": 35
+    },
+    {
+      "tag": "marvel",
+      "count": 1
+    },
+    {
+      "tag": "maslow",
+      "count": 1
+    },
+    {
+      "tag": "masochism",
+      "count": 2
+    },
+    {
+      "tag": "mass_extinction",
+      "count": 1
+    },
+    {
+      "tag": "mastery",
+      "count": 2
+    },
+    {
+      "tag": "masturbation",
+      "count": 2
+    },
+    {
+      "tag": "materialism",
+      "count": 8
+    },
+    {
+      "tag": "materials",
+      "count": 1
+    },
+    {
+      "tag": "maternal",
+      "count": 1
+    },
+    {
+      "tag": "maths",
+      "count": 1
+    },
+    {
+      "tag": "mating habits",
+      "count": 1
+    },
+    {
+      "tag": "maturation",
+      "count": 1
+    },
+    {
+      "tag": "maturity",
+      "count": 33
+    },
+    {
+      "tag": "meaning",
+      "count": 13
+    },
+    {
+      "tag": "meaning_finding",
+      "count": 1
+    },
+    {
+      "tag": "meaningfulness",
+      "count": 4
+    },
+    {
+      "tag": "meanness",
+      "count": 2
+    },
+    {
+      "tag": "media",
+      "count": 7
+    },
+    {
+      "tag": "mediatisation",
+      "count": 1
+    },
+    {
+      "tag": "mediocrity",
+      "count": 5
+    },
+    {
+      "tag": "meditation",
+      "count": 8
+    },
+    {
+      "tag": "meekness",
+      "count": 3
+    },
+    {
+      "tag": "melancholia",
+      "count": 1
+    },
+    {
+      "tag": "melancholy",
+      "count": 49
+    },
+    {
+      "tag": "memento mori",
+      "count": 1
+    },
+    {
+      "tag": "memorials",
+      "count": 1
+    },
+    {
+      "tag": "memories",
+      "count": 6
+    },
+    {
+      "tag": "memorization",
+      "count": 2
+    },
+    {
+      "tag": "memory",
+      "count": 19
+    },
+    {
+      "tag": "mental",
+      "count": 1
+    },
+    {
+      "tag": "mental healing",
+      "count": 1
+    },
+    {
+      "tag": "mental health",
+      "count": 5
+    },
+    {
+      "tag": "mental illness",
+      "count": 5
+    },
+    {
+      "tag": "mental state",
+      "count": 1
+    },
+    {
+      "tag": "mental_functioning",
+      "count": 1
+    },
+    {
+      "tag": "mental_health",
+      "count": 3
+    },
+    {
+      "tag": "mental_images",
+      "count": 1
+    },
+    {
+      "tag": "mentality",
+      "count": 1
+    },
+    {
+      "tag": "mentalization",
+      "count": 1
+    },
+    {
+      "tag": "mentorship",
+      "count": 2
+    },
+    {
+      "tag": "mercy",
+      "count": 5
+    },
+    {
+      "tag": "meritocracy",
+      "count": 14
+    },
+    {
+      "tag": "metaphor",
+      "count": 1
+    },
+    {
+      "tag": "microfriendships",
+      "count": 1
+    },
+    {
+      "tag": "midnight",
+      "count": 1
+    },
+    {
+      "tag": "milestones",
+      "count": 2
+    },
+    {
+      "tag": "mind-reading",
+      "count": 2
+    },
+    {
+      "tag": "mindbody",
+      "count": 1
+    },
+    {
+      "tag": "mindfulness",
+      "count": 22
+    },
+    {
+      "tag": "mindset",
+      "count": 1
+    },
+    {
+      "tag": "minibreak",
+      "count": 1
+    },
+    {
+      "tag": "minimalism",
+      "count": 6
+    },
+    {
+      "tag": "minor injuries",
+      "count": 1
+    },
+    {
+      "tag": "minor issues",
+      "count": 1
+    },
+    {
+      "tag": "misadaptation",
+      "count": 1
+    },
+    {
+      "tag": "misanthropy",
+      "count": 2
+    },
+    {
+      "tag": "misconception",
+      "count": 1
+    },
+    {
+      "tag": "misemployment",
+      "count": 1
+    },
+    {
+      "tag": "misery",
+      "count": 3
+    },
+    {
+      "tag": "misfit",
+      "count": 1
+    },
+    {
+      "tag": "misinterpretation",
+      "count": 1
+    },
+    {
+      "tag": "mismatch",
+      "count": 1
+    },
+    {
+      "tag": "missed Opportunities",
+      "count": 1
+    },
+    {
+      "tag": "mistaken",
+      "count": 1
+    },
+    {
+      "tag": "mistakes",
+      "count": 5
+    },
+    {
+      "tag": "misunderstanding",
+      "count": 7
+    },
+    {
+      "tag": "modernism",
+      "count": 1
+    },
+    {
+      "tag": "modernity",
+      "count": 15
+    },
+    {
+      "tag": "modesty",
+      "count": 13
+    },
+    {
+      "tag": "moment",
+      "count": 1
+    },
+    {
+      "tag": "momentary",
+      "count": 1
+    },
+    {
+      "tag": "monasteries",
+      "count": 1
+    },
+    {
+      "tag": "monastery",
+      "count": 2
+    },
+    {
+      "tag": "monasticism",
+      "count": 3
+    },
+    {
+      "tag": "money",
+      "count": 17
+    },
+    {
+      "tag": "money illusion",
+      "count": 1
+    },
+    {
+      "tag": "money issues",
+      "count": 1
+    },
+    {
+      "tag": "money management",
+      "count": 1
+    },
+    {
+      "tag": "money worries",
+      "count": 6
+    },
+    {
+      "tag": "monogamy",
+      "count": 4
+    },
+    {
+      "tag": "monsters",
+      "count": 2
+    },
+    {
+      "tag": "mood",
+      "count": 5
+    },
+    {
+      "tag": "mood_dependence",
+      "count": 1
+    },
+    {
+      "tag": "moral growth",
+      "count": 1
+    },
+    {
+      "tag": "moral_crucible",
+      "count": 1
+    },
+    {
+      "tag": "morality",
+      "count": 14
+    },
+    {
+      "tag": "morality-change",
+      "count": 1
+    },
+    {
+      "tag": "mortality",
+      "count": 15
+    },
+    {
+      "tag": "motivation",
+      "count": 4
+    },
+    {
+      "tag": "motivations",
+      "count": 1
+    },
+    {
+      "tag": "motives",
+      "count": 1
+    },
+    {
+      "tag": "mountains",
+      "count": 1
+    },
+    {
+      "tag": "mourning",
+      "count": 7
+    },
+    {
+      "tag": "mri",
+      "count": 2
+    },
+    {
+      "tag": "multiplicity",
+      "count": 2
+    },
+    {
+      "tag": "multipotentialite",
+      "count": 1
+    },
+    {
+      "tag": "mummy issues",
+      "count": 1
+    },
+    {
+      "tag": "mundane",
+      "count": 1
+    },
+    {
+      "tag": "mundane pleasures",
+      "count": 1
+    },
+    {
+      "tag": "muscle",
+      "count": 1
+    },
+    {
+      "tag": "museum",
+      "count": 2
+    },
+    {
+      "tag": "museums",
+      "count": 1
+    },
+    {
+      "tag": "music",
+      "count": 3
+    },
+    {
+      "tag": "mutual",
+      "count": 1
+    },
+    {
+      "tag": "mutual education",
+      "count": 1
+    },
+    {
+      "tag": "mutualimpact",
+      "count": 1
+    },
+    {
+      "tag": "mystery",
+      "count": 1
+    },
+    {
+      "tag": "mysticism",
+      "count": 1
+    },
+    {
+      "tag": "mythology",
+      "count": 1
+    },
+    {
+      "tag": "nagging",
+      "count": 1
+    },
+    {
+      "tag": "name",
+      "count": 1
+    },
+    {
+      "tag": "naps",
+      "count": 1
+    },
+    {
+      "tag": "narcissism",
+      "count": 1
+    },
+    {
+      "tag": "narrative",
+      "count": 6
+    },
+    {
+      "tag": "narratives",
+      "count": 2
+    },
+    {
+      "tag": "nastiness",
+      "count": 1
+    },
+    {
+      "tag": "nation",
+      "count": 1
+    },
+    {
+      "tag": "national character",
+      "count": 1
+    },
+    {
+      "tag": "national destiny",
+      "count": 1
+    },
+    {
+      "tag": "nationalism",
+      "count": 1
+    },
+    {
+      "tag": "nature",
+      "count": 41
+    },
+    {
+      "tag": "nature awareness",
+      "count": 1
+    },
+    {
+      "tag": "nature connection",
+      "count": 2
+    },
+    {
+      "tag": "nature loss",
+      "count": 1
+    },
+    {
+      "tag": "nature observation",
+      "count": 1
+    },
+    {
+      "tag": "navigation",
+      "count": 2
+    },
+    {
+      "tag": "neatness",
+      "count": 1
+    },
+    {
+      "tag": "necessity",
+      "count": 1
+    },
+    {
+      "tag": "need",
+      "count": 1
+    },
+    {
+      "tag": "neediness",
+      "count": 2
+    },
+    {
+      "tag": "needs",
+      "count": 7
+    },
+    {
+      "tag": "negativity",
+      "count": 2
+    },
+    {
+      "tag": "neglect",
+      "count": 10
+    },
+    {
+      "tag": "neglected tasks",
+      "count": 1
+    },
+    {
+      "tag": "negligence",
+      "count": 1
+    },
+    {
+      "tag": "negotiation",
+      "count": 4
+    },
+    {
+      "tag": "nepotism",
+      "count": 1
+    },
+    {
+      "tag": "nerves",
+      "count": 1
+    },
+    {
+      "tag": "nesting",
+      "count": 1
+    },
+    {
+      "tag": "networking",
+      "count": 3
+    },
+    {
+      "tag": "neurasthenia",
+      "count": 1
+    },
+    {
+      "tag": "neuroplasticity",
+      "count": 2
+    },
+    {
+      "tag": "neuroscience",
+      "count": 1
+    },
+    {
+      "tag": "neuroses",
+      "count": 1
+    },
+    {
+      "tag": "neurosis",
+      "count": 2
+    },
+    {
+      "tag": "neurosurgery",
+      "count": 1
+    },
+    {
+      "tag": "neutrality",
+      "count": 1
+    },
+    {
+      "tag": "new beginnings",
+      "count": 1
+    },
+    {
+      "tag": "news",
+      "count": 5
+    },
+    {
+      "tag": "news overload",
+      "count": 1
+    },
+    {
+      "tag": "newspaper",
+      "count": 1
+    },
+    {
+      "tag": "niceness",
+      "count": 6
+    },
+    {
+      "tag": "night",
+      "count": 2
+    },
+    {
+      "tag": "nightmares",
+      "count": 2
+    },
+    {
+      "tag": "nighttime",
+      "count": 2
+    },
+    {
+      "tag": "nighttime thoughts",
+      "count": 1
+    },
+    {
+      "tag": "nobility",
+      "count": 4
+    },
+    {
+      "tag": "non-judgment",
+      "count": 1
+    },
+    {
+      "tag": "nonsense",
+      "count": 1
+    },
+    {
+      "tag": "normalcy",
+      "count": 11
+    },
+    {
+      "tag": "normality",
+      "count": 9
+    },
+    {
+      "tag": "norms",
+      "count": 1
+    },
+    {
+      "tag": "northern",
+      "count": 1
+    },
+    {
+      "tag": "nosex",
+      "count": 1
+    },
+    {
+      "tag": "nostalgia",
+      "count": 28
+    },
+    {
+      "tag": "notebook",
+      "count": 1
+    },
+    {
+      "tag": "noticing",
+      "count": 1
+    },
+    {
+      "tag": "nourishment",
+      "count": 1
+    },
+    {
+      "tag": "novelty",
+      "count": 7
+    },
+    {
+      "tag": "nuance",
+      "count": 3
+    },
+    {
+      "tag": "nudity",
+      "count": 1
+    },
+    {
+      "tag": "nullity",
+      "count": 1
+    },
+    {
+      "tag": "numbness",
+      "count": 1
+    },
+    {
+      "tag": "nurturing",
+      "count": 3
+    },
+    {
+      "tag": "nutrients",
+      "count": 1
+    },
+    {
+      "tag": "obedience",
+      "count": 3
+    },
+    {
+      "tag": "object choice",
+      "count": 1
+    },
+    {
+      "tag": "objects",
+      "count": 3
+    },
+    {
+      "tag": "obligation",
+      "count": 1
+    },
+    {
+      "tag": "oblivion",
+      "count": 2
+    },
+    {
+      "tag": "observation",
+      "count": 13
+    },
+    {
+      "tag": "obsession",
+      "count": 2
+    },
+    {
+      "tag": "obsolescence",
+      "count": 1
+    },
+    {
+      "tag": "obstacles",
+      "count": 3
+    },
+    {
+      "tag": "occasional",
+      "count": 1
+    },
+    {
+      "tag": "occupation",
+      "count": 1
+    },
+    {
+      "tag": "ocd",
+      "count": 1
+    },
+    {
+      "tag": "oddity",
+      "count": 1
+    },
+    {
+      "tag": "office",
+      "count": 2
+    },
+    {
+      "tag": "office politics",
+      "count": 1
+    },
+    {
+      "tag": "oneness",
+      "count": 1
+    },
+    {
+      "tag": "open-mindedness",
+      "count": 1
+    },
+    {
+      "tag": "openness",
+      "count": 4
+    },
+    {
+      "tag": "opportunity",
+      "count": 1
+    },
+    {
+      "tag": "opposition",
+      "count": 1
+    },
+    {
+      "tag": "optimism",
+      "count": 15
+    },
+    {
+      "tag": "order",
+      "count": 4
+    },
+    {
+      "tag": "orderliness",
+      "count": 1
+    },
+    {
+      "tag": "ordinary",
+      "count": 6
+    },
+    {
+      "tag": "ordinary life",
+      "count": 1
+    },
+    {
+      "tag": "organization",
+      "count": 4
+    },
+    {
+      "tag": "organizational purpose",
+      "count": 1
+    },
+    {
+      "tag": "origin",
+      "count": 1
+    },
+    {
+      "tag": "original_sin",
+      "count": 4
+    },
+    {
+      "tag": "original_thought",
+      "count": 1
+    },
+    {
+      "tag": "originality",
+      "count": 2
+    },
+    {
+      "tag": "origins",
+      "count": 1
+    },
+    {
+      "tag": "ostracism",
+      "count": 1
+    },
+    {
+      "tag": "otherknowledge",
+      "count": 1
+    },
+    {
+      "tag": "otherness",
+      "count": 2
+    },
+    {
+      "tag": "outdoor experience",
+      "count": 1
+    },
+    {
+      "tag": "outlook",
+      "count": 1
+    },
+    {
+      "tag": "outputs",
+      "count": 1
+    },
+    {
+      "tag": "overachievement",
+      "count": 2
+    },
+    {
+      "tag": "overcompensation",
+      "count": 1
+    },
+    {
+      "tag": "overeating",
+      "count": 1
+    },
+    {
+      "tag": "overfriendliness",
+      "count": 1
+    },
+    {
+      "tag": "overload",
+      "count": 1
+    },
+    {
+      "tag": "overlooked",
+      "count": 2
+    },
+    {
+      "tag": "overprotection",
+      "count": 1
+    },
+    {
+      "tag": "oversensitivity",
+      "count": 1
+    },
+    {
+      "tag": "overwhelm",
+      "count": 1
+    },
+    {
+      "tag": "ownership",
+      "count": 1
+    },
+    {
+      "tag": "pain",
+      "count": 10
+    },
+    {
+      "tag": "paleontology",
+      "count": 1
+    },
+    {
+      "tag": "panic",
+      "count": 10
+    },
+    {
+      "tag": "paradigm",
+      "count": 1
+    },
+    {
+      "tag": "paradise",
+      "count": 3
+    },
+    {
+      "tag": "paranoia",
+      "count": 5
+    },
+    {
+      "tag": "pardon",
+      "count": 1
+    },
+    {
+      "tag": "parental failure",
+      "count": 2
+    },
+    {
+      "tag": "parental imprinting",
+      "count": 2
+    },
+    {
+      "tag": "parental influence",
+      "count": 1
+    },
+    {
+      "tag": "parental love",
+      "count": 1
+    },
+    {
+      "tag": "parental pressure",
+      "count": 1
+    },
+    {
+      "tag": "parental regret",
+      "count": 1
+    },
+    {
+      "tag": "parental role",
+      "count": 1
+    },
+    {
+      "tag": "parental-influence",
+      "count": 1
+    },
+    {
+      "tag": "parental-rescue",
+      "count": 1
+    },
+    {
+      "tag": "parental-resemblance",
+      "count": 1
+    },
+    {
+      "tag": "parenthood",
+      "count": 3
+    },
+    {
+      "tag": "parenting",
+      "count": 13
+    },
+    {
+      "tag": "parents",
+      "count": 6
+    },
+    {
+      "tag": "parks",
+      "count": 1
+    },
+    {
+      "tag": "partiality",
+      "count": 1
+    },
+    {
+      "tag": "participation",
+      "count": 1
+    },
+    {
+      "tag": "parties",
+      "count": 2
+    },
+    {
+      "tag": "partner choice",
+      "count": 1
+    },
+    {
+      "tag": "partnership",
+      "count": 8
+    },
+    {
+      "tag": "passion",
+      "count": 3
+    },
+    {
+      "tag": "passivity",
+      "count": 1
+    },
+    {
+      "tag": "past",
+      "count": 13
+    },
+    {
+      "tag": "past experiences",
+      "count": 1
+    },
+    {
+      "tag": "past-experiences",
+      "count": 1
+    },
+    {
+      "tag": "past-influences",
+      "count": 1
+    },
+    {
+      "tag": "past-trauma",
+      "count": 2
+    },
+    {
+      "tag": "pathologising",
+      "count": 1
+    },
+    {
+      "tag": "patience",
+      "count": 15
+    },
+    {
+      "tag": "patriotism",
+      "count": 1
+    },
+    {
+      "tag": "pattern",
+      "count": 1
+    },
+    {
+      "tag": "patterns",
+      "count": 8
+    },
+    {
+      "tag": "peace",
+      "count": 5
+    },
+    {
+      "tag": "pedagogy",
+      "count": 2
+    },
+    {
+      "tag": "people pleasing",
+      "count": 2
+    },
+    {
+      "tag": "perception",
+      "count": 27
+    },
+    {
+      "tag": "perfection",
+      "count": 4
+    },
+    {
+      "tag": "perfectionism",
+      "count": 14
+    },
+    {
+      "tag": "permanence",
+      "count": 1
+    },
+    {
+      "tag": "permission",
+      "count": 5
+    },
+    {
+      "tag": "permissions",
+      "count": 2
+    },
+    {
+      "tag": "persecution",
+      "count": 1
+    },
+    {
+      "tag": "perseverance",
+      "count": 2
+    },
+    {
+      "tag": "persona",
+      "count": 1
+    },
+    {
+      "tag": "personal connection",
+      "count": 2
+    },
+    {
+      "tag": "personal failings",
+      "count": 1
+    },
+    {
+      "tag": "personal freedom",
+      "count": 1
+    },
+    {
+      "tag": "personal growth",
+      "count": 1
+    },
+    {
+      "tag": "personal-wounds",
+      "count": 1
+    },
+    {
+      "tag": "personality",
+      "count": 2
+    },
+    {
+      "tag": "personality-alteration",
+      "count": 1
+    },
+    {
+      "tag": "personality_development",
+      "count": 1
+    },
+    {
+      "tag": "personalization",
+      "count": 1
+    },
+    {
+      "tag": "perspective",
+      "count": 26
+    },
+    {
+      "tag": "persuasion",
+      "count": 4
+    },
+    {
+      "tag": "perturbation",
+      "count": 1
+    },
+    {
+      "tag": "pessimism",
+      "count": 12
+    },
+    {
+      "tag": "petition",
+      "count": 1
+    },
+    {
+      "tag": "philanthropy",
+      "count": 2
+    },
+    {
+      "tag": "philosophical meditation",
+      "count": 2
+    },
+    {
+      "tag": "philosophizing",
+      "count": 1
+    },
+    {
+      "tag": "philosophy",
+      "count": 25
+    },
+    {
+      "tag": "photographs",
+      "count": 2
+    },
+    {
+      "tag": "photography",
+      "count": 3
+    },
+    {
+      "tag": "physical_needs",
+      "count": 1
+    },
+    {
+      "tag": "physiology",
+      "count": 1
+    },
+    {
+      "tag": "pilgrimage",
+      "count": 4
+    },
+    {
+      "tag": "pills",
+      "count": 2
+    },
+    {
+      "tag": "pitfalls",
+      "count": 1
+    },
+    {
+      "tag": "pity",
+      "count": 2
+    },
+    {
+      "tag": "place",
+      "count": 1
+    },
+    {
+      "tag": "placelessness",
+      "count": 1
+    },
+    {
+      "tag": "plan b",
+      "count": 1
+    },
+    {
+      "tag": "plan_b",
+      "count": 1
+    },
+    {
+      "tag": "planning",
+      "count": 3
+    },
+    {
+      "tag": "play",
+      "count": 2
+    },
+    {
+      "tag": "playfulness",
+      "count": 8
+    },
+    {
+      "tag": "pleasure",
+      "count": 20
+    },
+    {
+      "tag": "pleasure points",
+      "count": 1
+    },
+    {
+      "tag": "pleasures",
+      "count": 2
+    },
+    {
+      "tag": "plot",
+      "count": 1
+    },
+    {
+      "tag": "plotting",
+      "count": 1
+    },
+    {
+      "tag": "politeness",
+      "count": 15
+    },
+    {
+      "tag": "political",
+      "count": 1
+    },
+    {
+      "tag": "politics",
+      "count": 4
+    },
+    {
+      "tag": "polyamory",
+      "count": 1
+    },
+    {
+      "tag": "pop_music",
+      "count": 1
+    },
+    {
+      "tag": "popular opinion",
+      "count": 1
+    },
+    {
+      "tag": "popularisation",
+      "count": 1
+    },
+    {
+      "tag": "popularity",
+      "count": 1
+    },
+    {
+      "tag": "popularization",
+      "count": 1
+    },
+    {
+      "tag": "populism",
+      "count": 1
+    },
+    {
+      "tag": "pornography",
+      "count": 5
+    },
+    {
+      "tag": "positivity",
+      "count": 1
+    },
+    {
+      "tag": "possessions",
+      "count": 3
+    },
+    {
+      "tag": "possibilities",
+      "count": 1
+    },
+    {
+      "tag": "post-coital",
+      "count": 1
+    },
+    {
+      "tag": "potential",
+      "count": 4
+    },
+    {
+      "tag": "poverty",
+      "count": 7
+    },
+    {
+      "tag": "power",
+      "count": 4
+    },
+    {
+      "tag": "powerlessness",
+      "count": 2
+    },
+    {
+      "tag": "practical",
+      "count": 1
+    },
+    {
+      "tag": "practicality",
+      "count": 7
+    },
+    {
+      "tag": "practice",
+      "count": 3
+    },
+    {
+      "tag": "pragmatism",
+      "count": 4
+    },
+    {
+      "tag": "praise",
+      "count": 1
+    },
+    {
+      "tag": "prayer",
+      "count": 1
+    },
+    {
+      "tag": "precision",
+      "count": 3
+    },
+    {
+      "tag": "predictability",
+      "count": 2
+    },
+    {
+      "tag": "prediction",
+      "count": 2
+    },
+    {
+      "tag": "preference",
+      "count": 1
+    },
+    {
+      "tag": "prehistoric",
+      "count": 1
+    },
+    {
+      "tag": "prejudice",
+      "count": 5
+    },
+    {
+      "tag": "premeditation",
+      "count": 2
+    },
+    {
+      "tag": "prenuptial",
+      "count": 1
+    },
+    {
+      "tag": "preoccupation",
+      "count": 1
+    },
+    {
+      "tag": "preparation",
+      "count": 3
+    },
+    {
+      "tag": "preparedness",
+      "count": 1
+    },
+    {
+      "tag": "present",
+      "count": 12
+    },
+    {
+      "tag": "present moment",
+      "count": 1
+    },
+    {
+      "tag": "present-moment",
+      "count": 1
+    },
+    {
+      "tag": "present_moment",
+      "count": 1
+    },
+    {
+      "tag": "preservation",
+      "count": 1
+    },
+    {
+      "tag": "pressure",
+      "count": 4
+    },
+    {
+      "tag": "prestige",
+      "count": 3
+    },
+    {
+      "tag": "pretension",
+      "count": 2
+    },
+    {
+      "tag": "prevention",
+      "count": 1
+    },
+    {
+      "tag": "price",
+      "count": 2
+    },
+    {
+      "tag": "pride",
+      "count": 9
+    },
+    {
+      "tag": "priestly functions",
+      "count": 1
+    },
+    {
+      "tag": "primal_wound",
+      "count": 1
+    },
+    {
+      "tag": "primate",
+      "count": 1
+    },
+    {
+      "tag": "principle",
+      "count": 1
+    },
+    {
+      "tag": "principles",
+      "count": 1
+    },
+    {
+      "tag": "priorities",
+      "count": 8
+    },
+    {
+      "tag": "prioritization",
+      "count": 5
+    },
+    {
+      "tag": "privacy",
+      "count": 3
+    },
+    {
+      "tag": "privilege",
+      "count": 1
+    },
+    {
+      "tag": "probability",
+      "count": 1
+    },
+    {
+      "tag": "probing",
+      "count": 1
+    },
+    {
+      "tag": "problem-solving",
+      "count": 1
+    },
+    {
+      "tag": "problematic",
+      "count": 1
+    },
+    {
+      "tag": "problems",
+      "count": 8
+    },
+    {
+      "tag": "procedure",
+      "count": 1
+    },
+    {
+      "tag": "procedures",
+      "count": 1
+    },
+    {
+      "tag": "processing",
+      "count": 3
+    },
+    {
+      "tag": "procrastination",
+      "count": 18
+    },
+    {
+      "tag": "productivity",
+      "count": 9
+    },
+    {
+      "tag": "professionalism",
+      "count": 2
+    },
+    {
+      "tag": "profit",
+      "count": 3
+    },
+    {
+      "tag": "programming",
+      "count": 1
+    },
+    {
+      "tag": "progress",
+      "count": 4
+    },
+    {
+      "tag": "progressivism",
+      "count": 1
+    },
+    {
+      "tag": "projection",
+      "count": 7
+    },
+    {
+      "tag": "projects",
+      "count": 1
+    },
+    {
+      "tag": "prosperity",
+      "count": 2
+    },
+    {
+      "tag": "protection",
+      "count": 2
+    },
+    {
+      "tag": "protectiveness",
+      "count": 1
+    },
+    {
+      "tag": "provincialism",
+      "count": 3
+    },
+    {
+      "tag": "psyche",
+      "count": 1
+    },
+    {
+      "tag": "psychoanalysis",
+      "count": 6
+    },
+    {
+      "tag": "psychological",
+      "count": 4
+    },
+    {
+      "tag": "psychological asymmetry",
+      "count": 1
+    },
+    {
+      "tag": "psychological healing",
+      "count": 1
+    },
+    {
+      "tag": "psychological needs",
+      "count": 1
+    },
+    {
+      "tag": "psychological_traits",
+      "count": 1
+    },
+    {
+      "tag": "psychological\u6210\u672c",
+      "count": 1
+    },
+    {
+      "tag": "psychology",
+      "count": 40
+    },
+    {
+      "tag": "psychotherapy",
+      "count": 9
+    },
+    {
+      "tag": "public expression",
+      "count": 1
+    },
+    {
+      "tag": "publicity",
+      "count": 1
+    },
+    {
+      "tag": "purchasing",
+      "count": 1
+    },
+    {
+      "tag": "purity",
+      "count": 4
+    },
+    {
+      "tag": "purpose",
+      "count": 21
+    },
+    {
+      "tag": "purposes",
+      "count": 1
+    },
+    {
+      "tag": "puzzlement",
+      "count": 1
+    },
+    {
+      "tag": "qualifications",
+      "count": 2
+    },
+    {
+      "tag": "qualities",
+      "count": 1
+    },
+    {
+      "tag": "quantum mechanics",
+      "count": 1
+    },
+    {
+      "tag": "questioning",
+      "count": 9
+    },
+    {
+      "tag": "questionnaire",
+      "count": 2
+    },
+    {
+      "tag": "questions",
+      "count": 1
+    },
+    {
+      "tag": "quiet life",
+      "count": 2
+    },
+    {
+      "tag": "quiet mind",
+      "count": 1
+    },
+    {
+      "tag": "quietness",
+      "count": 3
+    },
+    {
+      "tag": "quills",
+      "count": 1
+    },
+    {
+      "tag": "quotidian",
+      "count": 2
+    },
+    {
+      "tag": "rage",
+      "count": 3
+    },
+    {
+      "tag": "randomness",
+      "count": 1
+    },
+    {
+      "tag": "ratio",
+      "count": 1
+    },
+    {
+      "tag": "rationalism",
+      "count": 1
+    },
+    {
+      "tag": "rationality",
+      "count": 8
+    },
+    {
+      "tag": "rationalization",
+      "count": 1
+    },
+    {
+      "tag": "reaction",
+      "count": 1
+    },
+    {
+      "tag": "readiness",
+      "count": 4
+    },
+    {
+      "tag": "reading",
+      "count": 3
+    },
+    {
+      "tag": "realism",
+      "count": 9
+    },
+    {
+      "tag": "reality",
+      "count": 39
+    },
+    {
+      "tag": "realization",
+      "count": 2
+    },
+    {
+      "tag": "reappreciation",
+      "count": 1
+    },
+    {
+      "tag": "reason",
+      "count": 2
+    },
+    {
+      "tag": "reason_vs_body",
+      "count": 1
+    },
+    {
+      "tag": "reasoning",
+      "count": 2
+    },
+    {
+      "tag": "reasons",
+      "count": 2
+    },
+    {
+      "tag": "reasons to live",
+      "count": 1
+    },
+    {
+      "tag": "reassurance",
+      "count": 18
+    },
+    {
+      "tag": "rebalancing",
+      "count": 1
+    },
+    {
+      "tag": "rebellion",
+      "count": 9
+    },
+    {
+      "tag": "recalibration",
+      "count": 1
+    },
+    {
+      "tag": "reciprocation",
+      "count": 2
+    },
+    {
+      "tag": "reciprocity",
+      "count": 5
+    },
+    {
+      "tag": "recitation",
+      "count": 1
+    },
+    {
+      "tag": "reclusion",
+      "count": 2
+    },
+    {
+      "tag": "recognition",
+      "count": 5
+    },
+    {
+      "tag": "recoil",
+      "count": 2
+    },
+    {
+      "tag": "recollection",
+      "count": 2
+    },
+    {
+      "tag": "reconciliation",
+      "count": 11
+    },
+    {
+      "tag": "reconnection",
+      "count": 3
+    },
+    {
+      "tag": "recordkeeping",
+      "count": 1
+    },
+    {
+      "tag": "recovery",
+      "count": 16
+    },
+    {
+      "tag": "recruitment",
+      "count": 1
+    },
+    {
+      "tag": "recurrence",
+      "count": 6
+    },
+    {
+      "tag": "redemption",
+      "count": 23
+    },
+    {
+      "tag": "redirection",
+      "count": 1
+    },
+    {
+      "tag": "rediscovery",
+      "count": 2
+    },
+    {
+      "tag": "reduction",
+      "count": 1
+    },
+    {
+      "tag": "redundancy",
+      "count": 1
+    },
+    {
+      "tag": "reenchantment",
+      "count": 1
+    },
+    {
+      "tag": "reevaluation",
+      "count": 2
+    },
+    {
+      "tag": "refinement",
+      "count": 2
+    },
+    {
+      "tag": "reflection",
+      "count": 50
+    },
+    {
+      "tag": "reflective-listening",
+      "count": 2
+    },
+    {
+      "tag": "reform",
+      "count": 2
+    },
+    {
+      "tag": "refuge",
+      "count": 3
+    },
+    {
+      "tag": "regression",
+      "count": 2
+    },
+    {
+      "tag": "regret",
+      "count": 19
+    },
+    {
+      "tag": "regulation",
+      "count": 1
+    },
+    {
+      "tag": "regulations",
+      "count": 1
+    },
+    {
+      "tag": "rehabilitation",
+      "count": 3
+    },
+    {
+      "tag": "reinforcement",
+      "count": 1
+    },
+    {
+      "tag": "reinvention",
+      "count": 1
+    },
+    {
+      "tag": "rejection",
+      "count": 11
+    },
+    {
+      "tag": "relapse",
+      "count": 1
+    },
+    {
+      "tag": "relationship",
+      "count": 20
+    },
+    {
+      "tag": "relationship dynamics",
+      "count": 1
+    },
+    {
+      "tag": "relationships",
+      "count": 102
+    },
+    {
+      "tag": "relativization",
+      "count": 1
+    },
+    {
+      "tag": "relaxation",
+      "count": 3
+    },
+    {
+      "tag": "relevance",
+      "count": 1
+    },
+    {
+      "tag": "reliance",
+      "count": 1
+    },
+    {
+      "tag": "relief",
+      "count": 3
+    },
+    {
+      "tag": "religion",
+      "count": 15
+    },
+    {
+      "tag": "reminder",
+      "count": 3
+    },
+    {
+      "tag": "reminders",
+      "count": 1
+    },
+    {
+      "tag": "reminiscence",
+      "count": 1
+    },
+    {
+      "tag": "remorse",
+      "count": 3
+    },
+    {
+      "tag": "renaming",
+      "count": 1
+    },
+    {
+      "tag": "renewal",
+      "count": 3
+    },
+    {
+      "tag": "renunciation",
+      "count": 2
+    },
+    {
+      "tag": "reorientation",
+      "count": 1
+    },
+    {
+      "tag": "repair",
+      "count": 6
+    },
+    {
+      "tag": "repair_work",
+      "count": 1
+    },
+    {
+      "tag": "reparation",
+      "count": 1
+    },
+    {
+      "tag": "reparenting",
+      "count": 3
+    },
+    {
+      "tag": "repetition",
+      "count": 8
+    },
+    {
+      "tag": "replacement",
+      "count": 2
+    },
+    {
+      "tag": "replication",
+      "count": 2
+    },
+    {
+      "tag": "repression",
+      "count": 1
+    },
+    {
+      "tag": "reputation",
+      "count": 2
+    },
+    {
+      "tag": "requirements",
+      "count": 1
+    },
+    {
+      "tag": "resentment",
+      "count": 16
+    },
+    {
+      "tag": "resignation",
+      "count": 7
+    },
+    {
+      "tag": "resilience",
+      "count": 53
+    },
+    {
+      "tag": "resistance",
+      "count": 2
+    },
+    {
+      "tag": "resolution",
+      "count": 3
+    },
+    {
+      "tag": "respect",
+      "count": 6
+    },
+    {
+      "tag": "respectability",
+      "count": 2
+    },
+    {
+      "tag": "response",
+      "count": 1
+    },
+    {
+      "tag": "responsibility",
+      "count": 14
+    },
+    {
+      "tag": "rest",
+      "count": 3
+    },
+    {
+      "tag": "restaurant",
+      "count": 1
+    },
+    {
+      "tag": "restlessness",
+      "count": 2
+    },
+    {
+      "tag": "restoration",
+      "count": 1
+    },
+    {
+      "tag": "restraint",
+      "count": 2
+    },
+    {
+      "tag": "restriction",
+      "count": 1
+    },
+    {
+      "tag": "restrictions",
+      "count": 2
+    },
+    {
+      "tag": "retention",
+      "count": 1
+    },
+    {
+      "tag": "retirement",
+      "count": 4
+    },
+    {
+      "tag": "retreat",
+      "count": 3
+    },
+    {
+      "tag": "revelation",
+      "count": 1
+    },
+    {
+      "tag": "revenge",
+      "count": 2
+    },
+    {
+      "tag": "reverie",
+      "count": 3
+    },
+    {
+      "tag": "revolution",
+      "count": 1
+    },
+    {
+      "tag": "reward",
+      "count": 1
+    },
+    {
+      "tag": "rice cultivation",
+      "count": 1
+    },
+    {
+      "tag": "ridiculousness",
+      "count": 1
+    },
+    {
+      "tag": "right",
+      "count": 1
+    },
+    {
+      "tag": "right_brain",
+      "count": 1
+    },
+    {
+      "tag": "righteousness",
+      "count": 1
+    },
+    {
+      "tag": "rightness",
+      "count": 1
+    },
+    {
+      "tag": "rights",
+      "count": 1
+    },
+    {
+      "tag": "rigidity",
+      "count": 1
+    },
+    {
+      "tag": "rings",
+      "count": 1
+    },
+    {
+      "tag": "risk",
+      "count": 1
+    },
+    {
+      "tag": "ritual",
+      "count": 4
+    },
+    {
+      "tag": "rituals",
+      "count": 5
+    },
+    {
+      "tag": "rivalry",
+      "count": 5
+    },
+    {
+      "tag": "river",
+      "count": 1
+    },
+    {
+      "tag": "robustness",
+      "count": 1
+    },
+    {
+      "tag": "role_models",
+      "count": 2
+    },
+    {
+      "tag": "roles",
+      "count": 1
+    },
+    {
+      "tag": "romance",
+      "count": 13
+    },
+    {
+      "tag": "romantic",
+      "count": 4
+    },
+    {
+      "tag": "romanticism",
+      "count": 23
+    },
+    {
+      "tag": "room",
+      "count": 1
+    },
+    {
+      "tag": "room_service",
+      "count": 1
+    },
+    {
+      "tag": "roots",
+      "count": 1
+    },
+    {
+      "tag": "routine",
+      "count": 4
+    },
+    {
+      "tag": "rows",
+      "count": 1
+    },
+    {
+      "tag": "ruins",
+      "count": 1
+    },
+    {
+      "tag": "rules",
+      "count": 1
+    },
+    {
+      "tag": "ruminating",
+      "count": 1
+    },
+    {
+      "tag": "rupture",
+      "count": 1
+    },
+    {
+      "tag": "rural",
+      "count": 1
+    },
+    {
+      "tag": "ruthlessness",
+      "count": 1
+    },
+    {
+      "tag": "sabotage",
+      "count": 2
+    },
+    {
+      "tag": "sacrifice",
+      "count": 15
+    },
+    {
+      "tag": "sadness",
+      "count": 13
+    },
+    {
+      "tag": "safety",
+      "count": 3
+    },
+    {
+      "tag": "saintliness",
+      "count": 1
+    },
+    {
+      "tag": "saints",
+      "count": 2
+    },
+    {
+      "tag": "samadhi",
+      "count": 1
+    },
+    {
+      "tag": "sanctuary",
+      "count": 1
+    },
+    {
+      "tag": "sane_insanity",
+      "count": 1
+    },
+    {
+      "tag": "sanity",
+      "count": 6
+    },
+    {
+      "tag": "satisfaction",
+      "count": 14
+    },
+    {
+      "tag": "scale",
+      "count": 5
+    },
+    {
+      "tag": "scarcity",
+      "count": 1
+    },
+    {
+      "tag": "schedule",
+      "count": 1
+    },
+    {
+      "tag": "school",
+      "count": 2
+    },
+    {
+      "tag": "schooling",
+      "count": 2
+    },
+    {
+      "tag": "science",
+      "count": 6
+    },
+    {
+      "tag": "scripting",
+      "count": 1
+    },
+    {
+      "tag": "scrutiny",
+      "count": 1
+    },
+    {
+      "tag": "sculpture",
+      "count": 1
+    },
+    {
+      "tag": "search",
+      "count": 1
+    },
+    {
+      "tag": "seasonal awareness",
+      "count": 1
+    },
+    {
+      "tag": "seasonal behavior",
+      "count": 1
+    },
+    {
+      "tag": "seasonality",
+      "count": 1
+    },
+    {
+      "tag": "second-guessing",
+      "count": 1
+    },
+    {
+      "tag": "secondary_goals",
+      "count": 1
+    },
+    {
+      "tag": "secrets",
+      "count": 7
+    },
+    {
+      "tag": "secularism",
+      "count": 2
+    },
+    {
+      "tag": "secularization",
+      "count": 4
+    },
+    {
+      "tag": "secure_attachment",
+      "count": 1
+    },
+    {
+      "tag": "security",
+      "count": 7
+    },
+    {
+      "tag": "seduction",
+      "count": 5
+    },
+    {
+      "tag": "seeing",
+      "count": 1
+    },
+    {
+      "tag": "selection",
+      "count": 1
+    },
+    {
+      "tag": "self",
+      "count": 8
+    },
+    {
+      "tag": "self-absorption",
+      "count": 1
+    },
+    {
+      "tag": "self-acceptance",
+      "count": 5
+    },
+    {
+      "tag": "self-accompanying",
+      "count": 1
+    },
+    {
+      "tag": "self-analysis",
+      "count": 2
+    },
+    {
+      "tag": "self-assertion",
+      "count": 2
+    },
+    {
+      "tag": "self-awareness",
+      "count": 52
+    },
+    {
+      "tag": "self-belief",
+      "count": 1
+    },
+    {
+      "tag": "self-blame",
+      "count": 2
+    },
+    {
+      "tag": "self-care",
+      "count": 3
+    },
+    {
+      "tag": "self-censorship",
+      "count": 1
+    },
+    {
+      "tag": "self-centeredness",
+      "count": 1
+    },
+    {
+      "tag": "self-compassion",
+      "count": 8
+    },
+    {
+      "tag": "self-conception",
+      "count": 1
+    },
+    {
+      "tag": "self-confidence",
+      "count": 3
+    },
+    {
+      "tag": "self-consciousness",
+      "count": 2
+    },
+    {
+      "tag": "self-contempt",
+      "count": 2
+    },
+    {
+      "tag": "self-control",
+      "count": 1
+    },
+    {
+      "tag": "self-criticism",
+      "count": 8
+    },
+    {
+      "tag": "self-definition",
+      "count": 3
+    },
+    {
+      "tag": "self-deprecating",
+      "count": 1
+    },
+    {
+      "tag": "self-deprecation",
+      "count": 1
+    },
+    {
+      "tag": "self-determination",
+      "count": 1
+    },
+    {
+      "tag": "self-development",
+      "count": 2
+    },
+    {
+      "tag": "self-directed",
+      "count": 2
+    },
+    {
+      "tag": "self-disclosure",
+      "count": 2
+    },
+    {
+      "tag": "self-discovery",
+      "count": 12
+    },
+    {
+      "tag": "self-disgust",
+      "count": 2
+    },
+    {
+      "tag": "self-doubt",
+      "count": 26
+    },
+    {
+      "tag": "self-esteem",
+      "count": 12
+    },
+    {
+      "tag": "self-evaluation",
+      "count": 1
+    },
+    {
+      "tag": "self-examination",
+      "count": 6
+    },
+    {
+      "tag": "self-explanation",
+      "count": 1
+    },
+    {
+      "tag": "self-exploration",
+      "count": 5
+    },
+    {
+      "tag": "self-expression",
+      "count": 4
+    },
+    {
+      "tag": "self-forgiveness",
+      "count": 2
+    },
+    {
+      "tag": "self-governance",
+      "count": 1
+    },
+    {
+      "tag": "self-growth",
+      "count": 1
+    },
+    {
+      "tag": "self-hatred",
+      "count": 46
+    },
+    {
+      "tag": "self-help",
+      "count": 1
+    },
+    {
+      "tag": "self-importance",
+      "count": 1
+    },
+    {
+      "tag": "self-improvement",
+      "count": 6
+    },
+    {
+      "tag": "self-indulgence",
+      "count": 2
+    },
+    {
+      "tag": "self-interest",
+      "count": 2
+    },
+    {
+      "tag": "self-judgment",
+      "count": 2
+    },
+    {
+      "tag": "self-justification",
+      "count": 1
+    },
+    {
+      "tag": "self-knowledge",
+      "count": 11
+    },
+    {
+      "tag": "self-limiting beliefs",
+      "count": 1
+    },
+    {
+      "tag": "self-loathing",
+      "count": 4
+    },
+    {
+      "tag": "self-love",
+      "count": 15
+    },
+    {
+      "tag": "self-made",
+      "count": 1
+    },
+    {
+      "tag": "self-motivation",
+      "count": 1
+    },
+    {
+      "tag": "self-neglect",
+      "count": 2
+    },
+    {
+      "tag": "self-observation",
+      "count": 6
+    },
+    {
+      "tag": "self-perception",
+      "count": 3
+    },
+    {
+      "tag": "self-pity",
+      "count": 1
+    },
+    {
+      "tag": "self-presentation",
+      "count": 2
+    },
+    {
+      "tag": "self-protection",
+      "count": 1
+    },
+    {
+      "tag": "self-rationale",
+      "count": 1
+    },
+    {
+      "tag": "self-realization",
+      "count": 2
+    },
+    {
+      "tag": "self-recognition",
+      "count": 1
+    },
+    {
+      "tag": "self-reflection",
+      "count": 26
+    },
+    {
+      "tag": "self-reliance",
+      "count": 4
+    },
+    {
+      "tag": "self-revelation",
+      "count": 1
+    },
+    {
+      "tag": "self-righteousness",
+      "count": 2
+    },
+    {
+      "tag": "self-sabotage",
+      "count": 10
+    },
+    {
+      "tag": "self-soothing",
+      "count": 1
+    },
+    {
+      "tag": "self-talk",
+      "count": 2
+    },
+    {
+      "tag": "self-understanding",
+      "count": 5
+    },
+    {
+      "tag": "self-worth",
+      "count": 12
+    },
+    {
+      "tag": "self_awareness",
+      "count": 1
+    },
+    {
+      "tag": "self_discovery",
+      "count": 1
+    },
+    {
+      "tag": "self_doubt",
+      "count": 1
+    },
+    {
+      "tag": "self_exploration",
+      "count": 2
+    },
+    {
+      "tag": "self_help",
+      "count": 1
+    },
+    {
+      "tag": "self_identity",
+      "count": 1
+    },
+    {
+      "tag": "self_nurture",
+      "count": 1
+    },
+    {
+      "tag": "self_perception",
+      "count": 1
+    },
+    {
+      "tag": "self_skepticism",
+      "count": 1
+    },
+    {
+      "tag": "self_understanding",
+      "count": 1
+    },
+    {
+      "tag": "selfishness",
+      "count": 5
+    },
+    {
+      "tag": "selfknowledge",
+      "count": 1
+    },
+    {
+      "tag": "selflessness",
+      "count": 10
+    },
+    {
+      "tag": "selfrighteousness",
+      "count": 1
+    },
+    {
+      "tag": "senecide",
+      "count": 1
+    },
+    {
+      "tag": "senior",
+      "count": 1
+    },
+    {
+      "tag": "sensemaking",
+      "count": 1
+    },
+    {
+      "tag": "senses",
+      "count": 4
+    },
+    {
+      "tag": "sensitivity",
+      "count": 8
+    },
+    {
+      "tag": "sentimentality",
+      "count": 2
+    },
+    {
+      "tag": "separation",
+      "count": 4
+    },
+    {
+      "tag": "serendipity",
+      "count": 1
+    },
+    {
+      "tag": "serenity",
+      "count": 5
+    },
+    {
+      "tag": "seriousness",
+      "count": 2
+    },
+    {
+      "tag": "service",
+      "count": 3
+    },
+    {
+      "tag": "setting",
+      "count": 1
+    },
+    {
+      "tag": "sewage",
+      "count": 1
+    },
+    {
+      "tag": "sex",
+      "count": 18
+    },
+    {
+      "tag": "sex life",
+      "count": 1
+    },
+    {
+      "tag": "sexiness",
+      "count": 1
+    },
+    {
+      "tag": "sexual",
+      "count": 1
+    },
+    {
+      "tag": "sexual communication",
+      "count": 1
+    },
+    {
+      "tag": "sexual fantasy",
+      "count": 1
+    },
+    {
+      "tag": "sexual liberation",
+      "count": 2
+    },
+    {
+      "tag": "sexual repression",
+      "count": 1
+    },
+    {
+      "tag": "sexual_fulfillment",
+      "count": 1
+    },
+    {
+      "tag": "sexuality",
+      "count": 25
+    },
+    {
+      "tag": "shadow",
+      "count": 1
+    },
+    {
+      "tag": "shame",
+      "count": 16
+    },
+    {
+      "tag": "shared",
+      "count": 1
+    },
+    {
+      "tag": "shared experience",
+      "count": 1
+    },
+    {
+      "tag": "sharing",
+      "count": 1
+    },
+    {
+      "tag": "sheep",
+      "count": 1
+    },
+    {
+      "tag": "shopping",
+      "count": 1
+    },
+    {
+      "tag": "shortsightedness",
+      "count": 1
+    },
+    {
+      "tag": "shrine",
+      "count": 1
+    },
+    {
+      "tag": "shyness",
+      "count": 9
+    },
+    {
+      "tag": "sight",
+      "count": 1
+    },
+    {
+      "tag": "significance",
+      "count": 5
+    },
+    {
+      "tag": "silence",
+      "count": 4
+    },
+    {
+      "tag": "silliness",
+      "count": 2
+    },
+    {
+      "tag": "similarity",
+      "count": 1
+    },
+    {
+      "tag": "simplicity",
+      "count": 30
+    },
+    {
+      "tag": "simplification",
+      "count": 1
+    },
+    {
+      "tag": "simulation",
+      "count": 1
+    },
+    {
+      "tag": "sin",
+      "count": 6
+    },
+    {
+      "tag": "sincerity",
+      "count": 5
+    },
+    {
+      "tag": "sinfulness",
+      "count": 1
+    },
+    {
+      "tag": "singledom",
+      "count": 1
+    },
+    {
+      "tag": "singlehood",
+      "count": 3
+    },
+    {
+      "tag": "singles",
+      "count": 1
+    },
+    {
+      "tag": "sins",
+      "count": 1
+    },
+    {
+      "tag": "skepticism",
+      "count": 10
+    },
+    {
+      "tag": "skewed",
+      "count": 1
+    },
+    {
+      "tag": "skill",
+      "count": 1
+    },
+    {
+      "tag": "skills",
+      "count": 5
+    },
+    {
+      "tag": "slavery",
+      "count": 1
+    },
+    {
+      "tag": "sleep",
+      "count": 3
+    },
+    {
+      "tag": "small",
+      "count": 3
+    },
+    {
+      "tag": "small pleasures",
+      "count": 3
+    },
+    {
+      "tag": "small talk",
+      "count": 1
+    },
+    {
+      "tag": "small things",
+      "count": 1
+    },
+    {
+      "tag": "small_pleasures",
+      "count": 1
+    },
+    {
+      "tag": "small_steps",
+      "count": 1
+    },
+    {
+      "tag": "smalltalk",
+      "count": 1
+    },
+    {
+      "tag": "smallthings",
+      "count": 1
+    },
+    {
+      "tag": "smiling",
+      "count": 1
+    },
+    {
+      "tag": "snobbery",
+      "count": 1
+    },
+    {
+      "tag": "sociability",
+      "count": 1
+    },
+    {
+      "tag": "social",
+      "count": 8
+    },
+    {
+      "tag": "social agreement",
+      "count": 1
+    },
+    {
+      "tag": "social anxiety",
+      "count": 2
+    },
+    {
+      "tag": "social barriers",
+      "count": 2
+    },
+    {
+      "tag": "social dilemmas",
+      "count": 1
+    },
+    {
+      "tag": "social inhibition",
+      "count": 1
+    },
+    {
+      "tag": "social life",
+      "count": 1
+    },
+    {
+      "tag": "social media",
+      "count": 1
+    },
+    {
+      "tag": "social pressure",
+      "count": 2
+    },
+    {
+      "tag": "social pressures",
+      "count": 1
+    },
+    {
+      "tag": "social skills",
+      "count": 1
+    },
+    {
+      "tag": "social-interaction",
+      "count": 1
+    },
+    {
+      "tag": "social_artifice",
+      "count": 1
+    },
+    {
+      "tag": "social_editing",
+      "count": 1
+    },
+    {
+      "tag": "socialization",
+      "count": 4
+    },
+    {
+      "tag": "societal norms",
+      "count": 1
+    },
+    {
+      "tag": "society",
+      "count": 2
+    },
+    {
+      "tag": "softening",
+      "count": 2
+    },
+    {
+      "tag": "solace",
+      "count": 3
+    },
+    {
+      "tag": "solar calendar",
+      "count": 1
+    },
+    {
+      "tag": "solemnity",
+      "count": 1
+    },
+    {
+      "tag": "solitude",
+      "count": 45
+    },
+    {
+      "tag": "solo",
+      "count": 1
+    },
+    {
+      "tag": "solution",
+      "count": 1
+    },
+    {
+      "tag": "solutions",
+      "count": 4
+    },
+    {
+      "tag": "song",
+      "count": 1
+    },
+    {
+      "tag": "soothing",
+      "count": 1
+    },
+    {
+      "tag": "sorrow",
+      "count": 8
+    },
+    {
+      "tag": "sorrows",
+      "count": 1
+    },
+    {
+      "tag": "soul",
+      "count": 4
+    },
+    {
+      "tag": "soulmate",
+      "count": 1
+    },
+    {
+      "tag": "sound",
+      "count": 1
+    },
+    {
+      "tag": "source",
+      "count": 1
+    },
+    {
+      "tag": "southern",
+      "count": 1
+    },
+    {
+      "tag": "space",
+      "count": 4
+    },
+    {
+      "tag": "special",
+      "count": 1
+    },
+    {
+      "tag": "specialization",
+      "count": 5
+    },
+    {
+      "tag": "specificity",
+      "count": 2
+    },
+    {
+      "tag": "speculation",
+      "count": 2
+    },
+    {
+      "tag": "speed",
+      "count": 1
+    },
+    {
+      "tag": "spirituality",
+      "count": 4
+    },
+    {
+      "tag": "splitting",
+      "count": 3
+    },
+    {
+      "tag": "spontaneity",
+      "count": 7
+    },
+    {
+      "tag": "sport",
+      "count": 1
+    },
+    {
+      "tag": "sprawl",
+      "count": 1
+    },
+    {
+      "tag": "stability",
+      "count": 3
+    },
+    {
+      "tag": "stale",
+      "count": 1
+    },
+    {
+      "tag": "standard model",
+      "count": 1
+    },
+    {
+      "tag": "standardization",
+      "count": 2
+    },
+    {
+      "tag": "standards",
+      "count": 1
+    },
+    {
+      "tag": "stars",
+      "count": 2
+    },
+    {
+      "tag": "station",
+      "count": 1
+    },
+    {
+      "tag": "statistics",
+      "count": 2
+    },
+    {
+      "tag": "status",
+      "count": 3
+    },
+    {
+      "tag": "steps",
+      "count": 1
+    },
+    {
+      "tag": "stereotypes",
+      "count": 2
+    },
+    {
+      "tag": "stewardship",
+      "count": 1
+    },
+    {
+      "tag": "stigma",
+      "count": 1
+    },
+    {
+      "tag": "stillness",
+      "count": 1
+    },
+    {
+      "tag": "stimulation",
+      "count": 2
+    },
+    {
+      "tag": "stoicism",
+      "count": 6
+    },
+    {
+      "tag": "stories",
+      "count": 2
+    },
+    {
+      "tag": "storms",
+      "count": 1
+    },
+    {
+      "tag": "storytelling",
+      "count": 2
+    },
+    {
+      "tag": "strain",
+      "count": 2
+    },
+    {
+      "tag": "strangeness",
+      "count": 1
+    },
+    {
+      "tag": "stranger",
+      "count": 1
+    },
+    {
+      "tag": "strangers",
+      "count": 1
+    },
+    {
+      "tag": "strategic",
+      "count": 1
+    },
+    {
+      "tag": "strategies",
+      "count": 1
+    },
+    {
+      "tag": "strategy",
+      "count": 2
+    },
+    {
+      "tag": "street photography",
+      "count": 1
+    },
+    {
+      "tag": "strength",
+      "count": 8
+    },
+    {
+      "tag": "stress",
+      "count": 7
+    },
+    {
+      "tag": "striving",
+      "count": 1
+    },
+    {
+      "tag": "structure",
+      "count": 4
+    },
+    {
+      "tag": "structured",
+      "count": 1
+    },
+    {
+      "tag": "struggle",
+      "count": 6
+    },
+    {
+      "tag": "stuckness",
+      "count": 1
+    },
+    {
+      "tag": "style",
+      "count": 1
+    },
+    {
+      "tag": "subconscious",
+      "count": 2
+    },
+    {
+      "tag": "subconscious influence",
+      "count": 1
+    },
+    {
+      "tag": "subjectivity",
+      "count": 1
+    },
+    {
+      "tag": "sublime",
+      "count": 2
+    },
+    {
+      "tag": "sublimity",
+      "count": 1
+    },
+    {
+      "tag": "submission",
+      "count": 1
+    },
+    {
+      "tag": "substitutes",
+      "count": 1
+    },
+    {
+      "tag": "subtlety",
+      "count": 1
+    },
+    {
+      "tag": "suburbanism",
+      "count": 1
+    },
+    {
+      "tag": "success",
+      "count": 23
+    },
+    {
+      "tag": "suddenness",
+      "count": 1
+    },
+    {
+      "tag": "suffering",
+      "count": 25
+    },
+    {
+      "tag": "sufficiency",
+      "count": 1
+    },
+    {
+      "tag": "suicidal thoughts",
+      "count": 1
+    },
+    {
+      "tag": "suicide",
+      "count": 8
+    },
+    {
+      "tag": "suitability",
+      "count": 1
+    },
+    {
+      "tag": "sulk",
+      "count": 3
+    },
+    {
+      "tag": "sulking",
+      "count": 4
+    },
+    {
+      "tag": "sunday",
+      "count": 1
+    },
+    {
+      "tag": "sunday evenings",
+      "count": 1
+    },
+    {
+      "tag": "sunlight",
+      "count": 1
+    },
+    {
+      "tag": "sunrise",
+      "count": 1
+    },
+    {
+      "tag": "sunshine",
+      "count": 2
+    },
+    {
+      "tag": "superficiality",
+      "count": 2
+    },
+    {
+      "tag": "superiority",
+      "count": 2
+    },
+    {
+      "tag": "supervision",
+      "count": 1
+    },
+    {
+      "tag": "support",
+      "count": 18
+    },
+    {
+      "tag": "surrender",
+      "count": 2
+    },
+    {
+      "tag": "survival",
+      "count": 19
+    },
+    {
+      "tag": "suspicion",
+      "count": 1
+    },
+    {
+      "tag": "symbolism",
+      "count": 2
+    },
+    {
+      "tag": "symmetry",
+      "count": 1
+    },
+    {
+      "tag": "sympathy",
+      "count": 11
+    },
+    {
+      "tag": "symptoms",
+      "count": 2
+    },
+    {
+      "tag": "synthesis",
+      "count": 1
+    },
+    {
+      "tag": "taboo",
+      "count": 3
+    },
+    {
+      "tag": "takeoff",
+      "count": 1
+    },
+    {
+      "tag": "talent",
+      "count": 2
+    },
+    {
+      "tag": "task avoidance",
+      "count": 1
+    },
+    {
+      "tag": "tasks",
+      "count": 1
+    },
+    {
+      "tag": "taste",
+      "count": 3
+    },
+    {
+      "tag": "teaching",
+      "count": 11
+    },
+    {
+      "tag": "teamwork",
+      "count": 1
+    },
+    {
+      "tag": "tears",
+      "count": 1
+    },
+    {
+      "tag": "teasing",
+      "count": 4
+    },
+    {
+      "tag": "technology",
+      "count": 7
+    },
+    {
+      "tag": "temples",
+      "count": 1
+    },
+    {
+      "tag": "temporality",
+      "count": 4
+    },
+    {
+      "tag": "temptation",
+      "count": 2
+    },
+    {
+      "tag": "tenacity",
+      "count": 1
+    },
+    {
+      "tag": "tenderness",
+      "count": 5
+    },
+    {
+      "tag": "tensions",
+      "count": 1
+    },
+    {
+      "tag": "termination",
+      "count": 1
+    },
+    {
+      "tag": "terror",
+      "count": 2
+    },
+    {
+      "tag": "thankfulness",
+      "count": 1
+    },
+    {
+      "tag": "theater",
+      "count": 2
+    },
+    {
+      "tag": "therapy",
+      "count": 35
+    },
+    {
+      "tag": "thinking",
+      "count": 11
+    },
+    {
+      "tag": "thinking feeling acting",
+      "count": 1
+    },
+    {
+      "tag": "thought",
+      "count": 2
+    },
+    {
+      "tag": "thoughtfulness",
+      "count": 1
+    },
+    {
+      "tag": "thoughts",
+      "count": 3
+    },
+    {
+      "tag": "threat",
+      "count": 1
+    },
+    {
+      "tag": "threshold",
+      "count": 1
+    },
+    {
+      "tag": "time",
+      "count": 8
+    },
+    {
+      "tag": "time management",
+      "count": 2
+    },
+    {
+      "tag": "time perception",
+      "count": 2
+    },
+    {
+      "tag": "timekeeping",
+      "count": 1
+    },
+    {
+      "tag": "timelessness",
+      "count": 1
+    },
+    {
+      "tag": "timing",
+      "count": 2
+    },
+    {
+      "tag": "tiredness",
+      "count": 1
+    },
+    {
+      "tag": "tolerance",
+      "count": 18
+    },
+    {
+      "tag": "tools",
+      "count": 1
+    },
+    {
+      "tag": "torture",
+      "count": 1
+    },
+    {
+      "tag": "toughness",
+      "count": 1
+    },
+    {
+      "tag": "tourism",
+      "count": 3
+    },
+    {
+      "tag": "tracking",
+      "count": 1
+    },
+    {
+      "tag": "trade-offs",
+      "count": 1
+    },
+    {
+      "tag": "tradition",
+      "count": 3
+    },
+    {
+      "tag": "traditional societies",
+      "count": 1
+    },
+    {
+      "tag": "tragedy",
+      "count": 18
+    },
+    {
+      "tag": "training",
+      "count": 1
+    },
+    {
+      "tag": "tranquility",
+      "count": 4
+    },
+    {
+      "tag": "tranquillisation",
+      "count": 1
+    },
+    {
+      "tag": "transactional analysis",
+      "count": 1
+    },
+    {
+      "tag": "transcendence",
+      "count": 16
+    },
+    {
+      "tag": "transference",
+      "count": 4
+    },
+    {
+      "tag": "transformation",
+      "count": 17
+    },
+    {
+      "tag": "transience",
+      "count": 4
+    },
+    {
+      "tag": "transient",
+      "count": 2
+    },
+    {
+      "tag": "transitional",
+      "count": 1
+    },
+    {
+      "tag": "transitional_objects",
+      "count": 1
+    },
+    {
+      "tag": "translation",
+      "count": 1
+    },
+    {
+      "tag": "transubstantiation",
+      "count": 1
+    },
+    {
+      "tag": "trauma",
+      "count": 29
+    },
+    {
+      "tag": "travel",
+      "count": 20
+    },
+    {
+      "tag": "trees",
+      "count": 1
+    },
+    {
+      "tag": "triggering",
+      "count": 1
+    },
+    {
+      "tag": "triumph",
+      "count": 1
+    },
+    {
+      "tag": "trivialities",
+      "count": 1
+    },
+    {
+      "tag": "triviality",
+      "count": 3
+    },
+    {
+      "tag": "trivialization",
+      "count": 1
+    },
+    {
+      "tag": "true connection",
+      "count": 1
+    },
+    {
+      "tag": "true happiness",
+      "count": 1
+    },
+    {
+      "tag": "true self",
+      "count": 2
+    },
+    {
+      "tag": "trust",
+      "count": 28
+    },
+    {
+      "tag": "trust Issues",
+      "count": 1
+    },
+    {
+      "tag": "truth",
+      "count": 18
+    },
+    {
+      "tag": "try",
+      "count": 1
+    },
+    {
+      "tag": "types",
+      "count": 1
+    },
+    {
+      "tag": "ugliness",
+      "count": 6
+    },
+    {
+      "tag": "ultimatum",
+      "count": 1
+    },
+    {
+      "tag": "uncertainty",
+      "count": 15
+    },
+    {
+      "tag": "unconditionality",
+      "count": 1
+    },
+    {
+      "tag": "unconscious",
+      "count": 5
+    },
+    {
+      "tag": "unconventional",
+      "count": 1
+    },
+    {
+      "tag": "underconfidence",
+      "count": 1
+    },
+    {
+      "tag": "underestimation",
+      "count": 1
+    },
+    {
+      "tag": "underlying_meaning",
+      "count": 1
+    },
+    {
+      "tag": "understanding",
+      "count": 63
+    },
+    {
+      "tag": "unexpected",
+      "count": 1
+    },
+    {
+      "tag": "unfairness",
+      "count": 2
+    },
+    {
+      "tag": "unfaithfulness",
+      "count": 1
+    },
+    {
+      "tag": "unfamiliarity",
+      "count": 1
+    },
+    {
+      "tag": "unfinished_business",
+      "count": 1
+    },
+    {
+      "tag": "unfulfillment",
+      "count": 1
+    },
+    {
+      "tag": "unhappiness",
+      "count": 3
+    },
+    {
+      "tag": "unintended_hurt",
+      "count": 1
+    },
+    {
+      "tag": "uniqueness",
+      "count": 2
+    },
+    {
+      "tag": "unity",
+      "count": 1
+    },
+    {
+      "tag": "universality",
+      "count": 1
+    },
+    {
+      "tag": "universe",
+      "count": 5
+    },
+    {
+      "tag": "unpacking",
+      "count": 1
+    },
+    {
+      "tag": "unpaid",
+      "count": 1
+    },
+    {
+      "tag": "unpredictability",
+      "count": 4
+    },
+    {
+      "tag": "unprocessed emotion",
+      "count": 2
+    },
+    {
+      "tag": "unreliability",
+      "count": 1
+    },
+    {
+      "tag": "unrequited",
+      "count": 1
+    },
+    {
+      "tag": "unrequited love",
+      "count": 1
+    },
+    {
+      "tag": "unresolved",
+      "count": 1
+    },
+    {
+      "tag": "unspoken words",
+      "count": 1
+    },
+    {
+      "tag": "unworthiness",
+      "count": 5
+    },
+    {
+      "tag": "upbringing",
+      "count": 2
+    },
+    {
+      "tag": "upset",
+      "count": 1
+    },
+    {
+      "tag": "urban exploration",
+      "count": 1
+    },
+    {
+      "tag": "urbanism",
+      "count": 1
+    },
+    {
+      "tag": "urbanization",
+      "count": 4
+    },
+    {
+      "tag": "urgency",
+      "count": 4
+    },
+    {
+      "tag": "urgent-action",
+      "count": 1
+    },
+    {
+      "tag": "usefulness",
+      "count": 2
+    },
+    {
+      "tag": "utility",
+      "count": 1
+    },
+    {
+      "tag": "utopia",
+      "count": 5
+    },
+    {
+      "tag": "vacuuming",
+      "count": 1
+    },
+    {
+      "tag": "vagueness",
+      "count": 1
+    },
+    {
+      "tag": "validation",
+      "count": 16
+    },
+    {
+      "tag": "value",
+      "count": 5
+    },
+    {
+      "tag": "value perception",
+      "count": 1
+    },
+    {
+      "tag": "values",
+      "count": 14
+    },
+    {
+      "tag": "values-assessment",
+      "count": 1
+    },
+    {
+      "tag": "vanity",
+      "count": 3
+    },
+    {
+      "tag": "veneration",
+      "count": 1
+    },
+    {
+      "tag": "vengeance",
+      "count": 1
+    },
+    {
+      "tag": "victimization",
+      "count": 1
+    },
+    {
+      "tag": "victory",
+      "count": 1
+    },
+    {
+      "tag": "vigilance",
+      "count": 1
+    },
+    {
+      "tag": "violence",
+      "count": 1
+    },
+    {
+      "tag": "virtue",
+      "count": 6
+    },
+    {
+      "tag": "virtues",
+      "count": 5
+    },
+    {
+      "tag": "vision",
+      "count": 1
+    },
+    {
+      "tag": "vitality",
+      "count": 1
+    },
+    {
+      "tag": "vivacity",
+      "count": 3
+    },
+    {
+      "tag": "vocation",
+      "count": 6
+    },
+    {
+      "tag": "volatility",
+      "count": 1
+    },
+    {
+      "tag": "voluntary poverty",
+      "count": 2
+    },
+    {
+      "tag": "voting",
+      "count": 1
+    },
+    {
+      "tag": "vows",
+      "count": 2
+    },
+    {
+      "tag": "vulnerability",
+      "count": 107
+    },
+    {
+      "tag": "walking",
+      "count": 1
+    },
+    {
+      "tag": "want",
+      "count": 1
+    },
+    {
+      "tag": "wanting",
+      "count": 1
+    },
+    {
+      "tag": "wants",
+      "count": 2
+    },
+    {
+      "tag": "wardrobe",
+      "count": 1
+    },
+    {
+      "tag": "warmth",
+      "count": 2
+    },
+    {
+      "tag": "warning",
+      "count": 1
+    },
+    {
+      "tag": "weakness",
+      "count": 9
+    },
+    {
+      "tag": "wealth",
+      "count": 8
+    },
+    {
+      "tag": "wealth misunderstanding",
+      "count": 1
+    },
+    {
+      "tag": "wedding",
+      "count": 1
+    },
+    {
+      "tag": "well-being",
+      "count": 3
+    },
+    {
+      "tag": "wellbeing",
+      "count": 1
+    },
+    {
+      "tag": "wheat",
+      "count": 1
+    },
+    {
+      "tag": "whitewashing",
+      "count": 1
+    },
+    {
+      "tag": "wholeness",
+      "count": 2
+    },
+    {
+      "tag": "widespread",
+      "count": 1
+    },
+    {
+      "tag": "wilderness",
+      "count": 2
+    },
+    {
+      "tag": "willpower",
+      "count": 1
+    },
+    {
+      "tag": "window",
+      "count": 1
+    },
+    {
+      "tag": "window staring",
+      "count": 1
+    },
+    {
+      "tag": "wisdom",
+      "count": 30
+    },
+    {
+      "tag": "wishfulthinking",
+      "count": 1
+    },
+    {
+      "tag": "wit",
+      "count": 1
+    },
+    {
+      "tag": "womb",
+      "count": 1
+    },
+    {
+      "tag": "wonder",
+      "count": 7
+    },
+    {
+      "tag": "woolf",
+      "count": 1
+    },
+    {
+      "tag": "work",
+      "count": 15
+    },
+    {
+      "tag": "work experience",
+      "count": 1
+    },
+    {
+      "tag": "workaholism",
+      "count": 1
+    },
+    {
+      "tag": "worries",
+      "count": 1
+    },
+    {
+      "tag": "worry",
+      "count": 3
+    },
+    {
+      "tag": "worship",
+      "count": 2
+    },
+    {
+      "tag": "worth",
+      "count": 3
+    },
+    {
+      "tag": "worthlessness",
+      "count": 1
+    },
+    {
+      "tag": "worthwhile",
+      "count": 1
+    },
+    {
+      "tag": "wound",
+      "count": 3
+    },
+    {
+      "tag": "wounds",
+      "count": 2
+    },
+    {
+      "tag": "wrath",
+      "count": 1
+    },
+    {
+      "tag": "wrist",
+      "count": 1
+    },
+    {
+      "tag": "writing",
+      "count": 2
+    },
+    {
+      "tag": "wrong",
+      "count": 1
+    },
+    {
+      "tag": "yoga",
+      "count": 3
+    },
+    {
+      "tag": "youth",
+      "count": 4
+    },
+    {
+      "tag": "youth obsession",
+      "count": 1
+    },
+    {
+      "tag": "zen",
+      "count": 1
+    },
+    {
+      "tag": "zoos",
+      "count": 1
+    },
+    {
+      "tag": "\u4fe1\u4efb",
+      "count": 1
+    },
+    {
+      "tag": "\u5fe0\u8bda",
+      "count": 1
+    },
+    {
+      "tag": "\u60c5\u611f",
+      "count": 1
+    },
+    {
+      "tag": "\u6d88\u901d",
+      "count": 1
+    },
+    {
+      "tag": "\u70e6\u607c",
+      "count": 1
+    },
+    {
+      "tag": "\u7231\u60c5",
+      "count": 1
+    },
+    {
+      "tag": "\u771f\u5b9e\u6027",
+      "count": 2
+    },
+    {
+      "tag": "\u8bc1\u660e",
+      "count": 1
+    },
+    {
+      "tag": "\u8c28\u614e",
+      "count": 1
+    },
+    {
+      "tag": "\u9009\u62e9",
+      "count": 1
+    },
+    {
+      "tag": "\u9057\u5fd8",
+      "count": 1
+    }
+  ]
 }
