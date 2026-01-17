@@ -1,5 +1,5 @@
 // Simplified Service Worker - Cache only, no update notifications
-const CACHE_VERSION = 'v6';
+const CACHE_VERSION = 'v7';
 const CACHE_NAME = `essay-search-${CACHE_VERSION}`;
 
 // Assets to pre-cache
@@ -51,6 +51,15 @@ self.addEventListener('fetch', (event) => {
   if (url.pathname === '/essay_search_engine/' && url.search) {
     event.respondWith(
       caches.match('/essay_search_engine/index.html')
+        .then((response) => response || fetch(event.request))
+    );
+    return;
+  }
+
+  // Handle chunk.html with query params (e.g., /chunk.html?id=123)
+  if (url.pathname === '/essay_search_engine/chunk.html' && url.search) {
+    event.respondWith(
+      caches.match('/essay_search_engine/chunk.html')
         .then((response) => response || fetch(event.request))
     );
     return;
