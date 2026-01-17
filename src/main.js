@@ -135,8 +135,8 @@ const searchEngine = new SearchEngine();
 let isInitialized = false;
 
 // DOM elements
-const searchInput = document.getElementById('search-input');
-const searchButton = document.getElementById('search-button');
+const searchInput = document.getElementById('searchInput');
+const searchButton = document.getElementById('searchButton');
 const statusDiv = document.getElementById('status');
 const resultsDiv = document.getElementById('results');
 
@@ -392,11 +392,15 @@ function escapeHtml(text) {
   return div.innerHTML;
 }
 
-// Event listeners - prevent form submission and handle search
-const searchForm = document.getElementById('search-form');
-searchForm.addEventListener('submit', (e) => {
-  e.preventDefault(); // Prevent page reload
+// Event listeners - handle search button click and Enter key
+searchButton.addEventListener('click', () => {
   performSearch();
+});
+
+searchInput.addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') {
+    performSearch();
+  }
 });
 
 // Auto-initialize on page load and handle tag parameters
