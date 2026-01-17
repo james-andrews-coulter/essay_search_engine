@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chunk Viewer</title>
+  <style>
+    body {
+      max-width: 50rem;
+      margin: 0 auto;
+      padding: 1rem;
+      font-family: system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+    }
+    .back { margin-bottom: 1rem; }
+    .back a { text-decoration: none; color: #0066cc; }
+    .meta { color: #666; font-size: 0.875rem; margin-bottom: 1rem; }
+    .content { margin-top: 2rem; }
+    .error { color: #c00; padding: 1rem; background: #fee; border-radius: 4px; }
+    .loading { color: #666; }
+  </style>
+</head>
+<body>
+  <div class="back">
+    <a href="#" onclick="history.back(); return false;">← Back to search</a>
+  </div>
+
+  <div id="meta" class="meta"></div>
+  <div id="content" class="content"></div>
+
+  <script type="module">
+    import { marked } from 'marked';
+
+    const contentDiv = document.getElementById('content');
+    const metaDiv = document.getElementById('meta');
+
+    async function loadChunk() {
+      try {
+        // Get chunk ID from URL
+        const params = new URLSearchParams(window.location.search);
+        const chunkId = parseInt(params.get('id'));
+
+        if (isNaN(chunkId)) {
+          throw new Error('Invalid chunk ID');
+        }
+
+        // Load metadata
+        const response = await fetch('/essay_search_engine/data/metadata.json');
+        const metadata = await response.json();
+
+        // Find chunk
+        const chunk = metadata.chunks.find(c => c.chunk_id === chunkId);
+        if (!chunk) {
+          throw new Error(`Chunk ${chunkId} not found`);
+        }
+
+        // Update title and meta
+        document.title = chunk.chapter_title || chunk.book_title;
+        metaDiv.innerHTML = `
+          <strong>${chunk.book_title}</strong>
+          ${chunk.chapter_title ? `<br>${chunk.chapter_title}` : ''}
+          ${chunk.tags ? `<br><span style="color: #999;">Tags: ${chunk.tags}</span>` : ''}
+        `;
+
+        // Render markdown
+        contentDiv.innerHTML = marked.parse(chunk.content || 'No content available');
+
+      } catch (error) {
+        contentDiv.innerHTML = `<div class="error">Error: ${error.message}</div>`;
+      }
+    }
+
+    loadChunk();
+  </script>
+</body>
+</html>
