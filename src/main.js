@@ -1,4 +1,5 @@
 import './styles.css';
+import '@tarekraafat/autocomplete.js/dist/css/autoComplete.css';
 import { SearchEngine } from './search.js';
 
 // Service Worker registration
