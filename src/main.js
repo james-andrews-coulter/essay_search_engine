@@ -1,5 +1,6 @@
 import './styles.css';
 import '@tarekraafat/autocomplete.js/dist/css/autoComplete.css';
+import autoComplete from '@tarekraafat/autocomplete.js';
 import { SearchEngine } from './search.js';
 
 // Service Worker registration
@@ -38,18 +39,66 @@ async function registerServiceWorker() {
 // Initialize search engine
 const searchEngine = new SearchEngine();
 let isInitialized = false;
+let selectedTags = new Set();
+let allTags = [];
+let autoCompleteInstance = null;
 
 // DOM elements
 const searchInput = document.getElementById('searchInput');
 const searchButton = document.getElementById('searchButton');
 const statusDiv = document.getElementById('status');
 const resultsDiv = document.getElementById('results');
+const tagBadgesDiv = document.getElementById('tagBadges');
 
 // Pagination state
 let allResults = [];
 let currentPage = 1;
 const resultsPerPage = 25;
 let currentQuery = '';
+
+/**
+ * Render tag badges
+ */
+function renderBadges() {
+  if (!tagBadgesDiv) return;
+
+  if (selectedTags.size === 0) {
+    tagBadgesDiv.innerHTML = '';
+    return;
+  }
+
+  const badgesHtml = Array.from(selectedTags).map(tag => `
+    <span class="badge" data-tag="${escapeHtml(tag)}">
+      ${escapeHtml(tag)}
+      <button type="button" class="badge-remove" aria-label="Remove ${escapeHtml(tag)}">×</button>
+    </span>
+  `).join('');
+
+  tagBadgesDiv.innerHTML = badgesHtml;
+
+  // Add remove handlers
+  tagBadgesDiv.querySelectorAll('.badge-remove').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const badge = e.target.closest('.badge');
+      const tag = badge.dataset.tag;
+      selectedTags.delete(tag);
+      renderBadges();
+
+      // Re-run search if there was a previous query
+      if (currentQuery || selectedTags.size > 0) {
+        performSearch();
+      }
+    });
+  });
+}
+
+/**
+ * Add tag badge
+ */
+function addTagBadge(tag) {
+  selectedTags.add(tag);
+  renderBadges();
+}
 
 /**
  * Initialize the search engine
@@ -64,7 +113,48 @@ async function initialize() {
 
   try {
     await searchEngine.initialize((progress) => {
-      statusDiv.textContent = 'Loading...';
+      statusDiv.textContent = progress;
+    });
+
+    // Extract all tags for autocomplete
+    allTags = searchEngine.getAllTags();
+
+    // Initialize autocomplete
+    autoCompleteInstance = new autoComplete({
+      selector: "#searchInput",
+      data: {
+        src: allTags,
+        cache: true
+      },
+      resultsList: {
+        maxResults: 15,
+        noResults: true,
+        element: (list, data) => {
+          if (!data.results.length) {
+            const message = document.createElement("div");
+            message.setAttribute("class", "no_result");
+            message.innerHTML = `<span>No tags found for "${data.query}"</span>`;
+            list.appendChild(message);
+          }
+        }
+      },
+      resultItem: {
+        highlight: true,
+        element: (item, data) => {
+          item.innerHTML = `tag:${data.value}`;
+        }
+      },
+      events: {
+        input: {
+          selection: (event) => {
+            const tag = event.detail.selection.value;
+            addTagBadge(tag);
+            searchInput.value = '';
+            event.detail.event.preventDefault();
+            performSearch();
+          }
+        }
+      }
     });
 
     isInitialized = true;
@@ -85,10 +175,12 @@ async function initialize() {
 async function performSearch() {
   const query = searchInput.value.trim();
 
-  if (!query) {
+  // If no query and no tags, clear results
+  if (!query && selectedTags.size === 0) {
     resultsDiv.innerHTML = '';
     allResults = [];
     currentQuery = '';
+    statusDiv.textContent = '';
     return;
   }
 
@@ -102,15 +194,21 @@ async function performSearch() {
   statusDiv.textContent = 'Searching...';
 
   try {
-    // Get all results (no limit)
-    const results = await searchEngine.search(query);
+    // Get all results with tag filtering
+    const tags = Array.from(selectedTags);
+    const results = await searchEngine.search(query, tags);
 
     // Hide loading state
     searchButton.disabled = false;
 
     if (results.length === 0) {
-      statusDiv.textContent = `No results found for "${query}"`;
-      resultsDiv.innerHTML = '<p>No results found. Try different keywords.</p>';
+      const queryDesc = query && tags.length > 0
+        ? `"${query}" with tags [${tags.join(', ')}]`
+        : query
+        ? `"${query}"`
+        : `tags [${tags.join(', ')}]`;
+      statusDiv.textContent = `No results found for ${queryDesc}`;
+      resultsDiv.innerHTML = '<p>No results found. Try different keywords or tags.</p>';
       allResults = [];
       currentQuery = '';
       return;
@@ -290,7 +388,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   const tag = urlParams.get('tag');
 
   if (tag && isInitialized) {
-    searchInput.value = tag;
+    addTagBadge(tag);
     performSearch();
   }
 });
