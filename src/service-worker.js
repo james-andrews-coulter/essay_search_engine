@@ -1,5 +1,5 @@
 // Simplified Service Worker - Cache only, no update notifications
-const CACHE_VERSION = 'v7';
+const CACHE_VERSION = 'v8';
 const CACHE_NAME = `essay-search-${CACHE_VERSION}`;
 
 // Assets to pre-cache
@@ -9,16 +9,7 @@ const PRECACHE_ASSETS = [
   '/essay_search_engine/chunk.html',
   '/essay_search_engine/tags.html',
   '/essay_search_engine/data/metadata.json',
-  '/essay_search_engine/data/embeddings.json',
-  '/essay_search_engine/data/tags.json',
-  '/essay_search_engine/models/Xenova/bge-large-en-v1.5/config.json',
-  '/essay_search_engine/models/Xenova/bge-large-en-v1.5/tokenizer.json',
-  '/essay_search_engine/models/Xenova/bge-large-en-v1.5/tokenizer_config.json',
-  '/essay_search_engine/models/Xenova/bge-large-en-v1.5/onnx/model_quantized.onnx',
-  '/essay_search_engine/wasm/ort-wasm-simd-threaded.wasm',
-  '/essay_search_engine/wasm/ort-wasm-simd.wasm',
-  '/essay_search_engine/wasm/ort-wasm-threaded.wasm',
-  '/essay_search_engine/wasm/ort-wasm.wasm'
+  '/essay_search_engine/data/tags.json'
 ];
 
 // Install: Cache assets
