@@ -1,23 +1,19 @@
-import { pipeline, env } from "@xenova/transformers";
-
-// Configure WASM files to load from our server instead of CDN (for offline support)
-env.backends.onnx.wasm.wasmPaths = "/essay_search_engine/wasm/";
+import Fuse from 'fuse.js';
 
 /**
  * Search Engine Class
- * Handles semantic search with BGE-large-en-v1.5 model and tag boosting
+ * Handles keyword/fuzzy search with Fuse.js and tag filtering
  */
 export class SearchEngine {
   constructor() {
-    this.embedder = null;
+    this.fuse = null;
     this.metadata = null;
-    this.embeddings = null;
     this.isLoading = false;
     this.isReady = false;
   }
 
   /**
-   * Initialize the search engine (load model and data)
+   * Initialize the search engine (load metadata only)
    * @param {Function} onProgress - Callback for progress updates
    */
   async initialize(onProgress = null) {
@@ -29,26 +25,27 @@ export class SearchEngine {
     this.isLoading = true;
 
     try {
-      // Load metadata and embeddings
+      // Load metadata only (no embeddings needed)
       if (onProgress) onProgress("Loading metadata...");
       const metadataResponse = await fetch(
         "/essay_search_engine/data/metadata.json",
       );
       this.metadata = await metadataResponse.json();
 
-      if (onProgress) onProgress("Loading embeddings...");
-      const embeddingsResponse = await fetch(
-        "/essay_search_engine/data/embeddings.json",
-      );
-      this.embeddings = await embeddingsResponse.json();
-
-      // Load embedding model (BGE-large-en-v1.5 - same as TUI)
-      if (onProgress)
-        onProgress("Loading AI model (327MB, may take a minute)...");
-      this.embedder = await pipeline(
-        "feature-extraction",
-        "Xenova/bge-large-en-v1.5",
-      );
+      // Initialize Fuse.js with weighted fields
+      if (onProgress) onProgress("Initializing search...");
+      this.fuse = new Fuse(this.metadata.chunks, {
+        keys: [
+          { name: 'book_title', weight: 0.4 },      // Highest priority
+          { name: 'chapter_title', weight: 0.3 },   // Second priority
+          { name: 'tags', weight: 0.2 },            // Third priority
+          { name: 'content', weight: 0.1 }          // Lowest (avoids noise)
+        ],
+        threshold: 0.4,              // Match strictness (0.0 = exact, 1.0 = anything)
+        ignoreLocation: true,        // Match anywhere in field
+        minMatchCharLength: 2,       // Ignore single chars
+        includeScore: true           // Include match score in results
+      });
 
       if (onProgress) onProgress("Ready!");
       this.isReady = true;
@@ -60,148 +57,60 @@ export class SearchEngine {
     }
   }
 
-  /**
-   * Compute cosine similarity between two vectors
-   */
-  cosineSimilarity(vecA, vecB) {
-    if (vecA.length !== vecB.length) {
-      throw new Error("Vectors must have the same length");
-    }
-
-    let dotProduct = 0;
-    let normA = 0;
-    let normB = 0;
-
-    for (let i = 0; i < vecA.length; i++) {
-      dotProduct += vecA[i] * vecB[i];
-      normA += vecA[i] * vecA[i];
-      normB += vecB[i] * vecB[i];
-    }
-
-    if (normA === 0 || normB === 0) {
-      return 0;
-    }
-
-    return dotProduct / (Math.sqrt(normA) * Math.sqrt(normB));
-  }
-
-  /**
-   * Search for chunks matching the query
-   * @param {string} query - Search query
-   * @param {number} limit - Maximum number of results (default: no limit, returns all)
+/**
+   * Search for chunks matching the query with optional tag filtering
+   * @param {string} query - Search query (keywords)
+   * @param {Array<string>} tags - Array of exact tags to filter by (AND logic)
+   * @param {number} limit - Maximum number of results (default: no limit)
    * @returns {Promise<Array>} - Array of search results with scores
    */
-  async search(query, limit = null) {
+  async search(query, tags = [], limit = null) {
     if (!this.isReady) {
       throw new Error(
         "Search engine not initialized. Call initialize() first.",
       );
     }
 
-    if (!query || query.trim().length === 0) {
-      return [];
+    // Start with all chunks
+    let results = this.metadata.chunks;
+
+    // Step 1: Filter by tags (exact AND logic)
+    if (tags.length > 0) {
+      results = results.filter(chunk => {
+        const chunkTags = chunk.tags?.split(',').map(t => t.trim()) || [];
+        return tags.every(tag => chunkTags.includes(tag)); // ALL tags must match
+      });
     }
 
-    // Embed the query (1024-dim)
-    const output = await this.embedder(query.trim(), {
-      pooling: "mean",
-      normalize: true,
-    });
-    const queryEmbedding = Array.from(output.data);
+    // Step 2: Fuzzy search within filtered results (if query exists)
+    if (query && query.trim().length > 0) {
+      const fuse = new Fuse(results, {
+        keys: [
+          { name: 'book_title', weight: 0.4 },
+          { name: 'chapter_title', weight: 0.3 },
+          { name: 'tags', weight: 0.2 },
+          { name: 'content', weight: 0.1 }
+        ],
+        threshold: 0.4,
+        ignoreLocation: true,
+        minMatchCharLength: 2,
+        includeScore: true
+      });
 
-    // Compute cosine similarity with all chunks
-    let results = this.embeddings.embeddings
-      .map((embedding, idx) => ({
-        chunk: this.metadata.chunks[idx],
-        score: this.cosineSimilarity(queryEmbedding, embedding),
-        baseSimilarity: this.cosineSimilarity(queryEmbedding, embedding),
-      }))
-      .filter((result) => result.chunk !== undefined);
+      const fuseResults = fuse.search(query.trim());
 
-    // Relevance boosting (ranked by importance)
-    const queryLower = query.toLowerCase().trim();
-    results = results.map((result) => {
-      const chunk = result.chunk;
-
-      // Book Title matching (highest priority: +50% for exact, +40% for partial)
-      const bookTitle = chunk.book_title ? chunk.book_title.toLowerCase() : "";
-      if (bookTitle === queryLower) {
-        result.score += 0.5;
-        result.hasBookTitleExact = true;
-      } else if (
-        bookTitle.includes(queryLower) ||
-        queryLower
-          .split(" ")
-          .some((word) => word.length > 2 && bookTitle.includes(word))
-      ) {
-        result.score += 0.4;
-        result.hasBookTitlePartial = true;
-      }
-
-      // Chapter Title matching (second priority: +40% for exact, +30% for partial)
-      const chapterTitle = chunk.chapter_title
-        ? chunk.chapter_title.toLowerCase()
-        : "";
-      if (chapterTitle === queryLower) {
-        result.score += 0.4;
-        result.hasChapterTitleExact = true;
-      } else if (
-        chapterTitle.includes(queryLower) ||
-        queryLower
-          .split(" ")
-          .some((word) => word.length > 2 && chapterTitle.includes(word))
-      ) {
-        result.score += 0.3;
-        result.hasChapterTitlePartial = true;
-      }
-
-      // Tag matching (third priority: +30% for exact, +15% for partial)
-      if (chunk.tags) {
-        const tags = chunk.tags
-          .toLowerCase()
-          .split(",")
-          .map((t) => t.trim())
-          .filter((t) => t.length > 0);
-
-        // Exact tag match: +30% score
-        if (tags.some((tag) => tag === queryLower)) {
-          result.score += 0.3;
-          result.hasExactMatch = true;
-        }
-        // Partial tag match: +15% score
-        else if (
-          tags.some(
-            (tag) => tag.includes(queryLower) || queryLower.includes(tag),
-          )
-        ) {
-          result.score += 0.15;
-          result.hasPartialMatch = true;
-        }
-      }
-
-      return result;
-    });
-
-    // Sort by score (descending)
-    results.sort((a, b) => b.score - a.score);
-
-    // Enhanced filtering: Prioritize title matches, then tag matches, then semantic similarity
-    results = results.filter((r) => {
-      // Keep if has book title match (even with very low semantic similarity)
-      if (r.hasBookTitleExact || r.hasBookTitlePartial) {
-        return r.baseSimilarity >= 0.15; // Very low threshold for book title matches
-      }
-      // Keep if has chapter title match
-      if (r.hasChapterTitleExact || r.hasChapterTitlePartial) {
-        return r.baseSimilarity >= 0.2; // Low threshold for chapter title matches
-      }
-      // Keep if has tag match and reasonable similarity
-      if (r.hasExactMatch || r.hasPartialMatch) {
-        return r.baseSimilarity >= 0.25; // Moderate threshold for tag matches
-      }
-      // Otherwise require very high semantic similarity
-      return r.baseSimilarity >= 0.65; // High threshold required without any match
-    });
+      // Convert Fuse.js results format to our format
+      results = fuseResults.map(result => ({
+        chunk: result.item,
+        score: 1 - result.score // Invert score (Fuse.js: 0=perfect, we want 1=perfect)
+      }));
+    } else {
+      // No query, just return filtered results (from tag filtering)
+      results = results.map(chunk => ({
+        chunk: chunk,
+        score: 1.0 // Perfect score for exact tag matches
+      }));
+    }
 
     return limit ? results.slice(0, limit) : results;
   }
@@ -218,5 +127,25 @@ export class SearchEngine {
    */
   getBooks() {
     return this.metadata ? this.metadata.books : [];
+  }
+
+  /**
+   * Extract all unique tags from metadata
+   * @returns {Array<string>} - Sorted array of unique tags
+   */
+  getAllTags() {
+    if (!this.metadata) return [];
+
+    const tagSet = new Set();
+    this.metadata.chunks.forEach(chunk => {
+      if (chunk.tags) {
+        chunk.tags.split(',').forEach(tag => {
+          const trimmed = tag.trim();
+          if (trimmed) tagSet.add(trimmed);
+        });
+      }
+    });
+
+    return Array.from(tagSet).sort();
   }
 }
