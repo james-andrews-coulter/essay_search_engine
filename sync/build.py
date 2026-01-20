@@ -31,6 +31,7 @@ def load_chunks():
         books_metadata = metadata.get('books', [])
 
     all_chunks = []
+    global_chunk_id = 0
     for book in books_metadata:
         book_dir = SOURCE_DIR / book['safe_title']
         chunks_file = book_dir / 'chunks.json'
@@ -45,12 +46,13 @@ def load_chunks():
         for chunk in chunks:
             # Add minimal metadata (remove word_count, char_count, doc_id, author)
             all_chunks.append({
-                'chunk_id': chunk['chunk_id'],
+                'chunk_id': global_chunk_id,
                 'book_title': book['title'],
                 'chapter_title': chunk.get('chapter_title', ''),
                 'tags': chunk.get('tags', ''),
                 'content': chunk.get('content', '')
             })
+            global_chunk_id += 1
 
     print(f"✓ Loaded {len(all_chunks)} chunks from {len(books_metadata)} books")
     return all_chunks
