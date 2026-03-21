@@ -35,3 +35,6 @@ private/
 
 # Git worktrees
 .worktrees/
+
+# Embeddings (large, regenerated via ./lib --sync)
+public/data/embeddings.json
