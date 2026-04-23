@@ -1,5 +1,7 @@
 # Shelf
 
+![Shelf screenshot](docs/images/hero.png)
+
 Turn any EPUB into a searchable, offline-first web library — deployed free on GitHub Pages.
 
 Shelf is a personal search engine for books and essays. Drop in an EPUB, and the CLI extracts chapters, generates semantic tags with a local LLM, and builds a static site you can search from anywhere — even without an internet connection.
