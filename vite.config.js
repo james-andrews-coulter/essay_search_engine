@@ -22,7 +22,8 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: './index.html',
-        chunk: './chunk.html'
+        chunk: './chunk.html',
+        tags: './tags.html'
       }
     }
   },

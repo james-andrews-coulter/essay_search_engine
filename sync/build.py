@@ -1,21 +1,19 @@
 #!/usr/bin/env python3
 """
 Unified build script for essay search engine.
-Generates metadata.json, tags.json, tags.html, and embeddings.json.
+Generates metadata.json, tags.json, and embeddings.json.
+tags.html is rendered client-side from tags.json.
 """
 
 import json
-import os
 from pathlib import Path
 from sentence_transformers import SentenceTransformer
 
-# Paths
 TARGET_DIR = Path(__file__).parent.parent
 SOURCE_DIR = TARGET_DIR / "private" / "books"
 METADATA_FILE = TARGET_DIR / "private" / "books_metadata.json"
 OUTPUT_DIR = TARGET_DIR / "public" / "data"
-TAGS_OUTPUT = TARGET_DIR / "public" / "data" / "tags.json"
-TAGS_HTML = TARGET_DIR / "public" / "tags.html"
+TAGS_OUTPUT = OUTPUT_DIR / "tags.json"
 
 def load_chunks():
     """Load all chunks from source books."""
@@ -76,22 +74,18 @@ def generate_metadata(chunks):
     print(f"✓ Generated metadata.json ({size_mb:.1f}MB)")
 
 def generate_tags(chunks):
-    """Generate tags.json and tags.html."""
+    """Generate tags.json (tags.html is rendered client-side)."""
     print("\nGenerating tags data...")
 
-    # Collect all tags with counts
     tag_counts = {}
     for chunk in chunks:
-        if chunk.get('tags'):
-            tags = [t.strip() for t in chunk['tags'].split(',')]
-            for tag in tags:
-                if tag:
-                    tag_counts[tag] = tag_counts.get(tag, 0) + 1
+        if not chunk.get('tags'):
+            continue
+        for tag in (t.strip() for t in chunk['tags'].split(',')):
+            if tag:
+                tag_counts[tag] = tag_counts.get(tag, 0) + 1
 
-    # Sort alphabetically
     sorted_tags = sorted(tag_counts.items())
-
-    # Generate tags.json
     tags_data = {
         'total_tags': len(sorted_tags),
         'tags': [{'tag': tag, 'count': count} for tag, count in sorted_tags]
@@ -101,40 +95,6 @@ def generate_tags(chunks):
         json.dump(tags_data, f, indent=2)
 
     print(f"✓ Generated tags.json ({len(sorted_tags)} unique tags)")
-
-    # Generate tags.html
-    html = f"""<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Browse Tags</title>
-    <style>
-        body {{ max-width: 50rem; margin: 0 auto; padding: 1rem; font-family: system-ui; }}
-        h1 {{ font-size: 1.5rem; }}
-        .tag-list {{ display: flex; flex-wrap: wrap; gap: 0.5rem; }}
-        .tag {{ display: inline-block; padding: 0.25rem 0.5rem; background: #f0f0f0; border-radius: 4px; text-decoration: none; color: #333; }}
-        .tag:hover {{ background: #e0e0e0; }}
-        .count {{ color: #666; font-size: 0.875rem; }}
-    </style>
-</head>
-<body>
-    <h1>Browse Tags</h1>
-    <p><a href="/essay_search_engine/">← Back to Search</a></p>
-    <div class="tag-list">
-"""
-
-    for tag, count in sorted_tags:
-        html += f'        <a href="/essay_search_engine/?tag={tag}" class="tag">{tag} <span class="count">({count})</span></a>\n'
-
-    html += """    </div>
-</body>
-</html>"""
-
-    with open(TAGS_HTML, 'w') as f:
-        f.write(html)
-
-    print(f"✓ Generated tags.html")
 
 def generate_embeddings(chunks):
     """Generate embeddings.json."""
