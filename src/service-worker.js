@@ -1,8 +1,6 @@
-// Simplified Service Worker - Cache only, no update notifications
-const CACHE_VERSION = 'v8';
+const CACHE_VERSION = 'v9';
 const CACHE_NAME = `essay-search-${CACHE_VERSION}`;
 
-// Assets to pre-cache
 const PRECACHE_ASSETS = [
   '/essay_search_engine/',
   '/essay_search_engine/index.html',
@@ -12,68 +10,46 @@ const PRECACHE_ASSETS = [
   '/essay_search_engine/data/tags.json'
 ];
 
-// Install: Cache assets
+// Paths that carry query strings — strip the query when matching cache
+const NAV_PATHS = new Set([
+  '/essay_search_engine/',
+  '/essay_search_engine/chunk.html'
+]);
+
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(PRECACHE_ASSETS);
-    }).then(() => self.skipWaiting())
+    caches.open(CACHE_NAME)
+      .then((cache) => cache.addAll(PRECACHE_ASSETS))
+      .then(() => self.skipWaiting())
   );
 });
 
-// Activate: Clean old caches
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then((cacheNames) => {
-      return Promise.all(
-        cacheNames
-          .filter((name) => name.startsWith('essay-search-') && name !== CACHE_NAME)
-          .map((name) => caches.delete(name))
-      );
-    }).then(() => self.clients.claim())
+    caches.keys()
+      .then((names) => Promise.all(
+        names
+          .filter((n) => n.startsWith('essay-search-') && n !== CACHE_NAME)
+          .map((n) => caches.delete(n))
+      ))
+      .then(() => self.clients.claim())
   );
 });
 
-// Fetch: Cache-first strategy
 self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
+  const cacheKey = url.search && NAV_PATHS.has(url.pathname) ? url.pathname : event.request;
 
-  // Handle root with query params (e.g., /?tag=anxiety)
-  if (url.pathname === '/essay_search_engine/' && url.search) {
-    event.respondWith(
-      caches.match('/essay_search_engine/index.html')
-        .then((response) => response || fetch(event.request))
-    );
-    return;
-  }
-
-  // Handle chunk.html with query params (e.g., /chunk.html?id=123)
-  if (url.pathname === '/essay_search_engine/chunk.html' && url.search) {
-    event.respondWith(
-      caches.match('/essay_search_engine/chunk.html')
-        .then((response) => response || fetch(event.request))
-    );
-    return;
-  }
-
-  // Cache-first for all other requests
   event.respondWith(
-    caches.match(event.request).then((cached) => {
+    caches.match(cacheKey).then((cached) => {
       if (cached) return cached;
-
       return fetch(event.request).then((response) => {
-        // Cache successful responses
-        if (response && response.status === 200) {
-          const responseClone = response.clone();
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, responseClone);
-          });
+        if (response?.status === 200) {
+          const clone = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
         }
         return response;
-      }).catch(() => {
-        // Return 404 response if offline and not cached
-        return new Response('Not found', { status: 404 });
-      });
+      }).catch(() => new Response('Not found', { status: 404 }));
     })
   );
 });
