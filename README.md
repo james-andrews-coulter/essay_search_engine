@@ -77,18 +77,26 @@ shelf/
 ├── process_book.py          # EPUB → chunks → tags pipeline
 ├── setup.sh                 # One-command environment setup
 ├── sync/
-│   └── build.py             # Generates metadata.json + tags.json
+│   └── build.py             # Generates metadata.json, tags.json, embeddings.json
 ├── src/
+│   ├── main.js              # Home page: search, pagination, tag badges
+│   ├── chunk.js             # Chunk viewer: renders markdown for a single chunk
+│   ├── tags.js              # Tag browser: renders tag list from tags.json
 │   ├── search.js            # Fuse.js search engine (weighted fields)
-│   ├── main.js              # UI logic, pagination, autocomplete
-│   ├── service-worker.js    # Cache-first offline support
-│   └── styles.css           # Minimal, mobile-first CSS
+│   ├── utils.js             # Shared helpers (escapeHtml, excerpt, parseTags)
+│   └── service-worker.js    # Cache-first offline support
 ├── public/data/             # Generated search index (committed)
-│   ├── metadata.json
-│   └── tags.json
-├── index.html               # Search interface
-└── chunk.html               # Dynamic chunk viewer (renders markdown)
+│   ├── metadata.json        # All chunks (content + metadata)
+│   ├── tags.json            # Tag counts (for tag browser)
+│   └── embeddings.json      # Sentence embeddings (generated, not wired up yet — see below)
+├── index.html               # Search page shell
+├── chunk.html               # Chunk viewer shell
+└── tags.html                # Tag browser shell
 ```
+
+### Embeddings
+
+`sync/build.py` generates `public/data/embeddings.json` using `BAAI/bge-large-en-v1.5` (same model can run in-browser via Transformers.js), but the current client is keyword/fuzzy-only via Fuse.js. The file is excluded from git (`.gitignore`) because it's regenerable and ~100 MB on a realistic library. It's staged here for a future semantic-search pass; if you don't need it, comment out `generate_embeddings(chunks)` in `sync/build.py` to skip it.
 
 ### Design decisions
 
