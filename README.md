@@ -38,7 +38,9 @@ EPUB → Markdown → Semantic chunks → AI tags → Static JSON → Client-sid
 
 - Python 3.10+
 - Node.js 20+
-- [Ollama](https://ollama.com) with `qwen2.5:7b` (`ollama pull qwen2.5:7b`)
+- [Ollama](https://ollama.com) with `qwen2.5:7b` — `ollama pull qwen2.5:7b` downloads ~4.7 GB
+
+> Optional: the embeddings pipeline also needs `sentence-transformers` and pulls a 1.3 GB model. Skip it unless you want to experiment with semantic search (see [Embeddings](#embeddings)).
 
 ### Setup
 
@@ -101,7 +103,7 @@ shelf/
 
 ### Embeddings
 
-`sync/build.py` generates `public/data/embeddings.json` using `BAAI/bge-large-en-v1.5` (same model can run in-browser via Transformers.js), but the current client is keyword/fuzzy-only via Fuse.js. The file is excluded from git (`.gitignore`) because it's regenerable and ~100 MB on a realistic library. It's staged here for a future semantic-search pass; if you don't need it, comment out `generate_embeddings(chunks)` in `sync/build.py` to skip it.
+`sync/build.py --embeddings` generates `public/data/embeddings.json` using `BAAI/bge-large-en-v1.5` (the same model can run in-browser via Transformers.js). The file is excluded from git (`.gitignore`) because it's regenerable and ~100 MB on a realistic library. The current client is keyword/fuzzy-only via Fuse.js; embeddings are staged for a future semantic-search pass. By default `./lib --sync` does **not** generate embeddings — pass `--embeddings` only if you want them.
 
 ### Design decisions
 
@@ -109,7 +111,7 @@ shelf/
 
 **Local AI for tagging.** Ollama runs on your machine. Tags like `"jealousy, rivalry, comparison"` make 1–2 word searches useful in a way that full-text search alone can't. No API key, no usage limits, no data uploaded anywhere.
 
-**Offline-first.** A service worker pre-caches the app shell and all search data on first load. After that, the entire library works without a connection. Cache versioning ensures updates propagate cleanly.
+**Offline-first.** A service worker precaches the HTML pages and JSON search data on install, then runtime-caches every other asset (JS bundles, CSS) the first time you visit a page. After you've touched each page once online, the whole library works without a connection. Cache versioning ensures updates propagate cleanly.
 
 **Single-page chunk viewer.** One `chunk.html` renders any chunk dynamically from `metadata.json` using `marked.js`. No static HTML generation, no build step per book.
 
