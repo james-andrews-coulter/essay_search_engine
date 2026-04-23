@@ -16,11 +16,9 @@ async function registerServiceWorker() {
 
   if (!('serviceWorker' in navigator)) return;
 
+  const base = import.meta.env.BASE_URL;
   try {
-    await navigator.serviceWorker.register(
-      '/essay_search_engine/service-worker.js',
-      { scope: '/essay_search_engine/' }
-    );
+    await navigator.serviceWorker.register(`${base}service-worker.js`, { scope: base });
   } catch (err) {
     console.error('[App] Service Worker registration failed:', err);
   }
@@ -159,10 +157,11 @@ function renderResults() {
   const endIdx = Math.min(startIdx + resultsPerPage, allResults.length);
   const pageResults = allResults.slice(startIdx, endIdx);
 
+  const base = import.meta.env.BASE_URL;
   resultsEl.innerHTML = '<div class="vstack">' + pageResults.map(r => {
     const tags = parseTags(r.chunk.tags);
     const preview = excerpt(r.chunk.content, 180);
-    const href = `/essay_search_engine/chunk.html?id=${r.chunk.chunk_id}`;
+    const href = `${base}chunk.html?id=${r.chunk.chunk_id}`;
     return `
       <article class="card">
         <header>
@@ -170,7 +169,7 @@ function renderResults() {
           ${r.chunk.chapter_title ? `<p class="text-light">${escapeHtml(r.chunk.chapter_title)}</p>` : ''}
         </header>
         ${preview ? `<p>${escapeHtml(preview)}</p>` : ''}
-        ${tags.length ? `<footer class="hstack">${tags.map(t => `<a class="badge outline" href="/essay_search_engine/?tag=${encodeURIComponent(t)}">${escapeHtml(t)}</a>`).join('')}</footer>` : ''}
+        ${tags.length ? `<footer class="hstack">${tags.map(t => `<a class="badge outline" href="${base}?tag=${encodeURIComponent(t)}">${escapeHtml(t)}</a>`).join('')}</footer>` : ''}
       </article>
     `;
   }).join('') + '</div>';

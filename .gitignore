@@ -44,3 +44,8 @@ public/data/embeddings.json
 *.png
 !docs/**/*.png
 
+# Local tooling and internal planning docs (kept out of public repo)
+.claude/
+docs/plans/
+docs/refactor-project/
+

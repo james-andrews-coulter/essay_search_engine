@@ -1,20 +1,20 @@
-const CACHE_VERSION = 'v9';
-const CACHE_NAME = `essay-search-${CACHE_VERSION}`;
+const CACHE_VERSION = 'v10';
+const CACHE_NAME = `shelf-${CACHE_VERSION}`;
+
+// Derive base path from the SW's own URL so the same code works for any repo name
+const BASE = self.location.pathname.replace(/service-worker\.js$/, '');
 
 const PRECACHE_ASSETS = [
-  '/essay_search_engine/',
-  '/essay_search_engine/index.html',
-  '/essay_search_engine/chunk.html',
-  '/essay_search_engine/tags.html',
-  '/essay_search_engine/data/metadata.json',
-  '/essay_search_engine/data/tags.json'
+  BASE,
+  `${BASE}index.html`,
+  `${BASE}chunk.html`,
+  `${BASE}tags.html`,
+  `${BASE}data/metadata.json`,
+  `${BASE}data/tags.json`
 ];
 
 // Paths that carry query strings — strip the query when matching cache
-const NAV_PATHS = new Set([
-  '/essay_search_engine/',
-  '/essay_search_engine/chunk.html'
-]);
+const NAV_PATHS = new Set([BASE, `${BASE}chunk.html`]);
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
@@ -29,7 +29,7 @@ self.addEventListener('activate', (event) => {
     caches.keys()
       .then((names) => Promise.all(
         names
-          .filter((n) => n.startsWith('essay-search-') && n !== CACHE_NAME)
+          .filter((n) => (n.startsWith('shelf-') || n.startsWith('essay-search-')) && n !== CACHE_NAME)
           .map((n) => caches.delete(n))
       ))
       .then(() => self.clients.claim())

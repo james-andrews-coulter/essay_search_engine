@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 """
-Unified build script for essay search engine.
-Generates metadata.json, tags.json, and embeddings.json.
-tags.html is rendered client-side from tags.json.
+Unified build script for Shelf.
+Generates metadata.json and tags.json. Embeddings are opt-in: pass
+--embeddings to also generate public/data/embeddings.json (~100 MB,
+requires sentence-transformers). tags.html is rendered client-side.
 """
 
+import argparse
 import json
 from pathlib import Path
-from sentence_transformers import SentenceTransformer
 
 TARGET_DIR = Path(__file__).parent.parent
 SOURCE_DIR = TARGET_DIR / "private" / "books"
@@ -98,6 +99,7 @@ def generate_tags(chunks):
 
 def generate_embeddings(chunks):
     """Generate embeddings.json."""
+    from sentence_transformers import SentenceTransformer
     print("\nGenerating embeddings...")
     print("Loading BGE-large-en-v1.5 model...")
 
@@ -133,20 +135,26 @@ def generate_embeddings(chunks):
 
 def main():
     """Main build process."""
+    parser = argparse.ArgumentParser(description="Build Shelf's search data.")
+    parser.add_argument('--embeddings', action='store_true',
+                        help='Also generate public/data/embeddings.json (~100 MB, requires sentence-transformers)')
+    args = parser.parse_args()
+
     print("\n" + "=" * 60)
-    print("Essay Search Engine - Build Script")
+    print("Shelf — Build Script")
     print("=" * 60 + "\n")
 
-    # Load chunks
     chunks = load_chunks()
     if not chunks:
         print("\n❌ No chunks found. Run ./lib to process books first.")
         return 1
 
-    # Generate outputs
     generate_metadata(chunks)
     generate_tags(chunks)
-    generate_embeddings(chunks)
+    if args.embeddings:
+        generate_embeddings(chunks)
+    else:
+        print("\nSkipping embeddings (pass --embeddings to generate).")
 
     print("\n" + "=" * 60)
     print("✓ Build complete!")

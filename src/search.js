@@ -28,7 +28,7 @@ export class SearchEngine {
     this.isLoading = true;
     try {
       onProgress?.('Loading metadata...');
-      const res = await fetch('/essay_search_engine/data/metadata.json');
+      const res = await fetch(`${import.meta.env.BASE_URL}data/metadata.json`);
       this.metadata = await res.json();
       onProgress?.('Ready!');
       this.isReady = true;

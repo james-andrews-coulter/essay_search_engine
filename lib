@@ -14,7 +14,7 @@ fi
 
 # Route commands
 if [ $# -eq 0 ]; then
-    echo "Essay Search Engine - Book Management"
+    echo "Shelf — Book Management"
     echo ""
     echo "Usage:"
     echo "  ./lib <book.epub>           Process and add a book"
@@ -35,7 +35,7 @@ elif [ "$1" = "--delete" ]; then
     fi
     "$PYTHON" process_book.py --delete "$2"
 elif [ "$1" = "--help" ]; then
-    echo "Essay Search Engine - Book Management"
+    echo "Shelf — Book Management"
     echo ""
     echo "Commands:"
     echo "  ./lib <book.epub>           Process and add a book to the library"

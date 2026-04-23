@@ -43,10 +43,13 @@ EPUB → Markdown → Semantic chunks → AI tags → Static JSON → Client-sid
 ### Setup
 
 ```bash
-git clone https://github.com/<you>/shelf.git && cd shelf
-./setup.sh      # Creates venv, installs Python deps
-npm install     # Installs Node deps
+git clone https://github.com/<you>/<your-fork>.git && cd <your-fork>
+./setup.sh                      # Creates venv, installs Python deps
+WITH_EMBEDDINGS=1 ./setup.sh    # ...and also downloads the 1.3 GB embeddings model
+npm install                     # Installs Node deps
 ```
+
+> `./setup.sh` only downloads the embeddings model if `WITH_EMBEDDINGS=1` is set. The embeddings pipeline is optional — the client uses keyword/fuzzy search, and the model is only needed if you plan to experiment with semantic search (see [Embeddings](#embeddings) below).
 
 ### Add a book
 
@@ -132,13 +135,12 @@ shelf/
 
 ## Fork and customize
 
-1. Fork this repo
-2. Delete `private/` and `public/data/` contents
-3. Update `base` in `vite.config.js` to `/<your-repo-name>/`
-4. Update the service worker's `PRECACHE_ASSETS` paths in `src/service-worker.js`
-5. Run `./setup.sh && npm install`
-6. Add your own EPUBs with `./lib <book.epub>`
-7. Enable GitHub Pages (Actions source) in repo settings
+1. Fork this repo (or use it as a template).
+2. Change `base` in `vite.config.js` to `/<your-repo-name>/`. That's the only path constant — the client reads it via `import.meta.env.BASE_URL` and the service worker derives it from its own URL at runtime.
+3. Run `./setup.sh && npm install`.
+4. Add your own EPUBs with `./lib <your-book.epub>` (books are stored under `private/`, which is gitignored).
+5. Run `./lib --sync` to regenerate `public/data/metadata.json` and `public/data/tags.json`.
+6. In GitHub repo **Settings → Pages**, set the source to **GitHub Actions**. The included workflow builds and deploys on push to `main`.
 
 ## License
 

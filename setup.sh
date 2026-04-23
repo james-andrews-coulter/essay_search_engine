@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "======================================"
-echo "Essay Search Engine - Setup"
+echo "Shelf — Setup"
 echo "======================================"
 echo ""
 
@@ -51,21 +51,26 @@ mkdir -p public/chunks
 
 echo "✓ Data directories created"
 
-# Download sentence-transformers model
-echo ""
-echo "======================================"
-echo "Downloading embedding model..."
-echo "======================================"
-echo ""
-echo "Model: BAAI/bge-large-en-v1.5 (~1.3GB)"
-echo "This will take several minutes..."
-echo ""
-python3 -c "from sentence_transformers import SentenceTransformer; print('Loading model...'); model = SentenceTransformer('BAAI/bge-large-en-v1.5'); print('✓ Model downloaded and cached')"
-
-if [ $? -ne 0 ]; then
+# Download sentence-transformers model — only if WITH_EMBEDDINGS=1
+if [ "$WITH_EMBEDDINGS" = "1" ]; then
     echo ""
-    echo "⚠️  Warning: Failed to download embedding model"
-    echo "   The model will be downloaded when you first run sync"
+    echo "======================================"
+    echo "Downloading embedding model..."
+    echo "======================================"
+    echo ""
+    echo "Model: BAAI/bge-large-en-v1.5 (~1.3GB)"
+    echo "This will take several minutes..."
+    echo ""
+    python3 -c "from sentence_transformers import SentenceTransformer; print('Loading model...'); model = SentenceTransformer('BAAI/bge-large-en-v1.5'); print('✓ Model downloaded and cached')"
+
+    if [ $? -ne 0 ]; then
+        echo ""
+        echo "⚠️  Warning: Failed to download embedding model"
+        echo "   The model will be downloaded when you first run sync with embeddings"
+    fi
+else
+    echo ""
+    echo "Skipping embeddings model (set WITH_EMBEDDINGS=1 to download ~1.3 GB)."
 fi
 
 # Check Ollama

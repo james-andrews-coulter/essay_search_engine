@@ -21,7 +21,7 @@ async function loadChunk() {
     const chunkId = parseInt(new URLSearchParams(location.search).get('id'));
     if (isNaN(chunkId)) throw new Error('Invalid chunk ID');
 
-    const res = await fetch('/essay_search_engine/data/metadata.json');
+    const res = await fetch(`${import.meta.env.BASE_URL}data/metadata.json`);
     const metadata = await res.json();
     const chunk = metadata.chunks.find(c => c.chunk_id === chunkId);
     if (!chunk) throw new Error(`Chunk ${chunkId} not found`);
@@ -34,8 +34,9 @@ async function loadChunk() {
     const body = chunk.chapter_title ? stripLeadingChapterHeading(raw, chunk.chapter_title) : raw;
     contentEl.innerHTML = marked.parse(body);
 
+    const base = import.meta.env.BASE_URL;
     tagsEl.innerHTML = parseTags(chunk.tags).map(t =>
-      `<a class="badge outline" href="/essay_search_engine/?tag=${encodeURIComponent(t)}">${escapeHtml(t)}</a>`
+      `<a class="badge outline" href="${base}?tag=${encodeURIComponent(t)}">${escapeHtml(t)}</a>`
     ).join('');
   } catch (error) {
     contentEl.innerHTML = `<p role="alert" data-variant="danger">Error: ${escapeHtml(error.message)}</p>`;
