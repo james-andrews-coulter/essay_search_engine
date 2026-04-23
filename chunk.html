@@ -26,59 +26,6 @@
     </article>
   </main>
 
-  <script type="module">
-    import { marked } from 'marked';
-
-    const titleEl = document.getElementById('title');
-    const chapterEl = document.getElementById('chapter');
-    const contentEl = document.getElementById('content');
-    const tagsEl = document.getElementById('tags');
-
-    document.getElementById('backLink').addEventListener('click', (e) => {
-      e.preventDefault();
-      history.back();
-    });
-
-    function escapeHtml(text) {
-      const div = document.createElement('div');
-      div.textContent = text == null ? '' : String(text);
-      return div.innerHTML;
-    }
-
-    async function loadChunk() {
-      try {
-        const chunkId = parseInt(new URLSearchParams(location.search).get('id'));
-        if (isNaN(chunkId)) throw new Error('Invalid chunk ID');
-
-        const res = await fetch('/essay_search_engine/data/metadata.json');
-        const metadata = await res.json();
-        const chunk = metadata.chunks.find(c => c.chunk_id === chunkId);
-        if (!chunk) throw new Error(`Chunk ${chunkId} not found`);
-
-        document.title = chunk.chapter_title || chunk.book_title;
-        titleEl.textContent = chunk.book_title;
-        chapterEl.textContent = chunk.chapter_title || '';
-
-        let body = chunk.content || '';
-        if (chunk.chapter_title) {
-          const chapter = chunk.chapter_title.trim();
-          body = body.replace(
-            new RegExp(`^\\s*#{1,6}\\s+${chapter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\s*\\n+`),
-            ''
-          );
-        }
-        contentEl.innerHTML = marked.parse(body);
-
-        const tags = (chunk.tags || '').split(',').map(t => t.trim()).filter(Boolean);
-        tagsEl.innerHTML = tags.map(t =>
-          `<a class="badge outline" href="/essay_search_engine/?tag=${encodeURIComponent(t)}">${escapeHtml(t)}</a>`
-        ).join('');
-      } catch (error) {
-        contentEl.innerHTML = `<p role="alert" data-variant="danger">Error: ${escapeHtml(error.message)}</p>`;
-      }
-    }
-
-    loadChunk();
-  </script>
+  <script type="module" src="/src/chunk.js"></script>
 </body>
 </html>
