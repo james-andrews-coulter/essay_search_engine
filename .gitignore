@@ -38,3 +38,9 @@ private/
 
 # Embeddings (large, regenerated via ./lib --sync)
 public/data/embeddings.json
+
+# QA / session artifacts
+.playwright-mcp/
+*.png
+!docs/**/*.png
+

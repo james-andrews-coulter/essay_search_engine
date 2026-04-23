@@ -4,36 +4,36 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Essay Search Engine</title>
-  <link rel="stylesheet" href="/src/styles.css">
+  <link rel="stylesheet" href="https://unpkg.com/@knadh/oat/oat.min.css">
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>Search</h1>
-      <div style="margin-bottom: 0.5rem;">
-        <a href="/essay_search_engine/tags.html">Browse Tags</a>
-      </div>
-    </header>
-
-    <div class="search-wrapper">
-      <div id="tagBadges" class="tag-badges"></div>
-      <div class="search-form">
+  <main class="container" style="--container-max:56rem">
+    <form id="searchForm" role="search">
+      <div id="tagBadges" class="hstack" role="list"></div>
+      <fieldset class="group">
         <input
-          type="text"
+          type="search"
           id="searchInput"
+          name="q"
           placeholder="Search or add tags..."
-          disabled
+          list="tagOptions"
           autocomplete="off"
           aria-label="Search input"
+          disabled
         />
-        <button id="searchButton" disabled>Search</button>
-      </div>
-    </div>
+        <datalist id="tagOptions"></datalist>
+        <button type="submit" id="searchButton" disabled>Search</button>
+      </fieldset>
+    </form>
 
-    <div id="status" style="font-size: 14px; color: #666; margin-bottom: 1rem;"></div>
-    <div id="results"></div>
-    <div id="pagination"></div>
-  </div>
+    <p id="status" class="text-light" role="status" aria-live="polite"></p>
+    <section id="results" aria-label="Results"></section>
+    <nav id="pagination" aria-label="Pagination"></nav>
+
+    <footer class="mt-6">
+      <small><a href="/essay_search_engine/tags.html">Browse all tags →</a></small>
+    </footer>
+  </main>
 
   <script type="module" src="/src/main.js"></script>
 </body>
