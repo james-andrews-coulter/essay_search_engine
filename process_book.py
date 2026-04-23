@@ -20,6 +20,23 @@ from datetime import datetime
 import requests
 
 
+def load_books_metadata(index_dir):
+    """Load books_metadata.json from the library, or None if it doesn't exist."""
+    path = Path(index_dir) / "books_metadata.json"
+    if not path.exists():
+        return None
+    with open(path) as f:
+        return json.load(f)
+
+
+def save_books_metadata(index_dir, data):
+    """Persist books_metadata.json for the library."""
+    path = Path(index_dir) / "books_metadata.json"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with open(path, 'w') as f:
+        json.dump(data, f, indent=2)
+
+
 def check_ollama_available():
     """Check if Ollama is running and has the required model."""
     try:
@@ -737,16 +754,8 @@ word_count: {chunk['metadata']['word_count']}
 
 def update_books_metadata(chunks, book_title, author, index_dir, chunk_dir, auto_replace=False):
     """Update the books_metadata.json file with new book information."""
-    metadata_path = index_dir / "books_metadata.json"
+    books_metadata = load_books_metadata(index_dir) or {"books": [], "next_id": 0}
 
-    # Load or create metadata
-    if metadata_path.exists():
-        with open(metadata_path, 'r') as f:
-            books_metadata = json.load(f)
-    else:
-        books_metadata = {"books": [], "next_id": 0}
-
-    # Check if book already exists
     safe_title = re.sub(r'[^\w\s-]', '', book_title)
     safe_title = re.sub(r'[-\s]+', '_', safe_title)
 
@@ -761,16 +770,13 @@ def update_books_metadata(chunks, book_title, author, index_dir, chunk_dir, auto
             if response != 'y':
                 print("Skipping...")
                 return
-        # Remove old book metadata
         books_metadata["books"] = [b for b in books_metadata["books"] if b["safe_title"] != safe_title]
 
-    # Get starting ID
     start_id = books_metadata["next_id"]
 
     print(f"\nUpdating metadata for {len(chunks)} chunks...")
     print(f"Book: {book_title} by {author}")
 
-    # Update metadata
     books_metadata["books"].append({
         "title": book_title,
         "author": author,
@@ -782,28 +788,21 @@ def update_books_metadata(chunks, book_title, author, index_dir, chunk_dir, auto
     })
     books_metadata["next_id"] = start_id + len(chunks)
 
-    # Ensure directory exists
-    metadata_path.parent.mkdir(parents=True, exist_ok=True)
+    save_books_metadata(index_dir, books_metadata)
 
-    with open(metadata_path, 'w') as f:
-        json.dump(books_metadata, f, indent=2)
-
-    print(f"✓ Metadata updated: {metadata_path}")
+    print(f"✓ Metadata updated: {index_dir / 'books_metadata.json'}")
     print(f"✓ Total books: {len(books_metadata['books'])}")
 
 
 def list_books(index_dir):
     """List all books in the unified index."""
     index_dir = Path(index_dir).expanduser()
-    metadata_path = index_dir / "books_metadata.json"
+    books_metadata = load_books_metadata(index_dir)
 
-    if not metadata_path.exists():
+    if books_metadata is None:
         print("No books found in library.")
         print(f"Library location: {index_dir}")
         return
-
-    with open(metadata_path) as f:
-        books_metadata = json.load(f)
 
     books = books_metadata.get("books", [])
 
@@ -825,7 +824,6 @@ def list_books(index_dir):
 
         # Format date
         try:
-            from datetime import datetime
             dt = datetime.fromisoformat(added_date)
             date_str = dt.strftime("%Y-%m-%d")
         except:
@@ -852,14 +850,11 @@ def delete_book(book_identifier, index_dir, force=False):
         force: Skip confirmation prompt
     """
     index_dir = Path(index_dir).expanduser()
-    metadata_path = index_dir / "books_metadata.json"
+    books_metadata = load_books_metadata(index_dir)
 
-    if not metadata_path.exists():
+    if books_metadata is None:
         print("Error: No library found at this location.")
         return
-
-    with open(metadata_path) as f:
-        books_metadata = json.load(f)
 
     books = books_metadata.get("books", [])
 
@@ -925,9 +920,7 @@ def delete_book(book_identifier, index_dir, force=False):
 
     # Remove from metadata
     books_metadata["books"] = [b for b in books_metadata["books"] if b["safe_title"] != safe_title]
-
-    with open(metadata_path, 'w') as f:
-        json.dump(books_metadata, f, indent=2)
+    save_books_metadata(index_dir, books_metadata)
     print(f"  ✓ Updated metadata")
 
     # Completion message
@@ -1027,20 +1020,11 @@ def main():
     print(f"\n✓ Markdown saved to: {output_md}")
 
     # Get starting doc_id from metadata
-    metadata_path = index_dir / "books_metadata.json"
-    if metadata_path.exists():
-        with open(metadata_path, 'r') as f:
-            books_metadata = json.load(f)
-        # Check if book already exists (for replacement)
+    books_metadata = load_books_metadata(index_dir)
+    if books_metadata:
         existing_book = next((b for b in books_metadata["books"] if b["safe_title"] == safe_title), None)
-        if existing_book:
-            # Book is being replaced, reuse its ID range
-            start_doc_id = existing_book["id_range"][0]
-        else:
-            # New book, use next_id
-            start_doc_id = books_metadata.get("next_id", 0)
+        start_doc_id = existing_book["id_range"][0] if existing_book else books_metadata.get("next_id", 0)
     else:
-        # No metadata yet, start from 0
         start_doc_id = 0
 
     save_chunks(chunks, index_dir / "books", book_title, start_doc_id)
