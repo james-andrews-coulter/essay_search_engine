@@ -199,29 +199,31 @@ function renderResults() {
   const pages = generatePageNumbers(currentPage, totalPages);
   paginationEl.innerHTML = `
     <menu class="buttons">
-      <li><button type="button" class="small outline" id="prev-page" ${currentPage === 1 ? 'disabled' : ''}>← Prev</button></li>
+      <li><button type="button" class="small outline" data-action="prev" ${currentPage === 1 ? 'disabled' : ''}>← Prev</button></li>
       ${pages.map(p => {
         if (p === '...') return '<li aria-hidden="true"><span class="text-lighter">…</span></li>';
         const active = p === currentPage;
-        return `<li><button type="button" class="small ${active ? '' : 'outline'} page-number" data-page="${p}" ${active ? 'aria-current="page" disabled' : ''}>${p}</button></li>`;
+        return `<li><button type="button" class="small ${active ? '' : 'outline'}" data-action="page" data-page="${p}" ${active ? 'aria-current="page" disabled' : ''}>${p}</button></li>`;
       }).join('')}
-      <li><button type="button" class="small outline" id="next-page" ${currentPage === totalPages ? 'disabled' : ''}>Next →</button></li>
+      <li><button type="button" class="small outline" data-action="next" ${currentPage === totalPages ? 'disabled' : ''}>Next →</button></li>
     </menu>
   `;
-
-  paginationEl.querySelector('#prev-page')?.addEventListener('click', () => {
-    if (currentPage > 1) { currentPage--; renderResults(); scrollTop(); }
-  });
-  paginationEl.querySelector('#next-page')?.addEventListener('click', () => {
-    if (currentPage < totalPages) { currentPage++; renderResults(); scrollTop(); }
-  });
-  paginationEl.querySelectorAll('.page-number').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      const p = parseInt(e.currentTarget.dataset.page);
-      if (p !== currentPage) { currentPage = p; renderResults(); scrollTop(); }
-    });
-  });
 }
+
+paginationEl.addEventListener('click', (e) => {
+  const btn = e.target.closest('button[data-action]');
+  if (!btn || btn.disabled) return;
+  const totalPages = Math.ceil(allResults.length / resultsPerPage);
+  const action = btn.dataset.action;
+  const next = action === 'prev' ? currentPage - 1
+             : action === 'next' ? currentPage + 1
+             : parseInt(btn.dataset.page);
+  if (next >= 1 && next <= totalPages && next !== currentPage) {
+    currentPage = next;
+    renderResults();
+    scrollTop();
+  }
+});
 
 function scrollTop() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
