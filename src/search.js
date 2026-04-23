@@ -1,4 +1,5 @@
 import Fuse from 'fuse.js';
+import { parseTags } from './utils.js';
 
 const FUSE_OPTIONS = {
   keys: [
@@ -45,7 +46,7 @@ export class SearchEngine {
 
     if (tags.length > 0) {
       chunks = chunks.filter(chunk => {
-        const chunkTags = chunk.tags?.split(',').map(t => t.trim()) || [];
+        const chunkTags = parseTags(chunk.tags);
         return tags.every(tag => chunkTags.includes(tag));
       });
     }
@@ -76,11 +77,7 @@ export class SearchEngine {
     if (!this.metadata) return [];
     const tagSet = new Set();
     for (const chunk of this.metadata.chunks) {
-      if (!chunk.tags) continue;
-      for (const tag of chunk.tags.split(',')) {
-        const trimmed = tag.trim();
-        if (trimmed) tagSet.add(trimmed);
-      }
+      for (const tag of parseTags(chunk.tags)) tagSet.add(tag);
     }
     return Array.from(tagSet).sort();
   }

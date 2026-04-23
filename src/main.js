@@ -1,4 +1,5 @@
 import { SearchEngine } from './search.js';
+import { escapeHtml, excerpt, parseTags } from './utils.js';
 
 async function registerServiceWorker() {
   const isDev = window.location.hostname === 'localhost' ||
@@ -43,21 +44,6 @@ let allResults = [];
 let currentPage = 1;
 const resultsPerPage = 25;
 let currentQuery = '';
-
-function escapeHtml(text) {
-  const div = document.createElement('div');
-  div.textContent = text == null ? '' : String(text);
-  return div.innerHTML;
-}
-
-function excerpt(text, maxLen) {
-  if (!text) return '';
-  const clean = text.replace(/^#{1,6}\s+.*$/m, '').replace(/\s+/g, ' ').trim();
-  if (clean.length <= maxLen) return clean;
-  const cut = clean.slice(0, maxLen);
-  const lastSpace = cut.lastIndexOf(' ');
-  return (lastSpace > maxLen * 0.6 ? cut.slice(0, lastSpace) : cut) + '…';
-}
 
 function renderBadges() {
   if (selectedTags.size === 0) {
@@ -174,9 +160,7 @@ function renderResults() {
   const pageResults = allResults.slice(startIdx, endIdx);
 
   resultsEl.innerHTML = '<div class="vstack">' + pageResults.map(r => {
-    const tags = r.chunk.tags
-      ? r.chunk.tags.split(',').map(t => t.trim()).filter(Boolean)
-      : [];
+    const tags = parseTags(r.chunk.tags);
     const preview = excerpt(r.chunk.content, 180);
     const href = `/essay_search_engine/chunk.html?id=${r.chunk.chunk_id}`;
     return `
